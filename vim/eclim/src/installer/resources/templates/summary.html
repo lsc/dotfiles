@@ -1,0 +1,40 @@
+<html>
+  <body>
+    Please review the following before continuing to ensure it is correct:
+    <br>
+    <table border="none">
+      <tr>
+        <td nowrap="nowrap"><b>Eclipse Home:</b></td>
+        <td>$installer.context.getValue("eclipse.home")</td>
+      </tr>
+      #if(!$os.isFamily("windows"))
+        #set($home = $installer.context.getValue("eclipse.home"))
+        #set($local = $installer.context.getValue("eclipse.local"))
+        #if($home != $local)
+      <tr>
+        <td nowrap="nowrap"><b>Eclipse Local:</b></td>
+        <td>$installer.context.getValue("eclipse.local")</td>
+      </tr>
+        #end
+      #end
+      <tr>
+        <td nowrap="nowrap"><b>Vimfiles Dir:</b></td>
+        <td>$installer.context.getValue("vim.files")</td>
+      </tr>
+      <tr>
+        <td nowrap="nowrap"><b>Features:</b></td>
+        <td>
+        #foreach($feature in $installer.context.getKeysByPrefix("featureList", true))
+          #if($installer.context.getValue("${feature}"))
+            $installer.getString("${feature}")<br>
+          #end
+        #end
+        </td>
+      </tr>
+    </table>
+    <b><font color="red">Warning:</font></b>
+    Any previous eclim eclipse and vim plugins will be deleted.<br>
+    If you want to back anything up from these directories, do so now before<br>
+    proceeding to the next step.
+  </body>
+</html>

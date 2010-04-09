@@ -1,0 +1,81 @@
+#!/usr/bin/env python
+
+# Copyright (C) 2005 - 2009  Eric Van Dewoestine
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+##
+# Script to check for any new updates for each of eclim's eclipse plugin
+# dependencies.
+#
+# Author: Eric Van Dewoestine
+##
+
+import os.path, re, sys
+from urllib import urlopen
+from xml.dom.minidom import parse
+
+def checkForUpdates ():
+  dependencies = getDependencies()
+  for dependency in dependencies:
+    found, versions = checkForUpdate(*dependency)
+    if not found:
+      print 'WARN: %s current version not found: %s' % (
+        dependency[1], dependency[2]
+      )
+    if versions:
+      versions.sort()
+      versions.reverse()
+      print '%s has the following updates available:' % dependency[1]
+      print '\t' + '\n\t'.join(versions)
+    else:
+      print '%s is up to date.' % dependency[1]
+
+def checkForUpdate (url, feature, currentVersion):
+  dom = parse(urlopen(url + 'site.xml'))
+  versions = []
+  try:
+    found = False
+    for featureElement in dom.getElementsByTagName("feature"):
+      name = featureElement.getAttribute("id")
+      if name == feature:
+        version = featureElement.getAttribute('version')
+        if version == currentVersion:
+          found = True
+        elif version > currentVersion:
+          versions.append(version)
+  finally:
+    dom.unlink()
+  return (found, versions)
+
+def getDependencies ():
+  ignore = re.compile(r'^(\s*[a-z.]+=|\s*#|\s*$)')
+  entry = re.compile(r'^\s*(.*?)\s*(,\s*\\)?\s*$')
+
+  path = os.path.dirname(sys.path[0])
+  properties = file(os.path.join(path,
+      'src/installer/resources/dependencies.properties'))
+
+  dependencies = []
+  try:
+    for line in properties.readlines():
+      if not ignore.match(line):
+        dependencies.append(entry.sub(r'\1', line).split())
+  finally:
+    properties.close()
+  return dependencies
+
+checkForUpdates()
+
+# vim:ft=python

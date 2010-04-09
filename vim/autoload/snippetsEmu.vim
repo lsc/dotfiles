@@ -1,0 +1,1 @@
+../plugin/snippetsEmu.vim

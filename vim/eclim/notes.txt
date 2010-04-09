@@ -1,0 +1,709 @@
+HIGH {{{
+  June 24th
+  http://wiki.eclipse.org/Galileo_Simultaneous_Release
+
+  - eclipse headed
+    - vim + eclipse debugger
+      http://groups.google.com/group/eclim-user/browse_thread/thread/fdda7b46a295c650?hl=en
+
+  - ruby interpreter
+    - add command to set interpreter as default
+
+  - xml validation, spring xml validation
+    - cache xsds/dtds
+    - handle connectivity issues (no internet access)
+
+  - rope + python completion improvements to watch
+    http://groups.google.com/group/rope-dev/browse_thread/thread/f33ce5855e2fe5bf?hl=en
+
+  - investigate vrapper error when vimplugin editor is opened.
+  - add high level docs or screencast
+  - update :Vcs commands to only cache remote calls (move caching to svn and
+    cvs impls)
+
+  http://conservancy.softwarefreedom.org/
+}}}
+
+TODO {{{
+
+  Bugs {{{
+    - after external change by eclipse, all view info is lost (manual folds, etc).
+      - https://sourceforge.net/tracker/?func=detail&atid=763326&aid=2123378&group_id=145869
+
+    - xml validate, if a doctype exists, but no dtd, then there is an error for
+      every element since they are "not declared" (ex. ant/cvs.xml).
+
+      <!DOCTYPE project [
+        <!ENTITY userlist SYSTEM "file:include/cvs-user-list.xml">
+      ]>
+
+    - Ubuntu Hardy (command completion may cause segfault)
+      - https://bugs.launchpad.net/ubuntu/+source/vim/+bug/219546
+  }}}
+
+  Tests {{{
+    - taglist
+      - ant
+      - javascript
+      - sql
+      - properties
+      - log4j
+      - webxml
+      - php
+    - line based matching via :JavaRegex and :PythonRegex
+    - util classes and vim util functions
+    - project nature add/remove
+    - logger (custom logger)
+    - indenting test cases
+    - html validate: validation of nested javascript and css
+    - various common vim commands
+      - :OtherWorkingCopyDiff
+      - :OtherWorkingCopyEdit
+      - :OtherWorkingCopySplit
+      - :OtherWorkingCopyTabopen
+      - :Sign
+      - :Signs
+      - :SignClearUser
+      - :SignClearAll
+      - :QuickFixClear
+      - :LocationListClear
+      - :VimgrepRelative
+      - :VimgrepAddRelative
+      - :LvimgrepRelative
+      - :LvimgrepAddRelative
+      - :CdRelative
+      - :LcdRelative
+    - django functionality
+    - :EclimHelp, :EclimHelpGrep
+    - :Jps
+    - vim templating
+  }}}
+
+  Installer {{{
+    - add/test proxy support to the installer
+      - new p2 provisioning system may handle this transparently
+
+    - detect gnome / kde and add installer step to auto start eclimd
+
+    - installer validation
+      - java version
+
+    - look into libarchive for bsd support.
+
+    - consider adding command line option to installer to specify temp dir to write to
+      - or maybe just use ~/.tmp
+
+    - test installer w/ eclipse running
+      - may cause issues, if so, attempt to detect if eclipse is running and
+        display an intermediate step (or add to requirements steps as warning)
+        alerting the user to shut it down.
+  }}}
+
+  Documentation {{{
+    - add menu of some sort in vimdocs
+    - consider a command to open topic in web docs
+
+    - document python import functionality
+
+    - document template plugin
+
+    - document qf/location list filtering support
+  }}}
+
+  Common {{{
+    - :LocateFile
+      - eclipse setting to filter out results
+
+    - templating system (convert to groovy)?
+
+    - add means to hook into and view all of eclipses build errors.
+
+    - support max number of cache entries
+      - len(split(globpath(g:EclimCacheDir, '*.cache*'), '\n'))
+      - exclude entries beginning w/ 'eclim_'
+      - maybe let the eclim server side manage this via a TimerTask.
+        - or use a expand / retract ratio so vim wouldn't be constantly deleting files.
+
+    - :ProjectCreateWizard - use input()
+
+    - Vcs
+      - add
+        :VcsStatus
+          - temp window w/ list of files
+          - hitting <enter> on a file with:
+            - M shows the diff
+            - A opens the file
+            - R open last revision
+        :VcsOut (git equivalent? requires git fetch first, only if another user
+                 check in your changes)
+          - open temp window w/ list of files grouped by changeset
+          - try to have <enter> on a file open a diff of remote version vs local
+            - A opens the file
+            - ... R files?
+        :VcsIn (git equivalent? requires git fetch first)
+          - open temp window w/ list of files grouped by changeset
+          - try to have <enter> on a file open a diff of remote version vs local
+            - A try to cat the remote file
+            - ... R files?
+        :VcsLogGrep (git)
+          - git: $ git log --grep=""
+        :VcsGrep (supported by hg and git)
+          - git: http://book.git-scm.com/4_finding_with_git_grep.html
+          - hg:  $ hg help grep
+
+    - eclim console log
+      - https://sourceforge.net/tracker/?func=detail&aid=2027557&group_id=145869&atid=763326
+
+    - org.eclim.project.tracker
+      for sourceforge we need n urls, one for bugs, one for features, etc.
+      but in the vcs log, how do you know which to use?
+      ... maybe support something like '#F123' or '#123f'
+      B:http://sourceforge.net/tracker/index.php?func=detail&group_id=145869&atid=763323&aid=<id> |
+      F:http://sourceforge.net/tracker/index.php?func=detail&group_id=145869&atid=763326&aid=<id>
+
+    - debugger interface
+      http://www.vim.org/scripts/script.php?script_id=1703
+      (not windows compatible, but worth watching)
+      http://www.vim.org/scripts/script.php?script_id=663
+      (probably not windows compatible either)
+
+    - creating a project in the workspace dir w/ a different name than the
+      directory doesn't work (Eclipse doesn't support this).
+      :ProjectCreate ~/workspace/my_project_dir -p my_project
+
+    - Eclipse 3.3
+      - code completion for eclipse plugin.xml and MANIFEST.MF
+
+    - determines the user's default workspace using (account for ~/.eclipse/org.eclipse.../configuration)
+      eclipse/configuration/.settings/org.eclipse.ui.ide.prefs
+      RECENT_WORKSPACES=/home/ervandew/test_workspace,/home/ervandew/workspace
+
+    - for taglist, support universal marker tag:
+      |-- marker_name --|
+
+    - In addition to marking lines w/ errors/warnings, highlight the offending text.
+    - CursorHold validation of files.
+      - via temp file?
+
+    - implement means to highlight text and push it to the command prompt
+      Ctrl-: or something similar.
+
+    - get working under cygwin
+      if has('win32unix')
+      - eclim command
+      - file paths
+      - sh installer via cygwin
+  }}}
+
+  Vimplugin {{{
+  }}}
+
+  C/C++ {{{
+    - cdt
+      - project create
+        - handle dependant projects
+        - specify toolchain
+        - specify project type (executable, shared library, static library, makefile project)
+        - makefile creation
+      - edit project config
+        - modify toolchain
+        - add/remove paths
+          - references (projects), source, output
+          - includes, symbols (macros?), library paths
+            - all of these support using environment variables in the path (or
+              value in the case of symbols): ${MY_VAR}.  support variable
+              completion
+                ICConfigurationDescription cfgDes =
+                  ManagedBuildManager.getDescriptionForConfiguration(cfg);
+                IEnvironmentVariableManager mngr =
+                  CCorePlugin.getDefault().getBuildEnvironmentManager();
+                IEnvironmentVariable[] vars = mngr.getVariables(cfgDes, true);
+
+    - completion outside of a project
+      - a user says eclipse supports this
+
+    - show function signature while typing parameters
+    - show function docs
+
+    - http://www.eclipse.org/cdt/
+      http://wiki.eclipse.org/index.php/CDT
+      http://download.eclipse.org/tools/cdt/releases/ganymede/site.xml
+      http://cdt-devel-faq.wikidot.com/
+
+    - ibm xl toolchain:
+      http://help.eclipse.org/help33/index.jsp?topic=/org.eclipse.cdt.doc.user/concepts/cdt_c_whatsnew.htm
+
+    - :CppHierarchy command which opens a buffer showing the class hierarchy for
+      the current file.
+    - :C[pp]IncludeHierarchy command which opens a buffer showing hierarchy of each
+      header file included in the current source file.
+
+    - :CCorrect
+
+    - make file validation
+    - make code completion
+  }}}
+
+  Css {{{
+    - for css validation, attempt to provide messages for errors that the validator does not.
+      - FIRST, try checking out latest css validation code and see if they have any messages.
+      - * ie hacks.
+        - ignore error immediately following this error report (if not another valid error).
+      - missing closing }
+      - font: 100%;
+      - trailing , on list of selectors
+  }}}
+
+  D {{{
+
+    http://www.dsource.org/projects/descent
+
+  }}}
+
+  Groovy {{{
+
+    - http://groovy.codehaus.org/Eclipse+Plugin
+
+    - can we leverage the groovy ast to provide some simple functionality (like
+      rudimentary validation)?
+
+    - taglist support
+
+  }}}
+
+  Html {{{
+    - look into using jericho instead of tidy as the html validator.
+
+    - add support for validation via the w3c online validator
+      (be sure to support configuration of the url to post to for local installs)
+      http://validator.w3.org/docs/install.html
+  }}}
+
+  Java {{{
+    - get/set, construtor, etc. templates
+      - consider using the eclipse templates or giving the user that option
+
+    - :Jps handle errors when opening jconsole
+
+    - :JavaCorrect, need to get the eclipse apply version working (but probably
+      should wait until :edit is a considered a change operation in vim).
+
+    - :JavaClassCreate create a new class
+      - handle locating the src dir, or prompting user if more than one
+      - handle creation of package dirs if necessary
+      - open new class in a split window
+
+    - generic support for java based xml config file validation
+      - support list of xpaths to class name attributes / values to validate
+
+    - look into code refactoring support.
+      - Safe deletes. Check for references before deleting.
+      - Convert anonymous class into inner/outer class.
+      - Convert inner class to outer class.
+      - Extract interface.
+      - Method / Class / Field renaming.
+      - Push methods / fields up to superclass or down to subclass.
+      - Move types, methods, fields.
+      - Code "Clean Up"
+        - Remove Unused Code (imports, private methods, private constructors,
+          private types).
+        - JSE 5.0 (add missing @Override, add missing @Deprecated)
+
+    - create spring file validation of class names like w/ log4j.
+
+    - JUnit
+      - results in the browser.
+      - When viewing a junit result file allow linking from stack trace
+        elements.
+      - File type support of junit result files w/ search functionality.
+      - Integrate with eclipse junit execution env and provide user with option to
+        choice which to use (eclipse or current external version).
+        org.eclim.java.junit.engine=(eclipse|external)
+
+    - :JavaImpl support anonymous classes.
+
+    - validation, look into grabbing additional message that eclipse displays that is not picked up by eclim
+      - Code:
+        List<String> hi = new ArrayList<String>();
+        hi[0];
+      - Messages:
+        1. not picked up by eclim: The type of the expression must be an array
+           type but it resolved to List<String>
+        2. picked up by eclim: Syntax error, insert "AssignmentOperator
+           Expression" to complete Expression"
+
+    - For commands that spawn temp buffer, assign a b:currentfile var to the
+      file that opened the buffer so that other commands can still be invoked
+      by changing the get file name function to examine b:currentfile.
+      - JavaImpl, JavaDelegate, JUnitImpl, JUnitResult
+
+    - add :JavaBeanImpl for defining an implementation of a bean interface.
+    - automate switch statement generation for enums.
+      When switch(enum), create cases for all enum values.
+    - :JavaImpl, wrap long parameter lines.
+    - modify for loop abbreviations to increment the looping var if the current
+      one is taken.  (ii, jj, kk, ll, mm, nn, ...)
+    - create a groovy templating harness
+      - create utility class with methods such as
+        - createMethod (velocity_template, values)
+        - createField (velocity_template, values)
+        - createImport (velocity_template, values)
+        - createClass (velocity_template, values)
+        - createCode (velocity_template, values) - insert code at current
+          cursor position
+      - standard templates
+        - jakarta equals, hashCode, toString.
+        - logging
+    - push method to interface... create method in interface from method in
+      implementation.
+
+    - logging
+      - Templates for generating logging statements:
+        Ex. logger.debug("${methodSignature} - ");
+      - Support for replacing System.out, System.err, and printStackTrace()
+        with logging statements.
+
+    - searching
+      - Expand searching from non java source files (spring xml, hibernate xml,
+        etc).
+      - Third party plugins may provide this functionality.
+
+    - content assist
+      - Generate anonymous class body, including all methods that need to be
+        implemented, from the start of defining one (new Runnable())<br/>
+        Eclipse Equiv: Ctrl+Space
+      - Create method from the call to one that does not yet exist or
+        change method signature (add/remove parameters/agruments).<br/>
+        Eclipse Equiv: Ctrl+1
+      - Create new field to hold constructor argument.<br/>
+        Eclipse Equiv: Ctrl+1
+      - Auto surround method call that throws an exception w/ try/catch
+        block or if surrounded and doesn't catch necessary exceptions,
+        add those catch statements.<br/>
+        Eclipse Equiv: Ctrl+1
+      - Wrap source block (selection) in do,if,for,try,while.<br/>
+        Eclipse Equiv: Ctrl+1
+      - many more provided by eclipse...
+
+    - code analysis
+      - http://findbugs.sourceforge.net/
+      - http://pmd.sourceforge.net/ PMD
+      - http://www.jutils.com/ Lint4j
+      - http://coverlipse.sourceforge.net Coverclipse
+      - http://java-source.net/open-source/code-coverage Other code coverage tools
+      - http://java-source.net/open-source/code-analyzers Other code analyizers
+
+    JDT Tips
+    http://help.eclipse.org/help31/index.jsp?topic=/org.eclipse.jdt.doc.user/tips/jdt_tips.html
+    JDT What's New
+    http://help.eclipse.org/help31/index.jsp?topic=/org.eclipse.jdt.doc.user/whatsNew/jdt_whatsnew.html
+
+  }}}
+
+  Javascript {{{
+    http://wiki.eclipse.org/index.php/ATF/JSDT
+    http://labs.adobe.com/technologies/jseclipse/
+    http://www.aptana.org/ aptana (owners of radrails)
+    http://www.eclipse.org/dltk/ dltk (experimental)
+
+    - :JavascriptRegex (maybe use rhino or see if eclipse has something)
+    - javascript code completion
+
+    - javascript doc lookup for common libraries
+      - :JavascriptDocSearch
+      - yui
+        http://developer.yahoo.com/yui/docs/YAHOO.widget.Dialog.html#configButtons
+      - prototype
+      - jquery
+      - JsDoc generated docs
+        http://code.google.com/apis/opensocial/docs/0.7/reference/gadgets.views.html
+      ...
+      http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Reference
+  }}}
+
+  Jdbc {{{
+    - dbext (http://www.vim.org/scripts/script.php?script_id=356)
+      - at a glance, seems to satify my requirements.
+
+    - Create connection profiles
+      - eclim_jdbc_profile_<name> (where to store these settings? ... .eclim/jdbc/<name>.properties)
+        - Driver Class:
+        - Driver Url:
+        - Libs (comma seperated paths to jar files):
+
+    - Support two open buffers, one for statements to execute, another for results
+      [Sql Editor]
+      [Sql Results]
+      - support some sort of query history
+
+    - Support tree with database metadata
+  }}}
+
+  Jsp {{{
+    jsp
+      - <%%>, <%=%> code completion
+      - <%@ page import="javax." %> completion
+      - <jsp: completion, with attribute name completion
+      - taglib completion (<core:<c-x><c-u>), including attribute name completion
+  }}}
+
+  Perl {{{
+    http://e-p-i-c.sourceforge.net/
+
+    - add :PerlRegex
+
+    - syntax validation
+      perl -c [-W or -w] <file>
+
+    - static validation
+      Perl::Critic
+      http://search.cpan.org/~elliotjs/Perl-Critic-1.082/lib/Perl/Critic.pm
+
+    - doc search on cpan
+
+    - format
+      http://perltidy.sourceforge.net/
+  }}}
+
+  Php {{{
+    - add :PhpRegex
+      - will require that php is compiled with cli support.
+  }}}
+
+  Python {{{
+    - look into using pyflakes fork, and possibly including it in vim like rope
+      http://github.com/kevinw/pyflakes/tree/master
+
+    - jython?
+
+    - rope
+      - other rope provided features
+        - organize imports
+        - fix imports
+        - get pydoc
+      - code completion enhancements
+        - self.<field> completion inside of __init__
+          - look at __init__ params
+          - look at super class self.<field> values
+
+    - modify :DjangoFind to account for django provided tags and filters.
+
+    - when adding new method for a class, auto add self as first parameter.
+
+    - debugger: http://pyclewn.wiki.sourceforge.net/
+      - seems to currently use netbeans support which means gvim only... look
+        into making it console vim compatible.
+  }}}
+
+  Ruby {{{
+    - http://www.eclipse.org/dltk/ dltk
+    - http://rubyeclipse.sourceforge.net/ rubyeclipse
+    - http://www.radrails.org/ rad rails
+    - jruby?
+  }}}
+
+  Scala {{{
+    - vim files for scala
+      https://lampsvn.epfl.ch/trac/scala/browser/scala-tool-support/trunk/src/vim
+
+    - http://www.scala-lang.org/node/94
+      Note: Wait on 2.8.0 to be release, since according to the developer
+      wiki[1], the code is undergoing a large refactoring.
+      [1] http://lampsvn.epfl.ch/trac/scala/wiki/EclipsePlugin
+
+    <feature id="sdt">
+      <dependency id="ch.epfl.lamp.sdt" version="2.7.4">
+        <site url="http://www.scala-lang.org/scala-eclipse-plugin/"/>
+      </dependency>
+    </feature>
+
+  }}}
+
+  SQL {{{
+    - sql pretty print
+
+    - antlr grammers for sql dialects (mysql, postgreql, oracle)
+      - http://www.antlr.org/grammar/list contains a couple oracle pl/sql
+        grammers and an ansi sql grammer
+  }}}
+
+}}}
+
+NOTES {{{
+
+  Eclipse Docs {{{
+
+    p2
+      http://wiki.eclipse.org/Equinox_p2_Getting_Started
+      http://wiki.eclipse.org/Equinox_p2_Admin_UI_Users_Guide
+      http://wiki.eclipse.org/Starting_Eclipse_Commandline_With_Equinox_Launcher/p2_Admin_UI
+
+    p2 director (install / upgrade)
+      http://wiki.eclipse.org/Equinox_p2_director_application
+
+      Example: install feature org.eclipse.wst
+        ./eclipse -nosplash -consolelog
+          -application org.eclipse.equinox.p2.director.app.application
+          -metadataRepository http://download.eclipse.org/releases/ganymede
+          -artifactRepository http://download.eclipse.org/releases/ganymede
+          -installIU org.eclipse.wst.feature.group
+          -version 3.0.2.v200808250510-7A-8f8QqVJLTFUkFahb1QIq2z0t8
+
+      Example: uninstall feature org.eclipse.wst (not fully tested yet)
+        ./eclipse -nosplash -consolelog
+          -application org.eclipse.equinox.p2.director.app.application
+          -metadataRepository http://download.eclipse.org/releases/ganymede
+          -artifactRepository http://download.eclipse.org/releases/ganymede
+          -uninstallIU org.eclipse.wst.feature.group
+
+    Old update manager:
+      http://help.eclipse.org/help33/index.jsp?topic=/org.eclipse.platform.doc.isv/reference/misc/update_standalone.html
+
+      Listing installed features:
+        ./eclipse -nosplash -consolelog
+          -application org.eclipse.update.core.standaloneUpdate
+          -command listFeatures
+
+  }}}
+
+  Steps for new releases {{{
+    1) create sourceforge release
+       - update windows and linux download pages with latest file to download.
+    2) update documentation website
+    3) tag git
+       $ git tag -a -m "<version>" <version>
+       $ git push --tags
+    4) announce on freshmeat
+       - http://freshmeat.net/projects/eclim/
+  }}}
+
+  Running two eclim instance concurrently {{{
+
+    Starting secondary instance:
+      $ eclimd -Dosgi.instance.area.default=@user.home/workspace_other -Dnailgun.server.port=9092
+
+    Running eclim script against secondary instance:
+      $ eclim -Dnailgun.server.port=9092 -command project_list
+
+    TODO: find easy way to force vim to send requests to secondary port.
+
+  }}}
+
+  Adding a new plugin {{{
+    Installer:
+      install.properties: add the following keys
+        - featureList.<plugin>
+        - featureList.<plugin>.html
+      dependencies.properties: add feature dependencies
+      FeatureProvider: add feature name, etc to constants
+      EclipsePluginStep: add feature to FeatureNameComparator
+      excludes: add <plugin>.excludes file
+  }}}
+
+  Troubleshooting {{{
+
+    Windows:
+      - starting eclim without spawning separate console
+        > java -jar plugins/org.eclipse.equinox.launcher_<version>.jar
+               -debug -consolelog -nosplash -clean -refresh
+               -application org.eclim.application_headless
+
+    Minimum execution of vim w/ eclim support:
+      $ vim -u NONE -U NONE --cmd "set nocp | sy on | filetype plugin on | ru plugin/eclim.vim"
+
+      Windows
+      > "C:\Program Files\Vim\vim72\gvim"
+            -u NONE -U NONE --cmd "set nocp | sy on | filetype plugin on | ru plugin/eclim.vim"
+
+    Minimum execution of gvim inside of eclipse:
+      Window -> Preferences -> Vimplugin -> Additional gvim args:
+        -u NONE -U NONE --cmd "set nocp | sy on | filetype plugin on | ru plugin/eclim.vim"
+
+    Helpful link for debugging plugin errors.
+      http://eclipse.org/eclipse/platform-core/documents/3.1/debug.html
+
+    Core Tools (plugin with tools for debugging / fixing issues)
+      http://www.eclipse.org/eclipse/platform-core/downloads.html (Spies/Tools)
+      - Workspace Re-Builder (looks a bit old, may need some work).
+
+    When using a project created from eclipse, may get errors in log when saving +
+    closing a src file, complaining that the .swp file doesn't exist.  To fix this,
+    you need to exclude the swp files from the eclipse build.
+
+      Project > Properties > Java Build Path
+        Expand Source folder node
+        Select "Excluded"
+        Hit "Edit"
+        Add exclusion pattern: "**/*.swp"
+    Or
+      Edit .classpath
+        Add attribute to src classpathentry
+          excluding="**/*.swp"
+        You can use '|' to delineate multiple entries
+          excluding="**/*.swp|**/*.tmp"
+  }}}
+
+  Benchmarks {{{
+    Trivial memory benchmark of vanilla eclipse vs eclim headless eclipse.
+    1) start the application
+    2) open and save org.eclim.Service
+    2) open and save build.xml
+
+             Virtual  Resident  Shared  (in megs)
+    eclim    360      132       54
+    eclipse  500      143       59
+  }}}
+
+  Potential Contributors {{{
+    Anton Sharonov (haron13)
+      - good work with :JavaFormat and headed eclim view contributions
+
+    fidlej
+      - good patch work so far
+        https://sourceforge.net/tracker/index.php?func=detail&aid=1617060&group_id=145869&atid=763326
+        https://sourceforge.net/tracker/index.php?func=detail&aid=1787180&group_id=145869&atid=763323
+        https://sourceforge.net/tracker/index.php?func=detail&aid=1781687&group_id=145869&atid=763323
+  }}}
+
+  Licensing {{{
+    http://www.fsf.org/licensing/licenses/ (lists compatible, not-compatible licenses)
+    http://www.eclipse.org/legal/eplfaq.php
+
+    - GPLv3 and Apache are one way compatible (gpl code can link to apache code).
+    - GPL and EPL are not compatible
+      - But as copyright holder I can provide permission to link to eclipse:
+        http://www.fsf.org/licensing/licenses/gpl-faq.html#GPLIncompatibleLibs
+      - EPL also has a different definition of "derivative work":
+        http://www.eclipse.org/legal/eplfaq.php#DERIV (#25 - 27)
+        - A few of my files may be considered derivative works and will need to
+          be licensed as EPL accordingly.
+  }}}
+
+  Autostart {{{
+
+    Gnome (this may work for enlightenment 17 and xfce4 as well)
+      $ mkdir -p ~/.config/autostart
+      $ cp $ECLIPSE_HOME/plugins/org.eclim_<version>/bin/native/linux/eclimd.desktop ~/.config/autostart
+
+    KDE
+      $ mkdir -p ~/.kde/Autostart
+      $ cp $ECLIPSE_HOME/plugins/org.eclim_<version>/bin/native/linux/eclimd ~/.kde/Autostart
+
+  }}}
+
+  Sourceforget shell access:
+  ssh -t USER,PROJECT@shell.sourceforge.net create
+
+  Git repos for vim:
+  http://repo.or.cz/w/vim_mainline.git
+
+  Generate list of all command names:
+    $ ack --java -hA 1 "@Command" | grep "name =" | sed 's/.*name = "\(\w\+\)".*/\1/' | sort
+
+  Running in true headless environment:
+  http://en.wikipedia.org/wiki/Xvfb
+    - Xvfb is included with xorg-server
+
+}}}
+
+// vim:fdm=marker:tw=0

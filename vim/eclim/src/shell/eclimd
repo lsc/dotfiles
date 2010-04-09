@@ -1,0 +1,120 @@
+#!/bin/sh
+
+# Copyright (C) 2005 - 2009  Eric Van Dewoestine
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+##
+# Determines eclim's home directory and sets the ECLIM_HOME var to that path.
+#
+resolve_eclim_home(){
+  FILEPATH="$0"
+
+  # handle symlink to eclimd script
+  # readlink -f is easier, but not supported on mac or bsd
+  while [ -h "$FILEPATH" ] ; do
+    PREV=$FILEPATH
+    FILEPATH=`readlink "$FILEPATH"`
+    if [ -z "$FILEPATH" -o "$FILEPATH" = "$PREV" ] ; then
+      FILEPATH=$PREV
+      break
+    fi
+  done
+
+  CURPATH=`dirname "$FILEPATH"`
+  ECLIM_HOME=`cd "$CURPATH/.." ; pwd`
+}
+
+##
+# Determines the eclipse home path and eclipse executable and sets
+# ECLIM_ECLIPSE_HOME and ECLIPSE to those results.
+#
+resolve_eclipse(){
+  #${eclipse.home}
+  if [ -z "$ECLIM_ECLIPSE_HOME" ]; then
+    ECLIM_ECLIPSE_HOME=`cd "$ECLIM_HOME/../../"; pwd`
+  fi
+
+  ECLIPSE="$ECLIM_ECLIPSE_HOME/eclipse"
+  if [ ! -e "$ECLIPSE" ]; then
+    ECLIPSE=`which eclipse 2> /dev/null`
+  fi
+  if [ ! -e "$ECLIPSE" ]; then
+    ECLIPSE=`which eclipse-3.5 2> /dev/null`
+  fi
+  # mac osx default location
+  if [ ! -e "$ECLIPSE" ]; then
+    ECLIPSE="$ECLIM_ECLIPSE_HOME/Eclipse.app/Contents/MacOS/eclipse"
+  fi
+
+  if [ ! -e "$ECLIPSE" ]; then
+    echo "No eclipse executable found." 1>&2
+    exit 1
+  fi
+}
+
+##
+# Builds a list of vm args to be passed to eclipse and sets ECLIM_VMARGS
+# accordingly.
+#
+build_vmargs(){
+  #ECLIMD_OPTS="-Djava.ext.dirs"
+  ECLIM_ARGS="$ECLIMD_OPTS"
+
+  # attempt to grab properties from .eclimrc if available.
+  SED=`which sed 2> /dev/null`
+  if [ -f "$HOME/.eclimrc" -a -n "$SED" ] ; then
+    ECLIM_ARGS="$ECLIM_ARGS `
+      sed -n -f \"$ECLIM_HOME/bin/eclimd.sed\" \"$HOME/.eclimrc\"
+    `"
+  fi
+  ECLIM_VMARGS="-vmargs $ECLIM_ARGS"
+}
+
+##
+# Handles any gentoo specific issues.
+#
+handle_gentoo(){
+  # handle eclipse issues on gentoo
+  IS_GENTOO=`which java-config 2> /dev/null`
+  if [ -x "$IS_GENTOO" ]; then
+    # handle emerged version of eclipse which has a bootstrap script
+    ECLIPSE_34=`which eclipse-3.4 2> /dev/null`
+    if [ "$ECLIM_ECLIPSE_HOME" = "/usr/lib/eclipse-3.4" -a -e "$ECLIPSE_34" ]; then
+      ECLIPSE="$ECLIPSE_34"
+      PLATFORM_VMARGS="$ECLIM_ARGS"
+      ECLIM_VMARGS=""
+    fi
+  fi
+}
+
+resolve_eclim_home
+build_vmargs
+resolve_eclipse
+
+# run platform specific setup
+handle_gentoo
+
+ECLIPSE_ARGS="
+  -debug -nosplash -clean -refresh
+  -application org.eclim.application_headless
+  $ECLIM_VMARGS"
+
+if [ "$1" = "start" ]; then
+  shift
+  CLASSPATH="" VM_ARGS="$PLATFORM_VMARGS" "$ECLIPSE" $ECLIPSE_ARGS $@ > /dev/null &
+else
+  echo "\"$ECLIPSE\" $ECLIPSE_ARGS $@"
+  CLASSPATH="" VM_ARGS="$PLATFORM_VMARGS" "$ECLIPSE" $ECLIPSE_ARGS $@
+fi
