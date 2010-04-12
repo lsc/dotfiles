@@ -2,7 +2,7 @@ stty erase '^?'
 export LANGUAGE=en_GB
 export LC_ALL=en_GB.UTF-8
 export LANG=en_GB
-export PATH="$PATH:/home/lsc/bin:/opt/android-sdk-1.5/tools"
+export PATH="$PATH:/home/lsc/bin:/opt/android-sdk-1.5/tools:/var/lib/gems/1.9.1/bin/"
 export GDK_USE_XFT=1
 export HOSTTYPE="$(uname -m)"
 export COLORTERM=yes

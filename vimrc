@@ -32,9 +32,6 @@ syntax on
 			\set guioptions+=T <Bar>
 			\set guioptions+=m <Bar>
 		    \endif <CR>
-    
-:abbreviate sqh #!/usr/bin/env lang<CR>#------------------------------------------- <CR># $id$ <CR># (c) Squace 20??<CR>#[[ description of function ]]<CR>#--------------------------------------------
-
 
 " A More informative statusline
 set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [LEN=%L][POS=\%04l.\%04v]
