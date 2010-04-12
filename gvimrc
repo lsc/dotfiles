@@ -1,4 +1,4 @@
-:set guifont=Monospace\ 10
+:set guifont=Inconsolata\ 12
 :colorscheme desert256
 :set lines=65
 :set columns=140
