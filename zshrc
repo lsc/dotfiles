@@ -9,15 +9,15 @@ export COLORTERM=yes
 export LINKS_XTERM=screen
 export MAILDIR=$HOME/.mail/
 export EDITOR="/usr/bin/vim"
-eval $(keychain --eval --quiet --agents ssh lowe_squace_rsa)
-eval $(keychain --eval --quiet --agents ssh id_dsa)
-export GEDITOR="$(which gvim) +NERDTree"
+export JAVA_HOME=/usr/lib/jvm/sun-jdk6
+export WTK_HOME='/home/lsc/lib/wtk2.5.2'
+export GEDITOR="$(which gvim)"
 alias ls='ls -F --color=auto'
 alias ll='ls -l'
 alias la='ls -a'
 alias lal='ls -al'
-alias gvim='gvim +NERDtree'
 alias xen='sshfs 10.0.0.2:/home/lsc ~/tmp'
+
 [ -f /etc/DIR_COLORS ] && eval $(dircolors -b /etc/DIR_COLORS) 
 autoload -U colors zsh/terminfo
 colors

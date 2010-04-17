@@ -14,6 +14,7 @@ set completeopt=longest,menuone
 set mouse=a
 filetype plugin on
 set ofu=syntaxcomplete#Complete
+:source $VIM/abbreviate.vim
 
 :inoremap <expr> <cr>  pumvisible() ? "\<c-y>" : "\<c-g>u\<cr>"
 :inoremap <expr> <c-n> pumvisible() ? "\<lt>c-n>" : "\<lt>c-n>\<lt>c-r>=pumvisible() ? \"\\<lt>down>\" : \"\"\<lt>cr>"
