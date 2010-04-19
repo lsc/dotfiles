@@ -14,6 +14,7 @@ set completeopt=longest,menuone
 set mouse=a
 filetype plugin on
 set ofu=syntaxcomplete#Complete
+<<<<<<< HEAD
 " Enable ctags info in statusline
 let g:ctags_statusline=1
 let g:generate_tags=1
@@ -22,6 +23,9 @@ let g:ctags_title=1
 :source ~/.vim/abbreviate.vim
 " Load templates based on extensions of file
 :autocmd BufNewFile * silent! 0r $VIMHOME/templates/%:e.tpl
+=======
+:source ~/.vim/abbreviate.vim
+>>>>>>> 97b4df38bdd0d982e93019c7536578a57981b489
 
 :inoremap <expr> <cr>  pumvisible() ? "\<c-y>" : "\<c-g>u\<cr>"
 :inoremap <expr> <c-n> pumvisible() ? "\<lt>c-n>" : "\<lt>c-n>\<lt>c-r>=pumvisible() ? \"\\<lt>down>\" : \"\"\<lt>cr>"

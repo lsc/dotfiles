@@ -1,0 +1,5 @@
+#!/bin/bash
+
+for i in *; do
+    cp -r $i $HOME/.$i
+done
