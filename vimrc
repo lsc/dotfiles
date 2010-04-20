@@ -14,12 +14,24 @@ set completeopt=longest,menuone
 set mouse=a
 filetype plugin on
 set ofu=syntaxcomplete#Complete
+" Enable ctags info in statusline
+let g:ctags_statusline=1
+let g:generate_tags=1
+let g:ctags_title=1
+" Load my abbreviations file
 :source ~/.vim/abbreviate.vim
-
+" Load templates based on extensions of file
+:autocmd BufNewFile * silent! 0r $VIMHOME/templates/%:e.tpl
 :inoremap <expr> <cr>  pumvisible() ? "\<c-y>" : "\<c-g>u\<cr>"
 :inoremap <expr> <c-n> pumvisible() ? "\<lt>c-n>" : "\<lt>c-n>\<lt>c-r>=pumvisible() ? \"\\<lt>down>\" : \"\"\<lt>cr>"
 :inoremap <expr> <m-;> pumvisible() ? "\<lt>c-n>" : "\<lt>c-x>\<lt>c-o>\<lt>c-n>\<lt>c-p>\<lt>c-r>=pumvisible() ? \"\\<lt>down>\" : \"\"\<lt>cr>
 syntax on
+" Map some F keys to tags lookup
+:nmap <buffer> <F7> <C-J>
+:nmap <buffer> <S-F7> <C-T>
+:nmap <buffer> <A-F7> :ptselect<cr>
+:nmap <buffer> <F8> :tnext<cr>
+:nmap <buffer> <C-F8> :tprev<cr>
 
 :map <C-j> <C-W>j<C-W>_
 :map <C-k> <C-W>k<C-W>_
@@ -75,6 +87,7 @@ endfunction
 set tabline=%!ShortTabLine()
 
 
+" Change working dir to the one the current open file is in.
 function! CURR_CWD()
     let _dir = expand("%:p:h")
     exec "cd " . _dir
