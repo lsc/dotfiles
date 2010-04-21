@@ -1,5 +1,0 @@
-#Tue Aug 19 20:34:47 PDT 2008
-eclipse.preferences.version=1
-org.eclim.java.checkstyle.config=checkstyle.xml
-org.eclim.java.compile.sourcepath=src-javac
-org.eclim.java.run.mainclass=org.eclim.test.Test

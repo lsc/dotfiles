@@ -1,3 +1,0 @@
-#!/bin/bash
-
-${eclim.home}/bin/eclimd start

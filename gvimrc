@@ -3,4 +3,4 @@
 :set lines=65
 :set columns=140
 :set guioptions-=T
-:set guioptions-=m
+

@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=Application
-Encoding=UTF-8
-Name=eclimd
-Exec=${eclim.home}/bin/eclimd start
-StartupNotify=false
-X-GNOME-Autostart-enabled=true
