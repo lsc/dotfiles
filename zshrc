@@ -10,6 +10,9 @@ export LINKS_XTERM=screen
 export MAILDIR=$HOME/.mail/
 export EDITOR=$(which vim)
 export JAVA_HOME=/usr/lib/jvm/sun-jdk6
+<<<<<<< HEAD
+export WTK_HOME=/home/lsc/lib/wtk2.5.2
+export GEDITOR="$(which gvim)"
 export WTK_HOME='/home/lsc/lib/wtk2.5.2'
 export GEDITOR=$(which gvim)
 alias ls='ls -F --color=auto'
@@ -125,8 +128,6 @@ HISTFILE=$HOME/.zshist
 SAVEHIST=1000
 HISTSIZE=1600
 TMPPREFIX=$HOME/tmp
-
-# Key bindings.. looking healthier now.
 
 # You can use:
 # % autoload -U zkbd
@@ -310,7 +311,6 @@ setopt                       \
      NO_verbose              \
         zle
 
-# Last but not least...
 #Rebind HOME and END to do the decent thing:                                    
 bindkey '^[[7~' beginning-of-line                                                
 bindkey '^[[8~' end-of-line                                                      
