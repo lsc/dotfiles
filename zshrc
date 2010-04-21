@@ -10,7 +10,6 @@ export LINKS_XTERM=screen
 export MAILDIR=$HOME/.mail/
 export EDITOR=$(which vim)
 export JAVA_HOME=/usr/lib/jvm/sun-jdk6
-<<<<<<< HEAD
 export WTK_HOME=/home/lsc/lib/wtk2.5.2
 export GEDITOR="$(which gvim)"
 export WTK_HOME='/home/lsc/lib/wtk2.5.2'
