@@ -2,8 +2,9 @@ set nocompatible
 set number
 set backspace=indent,eol,start
 set shiftwidth=4
-set tabstop=8
+set tabstop=4
 set softtabstop=4
+no expandtab
 set cursorline
 set spell
 set spelllang=en
@@ -14,6 +15,7 @@ set completeopt=longest,menuone
 set mouse=a
 set ofu=syntaxcomplete#Complete
 set foldenable
+
 syntax on
 filetype plugin on
 " Load abbreviations, maps and functions
@@ -37,3 +39,4 @@ set tabline=%!ShortTabLine()
 :autocmd VimEnter * call LoadSession()
 :autocmd VimLeave * call SaveSession()
 silent source! Session.vim
+silent :NERDTree 
