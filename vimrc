@@ -15,6 +15,7 @@ set completeopt=longest,menuone
 set mouse=a
 set ofu=syntaxcomplete#Complete
 set foldenable
+set foldmethod=syntax
 
 syntax on
 filetype plugin on
@@ -24,7 +25,7 @@ filetype plugin on
 :source ~/.vim/func.vim
 
 " Enable ctags info in statusline
-let g:ctags_statusline=1
+let g:ctags_statusline=0
 let g:generate_tags=1
 let g:ctags_title=1
 
@@ -39,4 +40,3 @@ set tabline=%!ShortTabLine()
 :autocmd VimEnter * call LoadSession()
 :autocmd VimLeave * call SaveSession()
 silent source! Session.vim
-silent :NERDTree 
