@@ -1,5 +1,10 @@
 #!/bin/bash
 
+echo "This script will delete the dotfiles in $HOME and then copy them, if this is unwanted: press CTRL-C now or hit any key to continue"
+read -p "$*"
 for i in *; do
-    cp -r $i $HOME/.$i
+	if [[ -e $HOME/.$i ]]; then
+		rm -r $HOME/.$i && echo "Removing $HOME/.$i"
+	fi
+    cp -r $i $HOME/.$i && echo "Copying $i to $HOME/.$i"
 done
