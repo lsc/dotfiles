@@ -30,3 +30,4 @@
 :imap <F11> <ESC>1G=G
 " Paste indented code aka the "stairs"
 :nnoremap <c-p> p=`]
+:map <F3> :NERDTreeToggle<cr>
