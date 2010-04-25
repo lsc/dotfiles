@@ -36,8 +36,8 @@ set laststatus=2
 set tabline=%!ShortTabLine()
 
 " Load templates based on extensions of file
-:autocmd BufNewFile * silent! 0r $VIMHOME/templates/%:e.tpl
+:autocmd BufNewFile * silent! 0r ~/.vim/templates/%:e.tpl
 " Save and restore sessions automaticly
-:autocmd VimEnter * call LoadSession()
-:autocmd VimLeave * call SaveSession()
-silent source! Session.vim
+":autocmd VimEnter * call LoadSession()
+":autocmd VimLeave * call SaveSession()
+"silent source! Session.vim
