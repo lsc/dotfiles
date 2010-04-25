@@ -42,13 +42,13 @@ autocmd BufEnter * call CURR_CWD()
 " Load and save sessions
 function! LoadSession()
     if argc() == 0
-	execute 'source $HOME/.vim/sessions/session.vim'
+		execute 'source $HOME/.vim/sessions/session.vim'
     endif	
 endfunction
 
 function! SaveSession()
     if argc() == 0
-	execute 'mksession $HOME/.vim/sessions/session.vim'
+		execute 'mksession $HOME/.vim/sessions/session.vim'
     endif
 endfunction
 
