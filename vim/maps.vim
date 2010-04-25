@@ -13,13 +13,14 @@
 
 " Toggle menu and toolbar with CTRL+F2
 :map <silent> <C-F2> :if &guioptions =~# 'T' <Bar>
-			\set guioptions-=T <Bar>
-			\set guioptions-=m <Bar>
-		    \else <Bar>
-			\set guioptions+=T <Bar>
-			\set guioptions+=m <Bar>
-		    \endif <CR>
+\set guioptions-=T <Bar>
+\set guioptions-=m <Bar>
+\else <Bar>
+\set guioptions+=T <Bar>
+\set guioptions+=m <Bar>
+\endif <CR>
 
+" Use space to toggle splits if we are one a split
 :nnoremap <space> za
 " Headline macros
 :map h1 yypVr=o
