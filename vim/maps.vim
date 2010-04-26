@@ -6,6 +6,7 @@
 :nmap <buffer> <C-F8> :tprev<cr>
 
 " Map CTRL-[jkhl] to move between splits
+:set winminheight=0
 :map <C-j> <C-W>j<C-W>_
 :map <C-k> <C-W>k<C-W>_
 :map <C-l> <C-W>l
@@ -20,7 +21,7 @@
 \set guioptions+=m <Bar>
 \endif <CR>
 
-" Use space to toggle splits if we are one a split
+" Use space to toggle splits if we are on a split
 :nnoremap <space> za
 " Headline macros
 :map h1 yypVr=o
