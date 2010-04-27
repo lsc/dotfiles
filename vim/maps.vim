@@ -1,5 +1,5 @@
 " Map some F keys to tags lookup
-":nmap <buffer> <F7> <C-J>
+:nmap <buffer> <F7> <C-J>
 :nmap <buffer> <S-F7> <C-T>
 :nmap <buffer> <A-F7> :ptselect<cr>
 :nmap <buffer> <F8> :tnext<cr>
