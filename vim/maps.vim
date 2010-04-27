@@ -1,5 +1,5 @@
 " Map some F keys to tags lookup
-:nmap <buffer> <F7> <C-J>
+":nmap <buffer> <F7> <C-J>
 :nmap <buffer> <S-F7> <C-T>
 :nmap <buffer> <A-F7> :ptselect<cr>
 :nmap <buffer> <F8> :tnext<cr>
@@ -32,3 +32,5 @@
 " Paste indented code aka the "stairs"
 :nnoremap <c-p> p=`]
 :map <F3> :NERDTreeToggle<cr>
+" Map Win+T for Command-t
+:nmap <silent> <M>t :CommandT<cr>

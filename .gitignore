@@ -1,5 +1,6 @@
 .DS_STORE
 .*.swp
 .svn/*
+*.o
+*.so
 
-/vim/hw.java
