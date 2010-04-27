@@ -6,7 +6,6 @@
 :nmap <buffer> <C-F8> :tprev<cr>
 
 " Map CTRL-[jkhl] to move between splits
-:set winminheight=0
 :map <C-j> <C-W>j<C-W>_
 :map <C-k> <C-W>k<C-W>_
 :map <C-l> <C-W>l
