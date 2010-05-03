@@ -2,7 +2,7 @@ stty erase '^?'
 export LANGUAGE=en_GB
 export LC_ALL=en_GB.UTF-8
 export LANG=en_GB
-export PATH="$PATH:/home/lsc/bin:/opt/android-sdk-1.5/tools:/var/lib/gems/1.9.1/bin/"
+export PATH="$PATH:/home/lsc/bin"
 export GDK_USE_XFT=1
 export HOSTTYPE="$(uname -m)"
 export COLORTERM=yes
@@ -19,6 +19,8 @@ alias ll='ls -l'
 alias la='ls -a'
 alias lal='ls -al'
 alias xen='sshfs 10.0.0.2:/home/lsc ~/tmp'
+# Find and delete files recursively from current directory
+alias findel='find . -name "$1"-exec rm -r {} \;' 
 
 [ -f /etc/DIR_COLORS ] && eval $(dircolors -b /etc/DIR_COLORS) 
 autoload -U colors zsh/terminfo
