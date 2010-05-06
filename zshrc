@@ -10,17 +10,14 @@ export LINKS_XTERM=screen
 export MAILDIR=$HOME/.mail/
 export EDITOR=$(which vim)
 export JAVA_HOME=/usr/lib/jvm/sun-jdk6
-export WTK_HOME=/home/lsc/lib/wtk2.5.2
 export GEDITOR="$(which gvim)"
 export WTK_HOME='/home/lsc/lib/wtk2.5.2'
-export GEDITOR=$(which gvim)
 alias ls='ls -F --color=auto'
 alias ll='ls -l'
 alias la='ls -a'
 alias lal='ls -al'
 alias xen='sshfs 10.0.0.2:/home/lsc ~/tmp'
-# Find and delete files recursively from current directory
-alias findel='find . -name "$1"-exec rm -r {} \;' 
+alias svndel="rm -rf $(find . -type d -name .svn)"
 
 [ -f /etc/DIR_COLORS ] && eval $(dircolors -b /etc/DIR_COLORS) 
 autoload -U colors zsh/terminfo
