@@ -1,4 +1,4 @@
-" Vim completion script	- hit 80% complete tasks
+" Vim compl
 " Version:	0.77.1
 " Language:	Java
 " Maintainer:	cheng fang <fangread@yahoo.com.cn>
