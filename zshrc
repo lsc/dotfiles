@@ -9,7 +9,7 @@ export COLORTERM=yes
 export LINKS_XTERM=screen
 export MAILDIR=$HOME/.mail/
 export EDITOR=$(which vim)
-export JAVA_HOME=/usr/lib/jvm/sun-jdk6
+export JAVA_HOME=/usr/lib/jvm/jre-openjdk
 export GEDITOR="$(which gvim)"
 export WTK_HOME='/home/lsc/lib/wtk2.5.2'
 alias ls='ls -F --color=auto'
