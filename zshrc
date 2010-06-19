@@ -152,16 +152,11 @@ bindkey "$(echotc kd)" down-line-or-history
 LSCOLORS="exfxexdxbxegedadabagaead"
 export LSCOLORS
 
-
 # Sexy completion stuff from oberyno
 _category() {
     categories=(/usr/portage/metadata/cache/*-*)
     category=${(M)${${categories##*/}}}
     _tags -s category && { compadd "$@" ${(kv=category} }
-}
-
-google() {
-    w3m "http://www.google.com/search?q=$@"
 }
 
 # Pretty menu!
