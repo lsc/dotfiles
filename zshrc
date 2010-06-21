@@ -9,7 +9,7 @@ export COLORTERM=yes
 export LINKS_XTERM=screen
 export MAILDIR=$HOME/.mail/
 export EDITOR=$(which vim)
-export JAVA_HOME=/usr/lib/jvm/sun-jdk6
+export JAVA_HOME=/usr/lib/jvm/jre-openjdk
 export GEDITOR="$(which gvim)"
 alias ls='ls -F --color=auto'
 alias ll='ls -l'
@@ -149,16 +149,11 @@ bindkey "$(echotc kd)" down-line-or-history
 LSCOLORS="exfxexdxbxegedadabagaead"
 export LSCOLORS
 
-
 # Sexy completion stuff from oberyno
 _category() {
     categories=(/usr/portage/metadata/cache/*-*)
     category=${(M)${${categories##*/}}}
     _tags -s category && { compadd "$@" ${(kv=category} }
-}
-
-google() {
-    w3m "http://www.google.com/search?q=$@"
 }
 
 # Pretty menu!
