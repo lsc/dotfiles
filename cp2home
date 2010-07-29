@@ -8,3 +8,4 @@ for i in *; do
 	fi
     cp -r $i $HOME/.$i && echo "Copying $i to $HOME/.$i"
 done
+mkdir -p $HOME/.vim/tmp
