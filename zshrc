@@ -3,6 +3,7 @@ export LANGUAGE=en_GB
 export LC_ALL=en_GB.UTF-8
 export LANG=en_GB
 export PATH="/usr/local/bin:$PATH:$HOME/bin"
+export RUBYLIB="/usr/local/lib"
 export GDK_USE_XFT=1
 export HOSTTYPE="$(uname -m)"
 export COLORTERM=yes
