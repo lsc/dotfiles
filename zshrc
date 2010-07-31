@@ -2,8 +2,9 @@ stty erase '^?'
 export LANGUAGE=en_GB
 export LC_ALL=en_GB.UTF-8
 export LANG=en_GB
-export PATH="/usr/local/bin:$PATH:$HOME/bin"
+export PATH="/usr/local/bin:$GEM_HOME:$PATH:$HOME/bin"
 export RUBYLIB="/usr/local/lib"
+export GEM_HOME="/usr/local/lib/ruby/gems/1.9.1/"
 export GDK_USE_XFT=1
 export HOSTTYPE="$(uname -m)"
 export COLORTERM=yes
