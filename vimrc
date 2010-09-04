@@ -45,7 +45,5 @@ set tabline=%!ShortTabLine()
 
 " Load templates based on extensions of file
 :autocmd BufNewFile * silent! 0r ~/.vim/templates/%:e.tpl
-" Save and restore sessions automaticly
-":autocmd VimEnter * call LoadSession()
-":autocmd VimLeave * call SaveSession()
-"silent source! Session.vim
+" Add lua syntax highlighting to Nmap script files (.nse extension)
+:autocmd BufNewFile,BufRead *.nse set filetype=lua
