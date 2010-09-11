@@ -48,3 +48,4 @@ set tabline=%!ShortTabLine()
 :autocmd BufNewFile * silent! 0r ~/.vim/templates/%:e.tpl
 " Add lua syntax highlighting to Nmap script files (.nse extension)
 :autocmd BufNewFile,BufRead *.nse set filetype=lua
+:autocmd BufRead,BufNewFile *.c set softtabstop=8
