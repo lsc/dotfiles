@@ -10,6 +10,7 @@ set spelllang=en
 set background=dark
 set spellsuggest=5
 set smartindent
+set copyindent 
 set completeopt=longest,menuone
 set mouse=a
 set ofu=syntaxcomplete#Complete
@@ -25,15 +26,16 @@ set directory=~/.vim/tmp
 set hidden
 set wmh=0
 set colorcolumn=80
-
+set showmatch
 
 syntax on
 filetype plugin on
+filetype indent on
 " Load abbreviations, maps and functions
 :source ~/.vim/abbreviate.vim
 :source ~/.vim/maps.vim
 :source ~/.vim/func.vim
-
+let mapleader=","
 " Command-t related 
 let g:CommandTCancelMap='<C-x>'
 " Mojolicious
