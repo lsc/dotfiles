@@ -42,7 +42,7 @@ let g:CommandTCancelMap='<C-x>'
 let mojo_disable_html = 1
 autocmd FileType perl syn include @perlData syntax/MojoliciousTemplate.vim
 " A More informative statusline
-set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [LEN=%L][POS=\%04l.\%04v] %{fugitive#statusline}
+set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [LEN=%L][POS=\%04l.\%04v]
 set laststatus=2 
 set tabline=%!ShortTabLine()
 
