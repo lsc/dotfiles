@@ -103,8 +103,6 @@ autoload -U colors; colors
 PROMPT="\$purple\$?\$NC|\$white%n\$green %m >\$white>\$NC "
 RPROMPT="\$cyan%~\$NC"
 
-# Man pages look a hell of a lot better in vim.
-
 # SCREENDIR will screw screen up
 unset SCREENDIR
 
