@@ -6,10 +6,10 @@
 :nmap <buffer> <C-F8> :tprev<cr>
 
 " Map CTRL-[jkhl] to move between splits
-:map <C-j> <C-W>j<C-W>_
-:map <C-k> <C-W>k<C-W>_
-:map <C-l> <C-W>l
-:map <C-h> <C-W>h
+nnoremap <C-j> <C-W>j<C-W>_
+nnoremap <C-k> <C-W>k<C-W>_
+nnoremap <C-l> <C-W>l
+nnoremap <C-h> <C-W>h
 
 " Toggle menu and toolbar with CTRL+F2
 :map <silent> <C-F2> :if &guioptions =~# 'T' <Bar>
@@ -36,3 +36,7 @@
 :nmap <silent> <M>t :CommandT<cr>
 " Toggle taglist window
 :nmap <silent> <F4> :TlistToggle<cr>
+" Clear hilightning
+nnoremap <leader><space> :noh<cr>
+" Create new vertical split and switch to it
+nnoremap <leader>w <C-w>v<C-w>l

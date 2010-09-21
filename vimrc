@@ -25,8 +25,12 @@ set iskeyword=_,$,#,@,%
 set directory=~/.vim/tmp
 set hidden
 set wmh=0
-set colorcolumn=80
+set gdefault
+set colorcolumn=90
 set showmatch
+set ignorecase
+set smartcase
+let mapleader=","
 
 syntax on
 filetype plugin on
@@ -35,7 +39,6 @@ filetype indent on
 :source ~/.vim/abbreviate.vim
 :source ~/.vim/maps.vim
 :source ~/.vim/func.vim
-let mapleader=","
 " Command-t related 
 let g:CommandTCancelMap='<C-x>'
 " Mojolicious
@@ -51,3 +54,5 @@ set tabline=%!ShortTabLine()
 " Add lua syntax highlighting to Nmap script files (.nse extension)
 :autocmd BufNewFile,BufRead *.nse set filetype=lua
 :autocmd BufRead,BufNewFile *.c set softtabstop=8
+" Save file when losing focus
+:autocmd FocusLost * :wa
