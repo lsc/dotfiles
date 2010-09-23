@@ -2,16 +2,26 @@ stty erase '^?'
 export LANGUAGE=en_GB
 export LC_ALL=en_GB.UTF-8
 export LANG=en_GB
-export PATH="$PATH:$HOME/bin:/var/lib/gems/1.9.1/bin"
+
+if [[ $(uname) = 'darwin' ]]; then
+	export PATH="/usr/local/bin:/usr/local/sbin:/usr/local/Cellar/ruby/1.9.2-po/bin:$PATH"
+	export EDITOR=$(which mvim)
+	export GOROOT=$(brew --cellar)/go/HEAD
+	export GOBIN='/usr/local/bin'
+	export GOARCH=amd64
+	export GOOS=darwin
+else 
+	export PATH="$PATH:$HOME/bin"
+	export EDITOR=$(which vim)
+fi
+
 export GDK_USE_XFT=1
 export HOSTTYPE="$(uname -m)"
 export COLORTERM=yes
 export LINKS_XTERM=screen
 export MAILDIR=$HOME/.mail/
-export EDITOR=$(which vim)
-export JAVA_HOME=/usr/lib/jvm/jre-openjdk
 export GEDITOR="$(which gvim)"
-alias ls='ls -F --color=auto'
+alias ls='ls -FG'
 alias ll='ls -l'
 alias la='ls -a'
 alias lal='ls -al'
