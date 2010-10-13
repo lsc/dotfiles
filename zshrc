@@ -9,12 +9,12 @@ if [[ $(uname) = 'darwin' ]]; then
 	export GOROOT=$(brew --cellar)/go/HEAD
 	export GOBIN='/usr/local/bin'
 	export GOARCH=amd64
-	export GOOS=darwin
 else 
 	export PATH="$PATH:$HOME/bin"
 	export EDITOR=$(which vim)
 fi
 
+export GOOS=$(uname)
 export GDK_USE_XFT=1
 export HOSTTYPE="$(uname -m)"
 export COLORTERM=yes
