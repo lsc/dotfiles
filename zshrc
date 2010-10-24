@@ -3,7 +3,7 @@ export LANGUAGE=en_GB
 export LC_ALL=en_GB.UTF-8
 export LANG=en_GB
 
-if [[ $(uname) = 'darwin' ]]; then
+if [[ $(uname) = 'Darwin' ]]; then
 	export PATH="/usr/local/bin:/usr/local/sbin:/usr/local/Cellar/ruby/1.9.2-po/bin:$PATH"
 	export EDITOR=$(which mvim)
 	export GOROOT=$(brew --cellar)/go/HEAD
