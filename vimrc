@@ -13,6 +13,7 @@ set smartindent
 set copyindent 
 set completeopt=longest,menuone
 set mouse=a
+set ofu=syntaxcomplete#Complete
 set foldenable
 set foldmethod=syntax
 set ruler
@@ -33,7 +34,6 @@ let mapleader=","
 
 syntax on
 filetype plugin on
-set ofu=syntaxcomplete#Complete
 filetype indent on
 
 " Load abbreviations, maps and functions
