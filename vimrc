@@ -49,7 +49,6 @@ set tabline=%!ShortTabLine()
 
 " Load templates based on extensions of file
 :autocmd BufNewFile * silent! 0r ~/.vim/templates/%:e.tpl
-:autocmd BufNewFile * :NERDTree 
 
 :autocmd BufNewFile,BufRead *.nse set filetype=lua
 :autocmd BufRead,BufNewFile *.ru set filetype=ruby
