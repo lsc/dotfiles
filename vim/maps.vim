@@ -32,8 +32,6 @@ nnoremap <C-h> <C-W>h
 " Paste indented code aka the "stairs"
 :nnoremap <c-p> p=`]
 :map <F3> :NERDTreeToggle<cr>
-" Map Win+T for Command-t
-:nmap <silent> <M>t :CommandT<cr>
 " Toggle taglist window
 :nmap <silent> <F4> :TlistToggle<cr>
 " Clear hilightning
