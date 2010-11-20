@@ -54,5 +54,9 @@ set tabline=%!ShortTabLine()
 " Add lua syntax highlighting to Nmap script files (.nse extension)
 :autocmd BufNewFile,BufRead *.nse set filetype=lua
 :autocmd BufRead,BufNewFile *.c set softtabstop=8
+:autocmd BufNewFile,BufRead *.py set expandtab
+:autocmd BufRead,BufNewFile *.ru set filetype=ruby
 " Save file when losing focus
 :autocmd FocusLost * :wa
+call pathogen#runtime_append_all_bundles() 
+
