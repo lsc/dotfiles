@@ -71,9 +71,9 @@ set tabline=%!ShortTabLine()
 :autocmd BufNewFile,BufRead *.mk  set filetype=mkd
 
 " Settings on a per filetype basis
-:autocmd FileType ruby   setlocal tabstop=2 shiftwidth=2 expandtab
-:autocmd FileType python setlocal tabstop=2 shiftwidth=2 
-:autocmd FileType c      setlocal tabstop=8 shiftwidth=8
+:autocmd FileType ruby   setlocal tabstop=2 softtabstop=2 shiftwidth=2 
+:autocmd FileType python setlocal tabstop=2 softtabstop=2 shiftwidth=2 
+:autocmd FileType c      setlocal tabstop=8 softtabstop=8 shiftwidth=8
 
 " Save file when losing focus
 :autocmd FocusLost * :wa
