@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
-set -o nounset 
-set -o errexit
-trap catch() INT TERM EXIT
-
-catch() {
-}
-
-print_help() {
-}
+#========================================
+# Author: Lowe Schmidt <lowe@nobelium.se>
+# Licence: GPLv3
+#========================================
