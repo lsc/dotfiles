@@ -44,6 +44,10 @@ set ignorecase
 set smartcase
 let mapleader=","
 
+" Syntastic file checking.
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_loc_list=1
+
 syntax on
 filetype plugin on
 filetype indent on
@@ -54,7 +58,7 @@ filetype indent on
 :source ~/.vim/functions.vim
 
 " A More informative statusline
-set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [LEN=%L][POS=\%04l.\%04v]\ %{fugitive#statusline()}
+set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [LEN=%L][POS=\%04l.\%04v]\ %{fugitive#statusline()}\ %{SyntasticStatuslineFlag()}
 set laststatus=2 
 set tabline=%!ShortTabLine()
 
