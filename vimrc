@@ -3,7 +3,7 @@ set nocompatible
 set number
 set backspace=indent,eol,start
 
-" I prefer 4 spaces for a tab
+" A TAB is TAB and should be 4 spaces wide
 set shiftwidth=4
 set tabstop=4
 set softtabstop=4
@@ -38,11 +38,6 @@ set directory=~/.vim/tmp
 set hidden
 set wmh=0
 set gdefault
-
-" Colorcolumn was first supported in version 7.3
-if version >= 730 
-	set colorcolumn=90
-endif
 
 set showmatch
 set ignorecase
@@ -80,4 +75,3 @@ set tabline=%!ShortTabLine()
 
 " Call pathogen.
 call pathogen#runtime_append_all_bundles() 
-
