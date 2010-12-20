@@ -32,12 +32,12 @@ function ShortTabLine()
 endfunction
 
 " Change working dir to the one the current open file is in.
-function! CURR_CWD()
-    let _dir = expand("%:p:h")
-    exec "cd " . _dir
-    unlet _dir
-endfunction
-autocmd BufEnter * call CURR_CWD()
+"function! CURR_CWD()
+"    let _dir = expand("%:p:h")
+"    exec \"cd " . _dir
+"    unlet _dir
+"endfunction
+"autocmd BufEnter * call CURR_CWD()
 
 " Load and save sessions
 function! LoadSession()
