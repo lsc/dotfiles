@@ -20,7 +20,7 @@ nnoremap <C-h> <C-W>h
 \set guioptions+=m <Bar>
 \endif <CR>
 
-" Use space to toggle splits if we are on a split
+" Use space to toggle folds if we are on a fold
 :nnoremap <space> za
 " Headline macros
 :map h1 yypVr=o
