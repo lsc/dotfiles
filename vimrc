@@ -69,7 +69,6 @@ set guioptions=aAce
 " Set some file types normally not recognized
 :autocmd BufNewFile,BufRead *.nse set filetype=lua
 :autocmd BufNewFile,BufRead *.ru  set filetype=ruby
-:autocmd BufNewFile,BufRead *.haml set filetype=ruby
 :autocmd BufNewFile,BufRead *.mk  set filetype=mkd
 
 " Settings on a per filetype basis
