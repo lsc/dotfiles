@@ -39,4 +39,4 @@ nnoremap <leader><space> :noh<cr>
 " Create new vertical split and switch to it
 nnoremap <leader>w <C-w>v<C-w>l
 " Source changes from vimrc and gvim
-nnoremap <leader>s :so $HOME/.vimrc
+nnoremap <leader>s :so $HOME/.vimrc <cr>
