@@ -4,7 +4,7 @@ export LC_ALL=en_GB.UTF-8
 export LANG=en_GB
 
 if [[ $(uname) = 'Darwin' ]]; then
-	export PATH="/usr/local/bin:/usr/local/sbin:/usr/local/Cellar/ruby/1.9.2-po/bin:$PATH"
+	export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 	export EDITOR=$(which mvim)
 	export GOROOT=$(brew --cellar)/go/HEAD
 	export GOBIN='/usr/local/bin'
@@ -342,5 +342,11 @@ function parse_git_branch {
 function precmd() {
   git_branch=$(parse_git_branch)
   export RPROMPT="%2~ ${git_branch}${svn_branch}"
+}
+
+function t2b() {
+	for i in *.torrent; do
+		scp $i belenus:~/Downloads && unlink $i
+	done
 }
 

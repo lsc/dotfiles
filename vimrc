@@ -44,6 +44,8 @@ set ignorecase
 set smartcase
 let mapleader=","
 
+set encoding=utf-8
+
 " Syntastic file checking.
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=1
@@ -72,10 +74,7 @@ set guioptions=aAce
 :autocmd BufNewFile,BufRead *.mk  set filetype=mkd
 
 " Settings on a per filetype basis
-:autocmd FileType ruby   setlocal tabstop=2 softtabstop=2 shiftwidth=2 
-:autocmd FileType python setlocal tabstop=2 softtabstop=2 shiftwidth=2 
-:autocmd FileType c      setlocal tabstop=8 softtabstop=8 shiftwidth=8
-:autocmd FileType haml   setlocal tabstop=2 softtabstop=2 shiftwidth=2
+:autocmd FileType ruby,python,haml,sass   setlocal tabstop=2 softtabstop=2 shiftwidth=2 
 
 " Save file when losing focus
 :autocmd FocusLost * :wa
