@@ -55,3 +55,12 @@
 [submodule "snippets"]
 	path = snippets
 	url = https://github.com/scrooloose/snipmate-snippets.git
+[submodule "vim/bundle/twit"]
+	path = vim/bundle/twit
+	url = https://github.com/vim-scripts/TwitVim.git
+[submodule "vim/bundle/gist"]
+	path = vim/bundle/gist
+	url = https://github.com/vim-scripts/Gist.vim.git
+[submodule "vim/bundle/ack"]
+	path = vim/bundle/ack
+	url = https://github.com/vim-scripts/ack.vim.git

@@ -6,7 +6,7 @@ echo "It will also build the Command-T C extension"
 read -p "$*"
 for i in *; do
 	if [[ -e $HOME/.$i ]]; then
-		rm -r $HOME/.$i && echo "Removing $HOME/.$i"
+		rm -fr $HOME/.$i && echo "Removing $HOME/.$i"
 	fi
     cp -r $i $HOME/.$i && echo "Copying $i to $HOME/.$i"
 done
