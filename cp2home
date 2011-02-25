@@ -15,3 +15,5 @@ mkdir -p $HOME/.vim/tmp
 cd $HOME/.vim/bundle/command-t/ruby/command-t
 $RUBY extconf.rb
 make
+cd $HOME/.snippets/
+rake deploy_local
