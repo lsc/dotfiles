@@ -4,7 +4,7 @@ export LC_ALL=en_GB.UTF-8
 export LANG=en_GB
 
 if [[ $(uname) = 'Darwin' ]]; then
-	export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+	export PATH="/usr/local/bin:/usr/local/Cellar/ruby/1.9.2-p180/bin:$PATH"
 	export EDITOR=$(which mvim)
 	export GOROOT=$(brew --cellar)/go/HEAD
 	export GOBIN='/usr/local/bin'
