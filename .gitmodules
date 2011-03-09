@@ -76,3 +76,6 @@
 [submodule "vim/bundle/organizer"]
 	path = vim/bundle/organizer
 	url = https://github.com/hsitz/VimOrganizer.git
+[submodule "vim/bundle/puppet"]
+	path = vim/bundle/puppet
+	url = https://github.com/vim-scripts/Puppet-Syntax-Highlighting.git
