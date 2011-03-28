@@ -1,8 +1,8 @@
 #!/bin/bash
 RUBY=$(which ruby)
 
-echo "This script will delete the dotfiles in $HOME and then copy them, if this is unwanted: press CTRL-C now or hit any key to continue"
-echo "It will also build the Command-T C extension"
+echo "This script will delete the dotfiles in $HOME and then copy them, if this is unwanted: press CTRL-C now."
+echo "Press any key to continue"
 read -p "$*"
 for i in *; do
 	if [[ -e $HOME/.$i ]]; then
