@@ -72,10 +72,10 @@ set guioptions=aAce
 :autocmd BufNewFile,BufRead *.nse set filetype=lua
 :autocmd BufNewFile,BufRead *.ru  set filetype=ruby
 :autocmd BufNewFile,BufRead *.mk  set filetype=mkd
-:autocmd BufNewFile,BufRead *.pp  set filetype=puppet
+:autocmd BufNewFile,BufRead *.pp  set filetype=puppet syntax=puppet
 
 " Settings on a per filetype basis
-:autocmd FileType lua,ruby,python,haml,sass setlocal tabstop=2 softtabstop=2 shiftwidth=2 
+:autocmd FileType puppet,lua,ruby,python,haml,sass setlocal tabstop=2 softtabstop=2 shiftwidth=2 
 
 " Save file when losing focus
 :autocmd FocusLost * :wa
