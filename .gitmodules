@@ -82,3 +82,6 @@
 [submodule "vim/bundle/cucumber"]
 	path = vim/bundle/cucumber
 	url = https://github.com/tpope/vim-cucumber.git
+[submodule "vim/bundle/textile"]
+	path = vim/bundle/textile
+	url = https://github.com/timcharper/textile.vim.git
