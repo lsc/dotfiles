@@ -1,5 +1,5 @@
 :set guifont=Inconsolata\ 10
-:colorscheme wombat 
+:colorscheme solarized
 :set guioptions-=T
 :set guioptions-=m
 
