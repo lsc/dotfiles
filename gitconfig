@@ -1,5 +1,5 @@
 [user]
-    name = lsc
+    name = Lowe Schmidt
     email = lowe.schmidt@gmail.com
 
 [branch]
@@ -31,3 +31,6 @@
     co = checkout
     df = diff
     lg = log -p 
+
+[github]
+	user = lsc

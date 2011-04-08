@@ -1,9 +1,10 @@
-" vimrc for lowe schmidt 
+" vimrc for Lowe Schmidt
 set nocompatible
 set number
 set backspace=indent,eol,start
 
 " A TAB is TAB and should be 4 spaces wide
+" (I set expansion and width of tabs on a filetype level further down)
 set shiftwidth=4
 set tabstop=4
 set softtabstop=4
@@ -46,7 +47,7 @@ let mapleader=","
 
 set encoding=utf-8
 
-" Syntastic file checking.
+" Syntastic file checking, 
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=1
 
@@ -63,8 +64,6 @@ filetype indent on
 set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [LEN=%L][POS=\%04l.\%04v]\ %{fugitive#statusline()}\ %{SyntasticStatuslineFlag()}
 set laststatus=2 
 set tabline=%!ShortTabLine()
-" Remove Scroll bars under Mac OS X
-set guioptions=aAce
 
 " Load templates based on extensions of file
 :autocmd BufNewFile * silent! 0r ~/.vim/templates/%:e.tpl
