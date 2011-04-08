@@ -2,18 +2,8 @@ stty erase '^?'
 export LANGUAGE=en_GB
 export LC_ALL=en_GB.UTF-8
 export LANG=en_GB
-
-if [[ $(uname) = 'Darwin' ]]; then
-	export PATH="/usr/local/bin:/usr/local/Cellar/ruby/1.9.2-p180/bin:$PATH"
-	export EDITOR=$(which mvim)
-	export GOROOT=$(brew --cellar)/go/HEAD
-	export GOBIN='/usr/local/bin'
-	export GOARCH=amd64
-else 
-	export PATH="$PATH:$HOME/bin"
-	export EDITOR=$(which vim)
-fi
-
+export PATH="$PATH:$HOME/bin"
+export EDITOR=$(which vim)
 export GOOS=$(uname)
 export GDK_USE_XFT=1
 export HOSTTYPE="$(uname -m)"
@@ -350,4 +340,3 @@ function t2b() {
 	done
 }
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"

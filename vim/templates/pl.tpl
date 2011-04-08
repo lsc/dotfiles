@@ -1,2 +1,3 @@
 #!/usr/bin/env perl
-use common::sense;
+use warnings;
+use strict;
