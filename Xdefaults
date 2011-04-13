@@ -75,5 +75,5 @@
 !! white dark/light
 *color7:                S_base2
 *color15:               S_base3
-URxvt*font: xft:Inconsolata:pixelsize=13
+URxvt*font: xft:Inconsolata:pixelsize=11
 URxvt*scrollBar: false
