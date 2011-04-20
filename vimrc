@@ -72,6 +72,7 @@ set tabline=%!ShortTabLine()
 :autocmd BufNewFile,BufRead *.ru  set filetype=ruby
 :autocmd BufNewFile,BufRead *.mk  set filetype=mkd
 :autocmd BufNewFile,BufRead *.md  set filetype=mkd
+:autocmd BufNewFile,BufRead *.textile set filetype=textile
 :autocmd BufNewFile,BufRead *.pp  set filetype=puppet syntax=puppet
 
 " Settings on a per filetype basis
