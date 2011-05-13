@@ -34,3 +34,6 @@
 
 [github]
 	user = lsc
+
+[merge]
+	tool = meld

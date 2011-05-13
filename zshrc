@@ -335,8 +335,15 @@ function precmd() {
 }
 
 function t2b() {
-	for i in *.torrent; do
-		scp $i belenus:~/Downloads && unlink $i
-	done
+	scp *.torrent $USER@nodens:/exports/media/Downloads/ && rm *.torrent
 }
 
+function dropd() {
+	$HOME/.dropbox-dist/dropboxd &
+	sleep 5
+	disown $!
+}
+
+function mountexp() {
+	sudo mount -t nfs nodens:/exports/media/ /exports/media
+}
