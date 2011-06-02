@@ -36,13 +36,10 @@
 #define S_blue          #2aa198
 #define S_cyan          #859900
 
-*background:            S_base03
-*foreground:            S_base00
+*background:            black
+*foreground:            grey
 *fading:                40
-*fadeColor:             S_base03
-*cursorColor:           S_base1
-*pointerColorBackground:S_base01
-*pointerColorForeground:S_base1
+*cursorColor:           red
 
 !! black dark/light
 *color0:                S_base02
@@ -75,5 +72,6 @@
 !! white dark/light
 *color7:                S_base2
 *color15:               S_base3
+
 URxvt*font: xft:Inconsolata:pixelsize=11
 URxvt*scrollBar: false

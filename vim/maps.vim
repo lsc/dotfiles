@@ -31,6 +31,7 @@ nnoremap <C-h> <C-W>h
 :imap <F11> <ESC>1G=G
 " Paste indented code aka the "stairs"
 :nnoremap <c-p> p=`]
+" Toggle NerdTree window
 :map <F3> :NERDTreeToggle<cr>
 " Toggle taglist window
 :nmap <silent> <F4> :TlistToggle<cr>

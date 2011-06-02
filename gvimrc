@@ -4,7 +4,3 @@
 :set guioptions-=m
 :set guioptions+=LlRrb
 :set guioptions-=LlRrb
-
-
-
-

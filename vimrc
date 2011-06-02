@@ -3,7 +3,7 @@ set nocompatible
 set number
 set backspace=indent,eol,start
 
-" A TAB is TAB and should be 4 spaces wide
+" A TAB is a TAB and should be 4 spaces wide
 " (I set expansion and width of tabs on a filetype level further down)
 set shiftwidth=4
 set tabstop=4
