@@ -94,15 +94,6 @@
 [submodule "awesome/lib/awesompd"]
 	path = awesome/lib/awesompd
 	url = https://github.com/alexander-yakushev/awesompd.git
-[submodule "awesome/lib/vicious"]
-	path = awesome/lib/vicious
-	url = http://git.sysphere.org/vicious/
-[submodule "obvious"]
-	path = obvious
-	url = git://git.mercenariesguild.net/obvious.git
-[submodule "awesome/obvious"]
-	path = awesome/obvious
-	url = git://git.mercenariesguild.net/obvious.git
 [submodule "awesome/delightful"]
 	path = awesome/delightful
 	url = http://scm.solitudo.net/gitweb/public/delightful.git
