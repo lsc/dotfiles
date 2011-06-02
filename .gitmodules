@@ -103,3 +103,6 @@
 [submodule "awesome/obvious"]
 	path = awesome/obvious
 	url = git://git.mercenariesguild.net/obvious.git
+[submodule "awesome/delightful"]
+	path = awesome/delightful
+	url = http://scm.solitudo.net/gitweb/public/delightful.git
