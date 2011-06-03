@@ -96,4 +96,4 @@
 	url = https://github.com/alexander-yakushev/awesompd.git
 [submodule "awesome/delightful"]
 	path = awesome/delightful
-	url = http://scm.solitudo.net/gitweb/public/delightful.git
+	url = git://scm.solitudo.net/delightful.git

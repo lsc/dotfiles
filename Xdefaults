@@ -2,5 +2,13 @@
 *foreground:            grey
 *fading:                40
 *cursorColor:           grey
-*font: xft:Inconsolata:pixelsize=11
+*font: xft:Inconsolata:pixelsize=12
 *scrollBar: false
+xscreensaver.timeout: 5
+URxvt.perl-ext-common: default,matcher
+URxvt.urlLauncher: firefox
+URxvt.matcher.button: 2
+URxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-]*[\\w/-]
+
+
+
