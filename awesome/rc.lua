@@ -10,6 +10,7 @@ require("naughty")
 require("awesompd")
 require("vicious")
 require("cal")
+require("revelation")
 
 -- MPD Configuration
 mpdw = awesompd:create() 
@@ -50,6 +51,7 @@ vicious.register(memwidget, vicious.widgets.mem, "$1", 13)
 
 -- CPU
 cpuwidget = awful.widget.graph()
+cpuwidget:set_height(20)
 cpuwidget:set_width(50)
 cpuwidget:set_background_color("#494B4F")
 cpuwidget:set_color("#AECF96")
@@ -58,7 +60,7 @@ vicious.register(cpuwidget, vicious.widgets.cpu, "$1", 3)
 
 -- Battery 
 batwidget = awful.widget.progressbar()
-batwidget:set_width(8)
+batwidget:set_width(10)
 batwidget:set_height(20)
 batwidget:set_vertical(true)
 batwidget:set_background_color("#494B4F")
@@ -66,6 +68,9 @@ batwidget:set_border_color(nil)
 batwidget:set_color("#AECF96")
 batwidget:set_gradient_colors({ "#AECF96", "#88A175", "#FF5656" })
 vicious.register(batwidget, vicious.widgets.bat, "$2", 61, "BAT0")
+
+-- Volume 
+
 
 
 -- {{{ Variable definitions
@@ -192,7 +197,7 @@ for s = 1, screen.count() do
                                           end, mytasklist.buttons)
 
     -- Create the wibox
-    mywibox[s] = awful.wibox({ position = "top", screen = s })
+    mywibox[s] = awful.wibox({ position = "top", height = "20", screen = s })
     -- Add widgets to the wibox - order matters
     mywibox[s].widgets = {
         {
@@ -207,7 +212,6 @@ for s = 1, screen.count() do
         cpuwidget,
         batwidget,
 				mpdw.widget,
-				alsawidget,
         s == 1 and mysystray or nil,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft
@@ -259,15 +263,19 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
+
+    -- Revelation!
+    awful.key({ modkey,           }, "e", revelation.revelation),
+
     -- Application start hotkeys
-    awful.key({ modkey,						}, "e", function() awful.util.spawn("gvim") end),
-    awful.key({ modkey,						}, "b", function() awful.util.spawn("firefox") end),
+    awful.key({ modkey,						}, "v", function() awful.util.spawn("gvim") end),
+    awful.key({ modkey,						}, "f", function() awful.util.spawn("firefox") end),
 		-- MPD Hotkeys
-    awful.key({ modkey,						}, "q", function() mpdw:command_volume_up() end),
-    awful.key({ modkey,						}, "a", function() mpdw:command_volume_down() end),
-    awful.key({ modkey,						}, "x", function() mpdw:command_toggle() end),
-    awful.key({ modkey,						}, "z", function() mpdw:command_prev_track() end),
-    awful.key({ modkey,						}, "c", function() mpdw:command_next_track() end),
+    awful.key({ modkey,						}, "q",  mpdw:command_volume_up()),
+    awful.key({ modkey,						}, "a",  mpdw:command_volume_down()),
+    awful.key({ modkey,						}, "x",  mpdw:command_toggle()),
+    awful.key({ modkey,						}, "z",  mpdw:command_prev_track()),
+    awful.key({ modkey,						}, "c",  mpdw:command_next_track()),
 		--
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
@@ -405,3 +413,10 @@ end)
 client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+-- awful.util.spawn_with_shell("pidgin")
+awful.util.spawn_with_shell("nm-applet --sm-disable")
+awful.util.spawn_with_shell("setxkbmap se")
+awful.util.spawn_with_shell("xmodmap ~/.speedswap")
+awful.util.spawn_with_shell("xscreensaver")
+
+
