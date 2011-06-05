@@ -46,7 +46,7 @@ memwidget:set_vertical(true)
 memwidget:set_background_color("#494B4F")
 memwidget:set_color("#AECF96")
 memwidget:set_gradient_colors( { "#AECF96", "#88A175", "#FF5656" } )
-memwidget:set_border_color(nil)
+memwidget:set_border_color(black)
 vicious.register(memwidget, vicious.widgets.mem, "$1", 13)
 
 -- CPU
@@ -71,7 +71,13 @@ vicious.register(batwidget, vicious.widgets.bat, "$2", 61, "BAT0")
 
 -- Volume 
 
-
+-- Run an application on startup.
+function run_once(prog)
+	if not prog then
+		do return nil end
+	end
+	awful.util.spawn_with_shell("pgrep -f -u $USER -x " .. prog .. " || (" .. prog .. ")")
+end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
@@ -289,7 +295,7 @@ globalkeys = awful.util.table.join(
     -- Prompt
     awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
 
-    awful.key({ modkey }, "x",
+    awful.key({ modkey, "Shift" }, "x",
               function ()
                   awful.prompt.run({ prompt = "Run Lua code: " },
                   mypromptbox[mouse.screen].widget,
@@ -413,10 +419,11 @@ end)
 client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
--- awful.util.spawn_with_shell("pidgin")
-awful.util.spawn_with_shell("nm-applet --sm-disable")
-awful.util.spawn_with_shell("setxkbmap se")
-awful.util.spawn_with_shell("xmodmap ~/.speedswap")
-awful.util.spawn_with_shell("xscreensaver")
+
+run_once("nm-applet --sm-disable")
+run_once("setxkbmap se")
+run_once("xmodmap ~/.speedswap")
+run_once("xscreensaver")
+run_once("dropbox start")
 
 
