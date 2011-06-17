@@ -6,7 +6,6 @@ require("awful.rules")
 require("beautiful")
 -- Notification library
 require("naughty")
--- 
 require("awesompd")
 require("vicious")
 require("cal")
