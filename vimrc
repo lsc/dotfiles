@@ -70,6 +70,7 @@ set tabline=%!ShortTabLine()
 " Set some file types normally not recognized
 :autocmd BufNewFile,BufRead *.nse set filetype=lua
 :autocmd BufNewFile,BufRead *.ru  set filetype=ruby
+:autocmd BufNewFile,BufRead *.thor set filetype=ruby
 :autocmd BufNewFile,BufRead *.mk  set filetype=mkd
 :autocmd BufNewFile,BufRead *.md  set filetype=mkd
 :autocmd BufNewFile,BufRead *.textile set filetype=textile
