@@ -59,7 +59,7 @@ vicious.register(cpuwidget, vicious.widgets.cpu, "$1", 3)
 
 -- Battery 
 batwidget = awful.widget.progressbar()
-batwidget:set_width(10)
+batwidget:set_width(3)
 batwidget:set_height(20)
 batwidget:set_vertical(true)
 batwidget:set_background_color("#494B4F")
@@ -68,7 +68,6 @@ batwidget:set_color("#AECF96")
 batwidget:set_gradient_colors({ "#AECF96", "#88A175", "#FF5656" })
 vicious.register(batwidget, vicious.widgets.bat, "$2", 61, "BAT0")
 
--- Volume 
 
 -- Run an application on startup.
 function run_once(prog)
@@ -215,6 +214,7 @@ for s = 1, screen.count() do
         mytextclock,
         memwidget,
         cpuwidget,
+        battext,
         batwidget,
 				mpdw.widget,
         s == 1 and mysystray or nil,
@@ -424,5 +424,3 @@ run_once("setxkbmap se")
 run_once("xmodmap ~/.speedswap")
 run_once("xscreensaver")
 run_once("dropbox start")
-
-
