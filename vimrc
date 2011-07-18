@@ -60,19 +60,18 @@ filetype indent on
 :source ~/.vim/maps.vim
 :source ~/.vim/functions.vim
 
-" A More informative statusline
-set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [LEN=%L][POS=\%04l.\%04v]\ %{fugitive#statusline()}\ %{SyntasticStatuslineFlag()}
+set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [LEN=%L][POS=\%04l.\%04v]\ %{fugitive#statusline()}\ %{SyntasticStatuslineFlag()}\ %{rvm#statusline()}
 set laststatus=2 
 set tabline=%!ShortTabLine()
 
 " Load templates based on extensions of file
 :autocmd BufNewFile * silent! 0r ~/.vim/templates/%:e.tpl
-" Set some file types normally not recognized
+" Set file types for a bunch of files to get syntax highlighting
 :autocmd BufNewFile,BufRead *.nse set filetype=lua
 :autocmd BufNewFile,BufRead *.ru  set filetype=ruby
 :autocmd BufNewFile,BufRead *.thor set filetype=ruby
-:autocmd BufNewFile,BufRead *.mk  set filetype=mkd
-:autocmd BufNewFile,BufRead *.md  set filetype=mkd
+:autocmd BufNewFile,BufRead *.mk  set filetype=markdown
+:autocmd BufNewFile,BufRead *.md  set filetype=markdown
 :autocmd BufNewFile,BufRead *.textile set filetype=textile
 :autocmd BufNewFile,BufRead *.pp  set filetype=puppet syntax=puppet
 

@@ -103,3 +103,6 @@
 [submodule "vim/bundle/rvm"]
 	path = vim/bundle/rvm
 	url = https://github.com/csexton/rvm.vim.git
+[submodule "vim/bundle/risto"]
+	path = vim/bundle/risto
+	url = https://github.com/vim-scripts/Risto-Color-Scheme.git

@@ -2,7 +2,7 @@
 *foreground:            grey
 *fading:                40
 *cursorColor:           grey
-*font: xft:Inconsolata:pixelsize=12
+*font: xft:Inconsolata:pixelsize=11
 *scrollBar: false
 xscreensaver.timeout: 5
 URxvt.perl-ext-common: default,matcher
