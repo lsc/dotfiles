@@ -76,7 +76,8 @@ set tabline=%!ShortTabLine()
 :autocmd BufNewFile,BufRead *.pp  set filetype=puppet syntax=puppet
 
 " Settings on a per filetype basis
-:autocmd FileType puppet,lua,ruby,python,haml,sass setlocal tabstop=2 softtabstop=2 shiftwidth=2 
+:autocmd FileType lua,python setlocal tabstop=2 softtabstop=2 shiftwidth=2 
+:autocmd FileType puppet,ruby,haml,sass setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
 " Save file when losing focus
 :autocmd FocusLost * :wa
