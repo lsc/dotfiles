@@ -114,3 +114,6 @@
 	path = awesome/vicious
 	url = http://git.sysphere.org/vicious
 
+[submodule "vim/bundle/puppet-vim"]
+	path = vim/bundle/puppet-vim
+	url = https://github.com/rodjek/vim-puppet.git
