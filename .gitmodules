@@ -114,3 +114,6 @@
 [submodule "vim/bundle/puppet-vim"]
 	path = vim/bundle/puppet-vim
 	url = https://github.com/rodjek/vim-puppet.git
+[submodule "vim/bundle/vim-session"]
+	path = vim/bundle/vim-session
+	url = https://github.com/xolox/vim-session.git
