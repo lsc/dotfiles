@@ -1,0 +1,53 @@
+*iruler.txt* Integrating vim with iRules!
+
+This module requires a python-enabled vim, >=2.4.4 or higher, and
+pycontrol version 2. See DevCentral for details on installing and
+using pycontrol v2.
+ 
+Commands:                                  *iruler-commands*
+:Co[nnect] {IP or hostname}
+    Connect to a system. You will be prompted for username and password.
+:Ls 
+    List the current iRules on the box. You will see both LTM and 
+    GTM rules listed.
+:Get
+    Get the current rule under the cursor. It will render the rule in the main
+    window, then close the menu on the left.
+:Sav {gtm}
+    Save the current rule to the system. To save a GTM rule, pass the
+    'gtm' argument to the command. This will call against the GTM service.
+    By default we call into LTM.
+:New
+    Create a new rule. Don't forget to :Sav!
+:Delete 
+    Delete the current iRule (current buffer) 
+:Apply {virtual-server}
+    Apply the current iRule (current buffer) to the virtual server
+    name passed as an argument.
+:Par[tition] {partition name}
+    Switch to the partition name passed.
+                                           *iruler-config*
+
+The vim-iRuler setup is essentially composed of custom commands in .vimrc:
+
+so $HOME/.vim/irule/pyfunc.vim
+let $irulsyn='~/.vim/syntax/irul.vim' "Syntax file for *.irul files.
+let g:irul_location='~/.vim/irule/irul_dict' "Location of the syntax dict.
+au BufRead,BufNewFile *.irul set filetype=irul "If you name a file *.irul, set ftype.
+au! Syntax irul source $irulsyn
+
+" Custom commands as shortcuts
+com -nargs=? Sav call PubRule(<f-args>)
+com Ls  call GetRules()
+com Get call OpenRule()
+com -nargs=* Connect call Connect(<f-args>)
+com New call NewRule()
+com -nargs=? Apply call ApplyRule(<f-args>)
+com -nargs=* Delete call DeleteRule(<f-args>)
+com -nargs=1 Partition call Partition (<f-args>)
+
+...Which map to formal python code found in ~/.vim/irule/pyfunc.vim
+
+The syntax dictionary is ~/.vim/irule/irul_dict, with a custom filetype of ".irul".
+
+

@@ -1,0 +1,21 @@
+Welcome to the vim iRuler!
+Version: 0.10
+Author: Matt Cauthorn, for f5 Networks.
+
+===========================NOTES ==========================================
+
+Note: This pulls together/modifies several plugins and a .vimrc
+from the web and glues them together with iControl, python, 
+a syntax file, and a completion dictionary. Credits are given to
+the original authors where appropriate.
+
+Note: Once again, thanks to Jason Rahm, ever the early-adopter for
+projects. A Jason helped me find an early issue that really made this
+better. Also, thanks to the and the DevCentral team.
+
+Note: For auto-complete of brackets and such, either install delimitMate
+or uncomment the auto-bracket section below.
+
+Note: I've not included colorschemes, so be sure and install them if you
+want them.
+===========================NOTES ==========================================
