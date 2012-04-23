@@ -1,9 +1,4 @@
-if has('macunix')
-  :set guifont=Monaco\ 11
-else
-  :set guifont=Inconsolata\ 9
-endif
-
+:set guifont=Inconsolata\ 14
 :colorscheme risto
 :set guioptions-=T
 :set guioptions-=m

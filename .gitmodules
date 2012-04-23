@@ -22,18 +22,12 @@
 [submodule "vim/bundle/sorround"]
 	path = vim/bundle/sorround
 	url = https://github.com/tpope/vim-surround.git
-[submodule "vim/bundle/command-t"]
-	path = vim/bundle/command-t
-	url = https://github.com/wincent/Command-T.git
 [submodule "vim/bundle/rails"]
 	path = vim/bundle/rails
 	url = https://github.com/tpope/vim-rails.git
 [submodule "vim/bundle/session"]
 	path = vim/bundle/session
 	url = https://github.com/vim-scripts/session.vim--Odding.git
-[submodule "vim/bundle/vcscommand"]
-	path = vim/bundle/vcscommand
-	url = https://github.com/vim-scripts/vcscommand.vim.git
 [submodule "vim/bundle/align"]
 	path = vim/bundle/align
 	url = https://github.com/vim-scripts/Align.vim.git
@@ -88,12 +82,6 @@
 [submodule "oh-my-zsh"]
 	path = oh-my-zsh
 	url = https://github.com/robbyrussell/oh-my-zsh.git
-[submodule "awesome/lib/awesompd"]
-	path = awesome/lib/awesompd
-	url = https://github.com/alexander-yakushev/awesompd.git
-[submodule "awesome/delightful"]
-	path = awesome/delightful
-	url = git://scm.solitudo.net/delightful.git
 [submodule "vim/bundle/tabular"]
 	path = vim/bundle/tabular
 	url = https://github.com/godlygeek/tabular.git
@@ -106,14 +94,12 @@
 [submodule "vim/bundle/tagbar"]
 	path = vim/bundle/tagbar
 	url = https://github.com/majutsushi/tagbar.git
-
-[submodule "awesome/vicious"]
-	path = awesome/vicious
-	url = http://git.sysphere.org/vicious
-
 [submodule "vim/bundle/puppet-vim"]
 	path = vim/bundle/puppet-vim
 	url = https://github.com/rodjek/vim-puppet.git
 [submodule "vim/bundle/vim-session"]
 	path = vim/bundle/vim-session
 	url = https://github.com/xolox/vim-session.git
+[submodule "vim/bundle/ctrlp"]
+	path = vim/bundle/ctrlp
+	url = https://github.com/kien/ctrlp.vim.git
