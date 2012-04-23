@@ -1,5 +1,6 @@
 [user]
 	name = Lowe Schmidt
+	email = lowe.schmidt@gmail.com
 
 [branch]
     autosetupmerge = true
@@ -38,3 +39,11 @@
 [github]
 	user = lsc
 
+[core]
+	excludesfile = /Users/lsc/.gitignore_global
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
