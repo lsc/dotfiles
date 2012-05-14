@@ -9,12 +9,6 @@ set shiftwidth=4
 set tabstop=4
 set softtabstop=4
 
-set cursorline
-
-set spell
-set spelllang=en
-set spellsuggest=5
-
 set background=dark
 set smartindent
 set copyindent 
