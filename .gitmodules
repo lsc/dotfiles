@@ -30,7 +30,7 @@
 	url = https://github.com/vim-scripts/session.vim--Odding.git
 [submodule "vim/bundle/align"]
 	path = vim/bundle/align
-	url = https://github.com/vim-scripts/Align.vim.git
+	url = https://github.com/tsaleh/vim-align.git
 [submodule "vim/bundle/molokai"]
 	path = vim/bundle/molokai
 	url = https://github.com/vim-scripts/molokai.git

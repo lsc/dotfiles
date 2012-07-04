@@ -1,5 +1,5 @@
-:set guifont=Inconsolata\ 14
-:colorscheme risto
+:set guifont=Inconsolata:h14
+:colorscheme solarized
 :set guioptions-=T
 :set guioptions-=m
 :set guioptions+=LlRrb
