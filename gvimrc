@@ -1,5 +1,5 @@
 :set guifont=Inconsolata:h14
-:colorscheme solarized
+:colorscheme blackboard
 :set guioptions-=T
 :set guioptions-=m
 :set guioptions+=LlRrb
