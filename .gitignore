@@ -4,6 +4,5 @@
 .svn/*
 *.o
 *.so
-vim/tmp/*
 vim/.netrwhist
 
