@@ -34,7 +34,7 @@ nnoremap <C-h> <C-W>h
 " Toggle NerdTree window
 :map <F3> :NERDTreeToggle<cr>
 " Toggle taglist window
-:nmap <silent> <F4> :TlistToggle<cr>
+:nmap <silent> <F4> :TagbarToggle<cr>
 " Clear hilightning
 nnoremap <leader><space> :noh<cr>
 " Create new vertical split and switch to it
