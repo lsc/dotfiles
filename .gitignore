@@ -5,4 +5,5 @@
 *.o
 *.so
 vim/.netrwhist
+vim/tmp/*.sw*
 

@@ -109,3 +109,6 @@
 [submodule "vim/bundle/chef"]
 	path = vim/bundle/chef
 	url = https://github.com/t9md/vim-chef.git
+[submodule "vim/bundle/vdebug"]
+	path = vim/bundle/vdebug
+	url = https://github.com/vim-scripts/Vdebug.git
