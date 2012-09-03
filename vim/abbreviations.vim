@@ -1,2 +1,0 @@
-:cabbrev nt NERDTree
-

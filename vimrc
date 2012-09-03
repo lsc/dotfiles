@@ -3,6 +3,9 @@ set nocompatible
 set number
 set backspace=indent,eol,start
 
+" Call pathogen.
+call pathogen#infect()
+
 " A TAB is a TAB and should be 4 spaces wide
 " (I set expansion and width of tabs on a filetype level further down)
 set shiftwidth=4
@@ -49,12 +52,10 @@ syntax on
 filetype plugin on
 filetype indent on
 
-" Load abbreviations, maps and functions
-:source ~/.vim/abbreviations.vim
 :source ~/.vim/maps.vim
 :source ~/.vim/functions.vim
 
-set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [LEN=%L][POS=\%04l.\%04v]\ %{fugitive#statusline()}\ %{SyntasticStatuslineFlag()}
+set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [LEN=%L][POS=\%04l.\%04v]\ %{fugitive#statusline()}\ %{SyntasticStatuslineFlag()}\ %{rvm#statusline()}
 set laststatus=2 
 set tabline=%!ShortTabLine()
 
@@ -82,6 +83,3 @@ highlight Pmenu ctermbg=238 gui=bold
 
 " Save file when losing focus
 :autocmd FocusLost * :wa
-
-" Call pathogen.
-call pathogen#runtime_append_all_bundles() 

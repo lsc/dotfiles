@@ -2,13 +2,13 @@
 *foreground:            grey
 *fading:                40
 *cursorColor:           grey
-*font: xft:Inconsolata:pixelsize=11
+*font: xft:Terminus:pixelsize=11:antialias=true:hinting=true
 *scrollBar: false
+URxvt*transparent: true
+URxvt*shading: 20
 xscreensaver.timeout: 5
 URxvt.perl-ext-common: default,matcher
 URxvt.urlLauncher: firefox
 URxvt.matcher.button: 2
 URxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-]*[\\w/-]
-
-
-
+URxvt.loginShell: true

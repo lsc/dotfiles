@@ -103,3 +103,12 @@
 [submodule "vim/bundle/ctrlp"]
 	path = vim/bundle/ctrlp
 	url = https://github.com/kien/ctrlp.vim.git
+[submodule "vim/bundle/minibufexplorer"]
+	path = vim/bundle/minibufexplorer
+	url = https://github.com/fholgado/minibufexpl.vim.git
+[submodule "vim/bundle/chef"]
+	path = vim/bundle/chef
+	url = https://github.com/t9md/vim-chef.git
+[submodule "vim/bundle/vdebug"]
+	path = vim/bundle/vdebug
+	url = https://github.com/vim-scripts/Vdebug.git
