@@ -6,7 +6,7 @@ else
 	:set guifont=Terminus\ 8
 endif 
 
-:colorscheme BlackSea
+:colorscheme molokai
 :set guioptions-=T
 :set guioptions-=m
 :set guioptions+=LlRrb

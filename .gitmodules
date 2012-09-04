@@ -112,3 +112,6 @@
 [submodule "vim/bundle/vdebug"]
 	path = vim/bundle/vdebug
 	url = https://github.com/vim-scripts/Vdebug.git
+[submodule "vim/bundle/utilsnips"]
+	path = vim/bundle/utilsnips
+	url = https://github.com/vim-scripts/UltiSnips.git
