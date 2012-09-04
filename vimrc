@@ -52,12 +52,8 @@ syntax on
 filetype plugin on
 filetype indent on
 
-:source ~/.vim/maps.vim
-:source ~/.vim/functions.vim
-
 set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [LEN=%L][POS=\%04l.\%04v]\ %{fugitive#statusline()}\ %{SyntasticStatuslineFlag()}\ %{rvm#statusline()}
 set laststatus=2 
-set tabline=%!ShortTabLine()
 
 " Load templates based on extensions of file
 :autocmd BufNewFile * silent! 0r ~/.vim/templates/%:e.tpl
@@ -80,6 +76,48 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 "improve autocomplete menu color
 highlight Pmenu ctermbg=238 gui=bold
+"
+" Map some F keys to tags lookup
+:nmap <buffer> <F7> <C-J>
+:nmap <buffer> <S-F7> <C-T>
+:nmap <buffer> <A-F7> :ptselect<cr>
+:nmap <buffer> <F8> :tnext<cr>
+:nmap <buffer> <C-F8> :tprev<cr>
+
+" Map CTRL-[jkhl] to move between splits
+nnoremap <C-j> <C-W>j<C-W>_
+nnoremap <C-k> <C-W>k<C-W>_
+nnoremap <C-l> <C-W>l
+nnoremap <C-h> <C-W>h
+
+" Toggle menu and toolbar with CTRL+F2
+:map <silent> <C-F2> :if &guioptions =~# 'T' <Bar>
+\set guioptions-=T <Bar>
+\set guioptions-=m <Bar>
+\else <Bar>
+\set guioptions+=T <Bar>
+\set guioptions+=m <Bar>
+\endif <CR>
+
+" Use space to toggle folds if we are on a fold
+:nnoremap <space> za
+" Headline macros
+:map h1 yypVr=o
+:map h2 yypVr-o
+:map h3 :s/\(.+\)/-\1-/<cr>o
+" Format code
+:nmap <F11> 1G=G
+:imap <F11> <ESC>1G=G
+" Paste indented code aka the "stairs"
+:nnoremap <c-p> p=`]
+" Toggle NerdTree window
+:map <F3> :NERDTreeToggle<cr>
+" Toggle taglist window
+:nmap <silent> <F4> :TagbarToggle<cr>
+" Clear hilightning
+nnoremap <leader><space> :noh<cr>
+" Create new vertical split and switch to it
+nnoremap <leader>w <C-w>v<C-w>l
 
 " Save file when losing focus
 :autocmd FocusLost * :wa
