@@ -45,7 +45,7 @@
 	url = https://github.com/vim-scripts/taglist.vim.git
 [submodule "vim/bundle/snipmate"]
 	path = vim/bundle/snipmate
-	url = https://github.com/msanders/snipmate.vim.git
+	url = https://github.com/garbas/vim-snipmate.git
 [submodule "snippets"]
 	path = snippets
 	url = https://github.com/scrooloose/snipmate-snippets.git
