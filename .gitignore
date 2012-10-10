@@ -6,4 +6,5 @@
 *.so
 vim/.netrwhist
 vim/tmp/*.sw*
+vim/sessions/*
 

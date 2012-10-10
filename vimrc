@@ -48,6 +48,8 @@ set encoding=utf-8
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=1
 
+let g:neocomplcache_enable_at_startup=1
+
 syntax on
 filetype plugin on
 filetype indent on
@@ -76,13 +78,6 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 "improve autocomplete menu color
 highlight Pmenu ctermbg=238 gui=bold
-"
-" Map some F keys to tags lookup
-:nmap <buffer> <F7> <C-J>
-:nmap <buffer> <S-F7> <C-T>
-:nmap <buffer> <A-F7> :ptselect<cr>
-:nmap <buffer> <F8> :tnext<cr>
-:nmap <buffer> <C-F8> :tprev<cr>
 
 " Map CTRL-[jkhl] to move between splits
 nnoremap <C-j> <C-W>j<C-W>_
