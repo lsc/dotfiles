@@ -1,9 +1,6 @@
 [submodule "vim/bundle/syntastic"]
 	path = vim/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
-[submodule "vim/bundle/supertab"]
-	path = vim/bundle/supertab
-	url = https://github.com/ervandew/supertab.git
 [submodule "vim/bundle/nerdtree"]
 	path = vim/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
@@ -13,9 +10,6 @@
 [submodule "vim/bundle/git"]
 	path = vim/bundle/git
 	url = https://github.com/tpope/vim-git.git
-[submodule "vim/bundle/conque"]
-	path = vim/bundle/conque
-	url = https://github.com/rson/vim-conque.git
 [submodule "vim/bundle/pastie"]
 	path = vim/bundle/pastie
 	url = https://github.com/tpope/vim-pastie.git
@@ -43,36 +37,12 @@
 [submodule "vim/bundle/taglist"]
 	path = vim/bundle/taglist
 	url = https://github.com/vim-scripts/taglist.vim.git
-[submodule "vim/bundle/snipmate"]
-	path = vim/bundle/snipmate
-	url = https://github.com/garbas/vim-snipmate.git
-[submodule "snippets"]
-	path = snippets
-	url = https://github.com/scrooloose/snipmate-snippets.git
-[submodule "vim/bundle/twit"]
-	path = vim/bundle/twit
-	url = https://github.com/vim-scripts/TwitVim.git
-[submodule "vim/bundle/gist"]
-	path = vim/bundle/gist
-	url = https://github.com/vim-scripts/Gist.vim.git
 [submodule "vim/bundle/ack"]
 	path = vim/bundle/ack
 	url = https://github.com/vim-scripts/ack.vim.git
 [submodule "vim/bundle/colorschemes"]
 	path = vim/bundle/colorschemes
 	url = git@github.com:flazz/vim-colorschemes.git
-[submodule "vim/bundle/textobj-user"]
-	path = vim/bundle/textobj-user
-	url = https://github.com/kana/vim-textobj-user.git
-[submodule "vim/bundle/textobj-rubyblock"]
-	path = vim/bundle/textobj-rubyblock
-	url = https://github.com/nelstrom/vim-textobj-rubyblock.git
-[submodule "vim/bundle/organizer"]
-	path = vim/bundle/organizer
-	url = https://github.com/hsitz/VimOrganizer.git
-[submodule "vim/bundle/cucumber"]
-	path = vim/bundle/cucumber
-	url = https://github.com/tpope/vim-cucumber.git
 [submodule "vim/bundle/textile"]
 	path = vim/bundle/textile
 	url = https://github.com/timcharper/textile.vim.git
@@ -109,15 +79,12 @@
 [submodule "vim/bundle/chef"]
 	path = vim/bundle/chef
 	url = https://github.com/t9md/vim-chef.git
-[submodule "vim/bundle/vdebug"]
-	path = vim/bundle/vdebug
-	url = https://github.com/vim-scripts/Vdebug.git
-[submodule "vim/bundle/utilsnips"]
-	path = vim/bundle/utilsnips
-	url = https://github.com/vim-scripts/UltiSnips.git
-[submodule "vim/bundle/neocomplcache-snippets"]
-	path = vim/bundle/neocomplcache-snippets
-	url = https://github.com/Shougo/neocomplcache-snippets-complete.git
-[submodule "vim/bundle/neocomplcache"]
-	path = vim/bundle/neocomplcache
-	url = https://github.com/Shougo/neocomplcache-snippets-complete.git
+[submodule "vim/bundle/mw-utils"]
+	path = vim/bundle/mw-utils
+	url = https://github.com/MarcWeber/vim-addon-mw-utils.git
+[submodule "vim/bundle/tlib"]
+	path = vim/bundle/tlib
+	url = https://github.com/tomtom/tlib_vim.git
+[submodule "vim/bundle/snipmate"]
+	path = vim/bundle/snipmate
+	url = https://github.com/garbas/vim-snipmate.git
