@@ -1,5 +1,5 @@
 if has('gui_macvim') 
-	:set guifont=Inconsolata:h14
+	:set guifont=Monaco:h12
 elseif has('gui_win32')
 	:set guifont=Inconsolata:h12
 else 
