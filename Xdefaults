@@ -2,7 +2,7 @@
 *foreground:            grey
 *fading:                40
 *cursorColor:           grey
-*font: xft:Terminus:pixelsize=11:antialias=true:hinting=true
+*font: xft:Inconsolata:pixelsize=10:antialias=true:hinting=true
 *scrollBar: false
 URxvt*transparent: true
 URxvt*shading: 20

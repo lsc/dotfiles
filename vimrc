@@ -48,13 +48,11 @@ set encoding=utf-8
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=1
 
-let g:neocomplcache_enable_at_startup=1
-
 syntax on
 filetype plugin on
 filetype indent on
 
-set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [LEN=%L][POS=\%04l.\%04v]\ %{fugitive#statusline()}\ %{SyntasticStatuslineFlag()}\ %{rvm#statusline()}
+set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [LEN=%L][POS=\%04l.\%04v]\ %{fugitive#statusline()}\ %{SyntasticStatuslineFlag()}
 set laststatus=2 
 
 " Load templates based on extensions of file
@@ -104,7 +102,7 @@ nnoremap <C-h> <C-W>h
 :nmap <F11> 1G=G
 :imap <F11> <ESC>1G=G
 " Paste indented code aka the "stairs"
-:nnoremap <c-p> p=`]
+:nnoremap <c-o> p=`]
 " Toggle NerdTree window
 :map <F3> :NERDTreeToggle<cr>
 " Toggle taglist window

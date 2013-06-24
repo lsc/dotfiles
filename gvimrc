@@ -3,10 +3,10 @@ if has('gui_macvim')
 elseif has('gui_win32')
 	:set guifont=Inconsolata:h12
 else 
-	:set guifont=Terminus\ 8
+	:set guifont=Inconsolata\ 10
 endif 
 
-:colorscheme molokai
+:colorscheme solarized
 :set guioptions-=T
 :set guioptions-=m
 :set guioptions+=LlRrb
