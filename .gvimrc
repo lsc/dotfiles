@@ -6,7 +6,7 @@ else
 	:set guifont=Inconsolata\ 10
 endif 
 
-:colorscheme solarized
+:colorscheme vividchalk
 :set guioptions-=T
 :set guioptions-=m
 :set guioptions+=LlRrb

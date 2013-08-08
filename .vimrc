@@ -10,6 +10,7 @@ call vundle#rc()
 " Let vundle manage vundle
 Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-vividchalk'
 Bundle 'scrooloose/syntastic.git'
 Bundle 'scrooloose/nerdtree.git'
 Bundle 'kien/ctrlp.vim'
