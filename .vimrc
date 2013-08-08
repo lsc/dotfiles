@@ -7,13 +7,20 @@ set rtp+=~/.vim/bundle/vundle
 
 call vundle#rc()
 
-" Let vundle manage vundle
+" Let lets vundle these bundles!
 Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-vividchalk'
 Bundle 'scrooloose/syntastic.git'
 Bundle 'scrooloose/nerdtree.git'
 Bundle 'kien/ctrlp.vim'
+Bundle 'majutsushi/tagbar'
+Bundle 'rodjek/vim-puppet'
+Bundle 'godlygeek/tabular'
+Bundle 'garbas/vim-snipmate'
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'tomtom/tlib_vim'
+Bundle 'honza/vim-snippets'
 
 " A TAB is a TAB and should be 4 spaces wide
 " (I set expansion and width of tabs on a filetype level further down)
@@ -26,7 +33,6 @@ set smartindent
 set copyindent 
 set completeopt=longest,menuone
 set mouse=a
-set ofu=syntaxcomplete#Complete
 
 set foldenable
 set foldmethod=syntax
@@ -78,11 +84,7 @@ set laststatus=2
 " Settings on a per filetype basis
 :autocmd FileType lua,python setlocal tabstop=2 softtabstop=2 shiftwidth=2 
 :autocmd FileType puppet,ruby,haml,sass setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
-"ruby
-autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
-autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+
 "improve autocomplete menu color
 highlight Pmenu ctermbg=238 gui=bold
 
