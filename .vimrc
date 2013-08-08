@@ -3,8 +3,8 @@ set nocompatible
 set number
 set backspace=indent,eol,start
 
-" Call pathogen.
-call pathogen#infect()
+" Let vundle manage vundle
+Bundle 'gmarik/vundle'
 
 " A TAB is a TAB and should be 4 spaces wide
 " (I set expansion and width of tabs on a filetype level further down)
@@ -31,7 +31,7 @@ set clipboard+=unnamed
 set iskeyword=_,$,#,@,%
 
 " Directory for vim swap files
-set directory=~/.vim/tmp
+set directory=/tmp
 
 set hidden
 set wmh=0
