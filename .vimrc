@@ -3,8 +3,16 @@ set nocompatible
 set number
 set backspace=indent,eol,start
 
+set rtp+=~/.vim/bundle/vundle
+
+call vundle#rc()
+
 " Let vundle manage vundle
 Bundle 'gmarik/vundle'
+Bundle 'tpope/vim-fugitive'
+Bundle 'scrooloose/syntastic.git'
+Bundle 'scrooloose/nerdtree.git'
+Bundle 'kien/ctrlp.vim'
 
 " A TAB is a TAB and should be 4 spaces wide
 " (I set expansion and width of tabs on a filetype level further down)

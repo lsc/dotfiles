@@ -7,4 +7,5 @@
 vim/.netrwhist
 vim/tmp/*.sw*
 vim/sessions/*
+.vim/bundle/*
 
