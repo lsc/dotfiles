@@ -7,10 +7,6 @@ ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="gallifrey"
 
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
@@ -35,6 +31,10 @@ ZSH_THEME="gallifrey"
 plugins=(git svn autojump python yum rbenv)
 
 source $ZSH/oh-my-zsh.sh
+
+vundle_install () {
+	git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+}
 
 # Customize to your needs...
 export PATH=$HOME/.rbenv/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/lowsch/bin
