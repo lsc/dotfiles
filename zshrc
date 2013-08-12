@@ -33,6 +33,7 @@ plugins=(git svn autojump python yum rbenv)
 source $ZSH/oh-my-zsh.sh
 
 vundle_install () {
+	[ -d ~/.vim/bundle/vundle ] && echo "Vundle already installed" && exit
 	git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
 }
 
