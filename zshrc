@@ -40,4 +40,7 @@ vundle_install () {
 # Customize to your needs...
 export PATH=$HOME/.rbenv/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/lowsch/bin
 export EDITOR=/usr/bin/vim
-eval "$(rbenv init -)"
+if [ $(which rbenv) ]; then
+	eval "$(rbenv init -)"
+fi
+

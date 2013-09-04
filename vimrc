@@ -30,7 +30,6 @@ set tabstop=4
 set softtabstop=4
 
 set background=dark
-set smartindent
 set copyindent 
 set completeopt=longest,menuone
 set mouse=a
