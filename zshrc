@@ -33,14 +33,11 @@ plugins=(git svn autojump python yum rbenv)
 source $ZSH/oh-my-zsh.sh
 
 vundle_install () {
-	[ -d ~/.vim/bundle/vundle ] && echo "Vundle already installed" && exit
 	git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
 }
 
 # Customize to your needs...
 export PATH=$HOME/.rbenv/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/lowsch/bin
 export EDITOR=/usr/bin/vim
-if [ $(which rbenv) ]; then
-	eval "$(rbenv init -)"
-fi
+eval "$(rbenv init -)"
 
