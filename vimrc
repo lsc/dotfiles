@@ -7,7 +7,7 @@ set rtp+=~/.vim/bundle/vundle
 
 call vundle#rc()
 
-" Let lets vundle these bundles!
+" Lets vundle these bundles!
 Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-vividchalk'
