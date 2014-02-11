@@ -4,4 +4,5 @@
 .svn/*
 *.o
 *.so
-.vim/.netrwhist
+vim/.netrwhist
+vim/bundle/*
