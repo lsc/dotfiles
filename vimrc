@@ -1,6 +1,6 @@
 " vimrc for Lowe Schmidt
 set nocompatible
-set number
+set relativenumber
 set backspace=indent,eol,start
 
 set rtp+=~/.vim/bundle/vundle
