@@ -28,6 +28,7 @@
     st = status
 	ss = status -s
     ci = commit
+	cl = clone
     br = branch
     co = checkout
     df = diff
@@ -43,11 +44,6 @@
 
 [core]
 	excludesfile = /Users/lsc/.gitignore_global
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+
 [push]
 	default = simple

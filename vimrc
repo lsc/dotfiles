@@ -1,6 +1,7 @@
 " vimrc for Lowe Schmidt
 set nocompatible
 set relativenumber
+set number
 set backspace=indent,eol,start
 
 set rtp+=~/.vim/bundle/vundle
@@ -25,6 +26,7 @@ Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'jnwhiteh/vim-golang'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'kakkyz81/evervim'
 
 " A TAB is a TAB and should be 4 spaces wide
 " (I set expansion and width of tabs on a filetype level further down)
@@ -65,6 +67,10 @@ set encoding=utf-8
 " Syntastic file checking, 
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=1
+
+" Different trigger for snipmate, to make the dam thing work
+imap <C-o> <esc>a<Plug>snipMateNextOrTrigger
+smap <C-o> <Plug>snipMateNextOrTrigger
 
 syntax on
 filetype plugin on
@@ -125,6 +131,5 @@ nnoremap <C-h> <C-W>h
 nnoremap <leader><space> :noh<cr>
 " Create new vertical split and switch to it
 nnoremap <leader>w <C-w>v<C-w>l
-
 " Save file when losing focus
 :autocmd FocusLost * :wa
