@@ -26,7 +26,7 @@ Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'jnwhiteh/vim-golang'
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'kakkyz81/evervim'
+Bundle 'vimwiki/vimwiki'
 
 " A TAB is a TAB and should be 4 spaces wide
 " (I set expansion and width of tabs on a filetype level further down)
