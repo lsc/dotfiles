@@ -11,7 +11,6 @@ call vundle#rc()
 " Lets vundle these bundles!
 Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-vividchalk'
 Bundle 'scrooloose/syntastic.git'
 Bundle 'scrooloose/nerdtree.git'
 Bundle 'kien/ctrlp.vim'
@@ -23,10 +22,9 @@ Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
 Bundle 'honza/vim-snippets'
 Bundle 'christoomey/vim-tmux-navigator'
-Bundle 'Valloric/YouCompleteMe'
 Bundle 'jnwhiteh/vim-golang'
-Bundle 'altercation/vim-colors-solarized'
 Bundle 'vimwiki/vimwiki'
+Bundle 'airblade/vim-gitgutter'
 
 " A TAB is a TAB and should be 4 spaces wide
 " (I set expansion and width of tabs on a filetype level further down)
