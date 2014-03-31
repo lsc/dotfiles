@@ -66,10 +66,6 @@ set encoding=utf-8
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=1
 
-" Different trigger for snipmate, to make the dam thing work
-imap <C-o> <esc>a<Plug>snipMateNextOrTrigger
-smap <C-o> <Plug>snipMateNextOrTrigger
-
 syntax on
 filetype plugin on
 filetype indent on
