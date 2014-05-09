@@ -25,6 +25,7 @@ Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'jnwhiteh/vim-golang'
 Bundle 'vimwiki/vimwiki'
 Bundle 'airblade/vim-gitgutter'
+Bundle 'Valloric/YouCompleteMe'
 
 " A TAB is a TAB and should be 4 spaces wide
 " (I set expansion and width of tabs on a filetype level further down)
@@ -65,6 +66,9 @@ set encoding=utf-8
 " Syntastic file checking, 
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=1
+
+" When I change dir in nerdtree, vim should follow.
+let NERDTreeChDirMode=2
 
 syntax on
 filetype plugin on
