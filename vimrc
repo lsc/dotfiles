@@ -10,6 +10,7 @@ call vundle#rc()
 
 " Lets vundle these bundles!
 Bundle 'gmarik/vundle'
+" 
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/syntastic.git'
 Bundle 'scrooloose/nerdtree.git'
@@ -17,15 +18,21 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'rodjek/vim-puppet'
 Bundle 'godlygeek/tabular'
+" Snipmate and its dependecies
 Bundle 'garbas/vim-snipmate'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
 Bundle 'honza/vim-snippets'
+"
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'jnwhiteh/vim-golang'
 Bundle 'vimwiki/vimwiki'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'Valloric/YouCompleteMe'
+Bundle 'altercation/vim-colors-solarized'
+
+:colorscheme solarized
+
 
 " A TAB is a TAB and should be 4 spaces wide
 " (I set expansion and width of tabs on a filetype level further down)
@@ -69,6 +76,7 @@ let g:syntastic_auto_loc_list=1
 
 " When I change dir in nerdtree, vim should follow.
 let NERDTreeChDirMode=2
+let NERDTreeShowBookmarks=1
 
 syntax on
 filetype plugin on
@@ -94,6 +102,8 @@ set laststatus=2
 
 "improve autocomplete menu color
 highlight Pmenu ctermbg=238 gui=bold
+
+let g:ycm_key_list_select_completion = [ '<ENTER>' ]
 
 " Map CTRL-[jkhl] to move between splits
 nnoremap <C-j> <C-W>j<C-W>_
