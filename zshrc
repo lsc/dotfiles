@@ -28,7 +28,7 @@ ZSH_THEME="gallifrey"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git svn autojump python yum rbenv)
+plugins=(git svn autojump python yum rbenv ruby gem bundler cpanm osx perl vundle tmuxinator golang)
 
 source $ZSH/oh-my-zsh.sh
 
