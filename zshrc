@@ -41,3 +41,4 @@ export PATH=/usr/local/bin:$HOME/.rbenv/bin:/usr/lib64/qt-3.3/bin:/usr/bin:/bin:
 export EDITOR=/usr/bin/vim
 eval "$(rbenv init -)"
 eval "$(plenv init -)"
+eval "$(pyenv init -)"

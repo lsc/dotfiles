@@ -1,7 +1,5 @@
--- Hi!
--- Save this as ~/.hydra/init.lua and choose Reload Config from the menu
 
-hydra.alert("Hydra sample config loaded", 1.5)
+hydra.alert("LOL", 1.5)
 
 -- open a repl
 --   the repl is a Lua prompt; type "print('hello world')"
