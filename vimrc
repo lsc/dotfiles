@@ -97,7 +97,8 @@ set laststatus=2
 :autocmd BufNewFile,BufRead *.pp  set filetype=puppet syntax=puppet
 
 " Settings on a per filetype basis
-:autocmd FileType lua,python setlocal tabstop=2 softtabstop=2 shiftwidth=2 
+:autocmd FileType lua setlocal tabstop=2 softtabstop=2 shiftwidth=2 
+:autocmd FileType python setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab 
 :autocmd FileType puppet,ruby,haml,sass setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
 "improve autocomplete menu color
