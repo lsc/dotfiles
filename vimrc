@@ -30,9 +30,9 @@ Bundle 'vimwiki/vimwiki'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'elixir-lang/vim-elixir'
 
 :colorscheme solarized
-
 
 " A TAB is a TAB and should be 4 spaces wide
 " (I set expansion and width of tabs on a filetype level further down)
@@ -95,11 +95,13 @@ set laststatus=2
 :autocmd BufNewFile,BufRead *.md  set filetype=markdown
 :autocmd BufNewFile,BufRead *.textile set filetype=textile
 :autocmd BufNewFile,BufRead *.pp  set filetype=puppet syntax=puppet
+:autocmd BufNewFile,BufRead *.sls set filetype=yaml
 
 " Settings on a per filetype basis
 :autocmd FileType lua setlocal tabstop=2 softtabstop=2 shiftwidth=2 
 :autocmd FileType python setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab 
-:autocmd FileType puppet,ruby,haml,sass setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+:autocmd FileType puppet,ruby,haml,sass,yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+
 
 "improve autocomplete menu color
 highlight Pmenu ctermbg=238 gui=bold
