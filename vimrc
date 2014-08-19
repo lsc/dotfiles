@@ -2,7 +2,6 @@
 set nocompatible
 set relativenumber
 set number
-set backspace=indent,eol,start
 
 set rtp+=~/.vim/bundle/vundle
 
@@ -10,6 +9,7 @@ call vundle#rc()
 
 " Lets vundle these bundles!
 Bundle 'gmarik/vundle'
+Bundle 'tpope/vim-sensible'
 " 
 Bundle 'tpope/vim-fugitive'
 Bundle 'scrooloose/syntastic.git'
@@ -26,11 +26,11 @@ Bundle 'honza/vim-snippets'
 "
 Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'jnwhiteh/vim-golang'
-Bundle 'vimwiki/vimwiki'
 Bundle 'airblade/vim-gitgutter'
-Bundle 'Valloric/YouCompleteMe'
 Bundle 'altercation/vim-colors-solarized'
+" Erlang stuff
 Bundle 'elixir-lang/vim-elixir'
+Bundle 'jimenezrick/vimerl'
 
 :colorscheme solarized
 
@@ -102,12 +102,10 @@ set laststatus=2
 :autocmd FileType python setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab 
 :autocmd FileType puppet,ruby,haml,sass,yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
-
 "improve autocomplete menu color
 highlight Pmenu ctermbg=238 gui=bold
 
 let g:ycm_key_list_select_completion = [ '<ENTER>' ]
-
 " Map CTRL-[jkhl] to move between splits
 nnoremap <C-j> <C-W>j<C-W>_
 nnoremap <C-k> <C-W>k<C-W>_
