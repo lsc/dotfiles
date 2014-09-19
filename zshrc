@@ -37,7 +37,7 @@ vundle_install () {
 }
 
 # Customize to your needs...
-export PATH=/usr/local/bin:$HOME/.rbenv/bin:/usr/lib64/qt-3.3/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/.cabal/bin
+export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:usr/sbin:/sbin:$HOME/.cabal/bin
 export EDITOR=/usr/bin/vim
 eval "$(rbenv init -)"
 eval "$(plenv init -)"
