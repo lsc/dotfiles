@@ -39,6 +39,7 @@ vundle_install () {
 # Customize to your needs...
 export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:usr/sbin:/sbin:$HOME/.cabal/bin
 export EDITOR=/usr/bin/vim
+export GROOVY_HOME=/usr/local/opt/groovy/libexec
 eval "$(rbenv init -)"
 eval "$(plenv init -)"
 eval "$(pyenv init -)"
