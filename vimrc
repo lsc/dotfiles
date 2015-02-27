@@ -31,6 +31,8 @@ Bundle 'altercation/vim-colors-solarized'
 " Erlang stuff
 Bundle 'elixir-lang/vim-elixir'
 Bundle 'jimenezrick/vimerl'
+" Gradle - Because LeoGears
+Bundle 'tfnico/vim-gradle'
 
 :colorscheme solarized
 
