@@ -31,6 +31,7 @@ vundle_install () {
 # Customize to your needs...
 export PATH=/usr/local/bin:$HOME/.rbenv/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
 export EDITOR=/usr/local/bin/nvim
+export GROOVY_HOME=/usr/local/opt/groovy/libexec
 export RBENV_ROOT=~/.rbenv
 export GOPATH=~/go
 eval "$(rbenv init -)"
