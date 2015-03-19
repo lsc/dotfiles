@@ -98,11 +98,12 @@ set laststatus=2
 :autocmd BufNewFile,BufRead *.textile set filetype=textile
 :autocmd BufNewFile,BufRead *.pp  set filetype=puppet syntax=puppet
 :autocmd BufNewFile,BufRead *.sls set filetype=yaml
+:autocmd BufNewFile,BufRead *.gradle set filetype=groovy
 
 " Settings on a per filetype basis
-:autocmd FileType lua setlocal tabstop=2 softtabstop=2 shiftwidth=2 
-:autocmd FileType python setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab 
-:autocmd FileType puppet,ruby,haml,sass,yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+:autocmd FileType lua                               setlocal tabstop=2 softtabstop=2 shiftwidth=2
+:autocmd FileType python                            setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+:autocmd FileType puppet,ruby,haml,sass,yaml,groovy setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
 "improve autocomplete menu color
 highlight Pmenu ctermbg=238 gui=bold
