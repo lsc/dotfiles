@@ -74,7 +74,7 @@ if exists('+colorcolumn')
 endif
 set cursorline
 set lazyredraw
-set fillchars=diff:⣿,vert:â
+set fillchars=diff:⣿,vert:│
 set clipboard+=unnamed
 set iskeyword=_,$,#,@,%
 set autowrite
@@ -100,7 +100,7 @@ set smartcase
 let mapleader=","
 
 set encoding=utf-8
-set listchars=tab:â¸\ ,trail:¬,extends:â¯,precedes:â®
+set listchars=tab:▸\ ,trail:¬,extends:❯,precedes:❮
 
 " Syntastic file checking, 
 let g:syntastic_enable_signs=1
