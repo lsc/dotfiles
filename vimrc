@@ -30,8 +30,8 @@ Bundle 'altercation/vim-colors-solarized'
 " Erlang stuff
 Bundle 'elixir-lang/vim-elixir'
 Bundle 'jimenezrick/vimerl'
-" Gradle - Because LeoGears
-Bundle 'tfnico/vim-gradle'
+
+Bundle 'lambdatoast/elm.vim'
 
 :colorscheme solarized
 
@@ -74,7 +74,6 @@ if exists('+colorcolumn')
 endif
 set cursorline
 set lazyredraw
-set fillchars=diff:⣿,vert:│
 set clipboard+=unnamed
 set iskeyword=_,$,#,@,%
 set autowrite
