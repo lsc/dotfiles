@@ -20,9 +20,11 @@ ZSH_THEME="gallifrey"
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 # COMPLETION_WAITING_DOTS="true"
 
-plugins=(git autojump python yum rbenv ruby gem bundler cpanm osx perl vundle tmuxinator golang)
+plugins=(git rbenv ruby gem bundler osx vundle )
 
 source $ZSH/oh-my-zsh.sh
+alias c=clear
+alias vim=nvim
 
 vundle_install () {
 	git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
