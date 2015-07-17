@@ -30,6 +30,11 @@ vundle_install () {
 	git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
 }
 
+# Tmux plugin manager
+tpm_install () {
+	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+}
+
 # Customize to your needs...
 export PATH=/usr/local/bin:$HOME/.rbenv/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
 export EDITOR=/usr/local/bin/nvim
