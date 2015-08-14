@@ -1,37 +1,16 @@
-" vimrc for Lowe Schmidt
-set nocompatible
-set number
-
-set rtp+=~/.vim/bundle/vundle
-
-call vundle#rc()
-
-" Lets vundle these bundles!
-Bundle 'gmarik/vundle'
-Bundle 'tpope/vim-sensible'
-" 
-Bundle 'tpope/vim-fugitive'
-Bundle 'scrooloose/syntastic.git'
-Bundle 'scrooloose/nerdtree.git'
-Bundle 'kien/ctrlp.vim'
-Bundle 'majutsushi/tagbar'
-Bundle 'rodjek/vim-puppet'
-Bundle 'godlygeek/tabular'
-" Snipmate and its dependecies
-Bundle 'garbas/vim-snipmate'
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'tomtom/tlib_vim'
-Bundle 'honza/vim-snippets'
+" I assume neovim.
 "
-Bundle 'christoomey/vim-tmux-navigator'
-Bundle 'jnwhiteh/vim-golang'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'altercation/vim-colors-solarized'
-" Erlang stuff
-Bundle 'elixir-lang/vim-elixir'
-Bundle 'jimenezrick/vimerl'
+call plug#begin('~/.vim/plugged')
+	Plug 'tpope/vim-fugitive'
+	Plug 'benekastah/neomake' 
+	Plug 'kien/ctrlp.vim'
+	Plug 'scrooloose/nerdtree'
+	Plug 'christoomey/vim-tmux-navigator'
+	Plug 'godlygeek/tabular'
+	Plug 'majutsushi/tagbar'
+call plug#end()
 
-Bundle 'lambdatoast/elm.vim'
+set number
 
 :colorscheme solarized
 
@@ -46,7 +25,6 @@ set background=dark
 set copyindent 
 set complete=.,w,b,u,t
 set completeopt=longest,menuone,preview
-set mouse=a
 
 set foldenable
 set foldmethod=syntax
@@ -86,9 +64,6 @@ set scrolloff=3
 set sidescroll=1
 set sidescrolloff=2
 
-" Directory for vim swap files
-set directory=/tmp
-
 set hidden
 set wmh=0
 set gdefault
@@ -101,9 +76,6 @@ let mapleader=","
 set encoding=utf-8
 set listchars=tab:▸\ ,trail:¬,extends:❯,precedes:❮
 
-" Syntastic file checking, 
-let g:syntastic_enable_signs=1
-let g:syntastic_auto_loc_list=1
 
 " When I change dir in nerdtree, vim should follow.
 let NERDTreeChDirMode=2
@@ -113,11 +85,9 @@ syntax on
 filetype off
 filetype plugin indent on
 
-set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [LEN=%L][POS=\%04l.\%04v]\ %{fugitive#statusline()}\ %{SyntasticStatuslineFlag()}
+set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [LEN=%L][POS=\%04l.\%04v]\ %{fugitive#statusline()} 
 set laststatus=2 
 
-" Load templates based on extensions of file
-:autocmd BufNewFile * silent! 0r ~/.vim/templates/%:e.tpl
 " Set file types for a bunch of files to get syntax highlighting
 :autocmd BufNewFile,BufRead *.nse set filetype=lua
 :autocmd BufNewFile,BufRead *.ru  set filetype=ruby
@@ -137,28 +107,20 @@ set laststatus=2
 "improve autocomplete menu color
 highlight Pmenu ctermbg=238 gui=bold
 
-let g:ycm_key_list_select_completion = [ '<ENTER>' ]
 " Map CTRL-[jkhl] to move between splits
 nnoremap <C-j> <C-W>j<C-W>_
 nnoremap <C-k> <C-W>k<C-W>_
 nnoremap <C-l> <C-W>l
 nnoremap <C-h> <C-W>h
 
-" Toggle menu and toolbar with CTRL+F2
-:map <silent> <C-F2> :if &guioptions =~# 'T' <Bar>
-\set guioptions-=T <Bar>
-\set guioptions-=m <Bar>
-\else <Bar>
-\set guioptions+=T <Bar>
-\set guioptions+=m <Bar>
-\endif <CR>
-
 " Use space to toggle folds if we are on a fold
 :nnoremap <space> za
+
 " Headline macros
 :map h1 yypVr=o
 :map h2 yypVr-o
 :map h3 :s/\(.+\)/-\1-/<cr>o
+"
 " Format code
 :nmap <F11> 1G=G
 :imap <F11> <ESC>1G=G
@@ -169,9 +131,7 @@ nnoremap <C-h> <C-W>h
 " Toggle taglist window
 :nmap <silent> <F4> :TagbarToggle<cr>
 " Clear hilightning
-nnoremap <leader><space> :noh<cr>
-" Create new vertical split and switch to it
-nnoremap <leader>w <C-w>v<C-w>l
+nnoremap <leader><space>:noh<cr>
 " Save file when losing focus
 function! AutoSave()
   " We are not in git or the file is not modified. Do nothing.
