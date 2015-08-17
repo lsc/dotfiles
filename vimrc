@@ -8,11 +8,16 @@ call plug#begin('~/.vim/plugged')
 	Plug 'christoomey/vim-tmux-navigator'
 	Plug 'godlygeek/tabular'
 	Plug 'majutsushi/tagbar'
+	Plug 'rodjek/vim-puppet'
+	Plug 'fatih/vim-go'
+	Plug 'elzr/vim-json'
+	Plug 'sickill/vim-monokai'
+	Plug 'plasticboy/vim-markdown'
 call plug#end()
 
+set backspace=indent,eol,start
 set number
-
-:colorscheme solarized
+:colorscheme monokai
 
 " A TAB is a TAB and should be 4 spaces wide
 " (I set expansion and width of tabs on a filetype level further down)
@@ -75,7 +80,6 @@ let mapleader=","
 
 set encoding=utf-8
 set listchars=tab:▸\ ,trail:¬,extends:❯,precedes:❮
-
 
 " When I change dir in nerdtree, vim should follow.
 let NERDTreeChDirMode=2

@@ -20,15 +20,11 @@ ZSH_THEME="gallifrey"
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 # COMPLETION_WAITING_DOTS="true"
 
-plugins=(git rbenv ruby gem bundler osx vundle )
+plugins=(git rbenv ruby gem bundler osx vundle)
 
 source $ZSH/oh-my-zsh.sh
 alias c=clear
 alias vim=nvim
-
-vundle_install () {
-	git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
-}
 
 # Tmux plugin manager
 tpm_install () {
@@ -38,7 +34,6 @@ tpm_install () {
 # Customize to your needs...
 export PATH=/usr/local/bin:$HOME/.rbenv/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin
 export EDITOR=/usr/local/bin/nvim
-export GROOVY_HOME=/usr/local/opt/groovy/libexec
 export RBENV_ROOT=~/.rbenv
 export GOPATH=~/go
 eval "$(rbenv init -)"
