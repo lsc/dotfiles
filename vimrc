@@ -1,5 +1,3 @@
-" I assume neovim.
-"
 call plug#begin('~/.vim/plugged')
 	Plug 'tpope/vim-fugitive'
 	Plug 'benekastah/neomake' 
@@ -13,14 +11,16 @@ call plug#begin('~/.vim/plugged')
 	Plug 'elzr/vim-json'
 	Plug 'sickill/vim-monokai'
 	Plug 'plasticboy/vim-markdown'
+	Plug 'w0ng/vim-hybrid'
+	Plug 'jonathanfilip/vim-lucius'
+	Plug 'tomasr/molokai'
+	Plug 'jpo/vim-railscasts-theme'
 call plug#end()
 
-set backspace=indent,eol,start
 set number
-:colorscheme monokai
+:colorscheme hybrid
 
 " A TAB is a TAB and should be 4 spaces wide
-" (I set expansion and width of tabs on a filetype level further down)
 set shiftwidth=4
 set tabstop=4
 set softtabstop=4
@@ -34,9 +34,6 @@ set completeopt=longest,menuone,preview
 set foldenable
 set foldmethod=syntax
 set ruler
-
-set wildmenu
-set wildmode=longest:full
 
 set wildignore+=.hg,.git,.svn                          " Version control
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg,*.xbm   " binary images
@@ -55,12 +52,12 @@ set wildignore+=*logs/*,*dist/*                         " ...
 if exists('+colorcolumn')
 	set colorcolumn=+1
 endif
+
 set cursorline
 set lazyredraw
 set clipboard+=unnamed
 set iskeyword=_,$,#,@,%
 set autowrite
-set autoread 
 set shiftround
 set linebreak
 set synmaxcol=800
@@ -135,7 +132,7 @@ nnoremap <C-h> <C-W>h
 " Toggle taglist window
 :nmap <silent> <F4> :TagbarToggle<cr>
 " Clear hilightning
-nnoremap <leader><space>:noh<cr>
+nnoremap <leader> <space> :noh <cr>
 " Save file when losing focus
 function! AutoSave()
   " We are not in git or the file is not modified. Do nothing.
