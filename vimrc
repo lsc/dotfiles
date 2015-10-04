@@ -15,10 +15,15 @@ call plug#begin('~/.vim/plugged')
 	Plug 'jonathanfilip/vim-lucius'
 	Plug 'tomasr/molokai'
 	Plug 'jpo/vim-railscasts-theme'
+	Plug 'vim-latex/vim-latex'
+	Plug 'elixir-lang/vim-elixir'
 call plug#end()
 
 set number
 :colorscheme hybrid
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
+set undodir=~/.vim/keep//
 
 " A TAB is a TAB and should be 4 spaces wide
 set shiftwidth=4
@@ -75,7 +80,6 @@ set ignorecase
 set smartcase
 let mapleader=","
 
-set encoding=utf-8
 set listchars=tab:▸\ ,trail:¬,extends:❯,precedes:❮
 
 " When I change dir in nerdtree, vim should follow.

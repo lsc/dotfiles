@@ -1,6 +1,6 @@
 [user]
 	name = Lowe Schmidt
-	email = git@loweschmidt.se
+	email = github@loweschmidt.se
 
 [branch]
     autosetupmerge = true
@@ -48,3 +48,6 @@
 
 [push]
 	default = simple
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
