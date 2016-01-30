@@ -1,4 +1,4 @@
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 	Plug 'tpope/vim-fugitive'
 	Plug 'benekastah/neomake' 
 	Plug 'kien/ctrlp.vim'
@@ -20,13 +20,13 @@ call plug#begin('~/.vim/plugged')
 	Plug 'elixir-lang/vim-elixir'
 	Plug 'Shougo/deoplete.nvim'
 	Plug 'janko-m/vim-test'
+	Plug 'lambdatoast/elm.vim'
 call plug#end()
 
 set number
 :colorscheme hybrid
-set backupdir=~/.vim/backup//
-set directory=~/.vim/swap//
-set undodir=~/.vim/keep//
+set directory=~/.config/nvim/swap//
+set undodir=~/.config/nvim/keep//
 
 " A TAB is a TAB and should be 4 spaces wide
 set shiftwidth=4
