@@ -1,1 +1,4 @@
-./config/nvim/plugged/*
+config/nvim/plugged/*
+config/fish/fish_history
+config/fish/fishd*
+
