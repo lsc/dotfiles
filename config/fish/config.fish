@@ -8,5 +8,7 @@ set -gx OMF_PATH "/Users/lsc/.local/share/omf"
 source $OMF_PATH/init.fish
 
 # My own stuff
-set -gx GOPATH "{$HOME}/go"
+set -gx GOPATH "$HOME/go"
+set -gx ANSIBLE_HOME "$HOME/.ansible"
+set -gx PATH /opt/puppetlabs/bin $PATH
 alias vim "nvim"

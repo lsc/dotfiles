@@ -6,8 +6,8 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'christoomey/vim-tmux-navigator'
 	Plug 'godlygeek/tabular'
 	Plug 'majutsushi/tagbar'
-	Plug 'rodjek/vim-puppet'
 	Plug 'fatih/vim-go'
+	Plug 'roidelapluie/vim-puppet'
 	Plug 'elzr/vim-json'
 	Plug 'sickill/vim-monokai'
 	Plug 'plasticboy/vim-markdown'
@@ -85,6 +85,8 @@ let mapleader=","
 
 set listchars=tab:▸\ ,trail:¬,extends:❯,precedes:❮
 
+" Enable keyword completion
+let g:deoplete#enable_at_startup = 1
 " When I change dir in nerdtree, vim should follow.
 let NERDTreeChDirMode=2
 let NERDTreeShowBookmarks=1
