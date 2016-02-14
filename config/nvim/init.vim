@@ -13,6 +13,7 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'plasticboy/vim-markdown'
 	Plug 'euclio/vim-markdown-composer'
 	Plug 'w0ng/vim-hybrid'
+	Plug 'altercation/vim-colors-solarized'
 	Plug 'jonathanfilip/vim-lucius'
 	Plug 'tomasr/molokai'
 	Plug 'jpo/vim-railscasts-theme'
@@ -24,7 +25,7 @@ call plug#begin('~/.config/nvim/plugged')
 call plug#end()
 
 set number
-:colorscheme hybrid
+:colorscheme solarized
 set directory=~/.config/nvim/swap//
 set undodir=~/.config/nvim/keep//
 

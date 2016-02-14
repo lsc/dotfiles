@@ -11,4 +11,7 @@ source $OMF_PATH/init.fish
 set -gx GOPATH "$HOME/go"
 set -gx ANSIBLE_HOME "$HOME/.ansible"
 set -gx PATH /opt/puppetlabs/bin $PATH
+set fish_greeting ""
+status --is-interactive; and . (pyenv init -|psub)
+status --is-interactive; and . (plenv init -|psub)
 alias vim "nvim"
