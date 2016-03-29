@@ -4,7 +4,10 @@
 .svn/*
 *.o
 *.so
+config/fish/fish_history
+config/fish/fishd*
 vim/.netrwhist
 vim/bundle/*
 vim/plugged/*
 weechat/logs/*
+weechat/weechat.log

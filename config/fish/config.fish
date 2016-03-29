@@ -12,6 +12,25 @@ set -gx GOPATH "$HOME/go"
 set -gx ANSIBLE_HOME "$HOME/.ansible"
 set -gx PATH /opt/puppetlabs/bin $PATH
 set fish_greeting ""
+
 status --is-interactive; and . (pyenv init -|psub)
 status --is-interactive; and . (plenv init -|psub)
+
+alias b "bundler"
+alias d "docker"
+alias dm "docker-machine"
+alias ds "docker-swarm"
+alias dco "docker-compose"
+alias be "bundler exec"
+alias g "git" 
+alias gf "git flow"
+alias h "heroku"
+alias v "vim"
 alias vim "nvim"
+
+function create_draft
+	set base_dir "~/Projects/lsc.github.io"
+	set drafts_dir "$base_dir/_drafts"
+end
+
+test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish

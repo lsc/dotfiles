@@ -1,4 +1,5 @@
 call plug#begin('~/.config/nvim/plugged')
+	Plug 'vim-airline/vim-airline'
 	Plug 'tpope/vim-fugitive'
 	Plug 'benekastah/neomake' 
 	Plug 'kien/ctrlp.vim'
@@ -9,23 +10,27 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'fatih/vim-go'
 	Plug 'roidelapluie/vim-puppet'
 	Plug 'elzr/vim-json'
-	Plug 'sickill/vim-monokai'
 	Plug 'plasticboy/vim-markdown'
-	Plug 'euclio/vim-markdown-composer'
 	Plug 'w0ng/vim-hybrid'
 	Plug 'altercation/vim-colors-solarized'
-	Plug 'jonathanfilip/vim-lucius'
-	Plug 'tomasr/molokai'
-	Plug 'jpo/vim-railscasts-theme'
 	Plug 'vim-latex/vim-latex'
 	Plug 'elixir-lang/vim-elixir'
 	Plug 'Shougo/deoplete.nvim'
 	Plug 'janko-m/vim-test'
 	Plug 'lambdatoast/elm.vim'
+	Plug 'patrick-conley/vim-fish'
+	Plug 'ervandew/supertab'
+	Plug 'hashivim/vim-vagrant'
+	Plug 'hashivim/vim-terraform'
+	Plug 'hashivim/vim-packer'
+	Plug 'hashivim/vim-consul'
+	Plug 'pearofducks/ansible-vim'
 call plug#end()
 
-set number
 :colorscheme solarized
+
+set list
+set number
 set directory=~/.config/nvim/swap//
 set undodir=~/.config/nvim/keep//
 
@@ -143,6 +148,8 @@ nnoremap <C-h> <C-W>h
 :nmap <silent> <F4> :TagbarToggle<cr>
 " Clear hilightning
 nnoremap <leader> <space> :noh <cr>
+autocmd! BufWritePost * Neomake
+
 " Save file when losing focus
 function! AutoSave()
   " We are not in git or the file is not modified. Do nothing.
