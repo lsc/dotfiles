@@ -2,7 +2,7 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'vim-airline/vim-airline'
 	Plug 'tpope/vim-fugitive'
 	Plug 'benekastah/neomake' 
-	Plug 'kien/ctrlp.vim'
+	Plug 'ctrlpvim/ctrlp.vim'
 	Plug 'scrooloose/nerdtree'
 	Plug 'christoomey/vim-tmux-navigator'
 	Plug 'godlygeek/tabular'
@@ -119,6 +119,7 @@ set laststatus=2
 :autocmd FileType lua                               setlocal tabstop=2 softtabstop=2 shiftwidth=2
 :autocmd FileType python                            setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 :autocmd FileType puppet,ruby,haml,sass,yaml,groovy setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+:autocmd FileType terraform                         setlocal foldmethod=indent
 
 "improve autocomplete menu color
 highlight Pmenu ctermbg=238 gui=bold

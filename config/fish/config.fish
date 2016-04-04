@@ -17,6 +17,7 @@ status --is-interactive; and . (pyenv init -|psub)
 status --is-interactive; and . (plenv init -|psub)
 
 alias b "bundler"
+alias buu "brew update; and brew upgrade --all"
 alias d "docker"
 alias dm "docker-machine"
 alias ds "docker-swarm"
