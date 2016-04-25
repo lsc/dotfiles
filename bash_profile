@@ -30,5 +30,9 @@ export SCM_CHECK=true
 # https://github.com/xvzf/vcprompt
 #export VCPROMPT_EXECUTABLE=~/.vcprompt/bin/vcprompt
 
+if [[ ~/.bashrc ]]; then
+	. ~/.bashrc 
+fi
+
 # Load Bash It
 source $BASH_IT/bash_it.sh
