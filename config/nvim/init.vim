@@ -96,6 +96,8 @@ let g:deoplete#enable_at_startup = 1
 " When I change dir in nerdtree, vim should follow.
 let NERDTreeChDirMode=2
 let NERDTreeShowBookmarks=1
+" 
+let g:terraform_align = 1
 
 syntax on
 filetype off
