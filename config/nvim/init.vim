@@ -93,10 +93,11 @@ set listchars=tab:▸\ ,trail:¬,extends:❯,precedes:❮
 
 " Enable keyword completion
 let g:deoplete#enable_at_startup = 1
+
 " When I change dir in nerdtree, vim should follow.
 let NERDTreeChDirMode=2
 let NERDTreeShowBookmarks=1
-" 
+"
 let g:terraform_align = 1
 
 syntax on
@@ -107,21 +108,21 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%0
 set laststatus=2 
 
 " Set file types for a bunch of files to get syntax highlighting
-:autocmd BufNewFile,BufRead *.nse set filetype=lua
-:autocmd BufNewFile,BufRead *.ru  set filetype=ruby
-:autocmd BufNewFile,BufRead *.thor set filetype=ruby
-:autocmd BufNewFile,BufRead *.mk  set filetype=markdown
-:autocmd BufNewFile,BufRead *.md  set filetype=markdown
+:autocmd BufNewFile,BufRead *.nse     set filetype=lua
+:autocmd BufNewFile,BufRead *.ru      set filetype=ruby
+:autocmd BufNewFile,BufRead *.thor    set filetype=ruby
+:autocmd BufNewFile,BufRead *.mk      set filetype=markdown
+:autocmd BufNewFile,BufRead *.md      set filetype=markdown
 :autocmd BufNewFile,BufRead *.textile set filetype=textile
-:autocmd BufNewFile,BufRead *.pp  set filetype=puppet syntax=puppet
-:autocmd BufNewFile,BufRead *.sls set filetype=yaml
-:autocmd BufNewFile,BufRead *.gradle set filetype=groovy
+:autocmd BufNewFile,BufRead *.pp      set filetype=puppet syntax=puppet
+:autocmd BufNewFile,BufRead *.sls     set filetype=yaml
+:autocmd BufNewFile,BufRead *.gradle  set filetype=groovy
 
 " Settings on a per filetype basis
 :autocmd FileType lua                               setlocal tabstop=2 softtabstop=2 shiftwidth=2
 :autocmd FileType python                            setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 :autocmd FileType puppet,ruby,haml,sass,yaml,groovy setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
-:autocmd FileType terraform                         setlocal foldmethod=indent
+:autocmd FileType terraform                         setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
 "improve autocomplete menu color
 highlight Pmenu ctermbg=238 gui=bold
