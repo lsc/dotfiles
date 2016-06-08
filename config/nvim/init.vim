@@ -25,6 +25,7 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'hashivim/vim-packer'
 	Plug 'hashivim/vim-consul'
 	Plug 'pearofducks/ansible-vim'
+	Plug 'derekwyatt/vim-scala'
 call plug#end()
 
 :colorscheme solarized
