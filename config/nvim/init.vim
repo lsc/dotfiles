@@ -122,6 +122,7 @@ set laststatus=2
 :autocmd BufNewFile,BufRead *.pp      set filetype=puppet syntax=puppet
 :autocmd BufNewFile,BufRead *.sls     set filetype=yaml
 :autocmd BufNewFile,BufRead *.gradle  set filetype=groovy
+:autocmd BufNewFile,BufRead *.aurora  set filetype=python
 
 " Settings on a per filetype basis
 :autocmd FileType lua                               setlocal tabstop=2 softtabstop=2 shiftwidth=2
