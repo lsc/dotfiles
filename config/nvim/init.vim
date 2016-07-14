@@ -33,6 +33,7 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'w0ng/vim-hybrid'
 call plug#end()
 
+
 :colorscheme solarized
 
 set list
