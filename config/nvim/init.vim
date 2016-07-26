@@ -31,8 +31,8 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'vim-latex/vim-latex'
 	Plug 'vim-ruby/vim-ruby'
 	Plug 'w0ng/vim-hybrid'
+	Plug 'mileszs/ack.vim'
 call plug#end()
-
 
 :colorscheme solarized
 
@@ -106,6 +106,8 @@ let NERDTreeChDirMode=2
 let NERDTreeShowBookmarks=1
 "
 let g:terraform_align = 1
+
+let g:ackprg = 'ag --nogroup --nocolor --column'
 
 syntax on
 filetype off
