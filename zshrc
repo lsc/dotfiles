@@ -1,4 +1,4 @@
-# Path to your oh-my-zsh installation.
+## Path to your oh-my-zsh installation.
 export ZSH=/Users/lsc/.oh-my-zsh
 
 # Set name of the theme to load.
@@ -49,7 +49,7 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git osx rbenv ruby vim)
+plugins=(git osx pyenv rbenv ruby vim)
 
 # User configuration
 
