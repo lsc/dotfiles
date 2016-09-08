@@ -1,11 +1,7 @@
 call plug#begin('~/.config/nvim/plugged')
-	Plug 'Shougo/deoplete.nvim'
 	Plug 'altercation/vim-colors-solarized'
-	Plug 'benekastah/neomake'
-	Plug 'christoomey/vim-tmux-navigator'
 	Plug 'ctrlpvim/ctrlp.vim'
 	Plug 'derekwyatt/vim-scala'
-	Plug 'elixir-lang/vim-elixir'
 	Plug 'elzr/vim-json'
 	Plug 'ervandew/supertab'
 	Plug 'fatih/vim-go'
@@ -14,24 +10,16 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'hashivim/vim-packer'
 	Plug 'hashivim/vim-terraform'
 	Plug 'hashivim/vim-vagrant'
-	Plug 'janko-m/vim-test'
-	Plug 'lambdatoast/elm.vim'
 	Plug 'majutsushi/tagbar'
-	Plug 'patrick-conley/vim-fish'
-	Plug 'pearofducks/ansible-vim'
 	Plug 'plasticboy/vim-markdown'
 	Plug 'roidelapluie/vim-puppet'
 	Plug 'scrooloose/nerdtree'
-	Plug 'tpope/vim-bundler'
 	Plug 'tpope/vim-fugitive'
-	Plug 'tpope/vim-projectionist'
-	Plug 'tpope/vim-rails'
-	Plug 'tpope/vim-rake'
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
 	Plug 'vim-latex/vim-latex'
 	Plug 'vim-ruby/vim-ruby'
-	Plug 'w0ng/vim-hybrid'
+	Plug 'mileszs/ack.vim'
 call plug#end()
 
 :colorscheme solarized
@@ -107,6 +95,8 @@ let NERDTreeShowBookmarks=1
 "
 let g:terraform_align = 1
 
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
 syntax on
 filetype off
 filetype plugin indent on
@@ -123,6 +113,7 @@ set laststatus=2
 :autocmd BufNewFile,BufRead *.pp      set filetype=puppet syntax=puppet
 :autocmd BufNewFile,BufRead *.sls     set filetype=yaml
 :autocmd BufNewFile,BufRead *.gradle  set filetype=groovy
+:autocmd BufNewFile,BufRead *.aurora  set filetype=python
 
 " Settings on a per filetype basis
 :autocmd FileType lua                               setlocal tabstop=2 softtabstop=2 shiftwidth=2
@@ -158,42 +149,6 @@ nnoremap <C-h> <C-W>h
 :nmap <silent> <F4> :TagbarToggle<cr>
 " Clear hilightning
 nnoremap <leader> <space> :noh <cr>
-autocmd! BufWritePost * Neomake
-
-" Save file when losing focus
-function! AutoSave()
-	" We are not in git or the file is not modified. Do nothing.
-	if exists('b:autosave') && b:autosave != 1 || &modified == 0
-		return
-	endif
-
-	" We generally always want to run the BufWritePre. Only skip it if it is set
-	" and set to zero.
-	if !exists('b:autosave_bufwritepre') || b:autosave_bufwritepre != 0
-		doau BufWritePre
-	endif
-
-	" Actually save the file! Will do nothing if the buffer has not file
-	" allocated yet.
-	silent! write
-
-	" We don't always want to do the BufWritePost since it would clobber test
-	" runners, linters or whatever. However, sometimes we actually do want it,
-	" and for those times we specify this!
-	if exists('b:autosave_bufwritepost') && b:autosave_bufwritepost == 1
-		doau BufWritePost
-	endif
-endfunction
-
-function! SetAutoSave()
-	let b:autosave = finddir('.git', expand('%:p:h') . ';') != ""
-endfunction
-
-augroup autosave
-	au!
-	au InsertLeave,CursorHold,BufLeave * call AutoSave()
-	au BufEnter,BufAdd * call SetAutoSave()
-augroup END
 
 function! KillTrailingWhitespace()
 	" Set the position. Default is that the cursor will be placed on any match.
@@ -208,11 +163,3 @@ function! KillTrailingWhitespace()
 	" Reset to the original position.
 	call setpos('.',pos)
 endfunction
-
-augroup line_return
-	au!
-	au BufReadPost *
-				\ if line("'\"") > 0 && line("'\"") <= line("$") |
-				\   execute 'normal! g`"zvzz' |
-				\ endif
-augroup END

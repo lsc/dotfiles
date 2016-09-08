@@ -1,4 +1,4 @@
-# Path to your oh-my-zsh installation.
+## Path to your oh-my-zsh installation.
 export ZSH=/Users/lsc/.oh-my-zsh
 
 # Set name of the theme to load.
