@@ -49,17 +49,12 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git osx rbenv ruby vim)
+plugins=(git osx rbenv ruby vim python pyenv)
 
 # User configuration
 
 # export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
-
-if [[ -r ~/.github-token ]]; then
-	source ~/.github-token
-fi
-export DEFAULT_USER='lsc'
 
 source $ZSH/oh-my-zsh.sh
 
@@ -84,6 +79,12 @@ source $ZSH/oh-my-zsh.sh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+if [[ -r ~/.github-token ]]; then
+	source ~/.github-token
+fi
+export DEFAULT_USER='lsc'
+export GOPATH=${HOME}/go
+alias vim=nvim
+alias vi=nvim  
+export PATH=$PATH:/usr/local/texlive/2016/bin/x86_64-darwin
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi

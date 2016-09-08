@@ -28,6 +28,7 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'tpope/vim-rails'
 	Plug 'tpope/vim-rake'
 	Plug 'vim-airline/vim-airline'
+	Plug 'vim-airline/vim-airline-themes'
 	Plug 'vim-latex/vim-latex'
 	Plug 'vim-ruby/vim-ruby'
 	Plug 'w0ng/vim-hybrid'
