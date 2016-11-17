@@ -26,8 +26,6 @@ call plug#end()
 
 set list
 set number
-set directory=~/.config/nvim/swap//
-set undodir=~/.config/nvim/keep//
 
 " A TAB is a TAB and should be 4 spaces wide
 set shiftwidth=4
@@ -53,7 +51,6 @@ set wildignore+=*.DS_Store                             " OSX bullshit
 set wildignore+=*.mo                                   " Django i18n
 set wildignore+=*.pyc,*__pycache__*                    " Python byte code
 set wildignore+=*.egg-info*,*.egg                      " Python package data
-set wildignore+=bin,build,lib,share,man                " Python venv files
 set wildignore+=*__init__.py                           " Python inits
 set wildignore+=*.db                                   " SQLite3
 set wildignore+=*logs/*,*dist/*                         " ...
@@ -88,6 +85,7 @@ set listchars=tab:▸\ ,trail:¬,extends:❯,precedes:❮
 
 " Enable keyword completion
 let g:deoplete#enable_at_startup = 1
+let g:airline_powerline_fonts = 1
 
 " When I change dir in nerdtree, vim should follow.
 let NERDTreeChDirMode=2
@@ -157,7 +155,7 @@ function! KillTrailingWhitespace()
 	" Remove trailing whitespace from any row. Ingore all errors.
 	silent! %s/\s\+$//e
 
-	" Remove trailing lines. Ignore all errors.
+" Remove trailing lines. Ignore all errors.
 	silent! %s/\v\n+%$//e
 
 	" Reset to the original position.

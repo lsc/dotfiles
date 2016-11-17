@@ -85,6 +85,8 @@ fi
 export DEFAULT_USER='lsc'
 export GOPATH=${HOME}/go
 alias vim=nvim
-alias vi=nvim  
+alias vi=nvim
+alias tf=terraform
+alias tg=terragrunt
 export PATH=$PATH:/usr/local/texlive/2016/bin/x86_64-darwin
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
