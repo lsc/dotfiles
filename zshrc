@@ -82,7 +82,7 @@ source $ZSH/oh-my-zsh.sh
 if [[ -r ~/.github-token ]]; then
 	source ~/.github-token
 fi
-export DEFAULT_USER='lsc'
+export DEFAULT_USER=$(whoami)
 export GOPATH=${HOME}/go
 alias vim=nvim
 alias vi=nvim
