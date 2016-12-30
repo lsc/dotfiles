@@ -84,8 +84,8 @@ if [[ -r ~/.github-token ]]; then
 fi
 export DEFAULT_USER=$(whoami)
 export GOPATH=${HOME}/go
+export LC_ALL=en_UK.UTF-8
 alias vim=nvim
-alias vi=nvim
 alias tf=terraform
 alias tg=terragrunt
 export PATH=$PATH:/usr/local/texlive/2016/bin/x86_64-darwin
