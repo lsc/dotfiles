@@ -87,3 +87,4 @@ export PATH="$PATH:${GOPATH}/bin"
 alias vim=nvim
 alias tf=terraform
 alias tg=terragrunt
+alias m=minikube
