@@ -20,6 +20,7 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'vim-latex/vim-latex'
 	Plug 'vim-ruby/vim-ruby'
 	Plug 'mileszs/ack.vim'
+	Plug 'Shougo/deoplete.vim'
 call plug#end()
 
 :colorscheme solarized
