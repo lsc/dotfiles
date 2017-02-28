@@ -49,7 +49,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git osx rbenv golang ruby vim python pyenv)
+plugins=(git osx rbenv golang ruby vim python pyenv docker)
 
 # User configuration
 
@@ -81,9 +81,14 @@ export LANG=en_US.UTF-8
 if [[ -r ~/.github-token ]]; then
 	source ~/.github-token
 fi
+
+if [[ -r ~/.vsphere-credentials ]]; then
+	source ~/.vsphere-credentials
+fi
 export DEFAULT_USER=$(whoami)
 export GOPATH=${HOME}/go
 export PATH="$PATH:${GOPATH}/bin"
 alias vim=nvim
 alias tf=terraform
 alias tg=terragrunt
+alias m=minikube
