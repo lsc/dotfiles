@@ -20,10 +20,13 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'vim-latex/vim-latex'
 	Plug 'vim-ruby/vim-ruby'
 	Plug 'mileszs/ack.vim'
-	Plug 'Shougo/deoplete.vim'
+	Plug 'Shougo/deoplete.nvim'
+	Plug 'ekalinin/Dockerfile.vim'
+	Plug 'neomake/neomake'
+	Plug 'iCyMind/NeoSolarized'
 call plug#end()
 
-:colorscheme solarized
+:colorscheme NeoSolarized
 
 set list
 set number
@@ -38,6 +41,7 @@ set background=dark
 set copyindent
 set complete=.,w,b,u,t
 set completeopt=longest,menuone,preview
+set termguicolors
 
 set foldenable
 set foldmethod=syntax
@@ -120,6 +124,7 @@ set laststatus=2
 :autocmd FileType puppet,ruby,haml,sass,yaml,groovy setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 :autocmd FileType terraform                         setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
+autocmd! BufWritePost * Neomake
 "improve autocomplete menu color
 highlight Pmenu ctermbg=238 gui=bold
 
