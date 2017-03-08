@@ -1,7 +1,9 @@
 call plug#begin('~/.config/nvim/plugged')
+	Plug 'Shougo/deoplete.nvim'
 	Plug 'altercation/vim-colors-solarized'
 	Plug 'ctrlpvim/ctrlp.vim'
 	Plug 'derekwyatt/vim-scala'
+	Plug 'ekalinin/Dockerfile.vim'
 	Plug 'elzr/vim-json'
 	Plug 'ervandew/supertab'
 	Plug 'fatih/vim-go'
@@ -10,7 +12,10 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'hashivim/vim-packer'
 	Plug 'hashivim/vim-terraform'
 	Plug 'hashivim/vim-vagrant'
+	Plug 'iCyMind/NeoSolarized'
 	Plug 'majutsushi/tagbar'
+	Plug 'mileszs/ack.vim'
+	Plug 'neomake/neomake'
 	Plug 'plasticboy/vim-markdown'
 	Plug 'roidelapluie/vim-puppet'
 	Plug 'scrooloose/nerdtree'
@@ -19,11 +24,6 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'vim-airline/vim-airline-themes'
 	Plug 'vim-latex/vim-latex'
 	Plug 'vim-ruby/vim-ruby'
-	Plug 'mileszs/ack.vim'
-	Plug 'Shougo/deoplete.nvim'
-	Plug 'ekalinin/Dockerfile.vim'
-	Plug 'neomake/neomake'
-	Plug 'iCyMind/NeoSolarized'
 call plug#end()
 
 :colorscheme NeoSolarized
