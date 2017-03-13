@@ -24,6 +24,8 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'vim-airline/vim-airline-themes'
 	Plug 'vim-latex/vim-latex'
 	Plug 'vim-ruby/vim-ruby'
+	Plug 'ludovicchabant/vim-gutentags'
+	Plug 'zchee/deoplete-go'
 call plug#end()
 
 :colorscheme NeoSolarized
@@ -110,7 +112,7 @@ set laststatus=2
 :autocmd BufNewFile,BufRead *.nse     set filetype=lua
 :autocmd BufNewFile,BufRead *.ru      set filetype=ruby
 :autocmd BufNewFile,BufRead *.thor    set filetype=ruby
-:autocmd BufNewFile,BufRead *.mk      set filetype=markdown
+:autocmd BufNewFile,BufRead *.mk      set filetype=make
 :autocmd BufNewFile,BufRead *.md      set filetype=markdown
 :autocmd BufNewFile,BufRead *.textile set filetype=textile
 :autocmd BufNewFile,BufRead *.pp      set filetype=puppet syntax=puppet
