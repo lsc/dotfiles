@@ -25,6 +25,7 @@
 	untracked = cyan
 
 [alias]
+	praise = blame
 	st = status
 	a  = add
 	ss = status -s
