@@ -14,6 +14,13 @@
 
 [diff]
 	compactionHeuristics = true
+	tool = icdiff
+
+[difftool]
+	prompt = false
+
+[diffool "icdiff"]
+	cmd = /usr/local/bin/icdiff --line-numbers $LOCAL $REMOTE
 
 [merge]
 	ff = only
@@ -24,6 +31,7 @@
 
 [transfer]
 	fsckobjects = true
+
 
 [filter "media"]
 	clean = git-media-clean %f
