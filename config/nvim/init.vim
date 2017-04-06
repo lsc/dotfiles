@@ -26,6 +26,8 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'vim-ruby/vim-ruby'
 	Plug 'ludovicchabant/vim-gutentags'
 	Plug 'zchee/deoplete-go'
+	Plug 'christoomey/vim-tmux-navigator'
+	Plug 'andrewstuart/vim-kubernetes'
 call plug#end()
 
 :colorscheme NeoSolarized
@@ -43,7 +45,9 @@ set background=dark
 set copyindent
 set complete=.,w,b,u,t
 set completeopt=longest,menuone,preview
-set termguicolors
+if has("gui_running")
+	set termguicolors
+endif
 
 set foldenable
 set foldmethod=syntax
