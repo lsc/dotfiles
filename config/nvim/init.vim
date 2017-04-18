@@ -28,6 +28,7 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'zchee/deoplete-go'
 	Plug 'christoomey/vim-tmux-navigator'
 	Plug 'andrewstuart/vim-kubernetes'
+	Plug 'mustache/vim-mustache-handlebars'
 call plug#end()
 
 :colorscheme NeoSolarized
