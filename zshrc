@@ -22,6 +22,8 @@ alias vim=nvim
 alias tf=terraform
 alias m=minikube
 alias dm=docker-machine
+alias tma='tmux attach -d -t'
+alias git-tmux='tmux new -s $(basename $(pwd))'
 
 # Things I don't currently use...
 # CASE_SENSITIVE="true"
