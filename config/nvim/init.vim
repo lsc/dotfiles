@@ -29,6 +29,9 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'christoomey/vim-tmux-navigator'
 	Plug 'andrewstuart/vim-kubernetes'
 	Plug 'mustache/vim-mustache-handlebars'
+	Plug 'airblade/vim-gitgutter'
+	Plug 'luochen1990/rainbow'
+	Plug 'juliosueiras/vim-terraform-completion'
 call plug#end()
 
 :colorscheme NeoSolarized
@@ -102,10 +105,14 @@ let g:airline_powerline_fonts = 1
 " When I change dir in nerdtree, vim should follow.
 let NERDTreeChDirMode=2
 let NERDTreeShowBookmarks=1
-"
+
 let g:terraform_align = 1
 
-let g:ackprg = 'ag --nogroup --nocolor --column'
+if executable('ag')
+	let g:ackprg = 'ag --nogroup --nocolor --column'
+	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+	let g:ctrlp_use_caching = 0
+endif
 
 syntax on
 filetype off
