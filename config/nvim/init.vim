@@ -1,6 +1,9 @@
 call plug#begin('~/.config/nvim/plugged')
 	Plug 'Shougo/deoplete.nvim'
+	Plug 'airblade/vim-gitgutter'
 	Plug 'altercation/vim-colors-solarized'
+	Plug 'andrewstuart/vim-kubernetes'
+	Plug 'christoomey/vim-tmux-navigator'
 	Plug 'ctrlpvim/ctrlp.vim'
 	Plug 'derekwyatt/vim-scala'
 	Plug 'ekalinin/Dockerfile.vim'
@@ -13,8 +16,12 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'hashivim/vim-terraform'
 	Plug 'hashivim/vim-vagrant'
 	Plug 'iCyMind/NeoSolarized'
+	Plug 'juliosueiras/vim-terraform-completion'
+	Plug 'ludovicchabant/vim-gutentags'
+	Plug 'luochen1990/rainbow'
 	Plug 'majutsushi/tagbar'
 	Plug 'mileszs/ack.vim'
+	Plug 'mustache/vim-mustache-handlebars'
 	Plug 'neomake/neomake'
 	Plug 'plasticboy/vim-markdown'
 	Plug 'roidelapluie/vim-puppet'
@@ -24,14 +31,7 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'vim-airline/vim-airline-themes'
 	Plug 'vim-latex/vim-latex'
 	Plug 'vim-ruby/vim-ruby'
-	Plug 'ludovicchabant/vim-gutentags'
 	Plug 'zchee/deoplete-go'
-	Plug 'christoomey/vim-tmux-navigator'
-	Plug 'andrewstuart/vim-kubernetes'
-	Plug 'mustache/vim-mustache-handlebars'
-	Plug 'airblade/vim-gitgutter'
-	Plug 'luochen1990/rainbow'
-	Plug 'juliosueiras/vim-terraform-completion'
 call plug#end()
 
 :colorscheme NeoSolarized
@@ -181,3 +181,17 @@ function! KillTrailingWhitespace()
 	" Reset to the original position.
 	call setpos('.',pos)
 endfunction
+
+let g:tagbar_type_terraform = {
+	\ 'ctagstype' : 'terraform',
+	\ 'kinds' : [
+		\ 'r:Resources',
+		\ 'd:Datas',
+		\ 'v:Variables',
+		\ 'p:Providers',
+		\ 'o:Outputs',
+		\ 'm:Modules',
+		\ 'f:TFVars'
+	\ ],
+	\ 'sort' : 1
+	\ }
