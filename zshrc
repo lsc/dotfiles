@@ -12,7 +12,7 @@ test -r ~/.github-token && source ~/.github-token
 test -r ~/.vsphere-credentials && source ~/.vsphere-credentials
 test -x pyenv && eval "$(pyenv init -)"
 test -x rbenv && eval "$(rbenv init -)"
-test -x docker-machine && eval "$(docker-machine env)"
+test -x $(which docker-machine) && eval "$(docker-machine env)"
 test -x $(which keychain) && eval "$(keychain --quiet --eval id_rsa)"
 
 export DEFAULT_USER=$(whoami)

@@ -1,5 +1,4 @@
 call plug#begin('~/.config/nvim/plugged')
-	Plug 'Shougo/deoplete.nvim'
 	Plug 'airblade/vim-gitgutter'
 	Plug 'altercation/vim-colors-solarized'
 	Plug 'andrewstuart/vim-kubernetes'
@@ -22,16 +21,16 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'majutsushi/tagbar'
 	Plug 'mileszs/ack.vim'
 	Plug 'mustache/vim-mustache-handlebars'
-	Plug 'neomake/neomake'
 	Plug 'plasticboy/vim-markdown'
 	Plug 'roidelapluie/vim-puppet'
+	Plug 'roxma/nvim-completion-manager'
 	Plug 'scrooloose/nerdtree'
 	Plug 'tpope/vim-fugitive'
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
 	Plug 'vim-latex/vim-latex'
 	Plug 'vim-ruby/vim-ruby'
-	Plug 'zchee/deoplete-go'
+	Plug 'w0rp/ale'
 call plug#end()
 
 :colorscheme NeoSolarized
@@ -99,7 +98,6 @@ let mapleader=","
 set listchars=tab:▸\ ,trail:¬,extends:❯,precedes:❮
 
 " Enable keyword completion
-let g:deoplete#enable_at_startup = 1
 let g:airline_powerline_fonts = 1
 
 " When I change dir in nerdtree, vim should follow.
@@ -138,7 +136,6 @@ set laststatus=2
 :autocmd FileType puppet,ruby,haml,sass,yaml,groovy setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 :autocmd FileType terraform                         setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
-autocmd! BufWritePost * Neomake
 "improve autocomplete menu color
 highlight Pmenu ctermbg=238 gui=bold
 
