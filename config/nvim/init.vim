@@ -1,3 +1,13 @@
+function BuildComposer(info)
+	if a:info.status != 'unchanged' || a.info.force
+		if has('nvim')
+			!cargo build --release
+		else
+			!cargo build --release --no-default-feature --features json-rpc
+		endif
+	endif
+endfunction
+
 call plug#begin('~/.config/nvim/plugged')
 	Plug 'airblade/vim-gitgutter'
 	Plug 'altercation/vim-colors-solarized'
@@ -8,6 +18,7 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'ekalinin/Dockerfile.vim'
 	Plug 'elzr/vim-json'
 	Plug 'ervandew/supertab'
+	Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer')}
 	Plug 'fatih/vim-go'
 	Plug 'godlygeek/tabular'
 	Plug 'hashivim/vim-consul'
@@ -31,6 +42,7 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'vim-latex/vim-latex'
 	Plug 'vim-ruby/vim-ruby'
 	Plug 'w0rp/ale'
+	Plug 'romainl/Apprentice'
 call plug#end()
 
 :colorscheme NeoSolarized
@@ -178,6 +190,7 @@ function! KillTrailingWhitespace()
 	" Reset to the original position.
 	call setpos('.',pos)
 endfunction
+
 
 let g:tagbar_type_terraform = {
 	\ 'ctagstype' : 'terraform',
