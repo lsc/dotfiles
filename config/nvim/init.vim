@@ -43,9 +43,10 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'vim-ruby/vim-ruby'
 	Plug 'w0rp/ale'
 	Plug 'romainl/Apprentice'
+	Plug 'morhetz/gruvbox'
 call plug#end()
 
-:colorscheme NeoSolarized
+:colorscheme gruvbox
 
 set list
 set number
@@ -205,3 +206,16 @@ let g:tagbar_type_terraform = {
 	\ ],
 	\ 'sort' : 1
 	\ }
+
+:tnoremap <A-h> <C-\><C-N><C-w>h
+:tnoremap <A-j> <C-\><C-N><C-w>j
+:tnoremap <A-k> <C-\><C-N><C-w>k
+:tnoremap <A-l> <C-\><C-N><C-w>l
+:inoremap <A-h> <C-\><C-N><C-w>h
+:inoremap <A-j> <C-\><C-N><C-w>j
+:inoremap <A-k> <C-\><C-N><C-w>k
+:inoremap <A-l> <C-\><C-N><C-w>l
+:nnoremap <A-h> <C-w>h
+:nnoremap <A-j> <C-w>j
+:nnoremap <A-k> <C-w>k
+:nnoremap <A-l> <C-w>l
