@@ -24,6 +24,7 @@ alias m=minikube
 alias dm=docker-machine
 alias tma='tmux attach -d -t'
 alias git-tmux='tmux new -s $(basename $(pwd))'
+alias tmux="TERM=screen-256color-bce tmux"
 
 # Things I don't currently use...
 # CASE_SENSITIVE="true"
