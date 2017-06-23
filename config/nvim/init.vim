@@ -27,13 +27,16 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'hashivim/vim-vagrant'
 	Plug 'iCyMind/NeoSolarized'
 	Plug 'juliosueiras/vim-terraform-completion'
+	Plug 'lervag/vimtex'
 	Plug 'ludovicchabant/vim-gutentags'
 	Plug 'luochen1990/rainbow'
 	Plug 'majutsushi/tagbar'
 	Plug 'mileszs/ack.vim'
+	Plug 'morhetz/gruvbox'
 	Plug 'mustache/vim-mustache-handlebars'
 	Plug 'plasticboy/vim-markdown'
 	Plug 'roidelapluie/vim-puppet'
+	Plug 'romainl/Apprentice'
 	Plug 'roxma/nvim-completion-manager'
 	Plug 'scrooloose/nerdtree'
 	Plug 'tpope/vim-fugitive'
@@ -42,8 +45,6 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'vim-latex/vim-latex'
 	Plug 'vim-ruby/vim-ruby'
 	Plug 'w0rp/ale'
-	Plug 'romainl/Apprentice'
-	Plug 'morhetz/gruvbox'
 call plug#end()
 
 :colorscheme gruvbox
