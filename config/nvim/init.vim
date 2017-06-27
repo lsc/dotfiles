@@ -82,6 +82,7 @@ set wildignore+=*.egg-info*,*.egg                      " Python package data
 set wildignore+=*__init__.py                           " Python inits
 set wildignore+=*.db                                   " SQLite3
 set wildignore+=*logs/*,*dist/*                         " ...
+set tags=./.git/tags;,tags;
 
 if exists('+colorcolumn')
 	set colorcolumn=+1

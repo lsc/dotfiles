@@ -4,7 +4,7 @@ export ZSH=/Users/$(whoami)/.oh-my-zsh
 ZSH_THEME="agnoster"
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 HIST_STAMPS="yyyy-mm-dd"
-plugins=(git osx rbenv golang ruby vim python pyenv docker kubectl golang)
+plugins=(aws git osx rbenv golang ruby vim python pyenv docker kubectl)
 source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
 
