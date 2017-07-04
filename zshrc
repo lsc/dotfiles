@@ -4,20 +4,41 @@ export ZSH=/Users/$(whoami)/.oh-my-zsh
 ZSH_THEME="agnoster"
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 HIST_STAMPS="yyyy-mm-dd"
-plugins=(aws git osx rbenv golang ruby vim python pyenv docker kubectl)
+plugins=(
+	aws
+	brew
+	colored-man-pages
+	common-aliases
+	docker
+	git
+	github
+	golang
+	gradle
+	kubectl
+	nomad
+	osx
+	python
+	ruby
+	terraform
+	tmux
+	vault
+	vi-mode
+	vim
+	vim-interaction
+	zsh_reload
+)
 source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
 
 test -r ~/.github-token && source ~/.github-token
 test -r ~/.vsphere-credentials && source ~/.vsphere-credentials
-test -x pyenv && eval "$(pyenv init -)"
-test -x rbenv && eval "$(rbenv init -)"
 test -x $(which docker-machine) && eval "$(docker-machine env)"
 test -x $(which keychain) && eval "$(keychain --quiet --eval id_rsa)"
 
 export DEFAULT_USER=$(whoami)
 export GOPATH=${HOME}/go
 export PATH="$PATH:${GOPATH}/bin"
+
 alias vim=nvim
 alias tf=terraform
 alias m=minikube

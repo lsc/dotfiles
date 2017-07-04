@@ -10,7 +10,6 @@ endfunction
 
 call plug#begin('~/.config/nvim/plugged')
 	Plug 'airblade/vim-gitgutter'
-	Plug 'altercation/vim-colors-solarized'
 	Plug 'andrewstuart/vim-kubernetes'
 	Plug 'christoomey/vim-tmux-navigator'
 	Plug 'ctrlpvim/ctrlp.vim'
@@ -146,10 +145,7 @@ set laststatus=2
 :autocmd BufNewFile,BufRead *.aurora  set filetype=python
 
 " Settings on a per filetype basis
-:autocmd FileType lua                               setlocal tabstop=2 softtabstop=2 shiftwidth=2
-:autocmd FileType python                            setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
-:autocmd FileType puppet,ruby,haml,sass,yaml,groovy setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
-:autocmd FileType terraform                         setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+:autocmd FileType python,terraform,puppet,ruby,haml,sass,yaml,groovy setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
 "improve autocomplete menu color
 highlight Pmenu ctermbg=238 gui=bold
