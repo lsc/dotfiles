@@ -145,7 +145,7 @@ set laststatus=2
 :autocmd BufNewFile,BufRead *.aurora  set filetype=python
 
 " Settings on a per filetype basis
-:autocmd FileType python,terraform,puppet,ruby,haml,sass,yaml,groovy setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+:autocmd FileType python,json,terraform,puppet,ruby,haml,sass,yaml,groovy setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
 "improve autocomplete menu color
 highlight Pmenu ctermbg=238 gui=bold
