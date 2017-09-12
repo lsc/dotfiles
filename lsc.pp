@@ -12,7 +12,7 @@ class lsc {
                       'iterm2-beta', 'karabiner-elements', 'google-chrome', 'spotify' ]
 
   $pkg_list = [ 'awscli', 'consul', 'ctags', 'docker', 'docker-machine', 'docker-machine-driver-xhyve',
-                'git', 'hugo', 'neovim', 'nomad', 'packer', 'rbenv', 'rcm', 'terraform', 'unrar', 'vault' ]
+                'git', 'hugo', 'neovim', 'nomad', 'mutt', 'packer', 'rbenv', 'rcm', 'terraform', 'unrar', 'vault' ]
 
 
   package { [ "thoughtbot/formulae", "neovim/neovim" ]:
