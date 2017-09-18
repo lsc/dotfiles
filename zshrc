@@ -18,7 +18,9 @@ plugins=(
 	nomad
 	osx
 	python
+	pyenv
 	ruby
+	rbenv
 	terraform
 	tmux
 	vault
@@ -31,13 +33,11 @@ source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
 
 test -r ~/.github-token && source ~/.github-token
-test -r ~/.vsphere-credentials && source ~/.vsphere-credentials
 test -x $(which docker-machine) && eval "$(docker-machine env)"
-test -x $(which keychain) && eval "$(keychain --quiet --eval id_rsa)"
+test -x $(which keychain) && eval "$(keychain --quiet --eval id_rsa id_ed25519)"
 
 export DEFAULT_USER=$(whoami)
-export GOPATH=${HOME}/go
-export PATH="$PATH:${GOPATH}/bin"
+export PATH="$PATH:/usr/local/opt/go/libexec/bin"
 
 alias vim=nvim
 alias tf=terraform
@@ -73,9 +73,3 @@ alias tmux="TERM=screen-256color-bce tmux"
 
 # User configuration
 # export MANPATH="/usr/local/man:$MANPATH"
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/lsc/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/lsc/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/lsc/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/lsc/google-cloud-sdk/completion.zsh.inc'; fi

@@ -32,7 +32,6 @@
 [transfer]
 	fsckobjects = true
 
-
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
@@ -86,3 +85,5 @@
 	added = yellow
 	changed = green
 	untracked = cyan
+[github]
+	user = lsc
