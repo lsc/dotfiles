@@ -23,6 +23,7 @@ plugins=(
 	rbenv
 	terraform
 	tmux
+	vagrant
 	vault
 	vi-mode
 	vim
