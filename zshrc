@@ -14,7 +14,6 @@ plugins=(
 	github
 	golang
 	gradle
-	kubectl
 	nomad
 	osx
 	python
@@ -35,7 +34,7 @@ export LANG=en_US.UTF-8
 
 test -r ~/.github-token && source ~/.github-token
 test -x $(which docker-machine) && eval "$(docker-machine env)"
-test -x $(which keychain) && eval "$(keychain --quiet --eval id_rsa id_ed25519)"
+test -x $(which keychain) && eval "$(keychain --quiet --eval --ignore-missing id_rsa id_ed25519)"
 
 export DEFAULT_USER=$(whoami)
 export PATH="$PATH:/usr/local/opt/go/libexec/bin"
@@ -44,6 +43,7 @@ alias vim=nvim
 alias tf=terraform
 alias m=minikube
 alias dm=docker-machine
+alias dco=docker-compose
 alias tma='tmux attach -d -t'
 alias git-tmux='tmux new -s $(basename $(pwd))'
 alias tmux="TERM=screen-256color-bce tmux"

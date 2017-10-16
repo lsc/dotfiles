@@ -30,6 +30,7 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'ludovicchabant/vim-gutentags'
 	Plug 'luochen1990/rainbow'
 	Plug 'majutsushi/tagbar'
+	Plug 'martinda/Jenkinsfile-vim-syntax'
 	Plug 'mileszs/ack.vim'
 	Plug 'morhetz/gruvbox'
 	Plug 'mustache/vim-mustache-handlebars'
@@ -133,16 +134,18 @@ filetype plugin indent on
 set laststatus=2
 
 " Set file types for a bunch of files to get syntax highlighting
-:autocmd BufNewFile,BufRead *.nse     set filetype=lua
-:autocmd BufNewFile,BufRead *.ru      set filetype=ruby
-:autocmd BufNewFile,BufRead *.thor    set filetype=ruby
-:autocmd BufNewFile,BufRead *.mk      set filetype=make
-:autocmd BufNewFile,BufRead *.md      set filetype=markdown
-:autocmd BufNewFile,BufRead *.textile set filetype=textile
-:autocmd BufNewFile,BufRead *.pp      set filetype=puppet syntax=puppet
-:autocmd BufNewFile,BufRead *.sls     set filetype=yaml
-:autocmd BufNewFile,BufRead *.gradle  set filetype=groovy
-:autocmd BufNewFile,BufRead *.aurora  set filetype=python
+:autocmd BufNewFile,BufRead *.nse       set filetype=lua
+:autocmd BufNewFile,BufRead *.ru        set filetype=ruby
+:autocmd BufNewFile,BufRead *.thor      set filetype=ruby
+:autocmd BufNewFile,BufRead *.mk        set filetype=make
+:autocmd BufNewFile,BufRead *.md        set filetype=markdown
+:autocmd BufNewFile,BufRead *.textile   set filetype=textile
+:autocmd BufNewFile,BufRead *.pp        set filetype=puppet syntax=puppet
+:autocmd BufNewFile,BufRead *.sls       set filetype=yaml
+:autocmd BufNewFile,BufRead *.yml       set filetype=yaml
+:autocmd BufNewFile,BufRead *.gradle    set filetype=groovy
+:autocmd BufNewFile,BufRead *.aurora    set filetype=python
+:autocmd BufNewFile,BufRead Jenkinsfile set filetype=groovy
 
 " Settings on a per filetype basis
 :autocmd FileType python,json,terraform,puppet,ruby,haml,sass,yaml,groovy setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
