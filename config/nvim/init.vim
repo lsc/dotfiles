@@ -163,7 +163,7 @@ nnoremap <C-h> <C-W>h
 :nnoremap <space> za
 
 " Use ESC to switch to normal mode in a Terminal
-if has(nvim)
+if has('nvim')
 	tnoremap <Esc> <C-\><C-n>
 	tnoremap <C-v><Esc> <Esc>
 endif
