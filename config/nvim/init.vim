@@ -162,6 +162,12 @@ nnoremap <C-h> <C-W>h
 " Use space to toggle folds if we are on a fold
 :nnoremap <space> za
 
+" Use ESC to switch to normal mode in a Terminal
+if has(nvim)
+	tnoremap <Esc> <C-\><C-n>
+	tnoremap <C-v><Esc> <Esc>
+endif
+
 " Headline macros
 :map h1 yypVr=o
 :map h2 yypVr-o
