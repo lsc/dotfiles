@@ -33,7 +33,7 @@ source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
 
 test -r ~/.github-token && source ~/.github-token
-test -x $(which docker-machine) && eval "$(docker-machine env)"
+test -x $(which docker-machine) && eval "$(docker-machine env &> /dev/null)"
 test -x $(which keychain) && eval "$(keychain --quiet --eval --ignore-missing id_rsa id_ed25519)"
 
 export DEFAULT_USER=$(whoami)
@@ -47,6 +47,8 @@ alias dco=docker-compose
 alias tma='tmux attach -d -t'
 alias git-tmux='tmux new -s $(basename $(pwd))'
 alias tmux="TERM=screen-256color-bce tmux"
+
+source <(awless completion zsh)
 
 # Things I don't currently use...
 # CASE_SENSITIVE="true"
