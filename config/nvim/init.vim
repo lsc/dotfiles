@@ -31,6 +31,7 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'luochen1990/rainbow'
 	Plug 'majutsushi/tagbar'
 	Plug 'martinda/Jenkinsfile-vim-syntax'
+	Plug 'mattn/gist-vim'
 	Plug 'mileszs/ack.vim'
 	Plug 'morhetz/gruvbox'
 	Plug 'mustache/vim-mustache-handlebars'
