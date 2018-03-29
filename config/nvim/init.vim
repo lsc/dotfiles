@@ -9,6 +9,7 @@ function BuildComposer(info)
 endfunction
 
 call plug#begin('~/.config/nvim/plugged')
+	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 	Plug 'airblade/vim-gitgutter'
 	Plug 'andrewstuart/vim-kubernetes'
 	Plug 'christoomey/vim-tmux-navigator'
@@ -20,6 +21,7 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer')}
 	Plug 'fatih/vim-go'
 	Plug 'godlygeek/tabular'
+	Plug 'google/vim-jsonnet'
 	Plug 'hashivim/vim-consul'
 	Plug 'hashivim/vim-packer'
 	Plug 'hashivim/vim-terraform'
@@ -32,6 +34,7 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'majutsushi/tagbar'
 	Plug 'martinda/Jenkinsfile-vim-syntax'
 	Plug 'mattn/gist-vim'
+	Plug 'mattn/webapi-vim'
 	Plug 'mileszs/ack.vim'
 	Plug 'morhetz/gruvbox'
 	Plug 'mustache/vim-mustache-handlebars'
@@ -41,15 +44,18 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'roxma/nvim-completion-manager'
 	Plug 'scrooloose/nerdtree'
 	Plug 'tpope/vim-fugitive'
+	Plug 'tpope/vim-rhubarb'
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
 	Plug 'vim-latex/vim-latex'
 	Plug 'vim-ruby/vim-ruby'
 	Plug 'w0rp/ale'
+	Plug 'tarekbecker/vim-yaml-formatter'
 call plug#end()
 
 :colorscheme gruvbox
-
+" I want to resize splits with my mouse...
+set mouse=a
 set list
 set number
 
@@ -199,6 +205,7 @@ function! KillTrailingWhitespace()
 	call setpos('.',pos)
 endfunction
 
+let g:deoplete#enable_at_startup = 1
 
 let g:tagbar_type_terraform = {
 	\ 'ctagstype' : 'terraform',

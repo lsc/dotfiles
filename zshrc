@@ -37,10 +37,12 @@ test -x $(which docker-machine) && eval "$(docker-machine env &> /dev/null)"
 test -x $(which keychain) && eval "$(keychain --quiet --eval --ignore-missing id_rsa id_ed25519)"
 
 export DEFAULT_USER=$(whoami)
-export PATH="$PATH:/usr/local/opt/go/libexec/bin"
+export PATH="$PATH:~/bin:/usr/local/opt/go/libexec/bin"
+export CDPATH="$HOME/Projects:$HOME/go/src"
 
 alias vim=nvim
 alias tf=terraform
+alias tg=terragrunt
 alias m=minikube
 alias dm=docker-machine
 alias dco=docker-compose
@@ -49,6 +51,12 @@ alias git-tmux='tmux new -s $(basename $(pwd))'
 alias tmux="TERM=screen-256color-bce tmux"
 
 source <(awless completion zsh)
+eval "$(go env -)"
+eval "$(rbenv init -)"
+eval "$(pyenv init -)"
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/nomad nomad
 
 # Things I don't currently use...
 # CASE_SENSITIVE="true"
@@ -76,3 +84,4 @@ source <(awless completion zsh)
 
 # User configuration
 # export MANPATH="/usr/local/man:$MANPATH"
+
