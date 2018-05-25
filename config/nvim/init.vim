@@ -104,15 +104,12 @@ set autowrite
 set shiftround
 set linebreak
 set synmaxcol=800
-
 set scrolloff=3
 set sidescroll=1
 set sidescrolloff=2
-
 set hidden
 set wmh=0
 set gdefault
-
 set showmatch
 set ignorecase
 set smartcase
