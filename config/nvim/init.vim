@@ -9,24 +9,20 @@ function BuildComposer(info)
 endfunction
 
 call plug#begin('~/.config/nvim/plugged')
-	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+	Plug 'Shougo/Deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+	Plug 'Shougo/neosnippet'
+	Plug 'Shougo/neosnippet-snippets'
 	Plug 'airblade/vim-gitgutter'
-	Plug 'andrewstuart/vim-kubernetes'
-	Plug 'christoomey/vim-tmux-navigator'
 	Plug 'ctrlpvim/ctrlp.vim'
-	Plug 'derekwyatt/vim-scala'
 	Plug 'ekalinin/Dockerfile.vim'
-	Plug 'elzr/vim-json'
-	Plug 'ervandew/supertab'
+	Plug 'elzr/vim-json', { 'for': 'json' }
 	Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer')}
-	Plug 'fatih/vim-go'
+	Plug 'fatih/vim-go', { 'tag': 'v1.17' }
 	Plug 'godlygeek/tabular'
-	Plug 'google/vim-jsonnet'
 	Plug 'hashivim/vim-consul'
 	Plug 'hashivim/vim-packer'
 	Plug 'hashivim/vim-terraform'
 	Plug 'hashivim/vim-vagrant'
-	Plug 'iCyMind/NeoSolarized'
 	Plug 'juliosueiras/vim-terraform-completion'
 	Plug 'lervag/vimtex'
 	Plug 'ludovicchabant/vim-gutentags'
@@ -38,19 +34,24 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'mileszs/ack.vim'
 	Plug 'morhetz/gruvbox'
 	Plug 'mustache/vim-mustache-handlebars'
+	Plug 'neomake/neomake'
 	Plug 'plasticboy/vim-markdown'
-	Plug 'roidelapluie/vim-puppet'
-	Plug 'romainl/Apprentice'
-	Plug 'roxma/nvim-completion-manager'
-	Plug 'scrooloose/nerdtree'
+	Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+	Plug 'tarekbecker/vim-yaml-formatter'
 	Plug 'tpope/vim-fugitive'
 	Plug 'tpope/vim-rhubarb'
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
 	Plug 'vim-latex/vim-latex'
-	Plug 'vim-ruby/vim-ruby'
-	Plug 'w0rp/ale'
-	Plug 'tarekbecker/vim-yaml-formatter'
+"	Plug 'romainl/Apprentice'
+"	Plug 'ervandew/supertab'
+"	Plug 'w0rp/ale'
+"	Plug 'andrewstuart/vim-kubernetes'
+"	Plug 'christoomey/vim-tmux-navigator'
+"	Plug 'derekwyatt/vim-scala'
+"	Plug 'google/vim-jsonnet'
+"	Plug 'roidelapluie/vim-puppet'
+"	Plug 'vim-ruby/vim-ruby'
 call plug#end()
 
 :colorscheme gruvbox
@@ -69,6 +70,7 @@ set background=dark
 set copyindent
 set complete=.,w,b,u,t
 set completeopt=longest,menuone,preview
+
 if has("gui_running")
 	set termguicolors
 endif
@@ -126,6 +128,26 @@ let NERDTreeChDirMode=2
 let NERDTreeShowBookmarks=1
 
 let g:terraform_align = 1
+let g:terraform_fmt_on_save = 1
+let g:terraform_fold_sections = 1
+let g:terraform_completion_keys = 1
+
+" Terraform deoplete configuration
+let g:deoplete#omni_patterns = {}
+let g:deoplete#omni_patterns.terraform = '[^ *\t"{=$]\w*'
+
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
+call deoplete#initialize()
+
+" NeoMake should run on each write and once every second
+call neomake#configure#automake('w', 1000)
+
+" NeoSnippets configuration
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+xmap <C-k> <Plug>(neosnippet_expand_target)
+imap <expr> <TAB> pumvisible() ? "\<C-n>" : neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump()" : "\<TAB>"
 
 if executable('ag')
 	let g:ackprg = 'ag --nogroup --nocolor --column'
@@ -152,6 +174,7 @@ set laststatus=2
 :autocmd BufNewFile,BufRead *.gradle    set filetype=groovy
 :autocmd BufNewFile,BufRead *.aurora    set filetype=python
 :autocmd BufNewFile,BufRead Jenkinsfile set filetype=groovy
+:autocmd BufNewFile,BufRead *.nomad		set filetype=terraform
 
 " Settings on a per filetype basis
 :autocmd FileType python,json,terraform,puppet,ruby,haml,sass,yaml,groovy setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
@@ -204,8 +227,6 @@ function! KillTrailingWhitespace()
 	" Reset to the original position.
 	call setpos('.',pos)
 endfunction
-
-let g:deoplete#enable_at_startup = 1
 
 let g:tagbar_type_terraform = {
 	\ 'ctagstype' : 'terraform',
