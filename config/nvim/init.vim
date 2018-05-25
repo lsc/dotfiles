@@ -117,7 +117,6 @@ let mapleader=","
 
 set listchars=tab:▸\ ,trail:¬,extends:❯,precedes:❮
 
-" Enable keyword completion
 let g:airline_powerline_fonts = 1
 
 " When I change dir in nerdtree, vim should follow.
@@ -144,7 +143,13 @@ call neomake#configure#automake('w', 1000)
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
 xmap <C-k> <Plug>(neosnippet_expand_target)
-imap <expr> <TAB> pumvisible() ? "\<C-n>" : neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump()" : "\<TAB>"
+imap <expr> <TAB>
+	\ pumvisible() ? "\<C-n>" :
+	\ neosnippet#expandable_or_jumpable() ?
+	\    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr> <TAB> neosnippet#expandable_or_jumpable() ?
+	\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
 
 if executable('ag')
 	let g:ackprg = 'ag --nogroup --nocolor --column'
@@ -202,42 +207,12 @@ endif
 " Format code
 :nmap <F11> 1G=G
 :imap <F11> <ESC>1G=G
-" Paste indented code aka the "stairs"
-:nnoremap <c-o> p=`]
 " Toggle NerdTree window
 :map <F3> :NERDTreeToggle<cr>
 " Toggle taglist window
 :nmap <silent> <F4> :TagbarToggle<cr>
 " Clear hilightning
 nnoremap <leader> <space> :noh <cr>
-
-function! KillTrailingWhitespace()
-	" Set the position. Default is that the cursor will be placed on any match.
-	let pos = getpos('.')
-
-	" Remove trailing whitespace from any row. Ingore all errors.
-	silent! %s/\s\+$//e
-
-" Remove trailing lines. Ignore all errors.
-	silent! %s/\v\n+%$//e
-
-	" Reset to the original position.
-	call setpos('.',pos)
-endfunction
-
-let g:tagbar_type_terraform = {
-	\ 'ctagstype' : 'terraform',
-	\ 'kinds' : [
-		\ 'r:Resources',
-		\ 'd:Datas',
-		\ 'v:Variables',
-		\ 'p:Providers',
-		\ 'o:Outputs',
-		\ 'm:Modules',
-		\ 'f:TFVars'
-	\ ],
-	\ 'sort' : 1
-	\ }
 
 :tnoremap <A-h> <C-\><C-N><C-w>h
 :tnoremap <A-j> <C-\><C-N><C-w>j
