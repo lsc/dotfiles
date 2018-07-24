@@ -18,11 +18,14 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'elzr/vim-json', { 'for': 'json' }
 	Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer')}
 	Plug 'fatih/vim-go', { 'tag': 'v1.17' }
+	Plug 'fatih/vim-hclfmt'
 	Plug 'godlygeek/tabular'
 	Plug 'hashivim/vim-consul'
+	Plug 'hashivim/vim-nomadproject'
 	Plug 'hashivim/vim-packer'
 	Plug 'hashivim/vim-terraform'
 	Plug 'hashivim/vim-vagrant'
+	Plug 'hashivim/vim-vaultproject'
 	Plug 'juliosueiras/vim-terraform-completion'
 	Plug 'lervag/vimtex'
 	Plug 'ludovicchabant/vim-gutentags'
