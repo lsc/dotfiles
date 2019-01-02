@@ -1,0 +1,14 @@
+{
+  "journals": {
+    "private": "~/Google Drive/journals/private.txt",
+    "work": "~/Google Drive/journals/work.txt"
+  },
+  "default_hour": 9,
+  "timeformat": "%Y-%m-%d %H:%M",
+  "linewrap": 79,
+  "encrypt": false,
+  "editor": "nvim",
+  "default_minute": 0,
+  "highlight": true,
+  "tagsymbols": "@" 
+}

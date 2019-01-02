@@ -22,13 +22,30 @@ eval "$(pyenv init -)"
 eval "$(rbenv init -)"
 
 function cluster_config() {
-	environment=${1:-staging}
-	domain_name=${2:-qapital.lan}
-	port=${3:-443}
-	export CONSUL_HTTP_ADDR="https://consul.${environment}.${domain_name}:${port}"
-	export NOMAD_ADDR="https://nomad.${environment}.${domain_name}:${port}"
-	export VAULT_ADDR="https://vault.${environment}.${domain_name}:${port}"
-	test -r ~/."${environment}"_cluster_token && source ~/."${environment}"_cluster_token
+	environment="${1:-}"
+	role="${2:-"developers"}"
+	github_token="${3:-$GITHUB_TOKEN}"
+	domain_name="${4:-"qapital.lan"}"
+	port="${5:-"443"}"
+
+	case $environment in
+		staging|production)
+			export VAULT_ADDR=https://vault.${environment}.${domain_name}:${port}
+			export NOMAD_ADDR=https://nomad.${environment}.${domain_name}:${port}
+			export CONSUL_HTTP_ADDR=https://consul.${environment}.${domain_name}:${port}
+		;;
+		*) 
+			echo "Environment should be one of staging or production"	
+			echo "$0 <environment> [github_token] [domain_name] [port]"
+			exit 1
+		;;
+	esac
+
+	vault_token=$(vault login -token-only -method=github token=${github_token})
+	nomad_token=$(VAULT_TOKEN=${vault_token} vault read -field=secret_id nomad/creds/${role})
+
+	export VAULT_TOKEN="$vault_token"
+	export NOMAD_TOKEN="$nomad_token"
 }
 
 autoload -U +X bashcompinit && bashcompinit

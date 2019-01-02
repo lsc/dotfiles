@@ -93,3 +93,5 @@
 	untracked = cyan
 [github]
 	user = lsc
+[fetch]
+	prune = true

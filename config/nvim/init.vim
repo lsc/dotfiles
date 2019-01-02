@@ -9,6 +9,7 @@ function BuildComposer(info)
 endfunction
 
 call plug#begin('~/.config/nvim/plugged')
+	Plug '/usr/local/opt/fzf'
 	Plug 'Shougo/Deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 	Plug 'Shougo/neosnippet'
 	Plug 'Shougo/neosnippet-snippets'
@@ -17,8 +18,7 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'ekalinin/Dockerfile.vim'
 	Plug 'elzr/vim-json', { 'for': 'json' }
 	Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer')}
-	Plug 'fatih/vim-go', { 'tag': 'v1.17' }
-	Plug 'fatih/vim-hclfmt'
+	Plug 'fatih/vim-go', { 'tag': 'v1.19' }
 	Plug 'godlygeek/tabular'
 	Plug 'hashivim/vim-consul'
 	Plug 'hashivim/vim-nomadproject'
@@ -27,6 +27,7 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'hashivim/vim-vagrant'
 	Plug 'hashivim/vim-vaultproject'
 	Plug 'juliosueiras/vim-terraform-completion'
+	Plug 'junegunn/fzf.vim'
 	Plug 'lervag/vimtex'
 	Plug 'ludovicchabant/vim-gutentags'
 	Plug 'luochen1990/rainbow'
@@ -39,25 +40,19 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'mustache/vim-mustache-handlebars'
 	Plug 'neomake/neomake'
 	Plug 'plasticboy/vim-markdown'
-	Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+	Plug 'scrooloose/nerdtree'
 	Plug 'tarekbecker/vim-yaml-formatter'
+	Plug 'thaerkh/vim-indentguides'
+	Plug 'thaerkh/vim-workspace'
 	Plug 'tpope/vim-fugitive'
 	Plug 'tpope/vim-rhubarb'
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
-	Plug 'vim-latex/vim-latex'
-"	Plug 'romainl/Apprentice'
-"	Plug 'ervandew/supertab'
-"	Plug 'w0rp/ale'
-"	Plug 'andrewstuart/vim-kubernetes'
-"	Plug 'christoomey/vim-tmux-navigator'
-"	Plug 'derekwyatt/vim-scala'
-"	Plug 'google/vim-jsonnet'
-"	Plug 'roidelapluie/vim-puppet'
-"	Plug 'vim-ruby/vim-ruby'
+	Plug 'vim-ruby/vim-ruby'
 call plug#end()
 
 :colorscheme gruvbox
+set backupcopy=auto
 " I want to resize splits with my mouse...
 set mouse=a
 set list
@@ -122,6 +117,8 @@ set listchars=tab:▸\ ,trail:¬,extends:❯,precedes:❮
 
 let g:airline_powerline_fonts = 1
 
+let g:vimtex_compiler_progname = 'nvr'
+
 " When I change dir in nerdtree, vim should follow.
 let NERDTreeChDirMode=2
 let NERDTreeShowBookmarks=1
@@ -130,29 +127,24 @@ let g:terraform_align = 1
 let g:terraform_fmt_on_save = 1
 let g:terraform_fold_sections = 1
 let g:terraform_completion_keys = 1
+let g:terraform_registry_module_completion = 1
 
 " Terraform deoplete configuration
 let g:deoplete#omni_patterns = {}
 let g:deoplete#omni_patterns.terraform = '[^ *\t"{=$]\w*'
-
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
 call deoplete#initialize()
 
 " NeoMake should run on each write and once every second
 call neomake#configure#automake('w', 1000)
 
 " NeoSnippets configuration
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-xmap <C-k> <Plug>(neosnippet_expand_target)
 imap <expr> <TAB>
 	\ pumvisible() ? "\<C-n>" :
 	\ neosnippet#expandable_or_jumpable() ?
 	\    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 smap <expr> <TAB> neosnippet#expandable_or_jumpable() ?
 	\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
 
 if executable('ag')
 	let g:ackprg = 'ag --nogroup --nocolor --column'
@@ -177,9 +169,7 @@ set laststatus=2
 :autocmd BufNewFile,BufRead *.sls       set filetype=yaml
 :autocmd BufNewFile,BufRead *.yml       set filetype=yaml
 :autocmd BufNewFile,BufRead *.gradle    set filetype=groovy
-:autocmd BufNewFile,BufRead *.aurora    set filetype=python
 :autocmd BufNewFile,BufRead Jenkinsfile set filetype=groovy
-:autocmd BufNewFile,BufRead *.nomad		set filetype=terraform
 
 " Settings on a per filetype basis
 :autocmd FileType python,json,terraform,puppet,ruby,haml,sass,yaml,groovy setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
@@ -195,6 +185,9 @@ nnoremap <C-h> <C-W>h
 
 " Use space to toggle folds if we are on a fold
 :nnoremap <space> za
+
+" Sessions
+:nnoremap <leader>s :ToggleWorkspace<CR>
 
 " Use ESC to switch to normal mode in a Terminal
 if has('nvim')

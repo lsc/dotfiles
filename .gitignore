@@ -12,3 +12,4 @@ vim/plugged/*
 weechat/logs/*
 weechat/weechat.log
 tags
+Session.vim
