@@ -8,8 +8,11 @@ source <(awless completion zsh)
 test -r ~/.github-token && source ~/.github-token
 test -x $(which keychain) && eval "$(keychain --quiet --eval --ignore-missing id_rsa id_ed25519)"
 
+autoload -U promptinit; promptinit
+  prompt spaceship
+
 export DEFAULT_USER=$(whoami)
-export PATH="$PATH:$HOME/bin:$HOME/go/bin:/usr/local/opt/go/libexec/bin:$HOME/context/tex/texmf-osx-64/bin"
+export PATH="$HOME/bin:$HOME/go/bin:/usr/local/opt/go/libexec/bin:$HOME/context/tex/texmf-osx-64/bin:$PATH"
 export CDPATH="$HOME/Projects:$HOME/go/src:$HOME/Projects/terraform/providers"
 
 alias vim=nvim
@@ -25,7 +28,7 @@ function cluster_config() {
 	environment="${1:-}"
 	role="${2:-"developers"}"
 	github_token="${3:-$GITHUB_TOKEN}"
-	domain_name="${4:-"qapital.lan"}"
+	domain_name="${4:-"qapital.cloud"}"
 	port="${5:-"443"}"
 
 	case $environment in
@@ -50,3 +53,7 @@ function cluster_config() {
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/nomad nomad
+
+  # Set Spaceship ZSH as a prompt
+  autoload -U promptinit; promptinit
+  prompt spaceship

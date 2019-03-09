@@ -1,24 +1,11 @@
-function BuildComposer(info)
-	if a:info.status != 'unchanged' || a.info.force
-		if has('nvim')
-			!cargo build --release
-		else
-			!cargo build --release --no-default-feature --features json-rpc
-		endif
-	endif
-endfunction
-
 call plug#begin('~/.config/nvim/plugged')
-	Plug '/usr/local/opt/fzf'
 	Plug 'Shougo/Deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-	Plug 'Shougo/neosnippet'
-	Plug 'Shougo/neosnippet-snippets'
 	Plug 'airblade/vim-gitgutter'
-	Plug 'ctrlpvim/ctrlp.vim'
+	Plug 'arcticicestudio/nord-vim'
 	Plug 'ekalinin/Dockerfile.vim'
 	Plug 'elzr/vim-json', { 'for': 'json' }
-	Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer')}
 	Plug 'fatih/vim-go', { 'tag': 'v1.19' }
+	Plug 'gcmt/taboo.vim'
 	Plug 'godlygeek/tabular'
 	Plug 'hashivim/vim-consul'
 	Plug 'hashivim/vim-nomadproject'
@@ -27,17 +14,14 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'hashivim/vim-vagrant'
 	Plug 'hashivim/vim-vaultproject'
 	Plug 'juliosueiras/vim-terraform-completion'
+	Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --bin'}
 	Plug 'junegunn/fzf.vim'
 	Plug 'lervag/vimtex'
 	Plug 'ludovicchabant/vim-gutentags'
 	Plug 'luochen1990/rainbow'
 	Plug 'majutsushi/tagbar'
 	Plug 'martinda/Jenkinsfile-vim-syntax'
-	Plug 'mattn/gist-vim'
-	Plug 'mattn/webapi-vim'
 	Plug 'mileszs/ack.vim'
-	Plug 'morhetz/gruvbox'
-	Plug 'mustache/vim-mustache-handlebars'
 	Plug 'neomake/neomake'
 	Plug 'plasticboy/vim-markdown'
 	Plug 'scrooloose/nerdtree'
@@ -51,7 +35,7 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'vim-ruby/vim-ruby'
 call plug#end()
 
-:colorscheme gruvbox
+:colorscheme nord
 set backupcopy=auto
 " I want to resize splits with my mouse...
 set mouse=a
@@ -116,7 +100,6 @@ let mapleader=","
 set listchars=tab:▸\ ,trail:¬,extends:❯,precedes:❮
 
 let g:airline_powerline_fonts = 1
-
 let g:vimtex_compiler_progname = 'nvr'
 
 " When I change dir in nerdtree, vim should follow.
@@ -130,26 +113,17 @@ let g:terraform_completion_keys = 1
 let g:terraform_registry_module_completion = 1
 
 " Terraform deoplete configuration
-let g:deoplete#omni_patterns = {}
-let g:deoplete#omni_patterns.terraform = '[^ *\t"{=$]\w*'
-let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option('omni_patterns', {
+\ 'complete_method': 'omnifunc',
+\ 'terraform': '[^ *\t"{=$]\w*',
+\})
 call deoplete#initialize()
 
 " NeoMake should run on each write and once every second
 call neomake#configure#automake('w', 1000)
 
-" NeoSnippets configuration
-imap <expr> <TAB>
-	\ pumvisible() ? "\<C-n>" :
-	\ neosnippet#expandable_or_jumpable() ?
-	\    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr> <TAB> neosnippet#expandable_or_jumpable() ?
-	\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
 if executable('ag')
-	let g:ackprg = 'ag --nogroup --nocolor --column'
-	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-	let g:ctrlp_use_caching = 0
+	let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
 endif
 
 syntax on
@@ -170,9 +144,10 @@ set laststatus=2
 :autocmd BufNewFile,BufRead *.yml       set filetype=yaml
 :autocmd BufNewFile,BufRead *.gradle    set filetype=groovy
 :autocmd BufNewFile,BufRead Jenkinsfile set filetype=groovy
+:autocmd BufNewFile,BufRead *.nomad     set filetype=terraform
 
 " Settings on a per filetype basis
-:autocmd FileType python,json,terraform,puppet,ruby,haml,sass,yaml,groovy setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+:autocmd FileType sh,python,json,terraform,puppet,ruby,haml,sass,yaml,groovy setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
 "improve autocomplete menu color
 highlight Pmenu ctermbg=238 gui=bold
@@ -204,21 +179,25 @@ endif
 :nmap <F11> 1G=G
 :imap <F11> <ESC>1G=G
 " Toggle NerdTree window
-:map <F3> :NERDTreeToggle<cr>
+:map <silent> <F3> :NERDTreeToggle<cr>
+:map <silent> <C-n> :NERDTreeToggle<cr>
 " Toggle taglist window
 :nmap <silent> <F4> :TagbarToggle<cr>
+:nmap <silent> <C-t> :TagbarToggle<cr>
 " Clear hilightning
 nnoremap <leader> <space> :noh <cr>
+nnoremap <C-P> :Files<CR>
 
-:tnoremap <A-h> <C-\><C-N><C-w>h
-:tnoremap <A-j> <C-\><C-N><C-w>j
-:tnoremap <A-k> <C-\><C-N><C-w>k
-:tnoremap <A-l> <C-\><C-N><C-w>l
-:inoremap <A-h> <C-\><C-N><C-w>h
-:inoremap <A-j> <C-\><C-N><C-w>j
-:inoremap <A-k> <C-\><C-N><C-w>k
-:inoremap <A-l> <C-\><C-N><C-w>l
-:nnoremap <A-h> <C-w>h
-:nnoremap <A-j> <C-w>j
-:nnoremap <A-k> <C-w>k
-:nnoremap <A-l> <C-w>l
+":tnoremap <A-h> <C-\><C-N><C-w>h
+":tnoremap <A-j> <C-\><C-N><C-w>j
+":tnoremap <A-k> <C-\><C-N><C-w>k
+":tnoremap <A-l> <C-\><C-N><C-w>l
+":inoremap <A-h> <C-\><C-N><C-w>h
+":inoremap <A-j> <C-\><C-N><C-w>j
+":inoremap <A-k> <C-\><C-N><C-w>k
+":inoremap <A-l> <C-\><C-N><C-w>l
+":nnoremap <A-h> <C-w>h
+":nnoremap <A-j> <C-w>j
+":nnoremap <A-k> <C-w>k
+":nnoremap <A-l> <C-w>l
+
