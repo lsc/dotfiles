@@ -1,7 +1,9 @@
 call plug#begin('~/.config/nvim/plugged')
 	Plug 'Shougo/Deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+	Plug 'Shougo/neco-syntax'
 	Plug 'airblade/vim-gitgutter'
 	Plug 'arcticicestudio/nord-vim'
+	Plug 'deoplete-plugins/deoplete-go', { 'do': 'make' }
 	Plug 'ekalinin/Dockerfile.vim'
 	Plug 'elzr/vim-json', { 'for': 'json' }
 	Plug 'fatih/vim-go', { 'tag': 'v1.19' }
@@ -33,6 +35,8 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
 	Plug 'vim-ruby/vim-ruby'
+	Plug 'ujihisa/neco-look'
+	Plug 'troydm/zoomwintab.vim'
 call plug#end()
 
 :colorscheme nord
@@ -53,9 +57,7 @@ set copyindent
 set complete=.,w,b,u,t
 set completeopt=longest,menuone,preview
 
-if has("gui_running")
-	set termguicolors
-endif
+set termguicolors
 
 set foldenable
 set foldmethod=syntax
@@ -105,6 +107,7 @@ let g:vimtex_compiler_progname = 'nvr'
 " When I change dir in nerdtree, vim should follow.
 let NERDTreeChDirMode=2
 let NERDTreeShowBookmarks=1
+let g:NERDTreeWinSize=45
 
 let g:terraform_align = 1
 let g:terraform_fmt_on_save = 1
@@ -145,6 +148,7 @@ set laststatus=2
 :autocmd BufNewFile,BufRead *.gradle    set filetype=groovy
 :autocmd BufNewFile,BufRead Jenkinsfile set filetype=groovy
 :autocmd BufNewFile,BufRead *.nomad     set filetype=terraform
+:autocmd BufNewFile,BufRead *.hcl		set filetype=terraform
 
 " Settings on a per filetype basis
 :autocmd FileType sh,python,json,terraform,puppet,ruby,haml,sass,yaml,groovy setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
@@ -186,18 +190,21 @@ endif
 :nmap <silent> <C-t> :TagbarToggle<cr>
 " Clear hilightning
 nnoremap <leader> <space> :noh <cr>
+" FZF :rocket_ship:
 nnoremap <C-P> :Files<CR>
+nnoremap f :Files<cr>
+nnoremap ; :Buffers<cr>
+nnoremap T :Tags<cr>
+nnoremap t :BTags<cr>
+nnoremap s :Ag<cr>
 
-":tnoremap <A-h> <C-\><C-N><C-w>h
-":tnoremap <A-j> <C-\><C-N><C-w>j
-":tnoremap <A-k> <C-\><C-N><C-w>k
-":tnoremap <A-l> <C-\><C-N><C-w>l
-":inoremap <A-h> <C-\><C-N><C-w>h
-":inoremap <A-j> <C-\><C-N><C-w>j
-":inoremap <A-k> <C-\><C-N><C-w>k
-":inoremap <A-l> <C-\><C-N><C-w>l
-":nnoremap <A-h> <C-w>h
-":nnoremap <A-j> <C-w>j
-":nnoremap <A-k> <C-w>k
-":nnoremap <A-l> <C-w>l
+function! OnTabEnter(path)
+	if isdirectory(a:path)
+		let dirname = a:path
+	else
+		let dirname = fnamemodify(a:path, ":h")
+	endif
+	execute "tcd ". dirname
+endfunction()
 
+autocmd TabNewEntered * call OnTabEnter(expand("<amatch>"))

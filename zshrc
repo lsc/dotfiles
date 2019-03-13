@@ -8,9 +8,6 @@ source <(awless completion zsh)
 test -r ~/.github-token && source ~/.github-token
 test -x $(which keychain) && eval "$(keychain --quiet --eval --ignore-missing id_rsa id_ed25519)"
 
-autoload -U promptinit; promptinit
-  prompt spaceship
-
 export DEFAULT_USER=$(whoami)
 export PATH="$HOME/bin:$HOME/go/bin:/usr/local/opt/go/libexec/bin:$HOME/context/tex/texmf-osx-64/bin:$PATH"
 export CDPATH="$HOME/Projects:$HOME/go/src:$HOME/Projects/terraform/providers"
@@ -37,23 +34,28 @@ function cluster_config() {
 			export NOMAD_ADDR=https://nomad.${environment}.${domain_name}:${port}
 			export CONSUL_HTTP_ADDR=https://consul.${environment}.${domain_name}:${port}
 		;;
-		*) 
-			echo "Environment should be one of staging or production"	
+		*)
+			echo "Environment should be one of staging or production"
 			echo "$0 <environment> [github_token] [domain_name] [port]"
-			exit 1
+			return 1
 		;;
 	esac
 
 	vault_token=$(vault login -token-only -method=github token=${github_token})
 	nomad_token=$(VAULT_TOKEN=${vault_token} vault read -field=secret_id nomad/creds/${role})
+	consul_token=$(VAULT_TOKEN=${vault_token} vault read -field=token consul/creds/${role})
 
 	export VAULT_TOKEN="$vault_token"
 	export NOMAD_TOKEN="$nomad_token"
+	export CONSUL_HTTP_TOKEN="$consul_token"
 }
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/nomad nomad
+consul -autocomplete-install &> /dev/null
 
-  # Set Spaceship ZSH as a prompt
-  autoload -U promptinit; promptinit
-  prompt spaceship
+# Set Spaceship ZSH as a prompt
+autoload -U promptinit; promptinit
+prompt spaceship
+
+complete -o nospace -C /usr/local/bin/consul consul
