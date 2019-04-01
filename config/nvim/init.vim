@@ -27,6 +27,7 @@ call plug#begin('~/.config/nvim/plugged')
 	Plug 'neomake/neomake'
 	Plug 'plasticboy/vim-markdown'
 	Plug 'scrooloose/nerdtree'
+	Plug 'stamblerre/gocode', {'rtp': 'vim/', 'do': '~/.vim/plugged/gocode/vim/symlink.sh'}
 	Plug 'tarekbecker/vim-yaml-formatter'
 	Plug 'thaerkh/vim-indentguides'
 	Plug 'thaerkh/vim-workspace'
@@ -126,7 +127,7 @@ call deoplete#initialize()
 call neomake#configure#automake('w', 1000)
 
 if executable('ag')
-	let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
+	let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git .terraform -g ""'
 endif
 
 syntax on

@@ -6,18 +6,20 @@ export ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
 source <(awless completion zsh)
 
 test -r ~/.github-token && source ~/.github-token
-test -x $(which keychain) && eval "$(keychain --quiet --eval --ignore-missing id_rsa id_ed25519)"
+test -x $(command -v keychain) && eval "$(keychain --quiet --eval --ignore-missing id_rsa id_ed25519)"
 
 export DEFAULT_USER=$(whoami)
 export PATH="$HOME/bin:$HOME/go/bin:/usr/local/opt/go/libexec/bin:$HOME/context/tex/texmf-osx-64/bin:$PATH"
 export CDPATH="$HOME/Projects:$HOME/go/src:$HOME/Projects/terraform/providers"
 
-alias vim=nvim
+test -x $(command -v nvim) && alias vim=nvim
 alias tf=terraform
 alias tg=terragrunt
 alias m=minikube
 alias dm=docker-machine
 alias dco=docker-compose
+test -x $(command -v hub) && alias git=hub
+
 eval "$(pyenv init -)"
 eval "$(rbenv init -)"
 
@@ -51,11 +53,14 @@ function cluster_config() {
 }
 
 autoload -U +X bashcompinit && bashcompinit
+autoload -Uz compinit && compinit
+
 complete -o nospace -C /usr/local/bin/nomad nomad
-consul -autocomplete-install &> /dev/null
+complete -o nospace -C /usr/local/bin/consul consul
 
 # Set Spaceship ZSH as a prompt
 autoload -U promptinit; promptinit
 prompt spaceship
 
-complete -o nospace -C /usr/local/bin/consul consul
+# The following lines were added by compinstall
+zstyle :compinstall filename '/Users/lsc/.zshrc'
