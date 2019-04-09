@@ -38,7 +38,7 @@ function cluster_config() {
 		;;
 		*)
 			echo "Environment should be one of staging or production"
-			echo "$0 <environment> [github_token] [domain_name] [port]"
+			echo "$0 <environment> [role ($role)] [github_token (\$GITHUB_TOKEN)] [domain_name ($domain_name)] [port ($port)]"
 			return 1
 		;;
 	esac
@@ -64,3 +64,5 @@ prompt spaceship
 
 # The following lines were added by compinstall
 zstyle :compinstall filename '/Users/lsc/.zshrc'
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

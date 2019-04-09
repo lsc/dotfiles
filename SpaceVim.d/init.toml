@@ -1,0 +1,105 @@
+#=============================================================================
+# dark_powered.toml --- dark powered configuration example for SpaceVim
+# Copyright (c) 2016-2017 Wang Shidong & Contributors
+# Author: Wang Shidong < wsdjeg at 163.com >
+# URL: https://spacevim.org
+# License: GPLv3
+#=============================================================================
+
+# All SpaceVim option below [option] section
+[options]
+    # set spacevim theme. by default colorscheme layer is not loaded,
+    # if you want to use more colorscheme, please load the colorscheme
+    # layer
+    colorscheme = "nord"
+    colorscheme_bg = "dark"
+    filemanager = "nerdtree"
+    filetree_direction = "left"
+    # Disable guicolors in basic mode, many terminal do not support 24bit
+    # true colors
+    enable_guicolors = true
+    # Disable statusline separator, if you want to use other value, please
+    # install nerd fonts
+    statusline_separator = "arrow"
+    statusline_inactive_separator = "arrow"
+    buffer_index_type = 4
+    enable_tabline_filetype_icon = true
+    enable_statusline_mode = false
+    enable_neomake = true
+    lint_on_the_fly = true
+    bootstrap_before = "myspacevim#before"
+    bootstrap_after = "myspacevim#after"
+
+# Enable autocomplete layer
+[[layers]]
+name = 'autocomplete'
+auto-completion-method = "deoplete"
+auto-completion-return-key-behavior = "complete"
+auto-completion-tab-key-behavior = "smart"
+
+[[layers]]
+name = 'shell'
+default_position = 'top'
+default_height = 30
+
+[[layers]]
+name = "colorscheme"
+
+[[layers]]
+name = "VersionControl"
+
+[[layers]]
+name = "checkers"
+
+[[layers]]
+name = "debug"
+
+[[layers]]
+name = "fzf"
+
+[[layers]]
+name = "git"
+
+[[layers]]
+name = "github"
+
+[[layers]]
+name = "lang#ruby"
+
+[[layers]]
+name = "lang#go"
+
+[[layers]]
+name = "lang#java"
+
+[[layers]]
+name = "lang#markdown"
+
+[[layers]]
+name = "lang#dockerfile"
+
+[[layers]]
+name = "lang#latex"
+
+[[layer]]
+name = "lang#sh"
+
+[[layers]]
+name = "lsp"
+filetypes = [ 
+  "go",
+  "sh",
+  "ruby",
+]
+
+[[custom_plugins]]
+name = "arcticicestudio/nord-vim"
+
+[[custom_plugins]]
+name = "hashivim/vim-terraform"
+
+[[custom_plugins]]
+name = "juliosueiras/vim-terraform-completion"
+
+[[custom_plugins]]
+name = "airblade/vim-gitgutter"
