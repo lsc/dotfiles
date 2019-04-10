@@ -52,6 +52,10 @@ function cluster_config() {
 	export CONSUL_HTTP_TOKEN="$consul_token"
 }
 
+install_spacevim(){
+	curl -sLf https://spacevim.org/install.sh | bash
+}
+
 autoload -U +X bashcompinit && bashcompinit
 autoload -Uz compinit && compinit
 
