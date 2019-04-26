@@ -13,11 +13,11 @@
     # layer
     colorscheme = "nord"
     colorscheme_bg = "dark"
-    filemanager = "nerdtree"
+    filemanager = "vimfiler"
     filetree_direction = "left"
     # Disable guicolors in basic mode, many terminal do not support 24bit
     # true colors
-    enable_guicolors = true
+    enable_guicolors = false
     # Disable statusline separator, if you want to use other value, please
     # install nerd fonts
     statusline_separator = "arrow"
@@ -36,6 +36,7 @@ name = 'autocomplete'
 auto-completion-method = "deoplete"
 auto-completion-return-key-behavior = "complete"
 auto-completion-tab-key-behavior = "smart"
+auto-completion-complete-with-key-sequence = "jk"
 
 [[layers]]
 name = 'shell'
@@ -64,10 +65,13 @@ name = "git"
 name = "github"
 
 [[layers]]
-name = "lang#ruby"
+name = "lang#go"
 
 [[layers]]
-name = "lang#go"
+name = "lang#erlang"
+
+[[layers]]
+name = "lang#ruby"
 
 [[layers]]
 name = "lang#java"
@@ -89,7 +93,6 @@ name = "lsp"
 filetypes = [ 
   "go",
   "sh",
-  "ruby",
 ]
 
 [[custom_plugins]]
@@ -103,3 +106,12 @@ name = "juliosueiras/vim-terraform-completion"
 
 [[custom_plugins]]
 name = "airblade/vim-gitgutter"
+
+[[custom_plugins]]
+name = "dracula/vim"
+
+[[custom_plugins]]
+name = "altercation/vim-colors-solarized"
+
+[[custom_plugins]] 
+  name = "martinda/Jenkinsfile-vim-syntax"
