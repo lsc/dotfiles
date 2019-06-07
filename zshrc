@@ -6,6 +6,7 @@ export ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
 source <(awless completion zsh)
 
 test -r ~/.github-token && source ~/.github-token
+test -r ~/.drone-token && source ~/.drone-token
 test -x $(command -v keychain) && eval "$(keychain --quiet --eval --ignore-missing id_rsa id_ed25519)"
 
 export DEFAULT_USER=$(whoami)

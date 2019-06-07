@@ -17,7 +17,7 @@
     filetree_direction = "left"
     # Disable guicolors in basic mode, many terminal do not support 24bit
     # true colors
-    enable_guicolors = false
+    enable_guicolors = true
     # Disable statusline separator, if you want to use other value, please
     # install nerd fonts
     statusline_separator = "arrow"
@@ -85,8 +85,11 @@ name = "lang#dockerfile"
 [[layers]]
 name = "lang#latex"
 
-[[layer]]
+[[layers]]
 name = "lang#sh"
+
+[[layers]]
+name = "lang#toml"
 
 [[layers]]
 name = "lsp"
@@ -114,4 +117,4 @@ name = "dracula/vim"
 name = "altercation/vim-colors-solarized"
 
 [[custom_plugins]] 
-  name = "martinda/Jenkinsfile-vim-syntax"
+name = "martinda/Jenkinsfile-vim-syntax"

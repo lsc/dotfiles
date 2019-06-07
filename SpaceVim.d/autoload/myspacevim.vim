@@ -5,6 +5,7 @@ function! myspacevim#before() abort
   nnoremap <C-h> <C-W>h
   let NERDTreeChDirMode=2
   let NERDTreeShowBookmarks=1
+  let mapleader = ","
 
 endfunction
 
