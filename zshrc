@@ -12,6 +12,7 @@ test -x $(command -v keychain) && eval "$(keychain --quiet --eval --ignore-missi
 export DEFAULT_USER=$(whoami)
 export PATH="$HOME/bin:$HOME/go/bin:/usr/local/opt/go/libexec/bin:$HOME/context/tex/texmf-osx-64/bin:$PATH"
 export CDPATH="$HOME/Projects:$HOME/go/src:$HOME/Projects/terraform/providers"
+export LC_ALL=en_GB.UTF-8
 
 test -x $(command -v nvim) && alias vim=nvim
 alias tf=terraform
@@ -20,9 +21,6 @@ alias m=minikube
 alias dm=docker-machine
 alias dco=docker-compose
 test -x $(command -v hub) && alias git=hub
-
-eval "$(pyenv init -)"
-eval "$(rbenv init -)"
 
 function cluster_config() {
 	environment="${1:-}"
@@ -63,12 +61,11 @@ autoload -Uz compinit && compinit
 complete -o nospace -C /usr/local/bin/nomad nomad
 complete -o nospace -C /usr/local/bin/consul consul
 
-# Set Spaceship ZSH as a prompt
-autoload -U promptinit; promptinit
-prompt spaceship
-
 # The following lines were added by compinstall
 zstyle :compinstall filename '/Users/lsc/.zshrc'
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 GTAGSLABEL=pygments
+eval "$(pyenv init -)"
+eval "$(rbenv init -)"
+eval "$(starship init zsh)"
