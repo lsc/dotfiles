@@ -33,10 +33,10 @@
 # Enable autocomplete layer
 [[layers]]
 name = 'autocomplete'
-auto-completion-method = "deoplete"
-auto-completion-return-key-behavior = "complete"
-auto-completion-tab-key-behavior = "smart"
-auto-completion-complete-with-key-sequence = "jk"
+auto_completion_method = "deoplete"
+auto_completion_return_key_behavior = "complete"
+auto_completion_tab_key_behavior = "smart"
+auto_completion_complete_with_key_sequence = "jk"
 
 [[layers]]
 name = 'shell'
@@ -92,6 +92,9 @@ name = "lang#sh"
 name = "lang#toml"
 
 [[layers]]
+name = "lang#kotlin"
+
+[[layers]]
 name = "lsp"
 filetypes = [ 
   "go",
@@ -121,3 +124,6 @@ name = "martinda/Jenkinsfile-vim-syntax"
 
 [[custom_plugins]]
 name = "yorickpeterse/happy_hacking.vim"
+
+[[custom_plugins]]
+name = "beeender/Comrade"
