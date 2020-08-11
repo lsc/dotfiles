@@ -127,3 +127,10 @@ name = "yorickpeterse/happy_hacking.vim"
 
 [[custom_plugins]]
 name = "beeender/Comrade"
+
+[[custom_plugins]]
+name = "ionide/Ionide-vim"
+
+[[custom_plugins]]
+name = "autozimu/LanguageClient-neovim"
+

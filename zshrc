@@ -6,17 +6,22 @@ export ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
 source <(awless completion zsh)
 
 test -r ~/.github-token && source ~/.github-token
+test -r ~/.dir_colors && eval $(gdircolors ~/.dir_colors)
 test -x $(command -v keychain) && eval "$(keychain --quiet --eval --ignore-missing id_rsa id_ed25519)"
 
 export DEFAULT_USER=$(whoami)
 export PATH="$HOME/bin:$HOME/go/bin:/usr/local/opt/go/libexec/bin:$HOME/context/tex/texmf-osx-64/bin:$PATH"
 export LC_ALL=en_GB.UTF-8
 export GOPATH="${HOME}/go"
+export TERRAGRUNT_DOWNLOAD="${HOME}/.terragrunt-cache"
+
+[[ -d $TERRAGRUNT_DOWNLOAD ]] || mkdir -p $TERRAGRUNT_DOWNLOAD
 
 test -x $(command -v nvim) && alias vim=nvim
 alias tf=terraform
 alias tg=terragrunt
 alias m=minikube
+alias d=docker
 alias dm=docker-machine
 alias dco=docker-compose
 test -x $(command -v hub) && alias git=hub
@@ -80,15 +85,24 @@ install_spacevim(){
 	curl -sLf https://spacevim.org/install.sh | bash
 }
 
+clear_aws_variables(){
+  local vars=( AWS_ACCESS_KEY AWS_SECRET_ACCESS_KEY AWS_SECURITY_TOKEN AWS_SESSION_TOKEN )
+  for v in $vars; do
+    unset $v
+  done
+}
+
 autoload -U +X bashcompinit && bashcompinit
 autoload -Uz compinit && compinit
 
 complete -o nospace -C /usr/local/bin/nomad nomad
 complete -o nospace -C /usr/local/bin/consul consul
 
+dm start &> /dev/null
 # The following lines were added by compinstall
 zstyle :compinstall filename '/Users/lsc/.zshrc'
 GTAGSLABEL=pygments
 eval "$(pyenv init -)"
 eval "$(rbenv init -)"
+eval "$(dm env)"
 eval "$(starship init zsh)"
