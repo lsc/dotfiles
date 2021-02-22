@@ -7,7 +7,8 @@
 
 [core]
 	excludesfile = /Users/lsc/.gitignore_global
-	pager = diff-so-fancy | less --tabs=4 -RFX
+	pager = delta
+	attributesfile = /Users/lsc/.gitattributes
 
 [push]
 	default = simple
@@ -54,6 +55,7 @@
 	co        = checkout
 	df        = diff
 	lg        = log -p
+  wip = rebase -i @{u}
 	prune     = fetch --prune
 	undo      = reset --soft ^HEAD
 	stash-all = stash save --include-untracked
@@ -94,18 +96,24 @@
 	added = yellow
 	changed = green
 	untracked = cyan
+
 [github]
 	user = lsc
+
 [fetch]
 	prune = true
+
 [credential]
 	helper = osxkeychain
+
 [color "diff-highlight"]
 	oldNormal = red bold
 	oldHighlight = red bold 52
 	newNormal = green bold
 	newHighlight = green bold 22
+
 [pull]
 	ff = only
+
 [init]
 	defaultBranch = main
