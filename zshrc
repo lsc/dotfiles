@@ -72,7 +72,7 @@ WORDCHARS=${WORDCHARS//[\/]}
 
 # Customize the style that the suggestions are shown with.
 # See https://github.com/zsh-users/zsh-autosuggestions/blob/master/README.md#suggestion-highlight-style
-#ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=10'
+#ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
 
 #
 # zsh-syntax-highlighting
@@ -85,14 +85,14 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 # Customize the main highlighter styles.
 # See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/main.md#how-to-tweak-it
 #typeset -A ZSH_HIGHLIGHT_STYLES
-#ZSH_HIGHLIGHT_STYLES[comment]='fg=10'
+#ZSH_HIGHLIGHT_STYLES[comment]='fg=242'
 
 # ------------------
 # Initialize modules
 # ------------------
 
-if [[ ${ZIM_HOME}/init.zsh -ot ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
-  # Update static initialization script if it's outdated, before sourcing it
+if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
+  # Update static initialization script if it does not exist or it's outdated, before sourcing it
   source ${ZIM_HOME}/zimfw.zsh init -q
 fi
 source ${ZIM_HOME}/init.zsh
@@ -123,6 +123,7 @@ bindkey -M vicmd 'j' history-substring-search-down
 # }}} End configuration added by Zim install
 
 export LANG=en_US.UTF-8
+export PATH="$HOME/bin:$HOME/go/bin:/opt/homebrew/bin:$PATH"
 
 source <(awless completion zsh)
 
@@ -131,7 +132,6 @@ test -r ~/.dir_colors && eval $(gdircolors ~/.dir_colors)
 test -x $(command -v keychain) && eval "$(keychain --quiet --eval --ignore-missing id_rsa id_ed25519)"
 
 export DEFAULT_USER=$(whoami)
-export PATH="$HOME/bin:$HOME/go/bin:/usr/local/opt/go/libexec/bin:$PATH"
 export LC_ALL=en_GB.UTF-8
 export GOPATH="${HOME}/go"
 export TERRAGRUNT_DOWNLOAD="${HOME}/.terragrunt-cache"
@@ -225,18 +225,32 @@ clear_aws_variables(){
   done
 }
 
+dtf() {
+  local tf_dir=$1
+  [[ -z $tf_dir ]] && tf_dir=$(pwd)
+  
+  docker run --rm -it --name terraform\
+    -v ${tf_dir}:/tmp/ -w /tmp\
+    -e AWS_VAULT\
+    -e AWS_ACCESS_KEY_ID\
+    -e AWS_SECRET_ACCESS_KEY\
+    -e AWS_SESSION_TOKEN\
+    -e AWS_SECURITY_TOKEN\
+    -e AWS_SESSION_EXPIRATION\
+    docker-registry.tools.qapital.cloud/qapital/terraform-terragrunt-arm64-linux:v0.2 bash
+}
+
 autoload -U +X bashcompinit && bashcompinit
 
-complete -o nospace -C /usr/local/bin/nomad nomad
-complete -o nospace -C /usr/local/bin/consul consul
+complete -o nospace -C $(command -v nomad) nomad
+complete -o nospace -C $(command -v consul) consul
 
 dm start &> /dev/null
 # The following lines were added by compinstall
 zstyle :compinstall filename '/Users/lsc/.zshrc'
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 GTAGSLABEL=pygments
 eval "$(dm env &> /dev/null)"
 eval "$(aws-vault --completion-script-zsh)"
 eval "$(starship init zsh)"
 
-. /usr/local/opt/asdf/asdf.sh
+. /opt/homebrew/opt/asdf/asdf.sh

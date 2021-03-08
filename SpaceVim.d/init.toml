@@ -97,8 +97,6 @@ name = "lang#kotlin"
 [[layers]]
 name = "lsp"
 filetypes = [ 
-  "go",
-  "sh",
 ]
 
 [[custom_plugins]]
