@@ -15,7 +15,7 @@ function tid --argument-names tf_dir
     -e GITHUB_TOKEN\
     -e DD_API_KEY\
     -e DD_APP_KEY\
-    docker-registry.tools.qapital.cloud/qapital/terraform-terragrunt-arm64-linux:v0.2 bash
+    docker-registry.tools.qapital.cloud/qapital/terraform-terragrunt-arm64-linux:v0.3 bash
 end
 
 

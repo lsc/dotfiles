@@ -94,10 +94,12 @@ name = "lang#toml"
 [[layers]]
 name = "lang#kotlin"
 
+[[ layers ]]
+name = "lang#puppet"
+
 [[layers]]
 name = "lsp"
-filetypes = [ 
-]
+filetypes = [ ]
 
 [[custom_plugins]]
 name = "arcticicestudio/nord-vim"
@@ -117,14 +119,8 @@ name = "dracula/vim"
 [[custom_plugins]]
 name = "altercation/vim-colors-solarized"
 
-[[custom_plugins]] 
-name = "martinda/Jenkinsfile-vim-syntax"
-
 [[custom_plugins]]
 name = "yorickpeterse/happy_hacking.vim"
-
-[[custom_plugins]]
-name = "beeender/Comrade"
 
 [[custom_plugins]]
 name = "ionide/Ionide-vim"

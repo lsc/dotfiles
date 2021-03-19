@@ -14,11 +14,6 @@ function! myspacevim#after() abort
   let g:terraform_registry_module_completion = 0
   set listchars=tab:▸\ ,trail:¬,extends:❯,precedes:❮
 
-  call deoplete#custom#option('omni_patterns', {
-  \ 'complete_method': 'omnifunc',
-  \ 'terraform': '[^ *\t"{=$]\w*',
-  \})
-
   nnoremap <C-j> <C-W>j<C-W>_
   nnoremap <C-k> <C-W>k<C-W>_
   nnoremap <C-l> <C-W>l

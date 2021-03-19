@@ -1,11 +1,12 @@
-terraform 0.13.5
-terragrunt 0.28.7
+terragrunt 0.28.11
 golang 1.16
 java openjdk-14
 ruby 3.0.0
 python 3.9.1
 pulumi 2.20.0
 poetry 1.1.4
-consul 1.9.3
-vault 1.6.2
+consul 1.9.4
+vault 1.6.3
+nomad 1.0.4
 packer 1.7.0
+terraform 0.13.6
