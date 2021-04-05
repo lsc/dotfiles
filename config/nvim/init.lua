@@ -1,7 +1,6 @@
 require('settings')
 require('lsp')
 -- require('maps')
--- require('statusline')
 
 vim.cmd 'packadd paq-nvim'
 local paq = require'paq-nvim'.paq
