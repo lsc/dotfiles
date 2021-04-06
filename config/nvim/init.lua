@@ -1,6 +1,6 @@
 require('settings')
 require('lsp')
--- require('maps')
+require('maps')
 
 vim.cmd 'packadd paq-nvim'
 local paq = require'paq-nvim'.paq
@@ -28,3 +28,6 @@ paq 'bronson/vim-trailing-whitespace'
 paq 'jvirtanen/vim-hcl'
 paq 'hashivim/vim-terraform'
 paq 'tpope/vim-fugitive'
+paq 'dag/vim-fish'
+paq 'junegunn/fzf.vim'
+paq 'junegunn/fzf'
