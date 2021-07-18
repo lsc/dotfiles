@@ -13,9 +13,6 @@ o.scrolloff = 12
 o.showmode = false
 o.mouse = 'a'
 o.wildmenu = true
-o.tabstop = 4
-o.shiftwidth = 4
-o.softtabstop = 4
 o.listchars='tab:│ ,nbsp:␣,trail:·,extends:>,precedes:<'
 o.hidden = true
 o.wildignore = [[
@@ -43,3 +40,6 @@ wo.wrap = false
 bo.expandtab = true
 bo.filetype = 'on'
 vim.cmd('filetype plugin indent on')
+bo.tabstop = 4
+bo.shiftwidth = 4
+bo.softtabstop = 4
