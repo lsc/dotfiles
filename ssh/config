@@ -1,0 +1,7 @@
+Host *.lsc.cloud
+    User lsc
+    IdentityFile ~/.ssh/id_ed25519.personal
+
+Host *
+    User lowe.schmidt
+    IdentityFile ~/.ssh/id_ed25519.qapital
