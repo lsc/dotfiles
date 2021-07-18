@@ -10,6 +10,24 @@
 	pager = delta
 	attributesfile = /Users/lsc/.gitattributes
 
+[pager]
+    diff = delta
+    log = delta
+    reflog = delta
+    show = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    features = side-by-side line-numbers decorations
+    whitespace-error-style = 22 reverse
+
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    file-decoration-style = none
+
 [push]
 	default = simple
 	followTags = true
@@ -39,9 +57,10 @@
 	smudge = git-media-smudge %f
 
 [filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
 	required = true
+	process = git-lfs filter-process
 
 
 [alias]
@@ -55,26 +74,16 @@
 	co        = checkout
 	df        = diff
 	lg        = log -p
-  wip = rebase -i @{u}
+    wip = rebase -i @{u}
 	prune     = fetch --prune
 	undo      = reset --soft ^HEAD
 	stash-all = stash save --include-untracked
 	glog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
-
 	l50 = "!git log --abbrev-commit --date=short --pretty=format:'%x00%h%x00%cd%x00%s%x00%an%x00%d' | gawk -F '\\0' '{ printf \"%s\\033[31m%s\\033[0m \\033[32m%s\\033[0m  %-50s \\033[30;1m%s\\033[0m\\033[33m%s\\n\", $1, $2, $3, gensub(/(.{49}).{2,}/, \"\\\\1…\",\"g\",$4), $5, $6 }' | less -R"
-
 	l80 = "!git log --abbrev-commit --date=short --pretty=format:'%x00%h%x00%cd%x00%s%x00%an%x00%d' | gawk -F '\\0' '{ printf \"%s\\033[31m%s\\033[0m \\033[32m%s\\033[0m  %-80s \\033[30;1m%s\\033[0m\\033[33m%s\\n\", $1, $2, $3, gensub(/(.{79}).{2,}/, \"\\\\1…\",\"g\",$4), $5, $6 }' | less -R"
-
 	lg50 = "!git log --graph --color=always --abbrev-commit --date=relative --pretty=format:'%x00%h%x00%s%x00%cd%x00%an%x00%d' | gawk -F '\\0' '{ printf \"%s\\033[31m%s\\033[0m %-50s \\033[32m%14s\\033[0m \\033[30;1m%s\\033[0m\\033[33m%s\\n\", $1, $2, gensub(/(.{49}).{2,}/, \"\\\\1…\",\"g\",$3), $4, $5, $6 }' | less -R"
-
 	lg80 = "!git log --graph --color=always --abbrev-commit --date=relative --pretty=format:'%x00%h%x00%s%x00%cd%x00%an%x00%d' | gawk -F '\\0' '{ printf \"%s\\033[31m%s\\033[0m %-80s \\033[32m%14s\\033[0m \\033[30;1m%s\\033[0m\\033[33m%s\\n\", $1, $2, gensub(/(.{79}).{2,}/, \"\\\\1…\",\"g\",$3), $4, $5, $6 }' | less -R"tool = meld
 	lcrev = log --reverse --no-merges --stat @{1}
-	wrapup = phlow wrapup
-	workon = phlow workon
-	deliver = phlow deliver
-	cleanup = phlow cleanup
-	web = phlow web
-	issues = phlow issues
 
 [color]
 	ui = true
@@ -104,7 +113,7 @@
 	prune = true
 
 [credential]
-	helper = osxkeychain
+	helper = store
 
 [color "diff-highlight"]
 	oldNormal = red bold
@@ -117,3 +126,21 @@
 
 [init]
 	defaultBranch = main
+[url "https://user@hostname"]
+	insteadOf = ssh://git@hostname
+[url "https://x-access-token@github.com"]
+	insteadOf = ssh://git@github.com
+[url "https://x-access-token@127.0.0.1:58201"]
+	insteadOf = ssh://git@127.0.0.1:58201
+[url "https://x-access-token@some-host"]
+	insteadOf = ssh://git@some-host
+[url "https://x-access-token@127.0.0.1:54626"]
+	insteadOf = ssh://git@127.0.0.1:54626
+[url "https://x-access-token@127.0.0.1:55720"]
+	insteadOf = ssh://git@127.0.0.1:55720
+[url "https://x-access-token@127.0.0.1:62437"]
+	insteadOf = ssh://git@127.0.0.1:62437
+[url "https://x-access-token@127.0.0.1:63401"]
+	insteadOf = ssh://git@127.0.0.1:63401
+[url "https://x-access-token@127.0.0.1:56984"]
+	insteadOf = ssh://git@127.0.0.1:56984
