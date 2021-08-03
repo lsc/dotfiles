@@ -8,3 +8,4 @@ test -d $TERRAGRUNT_DOWNLOAD || mkdir -p $TERRAGRUNT_DOWNLOAD
 starship init fish | source
 test -r ~/.github-token && source ~/.github-token &> /dev/null
 source /opt/homebrew/opt/asdf/asdf.fish
+fish_add_path /opt/homebrew/opt/node@14/bin

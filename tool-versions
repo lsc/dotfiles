@@ -1,13 +1,4 @@
-boundary 0.2.3
-consul 1.9.6
-golang 1.16
-java openjdk-14
-nomad 1.1.0
-packer 1.7.2
 poetry 1.1.4
 python 3.9.1
 ruby 3.0.0
-terraform 1.0.0
-terragrunt 0.29.10
-vault 1.7.2
-waypoint 0.4.0
+yarn 1.22.10
