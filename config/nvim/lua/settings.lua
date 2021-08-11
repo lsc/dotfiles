@@ -29,9 +29,6 @@ o.wildignore = [[
 ]]
 o.background = 'dark'
 vim.cmd('syntax on')
-vim.cmd('colorscheme nord')
-vim.cmd("let g:lightline = { 'colorscheme': 'nord' }")
-
 -- Window Options
 wo.number = true
 wo.wrap = false
