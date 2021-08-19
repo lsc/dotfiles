@@ -1,35 +1,43 @@
+local fn = vim.fn
+
+local install_path = fn.stdpath('data') .. '/site/pack/paqs/start/paq-nvim'
+
+if fn.empty(fn.glob(install_path)) > 0 then
+  fn.system({'git', 'clone', '--depth=1', 'https://github.com/savq/paq-nvim.git', install_path})
+end
+
+require "paq" {
+	{"savq/paq-nvim", opt=true};
+	 "Shougo/defx.nvim";
+	 "airblade/vim-gitgutter";
+	 "arcticicestudio/nord-vim";
+	 "bronson/vim-trailing-whitespace";
+	 "dag/vim-fish";
+	 "dbeniamine/vim-mail";
+	 "editorconfig/editorconfig-vim";
+	 "fatih/vim-go";
+	 "glepnir/lspsaga.nvim";
+	 "hashivim/vim-terraform";
+	 "itchyny/lightline.vim";
+	 "jiangmiao/auto-pairs";
+	 "jtratner/vim-flavored-markdown";
+	 "junegunn/fzf";
+	 "junegunn/fzf.vim";
+	 "jvirtanen/vim-hcl";
+	 "liuchengxu/vista.vim";
+	 "marko-cerovac/material.nvim";
+	 "neovim/nvim-lspconfig";
+	 "norcalli/snippets.nvim";
+	 "nvim-lua/completion-nvim";
+	 "nvim-treesitter/nvim-treesitter";
+	 "pearofducks/ansible-vim";
+	 "steelsojka/completion-buffers";
+	 "tpope/vim-fugitive";
+	 "tpope/vim-markdown";
+	 "tpope/vim-surround";
+     "ms-jpq/coq_nvim";
+}
+
 require('settings')
 require('lsp')
 require('maps')
-require('material').set
-
-vim.cmd 'packadd paq-nvim'
-local paq = require'paq-nvim'.paq
-paq{'savq/paq-nvim', opt=true}
-paq 'Shougo/defx.nvim'
-paq 'airblade/vim-gitgutter'
-paq 'arcticicestudio/nord-vim'
-paq 'bronson/vim-trailing-whitespace'
-paq 'dag/vim-fish'
-paq 'dbeniamine/vim-mail'
-paq 'editorconfig/editorconfig-vim'
-paq 'fatih/vim-go'
-paq 'glepnir/lspsaga.nvim'
-paq 'hashivim/vim-terraform'
-paq 'itchyny/lightline.vim'
-paq 'jiangmiao/auto-pairs'
-paq 'jtratner/vim-flavored-markdown'
-paq 'junegunn/fzf'
-paq 'junegunn/fzf.vim'
-paq 'jvirtanen/vim-hcl'
-paq 'liuchengxu/vista.vim'
-paq 'marko-cerovac/material.nvim'
-paq 'neovim/nvim-lspconfig'
-paq 'norcalli/snippets.nvim'
-paq 'nvim-lua/completion-nvim'
-paq 'nvim-treesitter/nvim-treesitter'
-paq 'pearofducks/ansible-vim'
-paq 'steelsojka/completion-buffers'
-paq 'tpope/vim-fugitive'
-paq 'tpope/vim-markdown'
-paq 'tpope/vim-surround'
