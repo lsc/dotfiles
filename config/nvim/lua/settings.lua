@@ -29,6 +29,7 @@ o.wildignore = [[
 ]]
 o.background = 'dark'
 vim.cmd('syntax on')
+vim.cmd('colorscheme nord')
 -- Window Options
 wo.number = true
 wo.wrap = false
