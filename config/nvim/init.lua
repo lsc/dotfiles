@@ -44,4 +44,3 @@ require "paq" {
 require('settings')
 require('lsp')
 require('maps')
-require('octo')

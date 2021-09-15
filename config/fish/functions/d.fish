@@ -1,4 +1,4 @@
 #!/usr/bin/env fish
 function d
-  docker $argv
+  podman $argv
 end
