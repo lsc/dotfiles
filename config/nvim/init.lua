@@ -14,7 +14,6 @@ require "paq" {
 	"dag/vim-fish";
 	"dbeniamine/vim-mail";
 	"editorconfig/editorconfig-vim";
-	"gleipnir/spaceline.vim";
 	"glepnir/lspsaga.nvim";
 	"hashivim/vim-terraform";
 	"itchyny/lightline.vim";
@@ -28,9 +27,7 @@ require "paq" {
 	"nvim-lua/plenary.nvim";
 	"nvim-telescope/telescope.nvim";
 	"nvim-treesitter/nvim-treesitter";
-	"pearofducks/ansible-vim";
 	"ryanoasis/vim-devicons";
-	"steelsojka/completion-buffers";
 	"tpope/vim-fugitive";
 	"tpope/vim-markdown";
 	"tpope/vim-surround";
