@@ -1,0 +1,1 @@
+/Users/lowe.schmidt/.dotfiles/config/fish/functions/g.fish

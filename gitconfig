@@ -9,6 +9,7 @@
 	excludesfile = /Users/lsc/.gitignore_global
 	pager = delta
 	attributesfile = /Users/lsc/.gitattributes
+	autocrlf = input
 
 [pager]
     diff = delta
