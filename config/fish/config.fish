@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 
 if command -v brew &> /dev/null
-    set brew_prefix (brew --prefix)
+   set brew_prefix (brew --prefix)
     fish_add_path "$brew_prefix/opt/openjdk@11/bin" "$brew_prefix/opt/make/libexec/gnubin" "$brew_prefix/bin" "$brew_prefix/sbin"
 end
 
