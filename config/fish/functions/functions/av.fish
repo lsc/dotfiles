@@ -1,1 +1,0 @@
-/Users/lowe.schmidt/.dotfiles/config/fish/functions/av.fish
