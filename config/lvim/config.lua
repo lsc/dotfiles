@@ -11,7 +11,7 @@ an executable
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save = true
-lvim.colorscheme = "nord"
+lvim.colorscheme = "gruvbox"
 
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
@@ -151,6 +151,8 @@ lvim.builtin.treesitter.highlight.enabled = true
  lvim.plugins = {
   {"arcticicestudio/nord-vim"},
   {"khaveesh/vim-fish-syntax"},
+  {"dracula/vim"},
+  {"morhetz/gruvbox"},
  }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)

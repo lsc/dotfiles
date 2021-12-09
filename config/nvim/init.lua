@@ -12,6 +12,7 @@ require "paq" {
 	"arcticicestudio/nord-vim";
 	"bronson/vim-trailing-whitespace";
 	"dag/vim-fish";
+    "dracula/vim";
 	"dbeniamine/vim-mail";
 	"editorconfig/editorconfig-vim";
 	"glepnir/lspsaga.nvim";
@@ -35,6 +36,7 @@ require "paq" {
 	"hrsh7th/vim-vsnip";
 	"hrsh7th/cmp-buffer";
 	"pwntester/octo.nvim";
+    "morhetz/gruvbox";
 	{"savq/paq-nvim", opt=true};
 }
 
