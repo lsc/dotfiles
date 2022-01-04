@@ -21,5 +21,6 @@ for file in $source_files
 	test -f $file && source $file
 end
 
+set -x SSH_AUTH_SOCK /Users/lowe.schmidt/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh
 
 command -v starship &> /dev/null && starship init fish | source
