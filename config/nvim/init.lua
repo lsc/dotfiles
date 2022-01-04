@@ -1,45 +1,28 @@
+-- Ensure Paq is installed and loaded.
 local fn = vim.fn
-
 local install_path = fn.stdpath('data') .. '/site/pack/paqs/start/paq-nvim'
-
 if fn.empty(fn.glob(install_path)) > 0 then
 	fn.system({'git', 'clone', '--depth=1', 'https://github.com/savq/paq-nvim.git', install_path})
 end
 
+-- Packages
 require "paq" {
-	"Shougo/defx.nvim";
 	"airblade/vim-gitgutter";
-	"arcticicestudio/nord-vim";
 	"bronson/vim-trailing-whitespace";
 	"dag/vim-fish";
-    "dracula/vim";
-	"dbeniamine/vim-mail";
 	"editorconfig/editorconfig-vim";
-	"glepnir/lspsaga.nvim";
-	"hashivim/vim-terraform";
-	"itchyny/lightline.vim";
-	"jiangmiao/auto-pairs";
+	"hrsh7th/nvim-cmp";
 	"jtratner/vim-flavored-markdown";
-	"jvirtanen/vim-hcl";
-	"liuchengxu/vista.vim";
-	"marko-cerovac/material.nvim";
+	"kyazdani42/nvim-tree.lua";
 	"neovim/nvim-lspconfig";
 	"nvim-lua/completion-nvim";
 	"nvim-lua/plenary.nvim";
 	"nvim-telescope/telescope.nvim";
 	"nvim-treesitter/nvim-treesitter";
 	"ryanoasis/vim-devicons";
-	"tpope/vim-fugitive";
-	"tpope/vim-markdown";
-	"tpope/vim-surround";
-	"hrsh7th/nvim-cmp";
-	"hrsh7th/vim-vsnip";
-	"hrsh7th/cmp-buffer";
-	"pwntester/octo.nvim";
-    "morhetz/gruvbox";
+	"sainnhe/gruvbox-material";
 	{"savq/paq-nvim", opt=true};
 }
 
-require('settings')
-require('lsp')
-require('maps')
+-- Require plugin configs
+require('lsc')
