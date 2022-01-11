@@ -35,7 +35,7 @@
 
 [diff]
 	compactionHeuristics = true
-	tool = icdiff
+	tool = diff-so-fancy
 
 [difftool]
 	prompt = false

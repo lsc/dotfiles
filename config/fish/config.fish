@@ -9,16 +9,17 @@ set source_files "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sd
 set add_paths "~/go/bin ~/.cargo/bin ~/bin"
 
 if command -v brew &> /dev/null
-   set brew_prefix (brew --prefix)
-   fish_add_path "$brew_prefix/opt/openjdk@11/bin" "$brew_prefix/opt/make/libexec/gnubin" "$brew_prefix/bin" "$brew_prefix/sbin"
+    set brew_prefix (brew --prefix)
+    fish_add_path "$brew_prefix/opt/openjdk@11/bin" "$brew_prefix/opt/make/libexec/gnubin" "$brew_prefix/bin" "$brew_prefix/sbin"
+    set --export HOMEBREW_NO_ENV_HINTS true
 end
 
 for path in $add_paths
-	test -d $path && fish_add_path $path
+    test -d $path && fish_add_path $path
 end
 
 for file in $source_files
-	test -f $file && source $file
+    test -f $file && source $file
 end
 
 set -x SSH_AUTH_SOCK /Users/lowe.schmidt/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh
