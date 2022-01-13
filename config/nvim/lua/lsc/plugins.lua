@@ -41,10 +41,12 @@ return packer.startup(function(use)
   use "hrsh7th/cmp-buffer"
   use "hrsh7th/cmp-path"
   use "hrsh7th/cmp-cmdline"
+  use "hrsh7th/cmp-nvim-lua"
   use "saadparwaiz1/cmp_luasnip"
   use	"jtratner/vim-flavored-markdown"
   use	"kyazdani42/nvim-tree.lua"
   use	"neovim/nvim-lspconfig"
+  use "williamboman/nvim-lsp-installer"
   use	"nvim-lua/completion-nvim"
   use	"nvim-lua/plenary.nvim"
   use	"nvim-telescope/telescope.nvim"
@@ -55,6 +57,7 @@ return packer.startup(function(use)
   use "wbthomason/packer.nvim"
   use "L3MON4D3/LuaSnip" -- Snipppets engine
   use "rafamadriz/friendly-snippets"
+
   -- Colorschemes
   use "folke/tokyonight.nvim"
   use "LunarVim/onedarker.nvim"
