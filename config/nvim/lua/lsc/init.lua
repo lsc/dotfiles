@@ -1,23 +1,12 @@
+require('lsc.plugins')
 require('lsc.nvimtree')
 require('lsc.telescope')
 require('lsc.lspconfig')
+require('lsc.options')
+require('lsc.keymaps')
+require('lsc.colorscheme')
 
 local M = {}
-local opts = { noremap = true}
-cmd = vim.cmd
-map = vim.api.nvim_set_keymap
-
-vim.g.mapleader = ' '
-
-map('n', '<leader>t', ':NvimTreeToggle<cr>',  opts)
-map('n', '<C-p>', ':Telescope find_files<cr>', opts)
-map('n', '<leader>ff', ':Telescope find_files<cr>', opts)
-map('n', '<leader>fg', ':Telescope live_grep<cr>', opts)
-map('n', '<leader>fb', ':Telescope buffers<cr>', opts)
-map('n', '<leader>fh', ':Telescope help_tags<cr>', opts)
-map('n', '<leader><esc>', ':nohlsearch<cr>', opts)
-
-cmd("colorscheme gruvbox-material")
 
 function M.create_autogroup(autocmds, name)
 	cmd('augroup' .. name)
