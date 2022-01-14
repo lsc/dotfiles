@@ -1,4 +1,5 @@
 -- Require plugin configs
+require("lsc.aerial")
 require("lsc.alpha")
 require("lsc.autopairs")
 require("lsc.bufferline")

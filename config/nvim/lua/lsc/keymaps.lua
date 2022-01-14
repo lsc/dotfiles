@@ -7,6 +7,8 @@ keymap("", "<SPACE>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+keymap("n", "<LEADER>q", ":Bdelete<cr>", opts)
+
 -- Navigate splits with ^hjkl
 keymap("n", "<C-h>", "<C-w>h", opts)
 keymap("n", "<C-j>", "<C-w>j", opts)
@@ -23,7 +25,10 @@ keymap("n", "<C-Right>", ":vertical resize +2<cr>", opts)
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
 
+-- File and symbol navigation
 keymap('n', '<leader>e', ':NvimTreeToggle<cr>',  opts)
+keymap('n', '<leader>a', ':AerialToggle<cr>', opts)
+
 keymap('n', '<leader><esc>', ':nohlsearch<cr>', opts)
 
 -- Exit INPUT mode with jk

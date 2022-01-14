@@ -71,6 +71,7 @@ return packer.startup(function(use)
   use "nvim-telescope/telescope-media-files.nvim"
   use "ahmedkhalf/project.nvim"
   use 'goolord/alpha-nvim'
+  use "stevearc/aerial.nvim"
 
   -- Comments
   use "numToStr/Comment.nvim"
@@ -87,6 +88,9 @@ return packer.startup(function(use)
   -- Terminal
   use "akinsho/toggleterm.nvim"
 
+  -- Language plugins
+  use "ray-x/go.nvim"
+  use "dag/vim-fish"
   -- Colorschemes
   use "folke/tokyonight.nvim"
   use "LunarVim/onedarker.nvim"
