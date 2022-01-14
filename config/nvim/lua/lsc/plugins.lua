@@ -3,7 +3,7 @@ local fn = vim.fn
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 
 if fn.empty(fn.glob(install_path)) > 0 then
-  PACKER_BOOTSTRAP = fn.system {'git', 'clone', '--depth=1', 'https://github.com/savq/paq-nvim.git', install_path}
+  PACKER_BOOTSTRAP = fn.system {'git', 'clone', '--depth=1', 'https://github.com/savq/paq-nvim.git', install_path,}
   print "Installing packer and restart neovim"
   vim.cmd [[packadd packer.nvim ]]
 end
@@ -38,6 +38,7 @@ return packer.startup(function(use)
   use	"dag/vim-fish"
   use	"editorconfig/editorconfig-vim"
   use	"hrsh7th/nvim-cmp"
+  use "hrsh7th/cmp-nvim-lsp"
   use "hrsh7th/cmp-buffer"
   use "hrsh7th/cmp-path"
   use "hrsh7th/cmp-cmdline"
