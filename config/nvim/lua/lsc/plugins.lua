@@ -42,6 +42,7 @@ return packer.startup(function(use)
   use "akinsho/bufferline.nvim"
   use "moll/vim-bbye"
   use "nvim-lualine/lualine.nvim"
+  use "lewis6991/impatient.nvim"
 
   -- Version Control
   use "lewis6991/gitsigns.nvim"
@@ -65,6 +66,7 @@ return packer.startup(function(use)
   use	"kyazdani42/nvim-web-devicons"
   use	"nvim-telescope/telescope.nvim"
   use "nvim-telescope/telescope-media-files.nvim"
+  use "ahmedkhalf/project.nvim"
 
   -- Comments
   use "numToStr/Comment.nvim"
