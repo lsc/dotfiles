@@ -1,5 +1,5 @@
 vim.g.nvim_tree_icons = {
-  default = "",
+          default = "",
   symlink = "",
   git = {
     unstaged = "",
@@ -24,6 +24,14 @@ if not status_ok then
 	vim.notify("Couldn't load nvim-tree")
 	return
 end
+
+local config_status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
+if not config_status_ok then
+  vim.notify("Unable to load nvim-tree.config")
+  return
+end
+
+local tree_cb = nvim_tree_config.nvim_tree_callback
 
 nvim_tree.setup {
   disable_netrw = true,
@@ -78,9 +86,9 @@ nvim_tree.setup {
     mappings = {
       custom_only = false,
       list = {
- --       { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
---        { key = "h", cb = tree_cb "close_node" },
- --       { key = "v", cb = tree_cb "vsplit" },
+        { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
+        { key = "h", cb = tree_cb "close_node" },
+        { key = "v", cb = tree_cb "vsplit" },
       },
     },
     number = false,

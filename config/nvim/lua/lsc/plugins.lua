@@ -39,6 +39,8 @@ return packer.startup(function(use)
   use	"ryanoasis/vim-devicons"
   use	"bronson/vim-trailing-whitespace"
   use "windwp/nvim-autopairs"
+  use "akinsho/bufferline.nvim"
+  use "moll/vim-bbye"
 
   -- Version Control
   use "lewis6991/gitsigns.nvim"
@@ -51,6 +53,7 @@ return packer.startup(function(use)
   use "hrsh7th/cmp-nvim-lua"
   use "hrsh7th/cmp-path"
   use	"neovim/nvim-lspconfig"
+  use "jose-elias-alvarez/null-ls.nvim"
   use "williamboman/nvim-lsp-installer"
   use "L3MON4D3/LuaSnip"
   use "rafamadriz/friendly-snippets"
@@ -58,6 +61,7 @@ return packer.startup(function(use)
 
   -- Navigation and search
   use	"kyazdani42/nvim-tree.lua"
+  use	"kyazdani42/nvim-web-devicons"
   use	"nvim-telescope/telescope.nvim"
   use "nvim-telescope/telescope-media-files.nvim"
 
