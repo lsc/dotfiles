@@ -41,7 +41,7 @@ return packer.startup(function(use)
   use "windwp/nvim-autopairs"
 
   -- Version Control
-  use	"airblade/vim-gitgutter"
+  use "lewis6991/gitsigns.nvim"
 
   -- Completion, Snippets and LSP
   use	"hrsh7th/nvim-cmp"

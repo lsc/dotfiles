@@ -14,7 +14,7 @@ comment.setup {
     elseif ctx.cmotion == U.cmotion.v or ctx.cmotion == U.cmotion.V then
       location = require("ts_context_commentstring.utils").get_visual_start_location()
     end
-    return require("ts_context_commentstring.internal").calculat_commentstring {
+    return require("ts_context_commentstring.internal").calculate_commentstring {
       key = ctx.ctype == U.ctype.line and "__default" or "__multiline",
       location = location,
     }
