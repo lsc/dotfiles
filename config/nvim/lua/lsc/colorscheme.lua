@@ -1,5 +1,5 @@
 vim.cmd "colorscheme default"
-vim.g.tokyonight_style = night
+vim.g.tokyonight_style = "night"
 vim.g.tokyonight_lualine_bold = true
 
 local colorscheme = "tokyonight"
