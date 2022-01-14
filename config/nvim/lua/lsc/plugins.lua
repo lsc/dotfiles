@@ -61,6 +61,10 @@ return packer.startup(function(use)
   use	"nvim-telescope/telescope.nvim"
   use "nvim-telescope/telescope-media-files.nvim"
 
+  -- Comments
+  use "numToStr/Comment.nvim"
+  use "JoosepAlviste/nvim-ts-context-commentstring"
+
   -- Hilighting/Treesitter
   use	{
     "nvim-treesitter/nvim-treesitter",
