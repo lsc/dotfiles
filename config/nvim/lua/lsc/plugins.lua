@@ -44,9 +44,11 @@ return packer.startup(function(use)
   use "nvim-lualine/lualine.nvim"
   use "lewis6991/impatient.nvim"
   use "lukas-reineke/indent-blankline.nvim"
+  use "folke/which-key.nvim"
 
   -- Version Control
   use "lewis6991/gitsigns.nvim"
+  use "TimUntersberger/neogit"
 
   -- Completion, Snippets and LSP
   use	"hrsh7th/nvim-cmp"
