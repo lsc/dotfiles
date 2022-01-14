@@ -33,38 +33,52 @@ packer.init {
 
 -- Packages
 return packer.startup(function(use)
-  use	"airblade/vim-gitgutter"
-  use	"bronson/vim-trailing-whitespace"
-  use	"dag/vim-fish"
-  use	"editorconfig/editorconfig-vim"
-  use	"hrsh7th/nvim-cmp"
-  use	"jtratner/vim-flavored-markdown"
-  use	"kyazdani42/nvim-tree.lua"
-  use	"neovim/nvim-lspconfig"
-  use	"nvim-lua/completion-nvim"
+  -- Utilities and libraries
   use	"nvim-lua/plenary.nvim"
-  use	"nvim-telescope/telescope.nvim"
-  use "nvim-telescope/telescope-media-files.nvim"
-  use	"nvim-treesitter/nvim-treesitter"
+  use "nvim-lua/popup.nvim"
   use	"ryanoasis/vim-devicons"
-  use	"sainnhe/gruvbox-material"
-  use "L3MON4D3/LuaSnip" -- Snipppets engine
+  use	"bronson/vim-trailing-whitespace"
+  use "windwp/nvim-autopairs"
+
+  -- Version Control
+  use	"airblade/vim-gitgutter"
+
+  -- Completion, Snippets and LSP
+  use	"hrsh7th/nvim-cmp"
   use "hrsh7th/cmp-buffer"
   use "hrsh7th/cmp-cmdline"
   use "hrsh7th/cmp-nvim-lsp"
   use "hrsh7th/cmp-nvim-lua"
   use "hrsh7th/cmp-path"
-  use "nvim-lua/popup.nvim"
+  use	"neovim/nvim-lspconfig"
+  use "williamboman/nvim-lsp-installer"
+  use "L3MON4D3/LuaSnip"
   use "rafamadriz/friendly-snippets"
   use "saadparwaiz1/cmp_luasnip"
-  use "wbthomason/packer.nvim"
-  use "williamboman/nvim-lsp-installer"
+
+  -- Navigation and search
+  use	"kyazdani42/nvim-tree.lua"
+  use	"nvim-telescope/telescope.nvim"
+  use "nvim-telescope/telescope-media-files.nvim"
+
+  -- Hilighting/Treesitter
+  use	{
+    "nvim-treesitter/nvim-treesitter",
+    run = ":TSUpdate",
+  }
+  use "p00f/nvim-ts-rainbow"
+  use "nvim-treesitter/playground"
 
   -- Colorschemes
   use "folke/tokyonight.nvim"
   use "LunarVim/onedarker.nvim"
   use "LunarVim/darkplus.nvim"
   use "LunarVim/colorschemes"
+  use	"sainnhe/gruvbox-material"
+
+  -- Plugin manager
+  use "wbthomason/packer.nvim"
+
   if PACKER_BOOTSTRAP then
     require("packer").sync()
   end
