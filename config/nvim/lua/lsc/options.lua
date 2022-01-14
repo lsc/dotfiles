@@ -28,5 +28,6 @@ o.relativenumber = true
 o.signcolumn = "yes"
 o.scrolloff = 8
 o.wrap = false
+o.shell = "fish"
 
 vim.cmd [[ set iskeyword+=- ]]

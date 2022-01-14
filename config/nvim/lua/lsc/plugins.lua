@@ -41,6 +41,7 @@ return packer.startup(function(use)
   use "windwp/nvim-autopairs"
   use "akinsho/bufferline.nvim"
   use "moll/vim-bbye"
+  use "nvim-lualine/lualine.nvim"
 
   -- Version Control
   use "lewis6991/gitsigns.nvim"
@@ -76,6 +77,9 @@ return packer.startup(function(use)
   }
   use "p00f/nvim-ts-rainbow"
   use "nvim-treesitter/playground"
+
+  -- Terminal
+  use "akinsho/toggleterm.nvim"
 
   -- Colorschemes
   use "folke/tokyonight.nvim"
