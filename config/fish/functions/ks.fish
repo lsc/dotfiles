@@ -1,5 +1,5 @@
 #!/usr/bin/env fish
 function ks
-    kubens $argv
+  kubens $argv
 end
 

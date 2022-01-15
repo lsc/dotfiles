@@ -1,4 +1,4 @@
 #!/usr/bin/env fish
 function b
-    brew $argv
+  brew $argv
 end

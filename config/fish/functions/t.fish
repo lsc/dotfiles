@@ -1,5 +1,4 @@
 #!/usr/bin/env fish
-#
-function t 
-    talosctl $argv
+function t
+  talosctl $argv
 end

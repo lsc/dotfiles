@@ -1,5 +1,4 @@
 #!/usr/bin/env fish
-
 function mk
-    minikube $argv
+  minikube $argv
 end

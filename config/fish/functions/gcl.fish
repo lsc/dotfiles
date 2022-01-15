@@ -1,4 +1,4 @@
 #!/usr/bin/env fish
 function gcl
-    gcloud $argv
+  gcloud $argv
 end
