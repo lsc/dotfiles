@@ -91,6 +91,7 @@ return packer.startup(function(use)
   -- Language plugins
   use "ray-x/go.nvim"
   use "dag/vim-fish"
+  use "hashivim/vim-terraform"
   -- Colorschemes
   use "folke/tokyonight.nvim"
   use "LunarVim/onedarker.nvim"
