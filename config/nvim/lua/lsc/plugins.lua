@@ -45,6 +45,12 @@ return packer.startup(function(use)
   use "lewis6991/impatient.nvim"
   use "lukas-reineke/indent-blankline.nvim"
   use "folke/which-key.nvim"
+  use {
+    "junegunn/fzf",
+    run = function()
+      vim.fn['fzf#install']()
+    end
+  }
 
   -- Version Control
   use "lewis6991/gitsigns.nvim"
@@ -72,6 +78,10 @@ return packer.startup(function(use)
   use "ahmedkhalf/project.nvim"
   use 'goolord/alpha-nvim'
   use "stevearc/aerial.nvim"
+  use {
+    "kevinhwang91/nvim-bqf",
+    ft = 'qf'
+  }
 
   -- Comments
   use "numToStr/Comment.nvim"
