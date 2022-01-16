@@ -22,3 +22,5 @@ telescope.load_extension('aerial')
 lspconfig.vimls.setup{
   on_attach = require("aerial").on_attach
 }
+
+aerial.setup()

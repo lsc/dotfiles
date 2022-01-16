@@ -4,3 +4,5 @@ if not status_ok then
   vim.notify("Unable to load bqf")
   return
 end
+
+bqf.setup()
