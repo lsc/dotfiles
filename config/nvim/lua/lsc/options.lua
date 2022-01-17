@@ -29,5 +29,6 @@ o.signcolumn = "yes"
 o.scrolloff = 8
 o.wrap = false
 o.shell = "fish"
+o.guifont = "Hasklug Nerd Font Mono:h17"
 
 vim.cmd [[ set iskeyword+=- ]]
