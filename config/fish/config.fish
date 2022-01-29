@@ -2,6 +2,7 @@
 
 set --export EDITOR nvim
 set --export TERRAGRUNT_DOWNLOAD ~/.terragrunt-cache
+# We build our Kotlin projects on Java 11 at M
 set --export JAVA_HOME /opt/homebrew/opt/openjdk@11/
 set --unexport fish_greeting
 
@@ -9,7 +10,7 @@ set add_paths "~/go/bin ~/.cargo/bin ~/bin"
 
 if command -v brew &> /dev/null
     set brew_prefix (brew --prefix)
-    fish_add_path "$brew_prefix/opt/openjdk@11/bin" "$brew_prefix/opt/make/libexec/gnubin" "$brew_prefix/bin" "$brew_prefix/sbin" 
+    fish_add_path "$brew_prefix/opt/openjdk@11/bin" "$brew_prefix/opt/make/libexec/gnubin" "$brew_prefix/bin" "$brew_prefix/sbin"
     set --export HOMEBREW_NO_ENV_HINTS 1
 end
 

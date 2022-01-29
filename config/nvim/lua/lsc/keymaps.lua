@@ -7,7 +7,7 @@ keymap("", "<SPACE>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-keymap("n", "<LEADER>q", ":Bdelete<cr>", opts)
+keymap("n", "<LEADER>c", ":Bdelete<cr>", opts)
 
 -- Navigate splits with ^hjkl
 keymap("n", "<C-h>", "<C-w>h", opts)

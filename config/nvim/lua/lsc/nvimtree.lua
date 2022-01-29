@@ -48,7 +48,7 @@ nvim_tree.setup {
   update_cwd = true,
   update_to_buf_dir = {
     enable = true,
-    auto_open = true,
+    auto_open = false,
   },
   diagnostics = {
     enable = true,
