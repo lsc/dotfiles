@@ -4,5 +4,4 @@ function clear_aws_variables
   for v in $vars
     set --erase $v
   end
-
 end
