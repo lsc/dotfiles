@@ -23,6 +23,6 @@ source ~/.github-token
 source /opt/homebrew/opt/asdf/libexec/asdf.fish
 
 set -x SSH_AUTH_SOCK /Users/lowe.schmidt/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh
-
+eval (driftctl completion fish)
 command -v starship &> /dev/null && starship init fish | source
 
