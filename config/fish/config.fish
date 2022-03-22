@@ -1,19 +1,17 @@
 #!/usr/bin/env fish
 
+
 set --export EDITOR nvim
 set --export TERRAGRUNT_DOWNLOAD ~/.terragrunt-cache
 set --unexport fish_greeting
+set --export JAVA_HOME (dirname (dirname (asdf which java)))/
 
-set add_paths "~/go/bin ~/.cargo/bin ~/bin"
+set PATH "~/go/bin ~/.cargo/bin ~/bin" $PATH
 
 if command -v brew &> /dev/null
     set brew_prefix (brew --prefix)
-    fish_add_path "$brew_prefix/opt/make/libexec/gnubin" "$brew_prefix/bin" "$brew_prefix/sbin"
+    set PATH "$brew_prefix/opt/make/libexec/gnubin" "$brew_prefix/bin" "$brew_prefix/sbin" $PATH
     set --export HOMEBREW_NO_ENV_HINTS 1
-end
-
-for path in $add_paths
-    test -d $path && fish_add_path $path
 end
 
 source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc
