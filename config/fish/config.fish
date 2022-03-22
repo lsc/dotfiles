@@ -1,10 +1,9 @@
 #!/usr/bin/env fish
 
-
 set --export EDITOR nvim
 set --export TERRAGRUNT_DOWNLOAD ~/.terragrunt-cache
-set --unexport fish_greeting
 set --export JAVA_HOME (dirname (dirname (asdf which java)))/
+set --unexport fish_greeting
 
 set PATH "~/go/bin ~/.cargo/bin ~/bin" $PATH
 
