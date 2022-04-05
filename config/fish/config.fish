@@ -8,9 +8,11 @@ set -x PATH $HOME/.cargo/bin $HOME/.asdf/shims $HOME/.asdf/bin $PATH
 
 command -v gcloud &>/dev/null && source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc
 
-if command -v asdf == $HOME/.asdf/bin/asdf
+set asdf (command -v asdf)
+
+if [ $asdf = "$HOME/.asdf/bin/asdf" ]
   source $HOME/.asdf/asdf.fish
-else if command -v &> /dev/null asdf == /opt/homebrew/opt/asdf/libexec/bin/asdf
+else if [ $asdf = "/opt/homebrew/opt/asdf/libexec/bin/asdf" ]
   source /opt/homebrew/opt/asdf/libexec/asdf.fish
 end
 

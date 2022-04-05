@@ -5,3 +5,4 @@ golang 1.18
 nodejs 14.19.1
 java zulu-11.54.25
 kotlin 1.6.10
+pulumi 3.26.1

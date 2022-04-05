@@ -1,5 +1,5 @@
 vim.g.nvim_tree_icons = {
-          default = "",
+  default = "",
   symlink = "",
   git = {
     unstaged = "",
@@ -21,8 +21,8 @@ vim.g.nvim_tree_icons = {
 
 local status_ok, nvim_tree = pcall(require, "nvim-tree")
 if not status_ok then
-	vim.notify("Couldn't load nvim-tree")
-	return
+  vim.notify("Couldn't load nvim-tree")
+  return
 end
 
 local config_status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
