@@ -2,6 +2,9 @@
 	name = Lowe Schmidt
 	email = github@loweschmidt.se
 
+[includeIf "gitdir:~/Source/work/"]
+  path = ~/.work.gitconfig
+
 [branch]
 	autosetupmerge = true
 
@@ -146,3 +149,5 @@
 	insteadOf = ssh://git@127.0.0.1:63401
 [url "https://x-access-token@127.0.0.1:56984"]
 	insteadOf = ssh://git@127.0.0.1:56984
+[commit]
+	gpgsign = true

@@ -78,10 +78,6 @@ return packer.startup(function(use)
   use "ahmedkhalf/project.nvim"
   use 'goolord/alpha-nvim'
   use "stevearc/aerial.nvim"
-  use {
-    "kevinhwang91/nvim-bqf",
-    ft = 'qf'
-  }
 
   -- Comments
   use "numToStr/Comment.nvim"

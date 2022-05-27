@@ -4,8 +4,6 @@ set --export EDITOR nvim
 set --export TERRAGRUNT_DOWNLOAD ~/.terragrunt-cache
 set --unexport fish_greeting
 
-set -x PATH $HOME/.cargo/bin $HOME/.asdf/shims $HOME/.asdf/bin $PATH
-
 command -v gcloud &>/dev/null && source /opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc
 
 set asdf (command -v asdf)
