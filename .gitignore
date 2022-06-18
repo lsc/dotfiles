@@ -6,6 +6,7 @@
 *.so
 config/fish/fish_history
 config/fish/fishd*
+config/fish/fish_variables
 vim/.netrwhist
 vim/bundle/*
 vim/plugged/*
@@ -15,4 +16,3 @@ tags
 Session.vim
 .idea/*
 styles/**
-config/fish/fish_variables
