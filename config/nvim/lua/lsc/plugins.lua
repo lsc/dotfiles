@@ -113,7 +113,10 @@ return packer.startup(function(use)
   use "LunarVim/onedarker.nvim"
   use "LunarVim/darkplus.nvim"
   use "LunarVim/colorschemes"
-  use	"sainnhe/gruvbox-material"
+  use "sainnhe/gruvbox-material"
+  use({ "catppuccin/nvim",
+  	as = "catppuccin"
+  })
 
   -- Plugin manager
   use "wbthomason/packer.nvim"
