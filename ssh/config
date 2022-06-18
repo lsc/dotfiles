@@ -2,3 +2,6 @@ Host *.lsc.cloud
     User lsc
     IdentityFile ~/.ssh/id_ed25519
 
+Host *.loweschmidt.se
+    User lsc
+    IdentityFile ~ /.ssh/id_ed25519

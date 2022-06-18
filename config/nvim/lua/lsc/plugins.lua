@@ -97,11 +97,17 @@ return packer.startup(function(use)
   -- Presentation plugins
   use "sotte/presenting.vim"
 
-  -- Language plugins
+  -- Software development plugins
   use "ray-x/go.nvim"
   use "dag/vim-fish"
   use "hashivim/vim-terraform"
   use "udalov/kotlin-vim"
+  use "mfussenegger/nvim-dap"
+  use "leoluz/nvim-dap-go"
+  use "rcarriga/nvim-dap-ui"
+  use "theHamsta/nvim-dap-virtual-text"
+  use "nvim-telescope/telescope-dap.nvim"
+
   -- Colorschemes
   use "folke/tokyonight.nvim"
   use "LunarVim/onedarker.nvim"

@@ -18,6 +18,7 @@ null_ls.setup {
     diagnostics.markdownlint,
     diagnostics.shellcheck,
     diagnostics.yamllint,
+    diagnostics.vale,
 
     formatting.chktex,
     formatting.golangci_lint,

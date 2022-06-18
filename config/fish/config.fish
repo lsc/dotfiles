@@ -18,3 +18,5 @@ set --export JAVA_HOME (dirname (dirname (asdf which java)))/
 set -x SSH_AUTH_SOCK /Users/lowe.schmidt/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh
 command -v starship &> /dev/null && starship init fish | source
 
+set -gx VOLTA_HOME "$HOME/.volta"
+set -gx PATH "$VOLTA_HOME/bin" $PATH

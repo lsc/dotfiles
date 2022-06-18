@@ -66,3 +66,14 @@ keymap("n", "<C-p>", "<cmd>lua require'telescope.builtin'.find_files(require('te
 keymap('n', '<leader>fg', ":Telescope live_grep<cr>", opts)
 keymap('n', '<leader>fb', ':Telescope buffers<cr>', opts)
 keymap('n', '<leader>fh', ':Telescope help_tags<cr>', opts)
+
+-- Debugging
+keymap("n", "<F5>", ":lua require'dap'.continue()<CR>")
+keymap("n", "<F10>", ":lua require'dap'.step_over()<CR>")
+keymap("n", "<F11>", ":lua require'dap'.step_into<CR>")
+keymap("n", "<F12>", ":lua require'dap'.step_out<CR>")
+keymap("n", "<leader>b", ":lua require'dap'.toggle_breakpoint()<CR>")
+--keymap("n", "<leader>B", ":lua require'dap'.set_breakpoint()<CR>")
+--keymap("n", "<leader>lp", ":lua require'dap'.set_breakpoint()<CR>")
+keymap("n", "<leader>dr", ":lua require'dap'.repl_open()<CR>")
+
