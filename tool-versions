@@ -7,4 +7,4 @@ java zulu-11.54.25
 kotlin 1.6.10
 pulumi 3.26.1
 yarn 1.22.19
-terraform 1.2.1
+terraform 1.2.5

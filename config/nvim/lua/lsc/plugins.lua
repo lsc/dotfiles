@@ -45,6 +45,7 @@ return packer.startup(function(use)
   use "lewis6991/impatient.nvim"
   use "lukas-reineke/indent-blankline.nvim"
   use "folke/which-key.nvim"
+  use "godlygeek/tabular"
   use {
     "junegunn/fzf",
     run = function()
@@ -113,6 +114,7 @@ return packer.startup(function(use)
   use "LunarVim/onedarker.nvim"
   use "LunarVim/darkplus.nvim"
   use "LunarVim/colorschemes"
+  use "PaideiaDilemma/penumbra.nvim"
   use "sainnhe/gruvbox-material"
   use({ "catppuccin/nvim",
   	as = "catppuccin"
