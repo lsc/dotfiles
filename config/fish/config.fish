@@ -9,5 +9,6 @@ source /opt/homebrew/opt/asdf/libexec/asdf.fish
 
 command -v starship &> /dev/null && starship init fish | source
 
-set -gx VOLTA_HOME "$HOME/.volta"
-set -gx PATH "$VOLTA_HOME/bin" $PATH
+if status is-interactive
+  atuin init fish | source
+end

@@ -1,9 +1,6 @@
 local status_ok, bufferline = pcall(require, "bufferline")
 
-if not status_ok then
-  vim.notify("Unable to load Bufferline")
-  return
-end
+if not status_ok then return end
 
 bufferline.setup {
   options = {

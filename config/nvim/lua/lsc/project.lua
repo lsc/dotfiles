@@ -1,8 +1,5 @@
 local status_ok, project = pcall(require, "project_nvim")
-if not status_ok then
-  vim.notify("Unable to load project")
-	return
-end
+if not status_ok then return end
 
 project.setup({
 	---@usage set to false to disable project.nvim.
