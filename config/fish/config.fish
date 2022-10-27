@@ -12,3 +12,5 @@ command -v starship &> /dev/null && starship init fish | source
 if status is-interactive
   atuin init fish | source
 end
+# Google Cloud SDK
+source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc"

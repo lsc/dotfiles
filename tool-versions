@@ -1,10 +1,8 @@
 poetry 1.1.4
 python 3.9.1
 ruby 3.0.0
-golang 1.18.3
-nodejs 14.19.1
-java zulu-11.54.25
-kotlin 1.6.10
-pulumi 3.26.1
+golang 1.19.2
+nodejs 16.18.0
+pulumi 3.44.2
 yarn 1.22.19
-terraform 1.2.5
+terraform 1.2.9

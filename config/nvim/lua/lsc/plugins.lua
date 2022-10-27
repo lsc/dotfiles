@@ -77,6 +77,10 @@ return packer.startup(function(use)
   use "ahmedkhalf/project.nvim"
   use 'goolord/alpha-nvim'
   use "stevearc/aerial.nvim"
+  use {
+    "s1n7ax/nvim-search-and-replace",
+    config = function() require'nvim-search-and-replace'.setup() end,
+  }
 
   -- Comments
   use "numToStr/Comment.nvim"
