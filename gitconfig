@@ -1,151 +1,141 @@
 [user]
-	name = Lowe Schmidt
-	email = github@loweschmidt.se
+  name  = Lowe Schmidt
+  email = github@loweschmidt.se
 
-[includeIf "gitdir:~/Source/work/"]
+[includeIf "gitdir:~/Sources/work/"]
   path = ~/.work.gitconfig
 
 [branch]
-	autosetupmerge = true
+  autosetupmerge = true
 
 [core]
-	excludesfile = /Users/lsc/.gitignore_global
-	pager = delta
-	attributesfile = /Users/lsc/.gitattributes
-	autocrlf = input
+  excludesfile   = /Users/lsc/.gitignore_global
+  pager          = delta
+  attributesfile = /Users/lsc/.gitattributes
+  autocrlf       = input
 
 [pager]
-    diff = delta
-    log = delta
-    reflog = delta
-    show = delta
+  diff   = delta
+  log    = delta
+  reflog = delta
+  show   = delta
 
 [interactive]
-    diffFilter = delta --color-only
+  diffFilter = delta --color-only
 
 [delta]
-    features = side-by-side line-numbers decorations
-    whitespace-error-style = 22 reverse
+  features               = side-by-side line-numbers decorations
+  whitespace-error-style = 22 reverse
 
 [delta "decorations"]
-    commit-decoration-style = bold yellow box ul
-    file-style = bold yellow ul
-    file-decoration-style = none
+  commit-decoration-style = bold yellow box ul
+  file-style              = bold yellow ul
+  file-decoration-style   = none
 
 [push]
-	default = simple
-	followTags = true
+  default    = simple
+  followTags = true
 
 [diff]
-	compactionHeuristics = true
-	tool = diff-so-fancy
+  compactionHeuristics = true
+  tool                 = diff-so-fancy
 
 [difftool]
-	prompt = false
+  prompt = false
 
 [diffool "icdiff"]
-	cmd = /usr/local/bin/icdiff --line-numbers $LOCAL $REMOTE
+  cmd = /usr/local/bin/icdiff --line-numbers $LOCAL $REMOTE
 
 [merge]
-	ff = only
-	conflictstyle = diff3
+  ff            = only
+  conflictstyle = diff3
 
 [status]
-	showUntrackedFiles = all
+  showUntrackedFiles = all
 
 [transfer]
-	fsckobjects = true
+  fsckobjects = true
 
 [filter "media"]
-	clean = git-media-clean %f
-	smudge = git-media-smudge %f
+  clean  = git-media-clean %f
+  smudge = git-media-smudge %f
 
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	required = true
-	process = git-lfs filter-process
+  clean    = git-lfs clean -- %f
+  smudge   = git-lfs smudge -- %f
+  required = true
+  process  = git-lfs filter-process
 
 
 [alias]
-	a         = add
-	br        = branch
-	ci        = commit
-	cl        = clone
-	co        = checkout
-	df        = diff
-	glog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
-    home = rev-parse --show-toplevel
-	l50 = "!git log --abbrev-commit --date=short --pretty=format:'%x00%h%x00%cd%x00%s%x00%an%x00%d' | gawk -F '\\0' '{ printf \"%s\\033[31m%s\\033[0m \\033[32m%s\\033[0m  %-50s \\033[30;1m%s\\033[0m\\033[33m%s\\n\", $1, $2, $3, gensub(/(.{49}).{2,}/, \"\\\\1…\",\"g\",$4), $5, $6 }' | less -R"
-	l80 = "!git log --abbrev-commit --date=short --pretty=format:'%x00%h%x00%cd%x00%s%x00%an%x00%d' | gawk -F '\\0' '{ printf \"%s\\033[31m%s\\033[0m \\033[32m%s\\033[0m  %-80s \\033[30;1m%s\\033[0m\\033[33m%s\\n\", $1, $2, $3, gensub(/(.{79}).{2,}/, \"\\\\1…\",\"g\",$4), $5, $6 }' | less -R"
-	lcrev = log --reverse --no-merges --stat @{1}
-	lg        = log -p
-	lg50 = "!git log --graph --color=always --abbrev-commit --date=relative --pretty=format:'%x00%h%x00%s%x00%cd%x00%an%x00%d' | gawk -F '\\0' '{ printf \"%s\\033[31m%s\\033[0m %-50s \\033[32m%14s\\033[0m \\033[30;1m%s\\033[0m\\033[33m%s\\n\", $1, $2, gensub(/(.{49}).{2,}/, \"\\\\1…\",\"g\",$3), $4, $5, $6 }' | less -R"
-	lg80 = "!git log --graph --color=always --abbrev-commit --date=relative --pretty=format:'%x00%h%x00%s%x00%cd%x00%an%x00%d' | gawk -F '\\0' '{ printf \"%s\\033[31m%s\\033[0m %-80s \\033[32m%14s\\033[0m \\033[30;1m%s\\033[0m\\033[33m%s\\n\", $1, $2, gensub(/(.{79}).{2,}/, \"\\\\1…\",\"g\",$3), $4, $5, $6 }' | less -R"tool = meld
-	praise    = blame
-	prune     = fetch --prune
-	ss        = status -s
-	st        = status
-	stash-all = stash save --include-untracked
-	undo      = reset --soft ^HEAD
-    wip = rebase -i @{u}
+  a         = add
+  br        = branch
+  cafu      = commit --amend --fixup HEAD~
+  ci        = commit
+  cl        = clone
+  co        = checkout
+  df        = diff
+  glog      = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+  home      = rev-parse --show-toplevel
+  l50       = "!git log --abbrev-commit --date=short --pretty=format:'%x00%h%x00%cd%x00%s%x00%an%x00%d' | gawk -F '\\0' '{ printf \"%s\\033[31m%s\\033[0m \\033[32m%s\\033[0m  %-50s \\033[30;1m%s\\033[0m\\033[33m%s\\n\", $1, $2, $3, gensub(/(.{49}).{2,}/, \"\\\\1…\",\"g\",$4), $5, $6 }' | less -R"
+  l80       = "!git log --abbrev-commit --date=short --pretty=format:'%x00%h%x00%cd%x00%s%x00%an%x00%d' | gawk -F '\\0' '{ printf \"%s\\033[31m%s\\033[0m \\033[32m%s\\033[0m  %-80s \\033[30;1m%s\\033[0m\\033[33m%s\\n\", $1, $2, $3, gensub(/(.{79}).{2,}/, \"\\\\1…\",\"g\",$4), $5, $6 }' | less -R"
+  lcrev     = log --reverse --no-merges --stat @{1}
+  lg        = log -p
+  lg50      = "!git log --graph --color=always --abbrev-commit --date=relative --pretty=format:'%x00%h%x00%s%x00%cd%x00%an%x00%d' | gawk -F '\\0' '{ printf \"%s\\033[31m%s\\033[0m %-50s \\033[32m%14s\\033[0m \\033[30;1m%s\\033[0m\\033[33m%s\\n\", $1, $2, gensub(/(.{49}).{2,}/, \"\\\\1…\",\"g\",$3), $4, $5, $6 }' | less -R"
+  lg80      = "!git log --graph --color=always --abbrev-commit --date=relative --pretty=format:'%x00%h%x00%s%x00%cd%x00%an%x00%d' | gawk -F '\\0' '{ printf \"%s\\033[31m%s\\033[0m %-80s \\033[32m%14s\\033[0m \\033[30;1m%s\\033[0m\\033[33m%s\\n\", $1, $2, gensub(/(.{79}).{2,}/, \"\\\\1…\",\"g\",$3), $4, $5, $6 }' | less -R"tool = meld
+  praise    = blame
+  prune     = fetch --prune
+  ss        = status -s
+  st        = status
+  stash-all = stash save --include-untracked
+  undo      = reset --soft ^HEAD
+  rebiam    = rebase -i --autosquash origin/main
+  wip       = rebase -i @{u}
 
 [color]
-	ui = true
+ui = true
 
 [color "branch"]
-	current = yellow reverse
-	local = yellow
-	remote = green
+  current = yellow reverse
+  local   = yellow
+  remote  = green
 
 [color "diff"]
-	meta = 11
-	frag = magenta bold
-	old = red bold
-	new = green bold
-	commit = yellow bold
-	whitespace = red reverse
+  meta       = 11
+  frag       = magenta bold
+  old        = red bold
+  new        = green bold
+  commit     = yellow bold
+  whitespace = red reverse
 
 [color "status"]
-	added = yellow
-	changed = green
-	untracked = cyan
+  added     = yellow
+  changed   = green
+  untracked = cyan
 
 [github]
-	user = lsc
+  user = lsc
 
 [fetch]
-	prune = true
+  prune = true
 
 [credential]
-	helper = store
+  helper = store
 
 [color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = red bold 52
-	newNormal = green bold
-	newHighlight = green bold 22
+  oldNormal    = red bold
+  oldHighlight = red bold 52
+  newNormal    = green bold
+  newHighlight = green bold 22
 
 [pull]
-	ff = only
+  ff = only
 
 [init]
-	defaultBranch = main
+  defaultBranch = main
+
 [url "https://user@hostname"]
-	insteadOf = ssh://git@hostname
+  insteadOf = ssh://git@hostname
+
 [url "https://x-access-token@github.com"]
-	insteadOf = ssh://git@github.com
-[url "https://x-access-token@127.0.0.1:58201"]
-	insteadOf = ssh://git@127.0.0.1:58201
-[url "https://x-access-token@some-host"]
-	insteadOf = ssh://git@some-host
-[url "https://x-access-token@127.0.0.1:54626"]
-	insteadOf = ssh://git@127.0.0.1:54626
-[url "https://x-access-token@127.0.0.1:55720"]
-	insteadOf = ssh://git@127.0.0.1:55720
-[url "https://x-access-token@127.0.0.1:62437"]
-	insteadOf = ssh://git@127.0.0.1:62437
-[url "https://x-access-token@127.0.0.1:63401"]
-	insteadOf = ssh://git@127.0.0.1:63401
-[url "https://x-access-token@127.0.0.1:56984"]
-	insteadOf = ssh://git@127.0.0.1:56984
+  insteadOf = ssh://git@github.com
