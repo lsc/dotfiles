@@ -11,7 +11,6 @@ local diagnostics = null_ls.builtins.diagnostics
 null_ls.setup {
 
   sources = {
-    diagnostics.chktex,
     diagnostics.gitlint,
     diagnostics.golangci_lint,
     diagnostics.jsonlint,
@@ -20,14 +19,8 @@ null_ls.setup {
     diagnostics.yamllint,
     diagnostics.vale,
 
-    formatting.chktex,
-    formatting.golangci_lint,
-    formatting.jsonlint,
     formatting.markdownlint,
     formatting.prettier.with { extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote"}},
-    formatting.shellcheck,
     formatting.stylua,
-    formatting.yamllint,
-
   },
 }

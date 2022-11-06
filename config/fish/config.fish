@@ -14,3 +14,7 @@ if status is-interactive
 end
 # Google Cloud SDK
 source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.fish.inc"
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+set --export --prepend PATH "/Users/lsc/.rd/bin"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
