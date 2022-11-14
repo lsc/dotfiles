@@ -26,7 +26,7 @@ keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
 
 -- File and symbol navigation
-keymap('n', '<leader>e', ':NvimTreeToggle<cr>',  opts)
+keymap('n', '<leader>e', ':NeoTreeRevealToggle<cr>',  opts)
 keymap('n', '<leader>d', ':AerialToggle<cr>', opts)
 
 keymap('n', '<leader><esc>', ':nohlsearch<cr>', opts)
