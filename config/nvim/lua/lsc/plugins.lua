@@ -35,7 +35,6 @@ return packer.startup(function(use)
   use	"nvim-lua/plenary.nvim"
   use "nvim-lua/popup.nvim"
   use	"ryanoasis/vim-devicons"
-  use	"bronson/vim-trailing-whitespace"
   use "windwp/nvim-autopairs"
   use "akinsho/bufferline.nvim"
   use "moll/vim-bbye"
