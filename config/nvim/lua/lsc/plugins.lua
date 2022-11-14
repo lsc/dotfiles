@@ -44,6 +44,7 @@ return packer.startup(function(use)
   use "lukas-reineke/indent-blankline.nvim"
   use "folke/which-key.nvim"
   use "godlygeek/tabular"
+  use "christoomey/vim-tmux-navigator"
   use {
     "junegunn/fzf",
     run = function()
