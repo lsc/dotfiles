@@ -50,6 +50,23 @@ return packer.startup(function(use)
       vim.fn['fzf#install']()
     end
   }
+  use {
+  "cshuaimin/ssr.nvim",
+  module = "ssr",
+  -- Calling setup is optional.
+  config = function()
+    require("ssr").setup {
+      min_width = 50,
+      min_height = 5,
+      keymaps = {
+        close = "q",
+        next_match = "n",
+        prev_match = "N",
+        replace_all = "<leader><cr>",
+      },
+    }
+  end
+}
 
   -- Version Control
   use "lewis6991/gitsigns.nvim"
@@ -90,6 +107,13 @@ return packer.startup(function(use)
   use {
     "s1n7ax/nvim-search-and-replace",
     config = function() require'nvim-search-and-replace'.setup() end,
+  }
+  use {
+    's1n7ax/nvim-window-picker',
+    tag = 'v1.*',
+    config = function()
+        require'window-picker'.setup()
+    end,
   }
 
   -- Comments

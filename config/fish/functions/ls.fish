@@ -1,4 +1,4 @@
 #!/usr/bin/env fish
 function ls
-	exa $argv
+	exa --icons --group-directories-first --header --octal-permissions $argv
 end
