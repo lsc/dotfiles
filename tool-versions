@@ -6,3 +6,4 @@ nodejs 16.18.0
 pulumi 3.44.2
 yarn 1.22.19
 terraform 1.2.9
+skaffold 1.39.3
