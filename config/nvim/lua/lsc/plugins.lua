@@ -79,9 +79,9 @@ return packer.startup(function(use)
   use "hrsh7th/cmp-nvim-lsp"
   use "hrsh7th/cmp-nvim-lua"
   use "hrsh7th/cmp-path"
-  use	"neovim/nvim-lspconfig"
   use "jose-elias-alvarez/null-ls.nvim"
-  use "williamboman/nvim-lsp-installer"
+  use "williamboman/mason.nvim"
+  use "williamboman/mason-lspconfig.nvim"
   use "L3MON4D3/LuaSnip"
   use "rafamadriz/friendly-snippets"
   use "saadparwaiz1/cmp_luasnip"
@@ -101,6 +101,10 @@ return packer.startup(function(use)
   }
   use "nvim-telescope/telescope.nvim"
   use "nvim-telescope/telescope-media-files.nvim"
+  use {
+    "nvim-telescope/telescope-fzf-native.nvim",
+    run = 'make', cond = vim.fn.executable 'make' == 1
+  }
   use "ahmedkhalf/project.nvim"
   use 'goolord/alpha-nvim'
   use "stevearc/aerial.nvim"
@@ -146,16 +150,17 @@ return packer.startup(function(use)
   use "nvim-telescope/telescope-dap.nvim"
 
   -- Colorschemes
-  use "folke/tokyonight.nvim"
-  use "gruvbox-community/gruvbox"
-  use "LunarVim/onedarker.nvim"
-  use "LunarVim/darkplus.nvim"
   use "LunarVim/colorschemes"
+  use "LunarVim/darkplus.nvim"
+  use "LunarVim/onedarker.nvim"
   use "PaideiaDilemma/penumbra.nvim"
-  use "sainnhe/gruvbox-material"
+  use "arcticicestudio/nord-vim"
   use({ "catppuccin/nvim",
   	as = "catppuccin"
   })
+  use "folke/tokyonight.nvim"
+  use "gruvbox-community/gruvbox"
+  use "sainnhe/gruvbox-material"
 
   -- Plugin manager
   use "wbthomason/packer.nvim"
