@@ -1,0 +1,172 @@
+return function (use)
+  -- Neo-tree
+  use ({
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v2.x",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "kyazdani42/nvim-web-devicons",
+      "MunifTanjim/nui.nvim"
+    },
+    config = function()
+      require("neo-tree").setup({
+        window = {
+          mappings = {
+            ["o"]    = "open_with_window_picker",
+            ["<cr>"] = "open_with_window_picker",
+            ["s"]    = "vsplit_with_window_picker",
+            ["S"]    = "split_with_window_picker",
+          }
+        }
+      })
+    end
+  })
+  -- Aerial
+  use ({
+    "stevearc/aerial.nvim",
+    config = function ()
+      local telescope = require('telescope')
+      telescope.load_extension('aerial')
+      require('aerial').setup({})
+    end
+  })
+  -- Alpha
+  use ({
+    "goolord/alpha-nvim",
+    config = function ()
+      local dashboard = require("alpha.themes.dashboard")
+
+      dashboard.section.header.val = {
+        [[                               __                ]],
+        [[  ___     ___    ___   __  __ /\_\    ___ ___    ]],
+        [[ / _ `\  / __`\ / __`\/\ \/\ \\/\ \  / __` __`\  ]],
+        [[/\ \/\ \/\  __//\ \_\ \ \ \_/ |\ \ \/\ \/\ \/\ \ ]],
+        [[\ \_\ \_\ \____\ \____/\ \___/  \ \_\ \_\ \_\ \_\]],
+        [[ \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/]],
+      }
+      dashboard.section.buttons.val = {
+        dashboard.button("f", "  Find file", ":Telescope find_files <CR>"),
+        dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
+        -- dashboard.button("p", "  Find project", ":Telescope projects <CR>"),
+        dashboard.button("r", "  Recently used files", ":Telescope oldfiles <CR>"),
+        dashboard.button("t", "  Find text", ":Telescope live_grep <CR>"),
+        dashboard.button("c", "  Configuration", ":e ~/.config/nvim/init.lua <CR>"),
+        dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
+      }
+      dashboard.section.footer.opts.hl = "Type"
+      dashboard.section.header.opts.hl = "Include"
+      dashboard.section.buttons.opts.hl = "Keyword"
+      dashboard.opts.opts.noautocmd = true
+
+      require('alpha').setup(dashboard.opts)
+    end
+  })
+  -- Window picker
+  -- Pick what buffer you want to open a file in interactively
+  use({
+    "s1n7ax/nvim-window-picker",
+    tag = 'v1.*',
+    config = function ()
+      require('window-picker').setup({})
+    end
+  })
+  -- Autopairs
+  -- Auto insert matching brackets, braces and similar characters
+  use({
+    "windwp/nvim-autopairs",
+    config = function ()
+      local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+      local cmp = require "cmp"
+      cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
+      require('nvim-autopairs').setup({})
+    end
+  })
+  -- Bufferline 
+  -- Show a nice a "tab bar" with buffers at the top of the editor
+  use({
+    "akinsho/bufferline.nvim",
+    config = function ()
+      require("bufferline").setup({})
+    end
+  })
+  use({
+    "folke/which-key.nvim",
+    config = function ()
+      require("which-key").setup({})
+    end
+  })
+  use({ "godlygeek/tabular" })
+  use({ "TimUntersberger/neogit",
+    config = function ()
+      require("neogit").setup({})
+    end
+  })
+  use({
+    "ahmedkhalf/project.nvim",
+    config = function ()
+      require("project_nvim").setup({
+        active = true,
+        on_config_done = nil,
+        manual_mode = false,
+        detection_methods = { "lsp", "pattern" },
+        patterns = { "go.mod", ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
+        show_hidden = false,
+        silent_chdir = true,
+        ignore_lsp = {},
+        datapath = vim.fn.stdpath("data"),
+      })
+    end
+  })
+  use({
+    "akinsho/toggleterm.nvim",
+    config = function ()
+      require("toggleterm").setup({
+        size = 20,
+        open_mapping = [[<c-t>]],
+        hide_numbers = true,
+        shade_filetypes = {},
+        shade_terminals = true,
+        shading_factor = 2,
+        start_in_insert = true,
+        insert_mappings = true,
+        persist_size = true,
+        direction = "horizontal",
+        close_on_exit = true,
+        shell = vim.o.shell,
+        float_opts = {
+          border = "curved",
+          winblend = 0,
+          highlights = {
+            border = "Normal",
+            background = "Normal",
+          },
+        },
+      })
+    end
+  })
+  use({ "arcticicestudio/nord-vim" })
+  use({
+    "jose-elias-alvarez/null-ls.nvim",
+    config = function ()
+      local null_ls = require("null-ls")
+      local diagnostics = null_ls.builtins.diagnostics
+      local formatting = null_ls.builtins.formatting
+      null_ls.setup({
+        sources = {
+          diagnostics.gitlint,
+          diagnostics.golangci_lint,
+          diagnostics.jsonlint,
+          diagnostics.javascript,
+          diagnostics.markdownlint,
+          diagnostics.shellcheck,
+          diagnostics.yamllint,
+          diagnostics.vale,
+
+          formatting.markdownlint,
+          formatting.prettier.with { extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote"}},
+          formatting.stylua,
+        }
+      })
+    end
+  })
+end
