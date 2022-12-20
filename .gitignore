@@ -1,5 +1,5 @@
 *.DS_Store
-.DS_Store
+.DS_Storeq
 .*.swp
 .svn/*
 *.o
@@ -8,12 +8,7 @@ config/fish/fish_history
 config/fish/fishd*
 config/fish/fish_variables
 vim/.netrwhist
-vim/bundle/*
-vim/plugged/*
-weechat/logs/*
-weechat/weechat.log
 tags
 Session.vim
 .idea/*
 styles/**
-**/packer_compiled.lua
