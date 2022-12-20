@@ -2,6 +2,12 @@ local opts = { noremap = true, silent = true }
 local term_opts = { silent = true }
 
 vim.opt.relativenumber = true
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
+vim.opt.tabstop = 4
+
+vim.keymap.set('n', '<C-p>', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
+vim.keymap.set('n', '<leader>sa', ":Telescope aerial <CR>" ,  { desc = '[S]earch [A]erial' })
 
 -- Navigate splits with ^hjkl
 vim.keymap.set("n", "<C-h>", "<C-w>h", opts)
@@ -46,3 +52,27 @@ vim.keymap.set("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
 vim.keymap.set("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
 vim.keymap.set("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 vim.keymap.set("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
+
+-- Lualine configuration to include aerial information
+require('lualine').setup({
+sections = {
+    lualine_x = { "aerial" },
+    -- Or you can customize it
+    lualine_y = { "aerial",
+      -- The separator to be used to separate symbols in status line.
+      sep = ' ) ',
+      -- The number of symbols to render top-down. In order to render only 'N' last
+      -- symbols, negative numbers may be supplied. For instance, 'depth = -1' can
+      -- be used in order to render only current symbol.
+      depth = nil,
+      -- When 'dense' mode is on, icons are not rendered near their symbols. Only
+      -- a single icon that represents the kind of current symbol is rendered at
+      -- the beginning of status line.
+      dense = false,
+      -- The separator to be used to separate symbols in dense mode.
+      dense_sep = '.',
+      -- Color the symbol icons.
+      colored = true,
+    },
+  },
+})

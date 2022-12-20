@@ -10,6 +10,7 @@ return function (use)
     },
     config = function()
       require("neo-tree").setup({
+        use_libuv_file_watcher = true,
         window = {
           mappings = {
             ["o"]    = "open_with_window_picker",
@@ -45,11 +46,11 @@ return function (use)
         [[ \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/]],
       }
       dashboard.section.buttons.val = {
-        dashboard.button("f", "  Find file", ":Telescope find_files <CR>"),
+        dashboard.button("f", "  Find file", require('telescope.builtin').find_files),
         dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
-        -- dashboard.button("p", "  Find project", ":Telescope projects <CR>"),
-        dashboard.button("r", "  Recently used files", ":Telescope oldfiles <CR>"),
-        dashboard.button("t", "  Find text", ":Telescope live_grep <CR>"),
+        dashboard.button("p", "  Find project", require('telescope.extensions.projects').projects),
+        dashboard.button("r", "  Recently used files", require('telescope.builtin').old_files),
+        dashboard.button("t", "  Find text", require('telescope.builtin').live_grep),
         dashboard.button("c", "  Configuration", ":e ~/.config/nvim/init.lua <CR>"),
         dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
       }
@@ -104,16 +105,18 @@ return function (use)
   use({
     "ahmedkhalf/project.nvim",
     config = function ()
+      require('telescope').load_extension('projects')
       require("project_nvim").setup({
-        active = true,
-        on_config_done = nil,
-        manual_mode = false,
+        active            = true,
+        on_config_done    = nil,
+        manual_mode       = false,
         detection_methods = { "lsp", "pattern" },
-        patterns = { "go.mod", ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
-        show_hidden = false,
-        silent_chdir = true,
-        ignore_lsp = {},
-        datapath = vim.fn.stdpath("data"),
+        exclude_dirs      = { "~/.dotfiles" },
+        patterns          = { "go.mod", ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
+        show_hidden       = false,
+        silent_chdir      = true,
+        ignore_lsp        = {},
+        datapath          = vim.fn.stdpath("data"),
       })
     end
   })
@@ -167,6 +170,17 @@ return function (use)
           formatting.stylua,
         }
       })
+    end
+  })
+  use({ "dag/vim-fish" })
+  use({
+    "ray-x/go.nvim",
+    requires = {
+      "neovim/nvim-lspconfig",
+      "nvim-treesitter/nvim-treesitter"
+    },
+    config = function ()
+      require('go').setup({})
     end
   })
 end

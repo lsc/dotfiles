@@ -16,3 +16,4 @@ tags
 Session.vim
 .idea/*
 styles/**
+**/packer_compiled.lua
