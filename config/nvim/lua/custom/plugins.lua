@@ -48,7 +48,7 @@ return function (use)
       dashboard.section.buttons.val = {
         dashboard.button("f", "  Find file", require('telescope.builtin').find_files),
         dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
-        dashboard.button("p", "  Find project", require('telescope.extensions.projects').projects),
+        -- dashboard.button("p", "  Find project", require'telescope.extensions'.projects.projects{}),
         dashboard.button("r", "  Recently used files", require('telescope.builtin').old_files),
         dashboard.button("t", "  Find text", require('telescope.builtin').live_grep),
         dashboard.button("c", "  Configuration", ":e ~/.config/nvim/init.lua <CR>"),
@@ -158,16 +158,28 @@ return function (use)
         sources = {
           diagnostics.gitlint,
           diagnostics.golangci_lint,
-          diagnostics.jsonlint,
           diagnostics.javascript,
+          diagnostics.jsonlint,
           diagnostics.markdownlint,
           diagnostics.shellcheck,
-          diagnostics.yamllint,
           diagnostics.vale,
+          diagnostics.yamllint,
+          diagnostics.checkmake,
+          diagnostics.eslint_d,
 
+          formatting.beautysh,
+          formatting.eslint_d,
+          formatting.fish_indent,
+          formatting.fixjson,
+          formatting.gofumpt,
+          formatting.lua_format,
           formatting.markdownlint,
-          formatting.prettier.with { extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote"}},
+          formatting.prettierd,
+          formatting.shellharden,
+          formatting.shellcheck,
           formatting.stylua,
+          formatting.terraform_fmt,
+          formatting.yamlfmt,
         }
       })
     end
@@ -181,6 +193,29 @@ return function (use)
     },
     config = function ()
       require('go').setup({})
+    end
+  })
+  use({
+    "leoluz/nvim-dap-go",
+    requires = {
+      "mfussenegger/nvim-dap"
+    },
+    config = function ()
+      require('dap-go').setup({})
+    end
+  })
+  use ({
+    "nathom/filetype.nvim",
+    config = function()
+      require("filetype").setup {
+        overrides = {
+          extensions = {
+            tf = "terraform",
+            tfvars = "terraform",
+            tfstate = "json",
+          },
+        },
+      }
     end
   })
 end

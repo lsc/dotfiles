@@ -91,7 +91,7 @@ _G.packer_plugins = {
     url = "https://github.com/stevearc/aerial.nvim"
   },
   ["alpha-nvim"] = {
-    config = { "\27LJ\2\n…\b\0\0\n\0(\1V6\0\0\0'\2\1\0B\0\2\0029\1\2\0009\1\3\0015\2\5\0=\2\4\0019\1\2\0009\1\6\0014\2\b\0009\3\a\0'\5\b\0'\6\t\0'\a\n\0B\3\4\2>\3\1\0029\3\a\0'\5\v\0'\6\f\0'\a\r\0B\3\4\2>\3\2\0029\3\a\0'\5\14\0'\6\15\0006\a\0\0'\t\16\0B\a\2\0029\a\17\a9\a\18\a9\a\18\a4\t\0\0B\a\2\0A\3\2\2>\3\3\0029\3\a\0'\5\19\0'\6\20\0'\a\21\0B\3\4\2>\3\4\0029\3\a\0'\5\22\0'\6\23\0'\a\24\0B\3\4\2>\3\5\0029\3\a\0'\5\25\0'\6\26\0'\a\27\0B\3\4\2>\3\6\0029\3\a\0'\5\28\0'\6\29\0'\a\30\0B\3\4\0?\3\0\0=\2\4\0019\1\2\0009\1\31\0019\1 \1'\2\"\0=\2!\0019\1\2\0009\1\3\0019\1 \1'\2#\0=\2!\0019\1\2\0009\1\6\0019\1 \1'\2$\0=\2!\0019\1 \0009\1 \1+\2\2\0=\2%\0016\1\0\0'\3&\0B\1\2\0029\1'\0019\3 \0B\1\2\1K\0\1\0\nsetup\nalpha\14noautocmd\fKeyword\fInclude\tType\ahl\topts\vfooter\f:qa<CR>\21Ôôô  Quit Neovim\6q$:e ~/.config/nvim/init.lua <CR>\23Óòï  Configuration\6c\30:Telescope live_grep <CR>\19ÔûÉ  Find text\6t\29:Telescope oldfiles <CR>\29Ôòà  Recently used files\6r\rprojects\15extensions\14telescope\22ÔÅª  Find project\6p :ene <BAR> startinsert <CR>\18ÔÖõ  New file\6e\31:Telescope find_files <CR>\19Ôúù  Find file\6f\vbutton\fbuttons\1\a\0\0006                               __                6  ___     ___    ___   __  __ /\\_\\    ___ ___    6 / _ `\\  / __`\\ / __`\\/\\ \\/\\ \\\\/\\ \\  / __` __`\\  6/\\ \\/\\ \\/\\  __//\\ \\_\\ \\ \\ \\_/ |\\ \\ \\/\\ \\/\\ \\/\\ \\ 6\\ \\_\\ \\_\\ \\____\\ \\____/\\ \\___/  \\ \\_\\ \\_\\ \\_\\ \\_\\6 \\/_/\\/_/\\/____/\\/___/  \\/__/    \\/_/\\/_/\\/_/\\/_/\bval\vheader\fsection\27alpha.themes.dashboard\frequire\15ÄÄ¿ô\4\0" },
+    config = { "\27LJ\2\nÍ\a\0\0\n\0$\1R6\0\0\0'\2\1\0B\0\2\0029\1\2\0009\1\3\0015\2\5\0=\2\4\0019\1\2\0009\1\6\0014\2\a\0009\3\a\0'\5\b\0'\6\t\0006\a\0\0'\t\n\0B\a\2\0029\a\v\aB\3\4\2>\3\1\0029\3\a\0'\5\f\0'\6\r\0'\a\14\0B\3\4\2>\3\2\0029\3\a\0'\5\15\0'\6\16\0006\a\0\0'\t\n\0B\a\2\0029\a\17\aB\3\4\2>\3\3\0029\3\a\0'\5\18\0'\6\19\0006\a\0\0'\t\n\0B\a\2\0029\a\20\aB\3\4\2>\3\4\0029\3\a\0'\5\21\0'\6\22\0'\a\23\0B\3\4\2>\3\5\0029\3\a\0'\5\24\0'\6\25\0'\a\26\0B\3\4\0?\3\0\0=\2\4\0019\1\2\0009\1\27\0019\1\28\1'\2\30\0=\2\29\0019\1\2\0009\1\3\0019\1\28\1'\2\31\0=\2\29\0019\1\2\0009\1\6\0019\1\28\1'\2 \0=\2\29\0019\1\28\0009\1\28\1+\2\2\0=\2!\0016\1\0\0'\3\"\0B\1\2\0029\1#\0019\3\28\0B\1\2\1K\0\1\0\nsetup\nalpha\14noautocmd\fKeyword\fInclude\tType\ahl\topts\vfooter\f:qa<CR>\21Ôôô  Quit Neovim\6q$:e ~/.config/nvim/init.lua <CR>\23Óòï  Configuration\6c\14live_grep\19ÔûÉ  Find text\6t\14old_files\29Ôòà  Recently used files\6r :ene <BAR> startinsert <CR>\18ÔÖõ  New file\6e\15find_files\22telescope.builtin\19Ôúù  Find file\6f\vbutton\fbuttons\1\a\0\0006                               __                6  ___     ___    ___   __  __ /\\_\\    ___ ___    6 / _ `\\  / __`\\ / __`\\/\\ \\/\\ \\\\/\\ \\  / __` __`\\  6/\\ \\/\\ \\/\\  __//\\ \\_\\ \\ \\ \\_/ |\\ \\ \\/\\ \\/\\ \\/\\ \\ 6\\ \\_\\ \\_\\ \\____\\ \\____/\\ \\___/  \\ \\_\\ \\_\\ \\_\\ \\_\\6 \\/_/\\/_/\\/____/\\/___/  \\/__/    \\/_/\\/_/\\/_/\\/_/\bval\vheader\fsection\27alpha.themes.dashboard\frequire\rÄÄ¿ô\4\0" },
     loaded = true,
     path = "/Users/lsc/.local/share/nvim/site/pack/packer/start/alpha-nvim",
     url = "https://github.com/goolord/alpha-nvim"
@@ -116,6 +116,12 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/lsc/.local/share/nvim/site/pack/packer/start/fidget.nvim",
     url = "https://github.com/j-hui/fidget.nvim"
+  },
+  ["filetype.nvim"] = {
+    config = { "\27LJ\2\nì\1\0\0\5\0\b\0\v6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\6\0005\3\4\0005\4\3\0=\4\5\3=\3\a\2B\0\2\1K\0\1\0\14overrides\1\0\0\15extensions\1\0\0\1\0\3\ftfstate\tjson\atf\14terraform\vtfvars\14terraform\nsetup\rfiletype\frequire\0" },
+    loaded = true,
+    path = "/Users/lsc/.local/share/nvim/site/pack/packer/start/filetype.nvim",
+    url = "https://github.com/nathom/filetype.nvim"
   },
   ["gitsigns.nvim"] = {
     loaded = true,
@@ -149,7 +155,7 @@ _G.packer_plugins = {
     url = "https://github.com/williamboman/mason.nvim"
   },
   ["neo-tree.nvim"] = {
-    config = { "\27LJ\2\nÈ\1\0\0\5\0\b\0\v6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\5\0005\4\4\0=\4\6\3=\3\a\2B\0\2\1K\0\1\0\vwindow\rmappings\1\0\0\1\0\4\6s\30vsplit_with_window_picker\6o\28open_with_window_picker\t<cr>\28open_with_window_picker\6S\29split_with_window_picker\1\0\1\27use_libuv_file_watcher\2\nsetup\rneo-tree\frequire\0" },
+    config = { "\27LJ\2\nÈ\1\0\0\5\0\b\0\v6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\5\0005\4\4\0=\4\6\3=\3\a\2B\0\2\1K\0\1\0\vwindow\rmappings\1\0\0\1\0\4\6S\29split_with_window_picker\6o\28open_with_window_picker\t<cr>\28open_with_window_picker\6s\30vsplit_with_window_picker\1\0\1\27use_libuv_file_watcher\2\nsetup\rneo-tree\frequire\0" },
     loaded = true,
     path = "/Users/lsc/.local/share/nvim/site/pack/packer/start/neo-tree.nvim",
     url = "https://github.com/nvim-neo-tree/neo-tree.nvim"
@@ -171,7 +177,7 @@ _G.packer_plugins = {
     url = "https://github.com/MunifTanjim/nui.nvim"
   },
   ["null-ls.nvim"] = {
-    config = { "\27LJ\2\nã\3\0\0\v\0\22\0(6\0\0\0'\2\1\0B\0\2\0029\1\2\0009\1\3\0019\2\2\0009\2\4\0029\3\5\0005\5\20\0004\6\f\0009\a\6\1>\a\1\0069\a\a\1>\a\2\0069\a\b\1>\a\3\0069\a\t\1>\a\4\0069\a\n\1>\a\5\0069\a\v\1>\a\6\0069\a\f\1>\a\a\0069\a\r\1>\a\b\0069\a\n\2>\a\t\0069\a\14\0029\a\15\a5\t\17\0005\n\16\0=\n\18\tB\a\2\2>\a\n\0069\a\19\2>\a\v\6=\6\21\5B\3\2\1K\0\1\0\fsources\1\0\0\vstylua\15extra_args\1\0\0\1\4\0\0\14--no-semi\19--single-quote\23--jsx-single-quote\twith\rprettier\tvale\ryamllint\15shellcheck\17markdownlint\15javascript\rjsonlint\18golangci_lint\fgitlint\nsetup\15formatting\16diagnostics\rbuiltins\fnull-ls\frequire\0" },
+    config = { "\27LJ\2\n˙\3\0\0\b\0\28\0;6\0\0\0'\2\1\0B\0\2\0029\1\2\0009\1\3\0019\2\2\0009\2\4\0029\3\5\0005\5\26\0004\6\24\0009\a\6\1>\a\1\0069\a\a\1>\a\2\0069\a\b\1>\a\3\0069\a\t\1>\a\4\0069\a\n\1>\a\5\0069\a\v\1>\a\6\0069\a\f\1>\a\a\0069\a\r\1>\a\b\0069\a\14\1>\a\t\0069\a\15\1>\a\n\0069\a\16\2>\a\v\0069\a\15\2>\a\f\0069\a\17\2>\a\r\0069\a\18\2>\a\14\0069\a\19\2>\a\15\0069\a\20\2>\a\16\0069\a\n\2>\a\17\0069\a\21\2>\a\18\0069\a\22\2>\a\19\0069\a\v\2>\a\20\0069\a\23\2>\a\21\0069\a\24\2>\a\22\0069\a\25\2>\a\23\6=\6\27\5B\3\2\1K\0\1\0\fsources\1\0\0\fyamlfmt\18terraform_fmt\vstylua\16shellharden\14prettierd\15lua_format\fgofumpt\ffixjson\16fish_indent\rbeautysh\reslint_d\14checkmake\ryamllint\tvale\15shellcheck\17markdownlint\rjsonlint\15javascript\18golangci_lint\fgitlint\nsetup\15formatting\16diagnostics\rbuiltins\fnull-ls\frequire\0" },
     loaded = true,
     path = "/Users/lsc/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
     url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
@@ -186,6 +192,17 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/lsc/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
+  },
+  ["nvim-dap"] = {
+    loaded = true,
+    path = "/Users/lsc/.local/share/nvim/site/pack/packer/start/nvim-dap",
+    url = "https://github.com/mfussenegger/nvim-dap"
+  },
+  ["nvim-dap-go"] = {
+    config = { "\27LJ\2\n8\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\vdap-go\frequire\0" },
+    loaded = true,
+    path = "/Users/lsc/.local/share/nvim/site/pack/packer/start/nvim-dap-go",
+    url = "https://github.com/leoluz/nvim-dap-go"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
@@ -231,7 +248,7 @@ _G.packer_plugins = {
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
   ["project.nvim"] = {
-    config = { "\27LJ\2\né\3\0\0\6\0\19\0\0276\0\0\0'\2\1\0B\0\2\0029\0\2\0'\2\3\0B\0\2\0016\0\0\0'\2\4\0B\0\2\0029\0\5\0005\2\6\0005\3\a\0=\3\b\0025\3\t\0=\3\n\0025\3\v\0=\3\f\0024\3\0\0=\3\r\0026\3\14\0009\3\15\0039\3\16\3'\5\17\0B\3\2\2=\3\18\2B\0\2\1K\0\1\0\rdatapath\tdata\fstdpath\afn\bvim\15ignore_lsp\rpatterns\1\t\0\0\vgo.mod\t.git\v_darcs\b.hg\t.bzr\t.svn\rMakefile\17package.json\17exclude_dirs\1\2\0\0\16~/.dotfiles\22detection_methods\1\3\0\0\blsp\fpattern\1\0\4\vactive\2\16manual_mode\1\17silent_chdir\2\16show_hidden\1\nsetup\17project_nvim\rprojects\19load_extension\14telescope\frequire\0" },
+    config = { "\27LJ\2\né\3\0\0\6\0\19\0\0276\0\0\0'\2\1\0B\0\2\0029\0\2\0'\2\3\0B\0\2\0016\0\0\0'\2\4\0B\0\2\0029\0\5\0005\2\6\0005\3\a\0=\3\b\0025\3\t\0=\3\n\0025\3\v\0=\3\f\0024\3\0\0=\3\r\0026\3\14\0009\3\15\0039\3\16\3'\5\17\0B\3\2\2=\3\18\2B\0\2\1K\0\1\0\rdatapath\tdata\fstdpath\afn\bvim\15ignore_lsp\rpatterns\1\t\0\0\vgo.mod\t.git\v_darcs\b.hg\t.bzr\t.svn\rMakefile\17package.json\17exclude_dirs\1\2\0\0\16~/.dotfiles\22detection_methods\1\3\0\0\blsp\fpattern\1\0\4\16manual_mode\1\17silent_chdir\2\16show_hidden\1\vactive\2\nsetup\17project_nvim\rprojects\19load_extension\14telescope\frequire\0" },
     loaded = true,
     path = "/Users/lsc/.local/share/nvim/site/pack/packer/start/project.nvim",
     url = "https://github.com/ahmedkhalf/project.nvim"
@@ -255,7 +272,7 @@ _G.packer_plugins = {
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
   ["toggleterm.nvim"] = {
-    config = { "\27LJ\2\nˆ\2\0\0\5\0\f\0\0176\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0004\3\0\0=\3\4\0026\3\5\0009\3\6\0039\3\a\3=\3\a\0025\3\b\0005\4\t\0=\4\n\3=\3\v\2B\0\2\1K\0\1\0\15float_opts\15highlights\1\0\2\15background\vNormal\vborder\vNormal\1\0\2\vborder\vcurved\rwinblend\3\0\nshell\6o\bvim\20shade_filetypes\1\0\n\20insert_mappings\2\20start_in_insert\2\19shading_factor\3\2\20shade_terminals\2\17hide_numbers\2\17open_mapping\n<c-t>\tsize\3\20\18close_on_exit\2\14direction\15horizontal\17persist_size\2\nsetup\15toggleterm\frequire\0" },
+    config = { "\27LJ\2\nˆ\2\0\0\5\0\f\0\0176\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0004\3\0\0=\3\4\0026\3\5\0009\3\6\0039\3\a\3=\3\a\0025\3\b\0005\4\t\0=\4\n\3=\3\v\2B\0\2\1K\0\1\0\15float_opts\15highlights\1\0\2\vborder\vNormal\15background\vNormal\1\0\2\vborder\vcurved\rwinblend\3\0\nshell\6o\bvim\20shade_filetypes\1\0\n\18close_on_exit\2\14direction\15horizontal\17persist_size\2\20insert_mappings\2\20start_in_insert\2\19shading_factor\3\2\20shade_terminals\2\17hide_numbers\2\17open_mapping\n<c-t>\tsize\3\20\nsetup\15toggleterm\frequire\0" },
     loaded = true,
     path = "/Users/lsc/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
     url = "https://github.com/akinsho/toggleterm.nvim"
@@ -289,54 +306,62 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: which-key.nvim
-time([[Config for which-key.nvim]], true)
-try_loadstring("\27LJ\2\n;\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\14which-key\frequire\0", "config", "which-key.nvim")
-time([[Config for which-key.nvim]], false)
--- Config for: go.nvim
-time([[Config for go.nvim]], true)
-try_loadstring("\27LJ\2\n4\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\ago\frequire\0", "config", "go.nvim")
-time([[Config for go.nvim]], false)
--- Config for: aerial.nvim
-time([[Config for aerial.nvim]], true)
-try_loadstring("\27LJ\2\ni\0\0\4\0\5\0\r6\0\0\0'\2\1\0B\0\2\0029\1\2\0'\3\3\0B\1\2\0016\1\0\0'\3\3\0B\1\2\0029\1\4\0014\3\0\0B\1\2\1K\0\1\0\nsetup\vaerial\19load_extension\14telescope\frequire\0", "config", "aerial.nvim")
-time([[Config for aerial.nvim]], false)
--- Config for: null-ls.nvim
-time([[Config for null-ls.nvim]], true)
-try_loadstring("\27LJ\2\nã\3\0\0\v\0\22\0(6\0\0\0'\2\1\0B\0\2\0029\1\2\0009\1\3\0019\2\2\0009\2\4\0029\3\5\0005\5\20\0004\6\f\0009\a\6\1>\a\1\0069\a\a\1>\a\2\0069\a\b\1>\a\3\0069\a\t\1>\a\4\0069\a\n\1>\a\5\0069\a\v\1>\a\6\0069\a\f\1>\a\a\0069\a\r\1>\a\b\0069\a\n\2>\a\t\0069\a\14\0029\a\15\a5\t\17\0005\n\16\0=\n\18\tB\a\2\2>\a\n\0069\a\19\2>\a\v\6=\6\21\5B\3\2\1K\0\1\0\fsources\1\0\0\vstylua\15extra_args\1\0\0\1\4\0\0\14--no-semi\19--single-quote\23--jsx-single-quote\twith\rprettier\tvale\ryamllint\15shellcheck\17markdownlint\15javascript\rjsonlint\18golangci_lint\fgitlint\nsetup\15formatting\16diagnostics\rbuiltins\fnull-ls\frequire\0", "config", "null-ls.nvim")
-time([[Config for null-ls.nvim]], false)
--- Config for: toggleterm.nvim
-time([[Config for toggleterm.nvim]], true)
-try_loadstring("\27LJ\2\nˆ\2\0\0\5\0\f\0\0176\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0004\3\0\0=\3\4\0026\3\5\0009\3\6\0039\3\a\3=\3\a\0025\3\b\0005\4\t\0=\4\n\3=\3\v\2B\0\2\1K\0\1\0\15float_opts\15highlights\1\0\2\15background\vNormal\vborder\vNormal\1\0\2\vborder\vcurved\rwinblend\3\0\nshell\6o\bvim\20shade_filetypes\1\0\n\20insert_mappings\2\20start_in_insert\2\19shading_factor\3\2\20shade_terminals\2\17hide_numbers\2\17open_mapping\n<c-t>\tsize\3\20\18close_on_exit\2\14direction\15horizontal\17persist_size\2\nsetup\15toggleterm\frequire\0", "config", "toggleterm.nvim")
-time([[Config for toggleterm.nvim]], false)
--- Config for: alpha-nvim
-time([[Config for alpha-nvim]], true)
-try_loadstring("\27LJ\2\n…\b\0\0\n\0(\1V6\0\0\0'\2\1\0B\0\2\0029\1\2\0009\1\3\0015\2\5\0=\2\4\0019\1\2\0009\1\6\0014\2\b\0009\3\a\0'\5\b\0'\6\t\0'\a\n\0B\3\4\2>\3\1\0029\3\a\0'\5\v\0'\6\f\0'\a\r\0B\3\4\2>\3\2\0029\3\a\0'\5\14\0'\6\15\0006\a\0\0'\t\16\0B\a\2\0029\a\17\a9\a\18\a9\a\18\a4\t\0\0B\a\2\0A\3\2\2>\3\3\0029\3\a\0'\5\19\0'\6\20\0'\a\21\0B\3\4\2>\3\4\0029\3\a\0'\5\22\0'\6\23\0'\a\24\0B\3\4\2>\3\5\0029\3\a\0'\5\25\0'\6\26\0'\a\27\0B\3\4\2>\3\6\0029\3\a\0'\5\28\0'\6\29\0'\a\30\0B\3\4\0?\3\0\0=\2\4\0019\1\2\0009\1\31\0019\1 \1'\2\"\0=\2!\0019\1\2\0009\1\3\0019\1 \1'\2#\0=\2!\0019\1\2\0009\1\6\0019\1 \1'\2$\0=\2!\0019\1 \0009\1 \1+\2\2\0=\2%\0016\1\0\0'\3&\0B\1\2\0029\1'\0019\3 \0B\1\2\1K\0\1\0\nsetup\nalpha\14noautocmd\fKeyword\fInclude\tType\ahl\topts\vfooter\f:qa<CR>\21Ôôô  Quit Neovim\6q$:e ~/.config/nvim/init.lua <CR>\23Óòï  Configuration\6c\30:Telescope live_grep <CR>\19ÔûÉ  Find text\6t\29:Telescope oldfiles <CR>\29Ôòà  Recently used files\6r\rprojects\15extensions\14telescope\22ÔÅª  Find project\6p :ene <BAR> startinsert <CR>\18ÔÖõ  New file\6e\31:Telescope find_files <CR>\19Ôúù  Find file\6f\vbutton\fbuttons\1\a\0\0006                               __                6  ___     ___    ___   __  __ /\\_\\    ___ ___    6 / _ `\\  / __`\\ / __`\\/\\ \\/\\ \\\\/\\ \\  / __` __`\\  6/\\ \\/\\ \\/\\  __//\\ \\_\\ \\ \\ \\_/ |\\ \\ \\/\\ \\/\\ \\/\\ \\ 6\\ \\_\\ \\_\\ \\____\\ \\____/\\ \\___/  \\ \\_\\ \\_\\ \\_\\ \\_\\6 \\/_/\\/_/\\/____/\\/___/  \\/__/    \\/_/\\/_/\\/_/\\/_/\bval\vheader\fsection\27alpha.themes.dashboard\frequire\15ÄÄ¿ô\4\0", "config", "alpha-nvim")
-time([[Config for alpha-nvim]], false)
 -- Config for: bufferline.nvim
 time([[Config for bufferline.nvim]], true)
 try_loadstring("\27LJ\2\n<\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\15bufferline\frequire\0", "config", "bufferline.nvim")
 time([[Config for bufferline.nvim]], false)
--- Config for: neo-tree.nvim
-time([[Config for neo-tree.nvim]], true)
-try_loadstring("\27LJ\2\nÈ\1\0\0\5\0\b\0\v6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\5\0005\4\4\0=\4\6\3=\3\a\2B\0\2\1K\0\1\0\vwindow\rmappings\1\0\0\1\0\4\6s\30vsplit_with_window_picker\6o\28open_with_window_picker\t<cr>\28open_with_window_picker\6S\29split_with_window_picker\1\0\1\27use_libuv_file_watcher\2\nsetup\rneo-tree\frequire\0", "config", "neo-tree.nvim")
-time([[Config for neo-tree.nvim]], false)
--- Config for: nvim-autopairs
-time([[Config for nvim-autopairs]], true)
-try_loadstring("\27LJ\2\n‹\1\0\0\n\0\f\0\0236\0\0\0'\2\1\0B\0\2\0026\1\0\0'\3\2\0B\1\2\0029\2\3\1\18\4\2\0009\2\4\2'\5\5\0009\6\6\0005\b\b\0005\t\a\0=\t\t\bB\6\2\0A\2\2\0016\2\0\0'\4\n\0B\2\2\0029\2\v\0024\4\0\0B\2\2\1K\0\1\0\nsetup\19nvim-autopairs\rmap_char\1\0\0\1\0\1\btex\5\20on_confirm_done\17confirm_done\aon\nevent\bcmp\"nvim-autopairs.completion.cmp\frequire\0", "config", "nvim-autopairs")
-time([[Config for nvim-autopairs]], false)
--- Config for: project.nvim
-time([[Config for project.nvim]], true)
-try_loadstring("\27LJ\2\né\3\0\0\6\0\19\0\0276\0\0\0'\2\1\0B\0\2\0029\0\2\0'\2\3\0B\0\2\0016\0\0\0'\2\4\0B\0\2\0029\0\5\0005\2\6\0005\3\a\0=\3\b\0025\3\t\0=\3\n\0025\3\v\0=\3\f\0024\3\0\0=\3\r\0026\3\14\0009\3\15\0039\3\16\3'\5\17\0B\3\2\2=\3\18\2B\0\2\1K\0\1\0\rdatapath\tdata\fstdpath\afn\bvim\15ignore_lsp\rpatterns\1\t\0\0\vgo.mod\t.git\v_darcs\b.hg\t.bzr\t.svn\rMakefile\17package.json\17exclude_dirs\1\2\0\0\16~/.dotfiles\22detection_methods\1\3\0\0\blsp\fpattern\1\0\4\vactive\2\16manual_mode\1\17silent_chdir\2\16show_hidden\1\nsetup\17project_nvim\rprojects\19load_extension\14telescope\frequire\0", "config", "project.nvim")
-time([[Config for project.nvim]], false)
--- Config for: neogit
-time([[Config for neogit]], true)
-try_loadstring("\27LJ\2\n8\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\vneogit\frequire\0", "config", "neogit")
-time([[Config for neogit]], false)
+-- Config for: toggleterm.nvim
+time([[Config for toggleterm.nvim]], true)
+try_loadstring("\27LJ\2\nˆ\2\0\0\5\0\f\0\0176\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0004\3\0\0=\3\4\0026\3\5\0009\3\6\0039\3\a\3=\3\a\0025\3\b\0005\4\t\0=\4\n\3=\3\v\2B\0\2\1K\0\1\0\15float_opts\15highlights\1\0\2\vborder\vNormal\15background\vNormal\1\0\2\vborder\vcurved\rwinblend\3\0\nshell\6o\bvim\20shade_filetypes\1\0\n\18close_on_exit\2\14direction\15horizontal\17persist_size\2\20insert_mappings\2\20start_in_insert\2\19shading_factor\3\2\20shade_terminals\2\17hide_numbers\2\17open_mapping\n<c-t>\tsize\3\20\nsetup\15toggleterm\frequire\0", "config", "toggleterm.nvim")
+time([[Config for toggleterm.nvim]], false)
 -- Config for: nvim-window-picker
 time([[Config for nvim-window-picker]], true)
 try_loadstring("\27LJ\2\n?\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\18window-picker\frequire\0", "config", "nvim-window-picker")
 time([[Config for nvim-window-picker]], false)
+-- Config for: nvim-dap-go
+time([[Config for nvim-dap-go]], true)
+try_loadstring("\27LJ\2\n8\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\vdap-go\frequire\0", "config", "nvim-dap-go")
+time([[Config for nvim-dap-go]], false)
+-- Config for: neo-tree.nvim
+time([[Config for neo-tree.nvim]], true)
+try_loadstring("\27LJ\2\nÈ\1\0\0\5\0\b\0\v6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0005\3\5\0005\4\4\0=\4\6\3=\3\a\2B\0\2\1K\0\1\0\vwindow\rmappings\1\0\0\1\0\4\6S\29split_with_window_picker\6o\28open_with_window_picker\t<cr>\28open_with_window_picker\6s\30vsplit_with_window_picker\1\0\1\27use_libuv_file_watcher\2\nsetup\rneo-tree\frequire\0", "config", "neo-tree.nvim")
+time([[Config for neo-tree.nvim]], false)
+-- Config for: null-ls.nvim
+time([[Config for null-ls.nvim]], true)
+try_loadstring("\27LJ\2\n˙\3\0\0\b\0\28\0;6\0\0\0'\2\1\0B\0\2\0029\1\2\0009\1\3\0019\2\2\0009\2\4\0029\3\5\0005\5\26\0004\6\24\0009\a\6\1>\a\1\0069\a\a\1>\a\2\0069\a\b\1>\a\3\0069\a\t\1>\a\4\0069\a\n\1>\a\5\0069\a\v\1>\a\6\0069\a\f\1>\a\a\0069\a\r\1>\a\b\0069\a\14\1>\a\t\0069\a\15\1>\a\n\0069\a\16\2>\a\v\0069\a\15\2>\a\f\0069\a\17\2>\a\r\0069\a\18\2>\a\14\0069\a\19\2>\a\15\0069\a\20\2>\a\16\0069\a\n\2>\a\17\0069\a\21\2>\a\18\0069\a\22\2>\a\19\0069\a\v\2>\a\20\0069\a\23\2>\a\21\0069\a\24\2>\a\22\0069\a\25\2>\a\23\6=\6\27\5B\3\2\1K\0\1\0\fsources\1\0\0\fyamlfmt\18terraform_fmt\vstylua\16shellharden\14prettierd\15lua_format\fgofumpt\ffixjson\16fish_indent\rbeautysh\reslint_d\14checkmake\ryamllint\tvale\15shellcheck\17markdownlint\rjsonlint\15javascript\18golangci_lint\fgitlint\nsetup\15formatting\16diagnostics\rbuiltins\fnull-ls\frequire\0", "config", "null-ls.nvim")
+time([[Config for null-ls.nvim]], false)
+-- Config for: filetype.nvim
+time([[Config for filetype.nvim]], true)
+try_loadstring("\27LJ\2\nì\1\0\0\5\0\b\0\v6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\6\0005\3\4\0005\4\3\0=\4\5\3=\3\a\2B\0\2\1K\0\1\0\14overrides\1\0\0\15extensions\1\0\0\1\0\3\ftfstate\tjson\atf\14terraform\vtfvars\14terraform\nsetup\rfiletype\frequire\0", "config", "filetype.nvim")
+time([[Config for filetype.nvim]], false)
+-- Config for: neogit
+time([[Config for neogit]], true)
+try_loadstring("\27LJ\2\n8\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\vneogit\frequire\0", "config", "neogit")
+time([[Config for neogit]], false)
+-- Config for: project.nvim
+time([[Config for project.nvim]], true)
+try_loadstring("\27LJ\2\né\3\0\0\6\0\19\0\0276\0\0\0'\2\1\0B\0\2\0029\0\2\0'\2\3\0B\0\2\0016\0\0\0'\2\4\0B\0\2\0029\0\5\0005\2\6\0005\3\a\0=\3\b\0025\3\t\0=\3\n\0025\3\v\0=\3\f\0024\3\0\0=\3\r\0026\3\14\0009\3\15\0039\3\16\3'\5\17\0B\3\2\2=\3\18\2B\0\2\1K\0\1\0\rdatapath\tdata\fstdpath\afn\bvim\15ignore_lsp\rpatterns\1\t\0\0\vgo.mod\t.git\v_darcs\b.hg\t.bzr\t.svn\rMakefile\17package.json\17exclude_dirs\1\2\0\0\16~/.dotfiles\22detection_methods\1\3\0\0\blsp\fpattern\1\0\4\16manual_mode\1\17silent_chdir\2\16show_hidden\1\vactive\2\nsetup\17project_nvim\rprojects\19load_extension\14telescope\frequire\0", "config", "project.nvim")
+time([[Config for project.nvim]], false)
+-- Config for: aerial.nvim
+time([[Config for aerial.nvim]], true)
+try_loadstring("\27LJ\2\ni\0\0\4\0\5\0\r6\0\0\0'\2\1\0B\0\2\0029\1\2\0'\3\3\0B\1\2\0016\1\0\0'\3\3\0B\1\2\0029\1\4\0014\3\0\0B\1\2\1K\0\1\0\nsetup\vaerial\19load_extension\14telescope\frequire\0", "config", "aerial.nvim")
+time([[Config for aerial.nvim]], false)
+-- Config for: nvim-autopairs
+time([[Config for nvim-autopairs]], true)
+try_loadstring("\27LJ\2\n‹\1\0\0\n\0\f\0\0236\0\0\0'\2\1\0B\0\2\0026\1\0\0'\3\2\0B\1\2\0029\2\3\1\18\4\2\0009\2\4\2'\5\5\0009\6\6\0005\b\b\0005\t\a\0=\t\t\bB\6\2\0A\2\2\0016\2\0\0'\4\n\0B\2\2\0029\2\v\0024\4\0\0B\2\2\1K\0\1\0\nsetup\19nvim-autopairs\rmap_char\1\0\0\1\0\1\btex\5\20on_confirm_done\17confirm_done\aon\nevent\bcmp\"nvim-autopairs.completion.cmp\frequire\0", "config", "nvim-autopairs")
+time([[Config for nvim-autopairs]], false)
+-- Config for: go.nvim
+time([[Config for go.nvim]], true)
+try_loadstring("\27LJ\2\n4\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\ago\frequire\0", "config", "go.nvim")
+time([[Config for go.nvim]], false)
+-- Config for: alpha-nvim
+time([[Config for alpha-nvim]], true)
+try_loadstring("\27LJ\2\nÍ\a\0\0\n\0$\1R6\0\0\0'\2\1\0B\0\2\0029\1\2\0009\1\3\0015\2\5\0=\2\4\0019\1\2\0009\1\6\0014\2\a\0009\3\a\0'\5\b\0'\6\t\0006\a\0\0'\t\n\0B\a\2\0029\a\v\aB\3\4\2>\3\1\0029\3\a\0'\5\f\0'\6\r\0'\a\14\0B\3\4\2>\3\2\0029\3\a\0'\5\15\0'\6\16\0006\a\0\0'\t\n\0B\a\2\0029\a\17\aB\3\4\2>\3\3\0029\3\a\0'\5\18\0'\6\19\0006\a\0\0'\t\n\0B\a\2\0029\a\20\aB\3\4\2>\3\4\0029\3\a\0'\5\21\0'\6\22\0'\a\23\0B\3\4\2>\3\5\0029\3\a\0'\5\24\0'\6\25\0'\a\26\0B\3\4\0?\3\0\0=\2\4\0019\1\2\0009\1\27\0019\1\28\1'\2\30\0=\2\29\0019\1\2\0009\1\3\0019\1\28\1'\2\31\0=\2\29\0019\1\2\0009\1\6\0019\1\28\1'\2 \0=\2\29\0019\1\28\0009\1\28\1+\2\2\0=\2!\0016\1\0\0'\3\"\0B\1\2\0029\1#\0019\3\28\0B\1\2\1K\0\1\0\nsetup\nalpha\14noautocmd\fKeyword\fInclude\tType\ahl\topts\vfooter\f:qa<CR>\21Ôôô  Quit Neovim\6q$:e ~/.config/nvim/init.lua <CR>\23Óòï  Configuration\6c\14live_grep\19ÔûÉ  Find text\6t\14old_files\29Ôòà  Recently used files\6r :ene <BAR> startinsert <CR>\18ÔÖõ  New file\6e\15find_files\22telescope.builtin\19Ôúù  Find file\6f\vbutton\fbuttons\1\a\0\0006                               __                6  ___     ___    ___   __  __ /\\_\\    ___ ___    6 / _ `\\  / __`\\ / __`\\/\\ \\/\\ \\\\/\\ \\  / __` __`\\  6/\\ \\/\\ \\/\\  __//\\ \\_\\ \\ \\ \\_/ |\\ \\ \\/\\ \\/\\ \\/\\ \\ 6\\ \\_\\ \\_\\ \\____\\ \\____/\\ \\___/  \\ \\_\\ \\_\\ \\_\\ \\_\\6 \\/_/\\/_/\\/____/\\/___/  \\/__/    \\/_/\\/_/\\/_/\\/_/\bval\vheader\fsection\27alpha.themes.dashboard\frequire\rÄÄ¿ô\4\0", "config", "alpha-nvim")
+time([[Config for alpha-nvim]], false)
+-- Config for: which-key.nvim
+time([[Config for which-key.nvim]], true)
+try_loadstring("\27LJ\2\n;\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\14which-key\frequire\0", "config", "which-key.nvim")
+time([[Config for which-key.nvim]], false)
 -- Conditional loads
 time([[Conditional loading of telescope-fzf-native.nvim]], true)
   require("packer.load")({"telescope-fzf-native.nvim"}, {}, _G.packer_plugins)
