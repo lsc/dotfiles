@@ -1,6 +1,8 @@
 local opts = { noremap = true, silent = true }
 local term_opts = { silent = true }
 
+vim.cmd [[colorscheme nord]]
+
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
@@ -57,6 +59,9 @@ vim.keymap.set("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
 vim.keymap.set("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
 vim.keymap.set("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 vim.keymap.set("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
+-- Leave terminal mode with ESC, so you can split the terminal
+vim.keymap.set("t", "<ESC>", "<C-\\><C-N>", term_opts)
+vim.keymap.set("n", '<leader>t', ":ToggleTermToggleAll<CR>", opts)
 
 -- Lualine configuration to include aerial information
 require('lualine').setup({
@@ -73,11 +78,11 @@ sections = {
       -- When 'dense' mode is on, icons are not rendered near their symbols. Only
       -- a single icon that represents the kind of current symbol is rendered at
       -- the beginning of status line.
-      dense = false,
+      dense = { "false" },
       -- The separator to be used to separate symbols in dense mode.
       dense_sep = '.',
       -- Color the symbol icons.
-      colored = true,
+      colored = { "true" },
     },
   },
 })

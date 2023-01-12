@@ -114,7 +114,7 @@ return function (use)
         exclude_dirs      = { "~/.dotfiles" },
         patterns          = { "go.mod", ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
         show_hidden       = false,
-        silent_chdir      = true,
+        silent_chdir      = false,
         ignore_lsp        = {},
         datapath          = vim.fn.stdpath("data"),
       })
@@ -124,7 +124,7 @@ return function (use)
     "akinsho/toggleterm.nvim",
     config = function ()
       require("toggleterm").setup({
-        size = 20,
+        size = 35,
         open_mapping = [[<c-t>]],
         hide_numbers = true,
         shade_filetypes = {},
@@ -133,7 +133,7 @@ return function (use)
         start_in_insert = true,
         insert_mappings = true,
         persist_size = true,
-        direction = "horizontal",
+        direction = "vertical",
         close_on_exit = true,
         shell = vim.o.shell,
         float_opts = {
@@ -158,7 +158,6 @@ return function (use)
         sources = {
           diagnostics.gitlint,
           diagnostics.golangci_lint,
-          diagnostics.javascript,
           diagnostics.jsonlint,
           diagnostics.markdownlint,
           diagnostics.shellcheck,
@@ -174,9 +173,7 @@ return function (use)
           formatting.gofumpt,
           formatting.lua_format,
           formatting.markdownlint,
-          formatting.prettierd,
           formatting.shellharden,
-          formatting.shellcheck,
           formatting.stylua,
           formatting.terraform_fmt,
           formatting.yamlfmt,
