@@ -1,5 +1,7 @@
 #!/usr/bin/env fish
 set --export EDITOR nvim
+set --export USE_GKE_GCLOUD_AUTH_PLUGIN True
+
 set --unexport fish_greeting
 
 set asdf (command -v asdf)
