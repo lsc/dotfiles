@@ -70,7 +70,7 @@ sections = {
     -- Or you can customize it
     lualine_y = { "aerial",
       -- The separator to be used to separate symbols in status line.
-      sep = ' ) ',
+      sep = " ) ",
       -- The number of symbols to render top-down. In order to render only 'N' last
       -- symbols, negative numbers may be supplied. For instance, 'depth = -1' can
       -- be used in order to render only current symbol.
