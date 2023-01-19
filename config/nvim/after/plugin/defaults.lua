@@ -1,20 +1,18 @@
 local opts = { noremap = true, silent = true }
 local term_opts = { silent = true }
 
-vim.cmd [[colorscheme nord]]
+vim.cmd [[colorscheme kanagawa]]
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
-vim.opt.shiftwidth = 4
-vim.opt.softtabstop = 4
-vim.opt.tabstop = 4
 vim.opt.scrolloff = 25
 vim.opt.scrollback = 25
 vim.opt.termguicolors = true
 
 vim.keymap.set('n', '<C-p>', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sa', ":Telescope aerial <CR>",  { desc = '[S]earch [A]erial' })
+-- vim.keymap.set('n', '<leader>sp', ":Telescope projects <CR>",  { desc = '[S]earch [P]rojects' })
 
 -- Navigate splits with ^hjkl
 vim.keymap.set("n", "<C-h>", "<C-w>h", opts)
