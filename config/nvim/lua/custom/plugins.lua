@@ -48,7 +48,6 @@ return function(use)
 			dashboard.section.buttons.val = {
 				dashboard.button("f", "  Find file", require("telescope.builtin").find_files),
 				dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
-				-- dashboard.button("p", "  Find project", require'telescope'.extensions.projects.projects{}),
 				dashboard.button("r", "  Recently used files", require("telescope.builtin").old_files),
 				dashboard.button("t", "  Find text", require("telescope.builtin").live_grep),
 				dashboard.button("c", "  Configuration", ":e ~/.config/nvim/init.lua <CR>"),
@@ -157,8 +156,24 @@ return function(use)
 		end,
 	})
 	use({ "arcticicestudio/nord-vim" })
-	use({ "rebelot/kanagawa.nvim" })
-	use({ "rose-pine/neovim" })
+	use({
+		"rebelot/kanagawa.nvim",
+		config = function ()
+			local kanagawa = require('kanagawa')
+			kanagawa.setup({
+				keywordStyle = { italic = false }
+			})
+		end
+	})
+	use({
+		"rose-pine/neovim",
+		config = function ()
+			local rose_pine = require('rose-pine')
+			rose_pine.setup({
+				disable_italics = true,
+			})
+		end
+	})
 	use({
 		"jose-elias-alvarez/null-ls.nvim",
 		config = function()

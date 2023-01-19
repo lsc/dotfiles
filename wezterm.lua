@@ -8,11 +8,11 @@ return {
     show_update_window = false,
     font = wezterm.font({
         family = "Fira Code",
-        weight = 450,
+        weight = "Medium",
         harfbuzz_features = { "zero", "onum", "ss02", "ss03", "ss04", "ss05", "ss08" },
     }),
-    font_size = 14,
-    color_scheme = "nord",
+    font_size = 15,
+    color_scheme = "kanagawabones",
     window_padding = {
         left = 0,
         right = 0,
