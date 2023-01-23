@@ -1,0 +1,6 @@
+theme = "kanagawa"
+
+[editor]
+line-number = "relative"
+scrolloff = 25
+shell = ["fish", "-c"]
