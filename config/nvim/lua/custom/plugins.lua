@@ -236,4 +236,9 @@ return function(use)
 		end,
 	})
 	use({ "NoahTheDuke/vim-just" })
+	use({
+		'mrjones2004/legendary.nvim',
+		tag = 'v2.6.0',
+		requires = 'kkharji/sqlite.lua'
+	})
 end
