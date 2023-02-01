@@ -32,35 +32,35 @@ return function(use)
 		end,
 	})
 	-- Alpha
-	use({
-		"goolord/alpha-nvim",
-		config = function()
-			local dashboard = require("alpha.themes.dashboard")
-
-			dashboard.section.header.val = {
-				[[                               __                ]],
-				[[  ___     ___    ___   __  __ /\_\    ___ ___    ]],
-				[[ / _ `\  / __`\ / __`\/\ \/\ \\/\ \  / __` __`\  ]],
-				[[/\ \/\ \/\  __//\ \_\ \ \ \_/ |\ \ \/\ \/\ \/\ \ ]],
-				[[\ \_\ \_\ \____\ \____/\ \___/  \ \_\ \_\ \_\ \_\]],
-				[[ \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/]],
-			}
-			dashboard.section.buttons.val = {
-				dashboard.button("f", "  Find file", require("telescope.builtin").find_files),
-				dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
-				dashboard.button("r", "  Recently used files", require("telescope.builtin").old_files),
-				dashboard.button("t", "  Find text", require("telescope.builtin").live_grep),
-				dashboard.button("c", "  Configuration", ":e ~/.config/nvim/init.lua <CR>"),
-				dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
-			}
-			dashboard.section.footer.opts.hl = "Type"
-			dashboard.section.header.opts.hl = "Include"
-			dashboard.section.buttons.opts.hl = "Keyword"
-			-- dashboard.opts.opts.noautocmd = "true"
-
-			require("alpha").setup(dashboard.opts)
-		end,
-	})
+	-- use({
+	-- 	"goolord/alpha-nvim",
+	-- 	config = function()
+	-- 		local dashboard = require("alpha.themes.dashboard")
+	--
+	-- 		dashboard.section.header.val = {
+	-- 			[[                               __                ]],
+	-- 			[[  ___     ___    ___   __  __ /\_\    ___ ___    ]],
+	-- 			[[ / _ `\  / __`\ / __`\/\ \/\ \\/\ \  / __` __`\  ]],
+	-- 			[[/\ \/\ \/\  __//\ \_\ \ \ \_/ |\ \ \/\ \/\ \/\ \ ]],
+	-- 			[[\ \_\ \_\ \____\ \____/\ \___/  \ \_\ \_\ \_\ \_\]],
+	-- 			[[ \/_/\/_/\/____/\/___/  \/__/    \/_/\/_/\/_/\/_/]],
+	-- 		}
+	-- 		dashboard.section.buttons.val = {
+	-- 			dashboard.button("f", "  Find file", require("telescope.builtin").find_files),
+	-- 			dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
+	-- 			dashboard.button("r", "  Recently used files", require("telescope.builtin").old_files),
+	-- 			dashboard.button("t", "  Find text", require("telescope.builtin").live_grep),
+	-- 			dashboard.button("c", "  Configuration", ":e ~/.config/nvim/init.lua <CR>"),
+	-- 			dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
+	-- 		}
+	-- 		dashboard.section.footer.opts.hl = "Type"
+	-- 		dashboard.section.header.opts.hl = "Include"
+	-- 		dashboard.section.buttons.opts.hl = "Keyword"
+	-- 		-- dashboard.opts.opts.noautocmd = "true"
+	--
+	-- 		require("alpha").setup(dashboard.opts)
+	-- 	end,
+	-- })
 	-- Window picker
 	-- Pick what buffer you want to open a file in interactively
 	use({
@@ -237,7 +237,7 @@ return function(use)
 	})
 	use({ "NoahTheDuke/vim-just" })
 	use({
-		'mrjones2004/legendary.nvim',
+		'mrjones2014/legendary.nvim',
 		tag = 'v2.6.0',
 		requires = 'kkharji/sqlite.lua'
 	})
