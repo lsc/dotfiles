@@ -158,21 +158,17 @@ return function(use)
 	use({ "arcticicestudio/nord-vim" })
 	use({
 		"rebelot/kanagawa.nvim",
-		config = function ()
-			local kanagawa = require('kanagawa')
-			kanagawa.setup({
-				keywordStyle = { italic = false }
-			})
-		end
+		config = function()
+			local kanagawa = require("kanagawa")
+			kanagawa.setup({ keywordStyle = { italic = false } })
+		end,
 	})
 	use({
 		"rose-pine/neovim",
-		config = function ()
-			local rose_pine = require('rose-pine')
-			rose_pine.setup({
-				disable_italics = true,
-			})
-		end
+		config = function()
+			local rose_pine = require("rose-pine")
+			rose_pine.setup({ disable_italics = true })
+		end,
 	})
 	use({
 		"jose-elias-alvarez/null-ls.nvim",
@@ -237,8 +233,12 @@ return function(use)
 	})
 	use({ "NoahTheDuke/vim-just" })
 	use({
-		'mrjones2014/legendary.nvim',
-		tag = 'v2.6.0',
-		requires = 'kkharji/sqlite.lua'
+		"mrjones2014/legendary.nvim",
+		tag = "v2.6.0",
+		requires = "kkharji/sqlite.lua",
+	})
+	use({
+		'rafamadriz/friendly-snippets',
+		require('luasnip.loaders.from_vscode').lazy_load(),
 	})
 end
