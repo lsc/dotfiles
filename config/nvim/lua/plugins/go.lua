@@ -1,3 +1,6 @@
 return {
-  { "ray-x/go.nvim" },
+  {
+    "ray-x/go.nvim",
+    config = true,
+  },
 }
