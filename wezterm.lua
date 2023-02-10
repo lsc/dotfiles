@@ -8,7 +8,7 @@ return {
 	use_fancy_tab_bar = false,
 	show_update_window = false,
 	font = wezterm.font({
-		family = "Fira Code",
+		family = "Jetbrains Mono NL",
 		weight = "DemiLight",
 		harfbuzz_features = { "zero", "onum", "ss02", "ss03", "ss04", "ss05", "ss08" },
 	}),
