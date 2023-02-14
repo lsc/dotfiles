@@ -15,7 +15,7 @@ return {
 	-- keys = {
 	-- 	{ key = "t", mods = "SUPER", action = act.SpawnTab("DefaultDomain") },
 	-- },
-	font_size = 15,
+	font_size = 18,
 	color_scheme = "kanagawabones",
 	window_padding = {
 		left = 0,
