@@ -7,7 +7,7 @@ set --export STARSHIP_DISTRO ""
 set os (uname)
 set shell (basename $SHELL)
 
-if (command -v asdf)
+if command -v asdf &> /dev/null
     switch $os
         case Darwin
             source /opt/homebrew/opt/asdf/libexec/asdf.$shell
@@ -18,12 +18,12 @@ if (command -v asdf)
     end
 end
 
-if status is-interactive
+if status is-interactive && command -v atuin &> /dev/null
   atuin init $shell | source
 end
 
 # Google Cloud SDK
-if (command -v gcloud)
+if command -v gcloud &> /dev/null
     switch $os
         case Darwin
             source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.$shell.inc"
@@ -31,6 +31,5 @@ if (command -v gcloud)
             true
     end
 end
-            
 
 command -v starship &> /dev/null && starship init fish | source
