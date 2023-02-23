@@ -9,7 +9,7 @@ return {
     },
   },
   {
-    "nvim-neotest/neotest-jest",
+    "haydenmeade/neotest-jest",
     dependencies = {
       "nvim-neotest/neotest",
     },
