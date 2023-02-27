@@ -6,6 +6,6 @@ nodejs 18.13.0
 pulumi 3.54.0
 yarn 1.22.19
 terraform 1.2.9
-skaffold 1.39.3
+skaffold 2.1.0
 kubectl 1.25.4
 rust 1.67.0
