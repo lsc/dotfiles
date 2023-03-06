@@ -45,6 +45,7 @@ return {
       { "<leader>a", ":SymbolsOutline <cr>", desc = "Toggle Symbols Outline" },
     },
     opts = {
+      autofold_depth = 0,
       keymaps = {},
     },
   },

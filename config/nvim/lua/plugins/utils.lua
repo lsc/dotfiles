@@ -26,4 +26,7 @@ return {
       tag = "v1.*",
     },
   },
+  {
+    "TimUntersberger/neogit",
+  },
 }
