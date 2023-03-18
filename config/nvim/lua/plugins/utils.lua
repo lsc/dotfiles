@@ -28,5 +28,18 @@ return {
   },
   {
     "TimUntersberger/neogit",
+    opts = {
+      disable_commit_confirmation = true,
+      keys = {
+        { "<leader>gn", ":Neogit <cr>", desc = "Neogit" },
+      },
+    },
+  },
+  {
+    "Wansmer/treesj",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    config = function()
+      require("treesj").setup({})
+    end,
   },
 }
