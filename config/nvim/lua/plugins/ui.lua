@@ -21,8 +21,11 @@ return {
       window = {
         mappings = {
           ["o"] = "open_with_window_picker",
+          ["l"] = "open_with_window_picker",
           ["s"] = "vsplit_with_window_picker",
           ["S"] = "split_with_window_picker",
+          ["h"] = "close_node",
+          ["W"] = "close_all_nodes",
         },
       },
     },
