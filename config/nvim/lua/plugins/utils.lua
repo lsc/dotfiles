@@ -28,12 +28,9 @@ return {
   },
   {
     "TimUntersberger/neogit",
-    opts = {
-      disable_commit_confirmation = true,
-      keys = {
-        { "<leader>gn", ":Neogit <cr>", desc = "Neogit" },
-      },
-    },
+    cmd = "Neogit",
+    keys = { { "<leader>gn", "<cmd>Neogit<cr>", desc = "Neogit" } },
+    opts = { disable_commit_confirmation = true },
   },
   {
     "Wansmer/treesj",
