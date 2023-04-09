@@ -1,0 +1,1 @@
+/Users/lsc/.dotfiles/dotfiles/config/fish/functions/p.fish
