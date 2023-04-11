@@ -2,6 +2,9 @@ return {
   {
     "ray-x/go.nvim",
     config = true,
+    dependencies = {
+      "ray-x/guihua.lua",
+    },
   },
   {
     "someone-stole-my-name/yaml-companion.nvim",
@@ -15,6 +18,7 @@ return {
     end,
   },
   { "khaveesh/vim-fish-syntax" },
+  { "NoahTheDuke/vim-just" },
   {
     "nathom/filetype.nvim",
     opts = {
