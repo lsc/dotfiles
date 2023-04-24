@@ -14,6 +14,12 @@ return {
     },
   },
   {
+    "folke/which-key.nvim",
+    opts = function(_, opts)
+      opts.defaults["<leader>t"] = { name = "+toggleterm" }
+    end,
+  },
+  {
     "nvim-neo-tree/neo-tree.nvim",
     opts = {
       use_libuv_file_watcher = true,
@@ -35,12 +41,11 @@ return {
     config = true,
     cmd = "SymbolsOutline",
     keys = {
-      { "<leader>a", ":SymbolsOutline <cr>", desc = "Toggle Symbols Outline" },
+      { "<leader>a", "<cmd>SymbolsOutline<cr>", desc = "Toggle Symbols Outline" },
     },
     opts = {
       autofold_depth = 0,
       keymaps = {},
     },
   },
-  { "HiPhish/nvim-ts-rainbow2" },
 }

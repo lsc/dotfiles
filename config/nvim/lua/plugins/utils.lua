@@ -19,6 +19,11 @@ return {
         highlights = { border = "Normal", background = "Normal" },
       },
     },
+    keys = {
+      { "<leader>tt", "<cmd>ToggleTerm<cr>", desc = "Toggle terminal" },
+      { "<leader>t2", "<cmd>2ToggleTerm<cr>", desc = "Toggle additional terminal" },
+      { "<leader>ta", "<cmd>ToggleTermToggleAll<cr>", desc = "Toggle all terminals" },
+    },
   },
   {
     "s1n7ax/nvim-window-picker",
@@ -43,4 +48,5 @@ return {
     "sindrets/diffview.nvim",
     dependencies = "nvim-lua/plenary.nvim",
   },
+  { "yazgoo/vmux", build = "cargo install vmux" },
 }
