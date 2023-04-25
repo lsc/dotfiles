@@ -20,7 +20,8 @@ return {
       },
     },
     keys = {
-      { "<leader>tt", "<cmd>ToggleTerm<cr>", desc = "Toggle terminal" },
+      { "<leader>th", "<cmd>ToggleTerm direction=horizontal size=12<cr>", desc = "Toggle horizontal terminal" },
+      { "<leader>tv", "<cmd>ToggleTerm direction=vertical size=65<cr>", desc = "Toggle vertical terminal" },
       { "<leader>t2", "<cmd>2ToggleTerm<cr>", desc = "Toggle additional terminal" },
       { "<leader>ta", "<cmd>ToggleTermToggleAll<cr>", desc = "Toggle all terminals" },
     },
