@@ -50,4 +50,14 @@ return {
     dependencies = "nvim-lua/plenary.nvim",
   },
   { "yazgoo/vmux", build = "cargo install vmux" },
+  {
+    "declancm/maximize.nvim",
+    keys = {
+      { "<leader>wm", "<cmd>lua require('maximize').toggle()<cr>", desc = "Maximize currently focused window" },
+    },
+  },
+  {
+    "f-person/git-blame.nvim",
+    { keys = { "<leader>gb", "<cmd>GitBlameToggle<cr>", desc = "Toggle Git Blame" } },
+  },
 }
