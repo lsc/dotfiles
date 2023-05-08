@@ -10,6 +10,10 @@ return {
     dependencies = {
       "mfussenegger/nvim-dap",
     },
+    ft = "go",
+    opts = function(_, opts)
+      require("dap-go").setup(opts)
+    end,
   },
   {
     "folke/neodev.nvim",

@@ -9,6 +9,10 @@ return {
     "hrsh7th/nvim-cmp",
     dependencies = {
       "hrsh7th/cmp-emoji",
+      {
+        "zbirenbaum/copilot-cmp",
+        opts = {},
+      },
     },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
@@ -21,6 +25,7 @@ return {
       local luasnip = require("luasnip")
       local cmp = require("cmp")
 
+      opts.sources = cmp.config.sources(vim.list_extend(opts.sources, { { name = "copilot" }, { name = "emoji" } }))
       opts.mapping = vim.tbl_extend("force", opts.mapping, {
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
@@ -46,5 +51,22 @@ return {
         end, { "i", "s" }),
       })
     end,
+  },
+  {
+    "zbirenbaum/copilot.lua",
+    enabled = true,
+    cmd = "Copilot",
+    event = "InsertEnter",
+    opts = {
+      suggestions = {
+        enabled = false,
+        auto_trigger = true,
+      },
+      panel = { enabled = false },
+    },
+  },
+  {
+    "zbirenbaum/copilot-cmp",
+    dependencies = { "zbirenbaum/copilot.lua" },
   },
 }
