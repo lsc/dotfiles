@@ -7,15 +7,8 @@ set --export STARSHIP_DISTRO ""
 set os (uname)
 set shell (basename $SHELL)
 
-if command -v asdf &>/dev/null
-    switch $os
-        case Darwin
-            source /opt/homebrew/opt/asdf/libexec/asdf.$shell
-        case Linux
-            source ~/.asdf/libexec/asdf.$shell
-        case '*'
-            true
-    end
+if command -v rtx &>/dev/null
+    rtx activate $shell | source
 end
 
 if status is-interactive && command -v atuin &>/dev/null
@@ -33,4 +26,5 @@ if command -v gcloud &>/dev/null
 end
 
 bass source ~/.local/share/nvim/lazy/vmux/plugin/setup_vmux.sh
+
 command -v starship &>/dev/null && starship init fish | source

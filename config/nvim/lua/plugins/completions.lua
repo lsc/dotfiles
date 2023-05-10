@@ -52,21 +52,4 @@ return {
       })
     end,
   },
-  {
-    "zbirenbaum/copilot.lua",
-    enabled = true,
-    cmd = "Copilot",
-    event = "InsertEnter",
-    opts = {
-      suggestions = {
-        enabled = false,
-        auto_trigger = true,
-      },
-      panel = { enabled = false },
-    },
-  },
-  {
-    "zbirenbaum/copilot-cmp",
-    dependencies = { "zbirenbaum/copilot.lua" },
-  },
 }

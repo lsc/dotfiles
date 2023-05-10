@@ -1,5 +1,3 @@
-Include ~/.orbstack/ssh/config
-
 Include /Users/lsc/.colima/ssh_config
 
 Host *.lsc.cloud
