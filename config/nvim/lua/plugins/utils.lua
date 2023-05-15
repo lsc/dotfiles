@@ -59,4 +59,8 @@ return {
   {
     "f-person/git-blame.nvim",
   },
+  {
+    "AckslD/muren.nvim",
+    config = true,
+  },
 }
