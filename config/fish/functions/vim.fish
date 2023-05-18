@@ -1,4 +1,4 @@
 #!/usr/bin/env fish
 function vim
-  nvim $argv
+    nvim-lazy $argv
 end
