@@ -1,6 +1,7 @@
 return {
   { "rebelot/kanagawa.nvim" },
   { "rose-pine/neovim", name = "rose-pine" },
+  { "ribru17/bamboo.nvim" },
   {
     "uloco/bluloco.nvim",
     dependencies = {
@@ -10,7 +11,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "kanagawa",
+      colorscheme = "bamboo",
     },
   },
   {

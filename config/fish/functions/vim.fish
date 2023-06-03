@@ -1,4 +1,4 @@
 #!/usr/bin/env fish
 function vim
-    nvim-lazy $argv
+    env NVIM_APPNAME=nvim-lazy nvim $argv
 end
