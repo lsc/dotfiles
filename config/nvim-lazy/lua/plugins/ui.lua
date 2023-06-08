@@ -15,10 +15,16 @@ return {
     },
   },
   {
-    "folke/which-key.nvim",
-    opts = function(_, opts)
-      opts.defaults["<leader>t"] = { name = "+toggleterm" }
-    end,
+    "folke/edgy.nvim",
+    opts = {
+      right = {
+        {
+          ft = "Outline",
+          pinned = true,
+          open = "SymbolsOutline",
+        },
+      },
+    },
   },
   {
     "nvim-neo-tree/neo-tree.nvim",

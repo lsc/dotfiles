@@ -1,12 +1,5 @@
 return {
   {
-    "ray-x/go.nvim",
-    config = true,
-    dependencies = {
-      "ray-x/guihua.lua",
-    },
-  },
-  {
     "someone-stole-my-name/yaml-companion.nvim",
     dependencies = {
       "neovim/nvim-lspconfig",
