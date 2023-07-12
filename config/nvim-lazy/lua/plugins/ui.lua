@@ -33,7 +33,7 @@ return {
       bind_to_cwd = true,
       window = {
         mappings = {
-          ["o"] = "open_with_window_picker",
+          ["o"] = "open",
           ["l"] = "open_with_window_picker",
           ["s"] = "vsplit_with_window_picker",
           ["S"] = "split_with_window_picker",

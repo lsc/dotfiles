@@ -11,6 +11,10 @@ if command -v rtx &>/dev/null
     rtx activate $shell | source
 end
 
+if command -v zoxide &>/dev/null
+    zoxide init fish | source
+end
+
 if status is-interactive && command -v atuin &>/dev/null
     atuin init $shell | source
 end

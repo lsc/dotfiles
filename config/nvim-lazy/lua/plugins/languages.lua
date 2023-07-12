@@ -12,16 +12,5 @@ return {
   },
   { "khaveesh/vim-fish-syntax" },
   { "NoahTheDuke/vim-just" },
-  {
-    "nathom/filetype.nvim",
-    opts = {
-      overrides = {
-        extensions = {
-          tf = "terraform",
-          tfvars = "terraform",
-          tfstate = "json",
-        },
-      },
-    },
-  },
+  { "cappyzawa/starlark.vim" },
 }
