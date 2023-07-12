@@ -11,6 +11,8 @@ return {
     end,
   },
   { "khaveesh/vim-fish-syntax" },
-  { "NoahTheDuke/vim-just" },
+  {
+    "NoahTheDuke/vim-just",
+  },
   { "cappyzawa/starlark.vim" },
 }
