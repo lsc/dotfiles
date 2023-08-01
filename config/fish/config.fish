@@ -15,6 +15,10 @@ if command -v zoxide &>/dev/null
     zoxide init fish | source
 end
 
+if command -v jj &>/dev/null
+    jj util completion --fish | source
+end
+
 if status is-interactive && command -v atuin &>/dev/null
     atuin init $shell | source
 end
@@ -28,7 +32,5 @@ if command -v gcloud &>/dev/null
             true
     end
 end
-
-bass source ~/.local/share/nvim/lazy/vmux/plugin/setup_vmux.sh
 
 command -v starship &>/dev/null && starship init fish | source
