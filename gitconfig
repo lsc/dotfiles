@@ -142,3 +142,9 @@ ui = true
 [bulkworkspaces]
 	work = /Users/lsc/Sources/work
 	personal = /Users/lsc/Sources/personal
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
