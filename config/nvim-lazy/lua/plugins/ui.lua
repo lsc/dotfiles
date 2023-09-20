@@ -2,6 +2,7 @@ return {
   { "rebelot/kanagawa.nvim" },
   { "rose-pine/neovim", name = "rose-pine" },
   { "ribru17/bamboo.nvim" },
+  { "polirritmico/monokai-nightasty.nvim" },
   {
     "uloco/bluloco.nvim",
     dependencies = {
