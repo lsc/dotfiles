@@ -44,7 +44,7 @@
   prompt = false
 
 [diffool "icdiff"]
-  cmd = /usr/local/bin/icdiff --line-numbers $LOCAL $REMOTE
+  cmd = /opt/homebrew/local/bin/icdiff --line-numbers $LOCAL $REMOTE
 
 [merge]
   ff            = only
@@ -144,7 +144,7 @@ ui = true
 	personal = /Users/lsc/Sources/personal
 [credential "https://github.com"]
 	helper = 
-	helper = !/usr/bin/gh auth git-credential
+	helper = !/opt/homebrew/bin/gh auth git-credential
 [credential "https://gist.github.com"]
 	helper = 
-	helper = !/usr/bin/gh auth git-credential
+	helper = !/opt/homebrew/bin/gh auth git-credential

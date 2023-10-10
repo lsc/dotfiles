@@ -56,4 +56,14 @@ return {
       keymaps = {},
     },
   },
+  {
+    "Lilja/zellij.nvim",
+    config = true,
+    -- If you want to configure the plugin
+    --[[
+    config = function()
+        require('zellij').setup({})
+    end
+    ]]
+  },
 }
