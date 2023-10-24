@@ -13,3 +13,4 @@ Session.vim
 .idea/*
 styles/**
 config/nvim/plugin/packer_compiled.lua
+**lazy-lock.json
