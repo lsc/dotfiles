@@ -51,6 +51,7 @@ return {
       projects = { -- define project roots
         "~/Sources/work/*",
         "~/Sources/personal/*",
+        "~/src/**",
         "~/.dotfiles/",
       },
     },

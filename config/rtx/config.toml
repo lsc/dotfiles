@@ -1,9 +1,6 @@
 [tools]
-golang = "latest"
+golang = "1.21.4"
 kubectl = "1.27.0"
-nodejs = "18.13"
-skaffold = "2.1.0"
-terraform = "1.2.9"
 
 [settings]
 asdf_compat = false

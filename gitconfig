@@ -2,9 +2,6 @@
   name  = Lowe Schmidt
   email = github@loweschmidt.se
 
-[includeIf "gitdir:~/Sources/work/"]
-  path = ~/.work.gitconfig
-
 [branch]
   autosetupmerge = true
 
