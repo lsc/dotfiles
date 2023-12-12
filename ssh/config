@@ -1,4 +1,4 @@
-Include /Users/lsc/.colima/ssh_config
+Include /Users/lowe.schmidt/.ssh/work_config
 
 Host *.lsc.cloud
     User lsc
@@ -7,6 +7,3 @@ Host *.lsc.cloud
 Host *.loweschmidt.se
     User lsc
     IdentityFile ~ /.ssh/id_ed25519
-
-Host *
-  IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"

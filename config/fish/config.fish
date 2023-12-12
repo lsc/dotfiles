@@ -23,6 +23,10 @@ if status is-interactive && command -v atuin &>/dev/null
     atuin init $shell | source
 end
 
+if command -v ic &>/dev/null
+    bass source (command -v ic)
+end
+
 # Google Cloud SDK
 if command -v gcloud &>/dev/null
     switch $os
