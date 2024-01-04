@@ -11,6 +11,7 @@ return {
     end,
   },
   { "khaveesh/vim-fish-syntax" },
+  { "terramate-io/vim-terramate" },
   {
     "NoahTheDuke/vim-just",
   },

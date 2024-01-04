@@ -45,7 +45,7 @@
 
 [merge]
   ff            = only
-  conflictstyle = diff3
+  conflictStyle = zdiff3
 
 [status]
   showUntrackedFiles = all
@@ -142,5 +142,4 @@ ui = true
 	personal = /Users/lsc/Sources/personal
 
 [credential "https://github.com"]
-	helper = !/usr/local/bin/gh auth git-credential
 	helper = !/usr/bin/gh auth git-credential
