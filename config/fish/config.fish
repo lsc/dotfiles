@@ -7,8 +7,8 @@ set --export STARSHIP_DISTRO ""
 set os (uname)
 set shell (basename $SHELL)
 
-if command -v rtx &>/dev/null
-    rtx activate $shell | source
+if command -v mise &>/dev/null
+    mise activate $shell | source
 end
 
 if command -v zoxide &>/dev/null
