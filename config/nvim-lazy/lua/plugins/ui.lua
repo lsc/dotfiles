@@ -45,11 +45,11 @@ return {
     },
   },
   {
-    "simrat39/symbols-outline.nvim",
+    "hedyhli/outline.nvim",
     config = true,
-    cmd = "SymbolsOutline",
+    cmd = { "Outline", "OutlineOpen" },
     keys = {
-      { "<leader>a", "<cmd>SymbolsOutline<cr>", desc = "Toggle Symbols Outline" },
+      { "<leader>a", "<cmd>Outline<cr>", desc = "Toggle Outline" },
     },
     opts = {
       autofold_depth = 0,
