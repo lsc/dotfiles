@@ -66,4 +66,9 @@ return {
     end
     ]]
   },
+  {
+    "SomesOver/accidentslipt",
+    config = true,
+    event = { "WinNew" },
+  },
 }

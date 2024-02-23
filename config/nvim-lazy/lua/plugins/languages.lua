@@ -36,4 +36,20 @@ return {
   {
     "Glench/Vim-Jinja2-Syntax",
   },
+  {
+    "apple/pkl-neovim",
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    setup = {
+      ensure_installed = "pkl",
+      highlight = {
+        enable = true,
+      },
+      ident = {
+        enable = true,
+      },
+    },
+  },
 }

@@ -16,7 +16,7 @@ if command -v zoxide &>/dev/null
 end
 
 if command -v jj &>/dev/null
-    jj util completion --fish | source
+    jj util completion fish | source
 end
 
 if status is-interactive && command -v atuin &>/dev/null
