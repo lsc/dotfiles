@@ -5,10 +5,9 @@ set --unexport fish_greeting
 set --export STARSHIP_DISTRO ""
 
 set os (uname)
-set shell (basename $SHELL)
 
 if command -v mise &>/dev/null
-    mise activate $shell | source
+    mise activate fish| source
 end
 
 if command -v zoxide &>/dev/null
