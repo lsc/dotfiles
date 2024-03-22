@@ -7,7 +7,7 @@ set --export STARSHIP_DISTRO ""
 set os (uname)
 
 if command -v mise &>/dev/null
-    mise activate fish| source
+    mise activate fish | source
 end
 
 if command -v zoxide &>/dev/null
@@ -19,11 +19,15 @@ if command -v jj &>/dev/null
 end
 
 if status is-interactive && command -v atuin &>/dev/null
-    atuin init $shell | source
+    atuin init fish | source
 end
 
 if command -v ic &>/dev/null
     bass source (command -v ic)
+end
+
+if command -v starship &>/dev/null
+    starship init fish | source
 end
 
 # Google Cloud SDK
@@ -32,8 +36,6 @@ if command -v gcloud &>/dev/null
         case Darwin
             source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.$shell.inc"
         case '*'
-            true
+            echo "Don't know about $os"
     end
 end
-
-command -v starship &>/dev/null && starship init fish | source
