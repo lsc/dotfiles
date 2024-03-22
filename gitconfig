@@ -7,27 +7,11 @@
 
 [core]
   excludesfile   = /Users/lsc/.gitignore_global
-  pager          = delta
   attributesfile = /Users/lsc/.gitattributes
   autocrlf       = input
 
-[pager]
-  diff   = delta
-  log    = delta
-  reflog = delta
-  show   = delta
-
 [interactive]
   diffFilter = delta --color-only
-
-[delta]
-  features               = side-by-side line-numbers decorations
-  whitespace-error-style = 22 reverse
-
-[delta "decorations"]
-  commit-decoration-style = bold yellow box ul
-  file-style              = bold yellow ul
-  file-decoration-style   = none
 
 [push]
   default    = simple
@@ -35,13 +19,16 @@
 
 [diff]
   compactionHeuristics = true
-  tool                 = diff-so-fancy
+  tool                 = difftastic
 
 [difftool]
   prompt = false
 
-[diffool "icdiff"]
-  cmd = /opt/homebrew/local/bin/icdiff --line-numbers $LOCAL $REMOTE
+[difftool "difftastic"]
+  cmd = difft "$LOCAL" "$REMOTE"
+
+[pager]
+  difftool = true
 
 [merge]
   ff            = only
@@ -71,7 +58,8 @@
   ci        = commit
   cl        = clone
   co        = checkout
-  df        = diff
+  df        = difftool
+  dlog = "!f() { GIT_EXTERNAL_DIFF=difft git log -p --ext-diff $@;}; f"
   glog      = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
   home      = rev-parse --show-toplevel
   l50       = "!git log --abbrev-commit --date=short --pretty=format:'%x00%h%x00%cd%x00%s%x00%an%x00%d' | gawk -F '\\0' '{ printf \"%s\\033[31m%s\\033[0m \\033[32m%s\\033[0m  %-50s \\033[30;1m%s\\033[0m\\033[33m%s\\n\", $1, $2, $3, gensub(/(.{49}).{2,}/, \"\\\\1…\",\"g\",$4), $5, $6 }' | less -R"
