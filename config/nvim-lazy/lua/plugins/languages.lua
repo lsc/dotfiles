@@ -47,7 +47,7 @@ return {
       highlight = {
         enable = true,
       },
-      ident = {
+      indent = {
         enable = true,
       },
     },
