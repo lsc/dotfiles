@@ -3,6 +3,7 @@ return {
   { "rose-pine/neovim", name = "rose-pine" },
   { "ribru17/bamboo.nvim" },
   { "polirritmico/monokai-nightasty.nvim" },
+  { "mcchrish/zenbones.nvim" },
   {
     "uloco/bluloco.nvim",
     dependencies = {
@@ -12,7 +13,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "bamboo",
+      colorscheme = "kanagawa",
     },
   },
   {
@@ -22,7 +23,7 @@ return {
         {
           ft = "Outline",
           pinned = true,
-          open = "SymbolsOutline",
+          open = "Outline",
         },
       },
     },
