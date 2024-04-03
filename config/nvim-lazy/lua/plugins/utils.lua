@@ -35,4 +35,9 @@ return {
     "AckslD/muren.nvim",
     config = true,
   },
+  {
+    "mackeper/SeshMgr.nvim",
+    opts = {},
+    keys = {},
+  },
 }
