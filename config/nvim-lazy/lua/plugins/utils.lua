@@ -40,4 +40,7 @@ return {
     opts = {},
     keys = {},
   },
+  {
+    "esensar/nvim-dev-container",
+  },
 }

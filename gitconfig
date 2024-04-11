@@ -6,8 +6,8 @@
   autosetupmerge = true
 
 [core]
-  excludesfile   = /Users/lsc/.gitignore_global
-  attributesfile = /Users/lsc/.gitattributes
+  excludesfile   = ~/.gitignore_global
+  attributesfile = ~/.gitattributes
   autocrlf       = input
 
 [interactive]
@@ -125,9 +125,5 @@ ui = true
 [url "https://x-access-token@github.com"]
   insteadOf = ssh://git@github.com
 
-[bulkworkspaces]
-	work = /Users/lsc/Sources/work
-	personal = /Users/lsc/Sources/personal
-
 [credential "https://github.com"]
-	helper = !/usr/bin/gh auth git-credential
+	helper = !gh auth git-credential
