@@ -52,4 +52,7 @@ return {
       },
     },
   },
+  {
+    "AckslD/swenv.nvim",
+  },
 }
