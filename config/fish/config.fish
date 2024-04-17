@@ -4,6 +4,9 @@ set --export USE_GKE_GCLOUD_AUTH_PLUGIN True
 set --unexport fish_greeting
 set --export STARSHIP_DISTRO ""
 
+set scratch_file ~/.scratch
+set teleport_host_list ~/.teleport_hosts
+
 set os (uname)
 set shell (basename $SHELL)
 
