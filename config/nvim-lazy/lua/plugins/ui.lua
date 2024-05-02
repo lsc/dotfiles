@@ -4,7 +4,7 @@ return {
   { "ribru17/bamboo.nvim" },
   { "polirritmico/monokai-nightasty.nvim" },
   { "mcchrish/zenbones.nvim" },
-  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  { "catppuccin/nvim", name = "catppuccin" },
   {
     "uloco/bluloco.nvim",
     dependencies = {
@@ -14,7 +14,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "kanagawa",
+      colorscheme = "catppuccin-frappe",
     },
   },
   {

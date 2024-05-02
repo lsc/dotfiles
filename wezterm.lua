@@ -12,7 +12,7 @@ return {
 		harfbuzz_features = { "zero", "onum", "ss02", "ss03", "ss04", "ss05", "ss08" },
 	}),
 	font_size = 17,
-	color_scheme = "kanagawabones",
+	color_scheme = "Catppuccin Frappe",
 	window_padding = {
 		left = 20,
 		right = 20,
