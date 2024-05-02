@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
-function scratch-edit --description 'Edit scratch file'
-    $EDITOR ~/.scratch
+function scratch-edit --description "Edit scratch file with $EDITOR"
+    $EDITOR $scratch_file
 end
 
-alias sce scratch-edit
+abbr --add sce scratch-edit
