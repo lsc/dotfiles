@@ -4,6 +4,7 @@ return {
   { "ribru17/bamboo.nvim" },
   { "polirritmico/monokai-nightasty.nvim" },
   { "mcchrish/zenbones.nvim" },
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   {
     "uloco/bluloco.nvim",
     dependencies = {
