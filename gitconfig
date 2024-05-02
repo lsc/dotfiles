@@ -121,9 +121,5 @@ ui = true
 
 [url "https://user@hostname"]
   insteadOf = ssh://git@hostname
-
-[url "https://x-access-token@github.com"]
-  insteadOf = ssh://git@github.com
-
 [credential "https://github.com"]
 	helper = !gh auth git-credential

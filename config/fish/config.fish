@@ -10,8 +10,10 @@ set teleport_host_list ~/.teleport_hosts
 set os (uname)
 set shell (basename $SHELL)
 
-if command -v mise &>/dev/null
+if status is-interactive && command -v mise &>/dev/null
     mise activate fish | source
+else
+    mise activate fish --shims | source
 end
 
 if command -v zoxide &>/dev/null

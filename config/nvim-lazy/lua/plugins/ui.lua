@@ -34,6 +34,7 @@ return {
       use_libuv_file_watcher = true,
       bind_to_cwd = true,
       window = {
+        width = 600,
         mappings = {
           ["o"] = "open",
           ["l"] = "open_with_window_picker",
