@@ -19,4 +19,12 @@ return {
 		top = 10,
 		bottom = 10,
 	},
+	mouse_bindings = {
+		-- Ctrl Click will open the link in the default browser
+		{
+			event = { Up = { streak = 1, button = "Left", mods = "Ctrl" } },
+			mods = "CTRL",
+			action = "OpenLinkAtMouseCursor",
+		},
+	},
 }
