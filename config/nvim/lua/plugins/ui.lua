@@ -1,9 +1,5 @@
 return {
   { "rebelot/kanagawa.nvim" },
-  { "rose-pine/neovim", name = "rose-pine" },
-  { "ribru17/bamboo.nvim" },
-  { "polirritmico/monokai-nightasty.nvim" },
-  { "mcchrish/zenbones.nvim" },
   { "catppuccin/nvim", name = "catppuccin" },
   {
     "uloco/bluloco.nvim",
@@ -58,15 +54,5 @@ return {
       autofold_depth = 0,
       keymaps = {},
     },
-  },
-  {
-    "Lilja/zellij.nvim",
-    config = true,
-    -- If you want to configure the plugin
-    --[[
-    config = function()
-        require('zellij').setup({})
-    end
-    ]]
   },
 }

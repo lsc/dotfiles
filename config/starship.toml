@@ -1,13 +1,11 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
+
 add_newline = false
 format = """$directory$character"""
 palette = "catppuccin_frappe"
 right_format = """$all"""
 command_timeout = 1000
-
-[os]
-disabled = false
 
 [status]
 disabled = false
@@ -20,9 +18,6 @@ format = '[$symbol(profile: "$profile" )(\(region: $region\) )]($style)'
 disabled = false
 style = 'bold blue'
 symbol = " "
-
-[golang]
-format = '[ ](bold cyan)'
 
 [kubernetes]
 symbol = '☸ '
