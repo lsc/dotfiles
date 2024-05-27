@@ -6,6 +6,12 @@ return {
     },
   },
   {
+    "stevearc/oil.nvim",
+    opts = {},
+    -- Optional dependencies
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
+  {
     "NeogitOrg/neogit",
     cmd = "Neogit",
     keys = { { "<leader>gn", "<cmd>Neogit<cr>", desc = "Neogit" } },
@@ -23,22 +29,11 @@ return {
     dependencies = "nvim-lua/plenary.nvim",
   },
   {
-    "declancm/maximize.nvim",
-    keys = {
-      { "<leader>wm", "<cmd>lua require('maximize').toggle()<cr>", desc = "Maximize currently focused window" },
-    },
-  },
-  {
     "f-person/git-blame.nvim",
   },
   {
     "AckslD/muren.nvim",
     config = true,
-  },
-  {
-    "mackeper/SeshMgr.nvim",
-    opts = {},
-    keys = {},
   },
   {
     "esensar/nvim-dev-container",

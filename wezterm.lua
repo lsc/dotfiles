@@ -4,7 +4,7 @@ return {
 	send_composed_key_when_left_alt_is_pressed = true,
 	swap_backspace_and_delete = false,
 	hide_tab_bar_if_only_one_tab = true,
-	use_fancy_tab_bar = true,
+	use_fancy_tab_bar = false,
 	show_update_window = false,
 	font = wezterm.font({
 		family = "Berkeley Mono",
