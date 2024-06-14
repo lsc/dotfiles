@@ -43,16 +43,4 @@ return {
       },
     },
   },
-  {
-    "hedyhli/outline.nvim",
-    config = true,
-    cmd = { "Outline", "OutlineOpen" },
-    keys = {
-      { "<leader>a", "<cmd>Outline<cr>", desc = "Toggle Outline" },
-    },
-    opts = {
-      autofold_depth = 0,
-      keymaps = {},
-    },
-  },
 }
