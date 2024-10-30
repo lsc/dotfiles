@@ -1,5 +1,6 @@
 #!/usr/bin/env dev
+set ip 127.1
 
 function dev
-    ssh 10.0.0.229 -p 22022 -l lsc
+    ssh $ip -p 22022 -l lsc
 end
