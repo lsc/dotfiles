@@ -29,3 +29,4 @@ usage = "0.3.0"
 zellij = "0.41.1"
 zig = ["0.13.0", "master"]
 zoxide = "latest"
+goreleaser = "2.4.6"
