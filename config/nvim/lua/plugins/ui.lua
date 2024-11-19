@@ -1,12 +1,5 @@
 return {
-  { "rebelot/kanagawa.nvim" },
   { "catppuccin/nvim", name = "catppuccin" },
-  {
-    "uloco/bluloco.nvim",
-    dependencies = {
-      "rktjmp/lush.nvim",
-    },
-  },
   {
     "LazyVim/LazyVim",
     opts = {
