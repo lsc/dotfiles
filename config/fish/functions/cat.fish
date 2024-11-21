@@ -3,7 +3,7 @@ function cat
     set is_installed (command -v bat)
     if is_installed
         bat $argv
-        return
+    else
+        cat $argv
     end
-    cat $argv
 end
