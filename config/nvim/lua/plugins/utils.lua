@@ -1,5 +1,10 @@
 return {
   {
+    "echasnovski/mini.align",
+    version = false,
+    opts = {},
+  },
+  {
     "s1n7ax/nvim-window-picker",
     opts = {
       tag = "v2.*",
