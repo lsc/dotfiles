@@ -1,4 +1,0 @@
-player=mpv --cache 4096 
-title="{game} - {author} - {title}" 
-default-stream="720p60,720p,best"
-loglevel=none
