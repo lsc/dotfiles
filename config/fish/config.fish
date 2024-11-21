@@ -53,7 +53,6 @@ if command -v gcloud &>/dev/null
     end
 end
 
-
 alias av aws-vault
 alias b brew
 alias cat bat
@@ -65,8 +64,8 @@ alias ks kubens
 alias kx switcher
 alias ls 'eza -l --icons --group-directories-first --header --octal-permissions --git'
 alias otf tofu
+alias spw 'pwgen -anys 32 -1'
 alias tf terraform
 alias tg terragrunt
 alias tm terramate
-alias spw 'pwgen -anys 32 -1'
 alias v nvim
