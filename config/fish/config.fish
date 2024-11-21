@@ -1,8 +1,15 @@
 #!/usr/bin/env fish
+#
+function is_installed -a name
+    if ! command -v $name &>/dev/null
+        echo "This script requires $name but it is not installed"
+        return 1
+    end
+end
+
 set --export EDITOR nvim
 set --export USE_GKE_GCLOUD_AUTH_PLUGIN True
 set --unexport fish_greeting
-set --export STARSHIP_DISTRO ""
 
 set scratch_file ~/.scratch
 set teleport_host_list ~/.teleport_hosts
@@ -45,3 +52,21 @@ if command -v gcloud &>/dev/null
             echo "Don't know about $os"
     end
 end
+
+
+alias av aws-vault
+alias b brew
+alias cat bat
+alias e encore
+alias g git
+alias j just
+alias k kubectl
+alias ks kubens
+alias kx switcher
+alias ls 'eza -l --icons --group-directories-first --header --octal-permissions --git'
+alias otf tofu
+alias tf terraform
+alias tg terragrunt
+alias tm terramate
+alias spw 'pwgen -anys 32 -1'
+alias v nvim
