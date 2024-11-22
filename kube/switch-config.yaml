@@ -2,7 +2,7 @@ kind: SwitchConfig
 version: v1alpha1
 kubeconfigStores:
   - kind: filesystem
-    kubeconfigName: "*"
+    kubeconfigName: "k8sfactsconfig*"
     showPrefix: false
     paths:
       - ~/.kube/
