@@ -53,6 +53,10 @@ if command -v gcloud &>/dev/null
     end
 end
 
+function kx --wraps switcher
+    kubeswitch $argv
+end
+
 alias av aws-vault
 alias b brew
 alias cat bat

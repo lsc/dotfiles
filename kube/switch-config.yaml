@@ -5,4 +5,4 @@ kubeconfigStores:
     kubeconfigName: "*"
     showPrefix: false
     paths:
-      - ~/.kube/static_configs/
+      - ~/.kube/
