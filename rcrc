@@ -1,3 +1,0 @@
-UNDOTTED="Library"
-COPY_ALWAYS="Library/Application Support/org.nushell.nu/config.toml"
-EXCLUDE_PATTERN="fish_variables"

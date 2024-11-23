@@ -1,6 +1,0 @@
-font-family = Berkeley Mono
-theme = catppuccin-frappe
-term = xterm-ghostty
-font-size = 17
-mouse-hide-while-typing = true
-window-decoration = true
