@@ -30,3 +30,4 @@ zig = ["0.13.0", "master"]
 zoxide = "latest"
 goreleaser = "2.4.6"
 eza = "0.20.8"
+neovim = "stable"
