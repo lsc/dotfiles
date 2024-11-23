@@ -123,5 +123,3 @@ ui = true
   insteadOf = ssh://git@hostname
 [credential "https://github.com"]
 	helper = !gh auth git-credential
-[http]
-	cookiefile = /home/lowe.schmidt/.gitcookies
