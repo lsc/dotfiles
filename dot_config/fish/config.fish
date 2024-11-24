@@ -59,6 +59,7 @@ end
 
 alias av aws-vault
 alias b brew
+alias c chezmoi
 alias cat bat
 alias e encore
 alias g git
