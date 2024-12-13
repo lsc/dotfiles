@@ -67,7 +67,7 @@ alias j just
 alias k kubectl
 alias ks kubens
 alias kx switcher
-alias ls 'eza -l --icons --group-directories-first --header --octal-permissions --git'
+alias ls 'eza -l --icons --group-directories-first --header --octal-permissions'
 alias otf tofu
 alias spw 'pwgen -anys 32 -1'
 alias tf terraform
