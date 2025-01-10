@@ -1,3 +1,21 @@
 [user]
 name = "Lowe Schmidt"
 email = "nospam@loweschmidt.se"
+
+[[--scope]]
+--when.repositories = [
+  "~/src/github.com/ICO-Engineering/",
+  "~/src/gitlab.imperva.local",
+]
+
+[scope.user]
+email = "lowe.schmidt@imperva.com"
+
+[ui]
+default-command = ["log", "--reversed"]
+diff.tool = ["difft", "--color=always", "$left", "$right"]
+pager = "delta"
+editor = "nvim"
+
+[template-aliases]
+'format_time_range(time_range)' = 'time_range.start() ++ " - " ++ time_range.end()'
