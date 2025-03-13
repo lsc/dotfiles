@@ -4,7 +4,7 @@ function get_k8s_clusters --argument-names env
     is_installed curl || exit 1
     is_installed kubectl || exit 1
 
-    set --local out $HOME/.kube/static/k8sfactsconfig-$env.yaml
+    set --local out $HOME/.kube/config
     set --local base_url "https://k8sfacts{{ENV}}.imperva-services.net/kubeconfig?role=full-admin&cluster_role_binding=true&user=lowe.schmidt"
 
     if string match $env prd
