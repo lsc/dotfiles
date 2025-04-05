@@ -1,6 +1,6 @@
 [tools]
 bat = "0.25.0"
-chezmoi = "2.54.0"
+chezmoi = "2.61.0"
 cue = "0.9.1"
 difftastic = "0.58.0"
 eksctl = "0.180.0"
@@ -29,5 +29,5 @@ terramate = "0.8.4"
 usage = "0.3.0"
 xh = "0.23.1"
 zellij = "0.41.1"
-zig = ["0.13.0", "master"]
+zig = ["0.13.0", "0.14.0", "master"]
 zoxide = "latest"
