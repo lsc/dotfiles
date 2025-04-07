@@ -1,11 +1,12 @@
 #!/usr/bin/env fish
-#
+
 function is_installed -a name
     if ! command -v $name &>/dev/null
         echo "This script requires $name but it is not installed"
         return 1
     end
 end
+bind \cg __zoxide_zi
 
 set --export EDITOR nvim
 set --export USE_GKE_GCLOUD_AUTH_PLUGIN True
