@@ -29,5 +29,5 @@ terramate = "0.8.4"
 usage = "0.3.0"
 xh = "0.23.1"
 zellij = "0.41.1"
-zig = ["0.13.0", "0.14.0", "master"]
+zig = ["0.13.0", "0.14.0"]
 zoxide = "latest"
