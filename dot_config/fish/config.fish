@@ -6,6 +6,7 @@ function is_installed -a name
         return 1
     end
 end
+
 bind \cg __zoxide_zi
 
 set --export EDITOR nvim
@@ -54,10 +55,6 @@ if command -v gcloud &>/dev/null
     end
 end
 
-function kx --wraps switcher
-    kubeswitch $argv
-end
-
 alias av aws-vault
 alias b brew
 alias c chezmoi
@@ -67,7 +64,6 @@ alias g git
 alias j just
 alias k kubectl
 alias ks kubens
-alias kx switcher
 alias ls 'eza -l --icons --group-directories-first --header --octal-permissions'
 alias otf tofu
 alias spw 'pwgen -anys 32 -1'

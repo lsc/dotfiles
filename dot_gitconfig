@@ -1,6 +1,14 @@
 [user]
   name  = Lowe Schmidt
-  email = github@loweschmidt.se
+
+[includeIf "gitditr:~/src/github.com/ICO-Engineering/**.git"]
+  path = ~/.gitconfig.work
+
+[includeIf "gitdir:~/src/gitlab.imperva.local/**.git"]
+  path = ~/.gitconfig.work
+
+[include]
+  path = ~/.gitconfig.personal
 
 [branch]
   autosetupmerge = true
