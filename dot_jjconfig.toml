@@ -13,7 +13,7 @@ email = "lowe.schmidt@imperva.com"
 
 [ui]
 default-command = ["log", "--reversed"]
-diff.tool = ["difft", "--color=always", "$left", "$right"]
+diff.ui-formatter = ["difft", "--color=always", "$left", "$right"]
 pager = "delta"
 editor = "nvim"
 

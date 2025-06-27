@@ -1,10 +1,10 @@
 [user]
   name  = Lowe Schmidt
 
-[includeIf "gitditr:~/src/github.com/ICO-Engineering/**.git"]
+[includeIf "gitditr:**/github.com/ICO-Engineering/**.git"]
   path = ~/.gitconfig.work
 
-[includeIf "gitdir:~/src/gitlab.imperva.local/**.git"]
+[includeIf "gitdir:**gitlab.imperva.local/**.git"]
   path = ~/.gitconfig.work
 
 [include]
