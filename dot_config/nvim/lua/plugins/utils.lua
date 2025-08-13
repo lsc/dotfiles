@@ -30,4 +30,10 @@ return {
     version = "*", -- Pin Neorg to the latest stable release
     config = true,
   },
+  {
+    "benomahony/uv.nvim",
+    opts = {
+      picker_integration = true,
+    },
+  },
 }
