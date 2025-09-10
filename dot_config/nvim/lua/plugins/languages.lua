@@ -5,12 +5,6 @@ return {
   { "cappyzawa/starlark.vim" },
   { "Glench/Vim-Jinja2-Syntax" },
   {
-    "benomahony/uv.nvim",
-    config = function()
-      require("uv").setup()
-    end,
-  },
-  {
     "ray-x/go.nvim",
     dependencies = { -- optional packages
       "ray-x/guihua.lua",

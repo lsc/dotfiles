@@ -5,5 +5,11 @@ return {
     opts = {
       colorscheme = "catppuccin-frappe",
     },
+    {
+      "folke/which-key.nvim",
+      opts = {
+        preset = "classic",
+      },
+    },
   },
 }
