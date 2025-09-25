@@ -1,7 +1,7 @@
 font-family = Berkeley Mono
 theme = Catppuccin Frappe
 term = xterm-ghostty
-font-size = 13
+font-size = 17
 mouse-hide-while-typing = true
 cursor-style = block
 window-save-state = always
@@ -36,4 +36,7 @@ keybind = ctrl+a>.=resize_split:right,80
 
 # other
 copy-on-select = clipboard
+
 shell-integration-features = true
+#ssh-terminfo 
+#ssh-env 
