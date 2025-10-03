@@ -60,7 +60,6 @@ alias g git
 alias j just
 alias k kubectl
 alias ks kubens
-alias kx kubectx
 alias ls 'eza -l --icons --group-directories-first --header --octal-permissions'
 alias otf tofu
 alias spw 'pwgen -anys 32 -1'
