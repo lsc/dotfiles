@@ -38,5 +38,3 @@ keybind = ctrl+a>.=resize_split:right,80
 copy-on-select = clipboard
 
 shell-integration-features = true
-#ssh-terminfo 
-#ssh-env 
