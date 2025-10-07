@@ -29,3 +29,6 @@ xh = "0.23.1"
 zellij = "0.41.1"
 zig = ["0.13.0", "0.14.0"]
 zoxide = "latest"
+
+[settings]
+idiomatic_version_file_enable_tools = ["terragrunt"]
