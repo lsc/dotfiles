@@ -1,15 +1,12 @@
 return {
   {
-    "stevearc/oil.nvim",
-    opts = {},
-    -- Optional dependencies
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-  },
-  {
     "NeogitOrg/neogit",
     cmd = "Neogit",
     keys = { { "<leader>gn", "<cmd>Neogit<cr>", desc = "Neogit" } },
     opts = { disable_commit_confirmation = true },
+  },
+  {
+    "NicolasGB/jj.nvim",
   },
   {
     "sindrets/diffview.nvim",
