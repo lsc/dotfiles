@@ -1,5 +1,6 @@
 [user]
   name  = Lowe Schmidt
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINL7C8JM+zrHF9n5c0wu5yHTn+/X+epQ1Xw4QoS3fttG
 
 [includeIf "gitditr:**/github.com/ICO-Engineering/**.git"]
   path = ~/.gitconfig.work
@@ -131,3 +132,9 @@ ui = true
   insteadOf = ssh://git@hostname
 [credential "https://github.com"]
 	helper = !gh auth git-credential
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+[commit]
+	gpgsign = true
