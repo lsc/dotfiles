@@ -48,8 +48,12 @@ return {
     opts = {
       workspaces = {
         {
-          name = "Personal",
+          name = "Personal (Linux)",
           path = "~/Sources/Obsidian/",
+        },
+        {
+          name = "Personal (MacOS)",
+          path = "~/src/github.com/lsc/obsidian/",
         },
       },
     },
