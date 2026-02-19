@@ -1,2 +1,3 @@
 [user]
 email = "git@loweschmidt.se"
+signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINw/rFSqWTiD/Ozc4aY3Bm/erLsLXKKjqEuVcY/Y859O
