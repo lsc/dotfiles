@@ -2,8 +2,6 @@
   name  = Lowe Schmidt
 [gpg]
 	format = ssh
-[gpg "ssh"]
-  program = "/opt/1Password/op-ssh-sign"
 [commit]
 	gpgsign = true
 

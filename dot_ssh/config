@@ -1,4 +1,4 @@
-Include /Users/lowe.schmidt/.ssh/work_config
+Include ~/.ssh/work_config
 
 Host *.lsc.cloud
     User lsc
@@ -6,7 +6,5 @@ Host *.lsc.cloud
 
 Host *.loweschmidt.se
     User lsc
-    IdentityFile ~ /.ssh/id_ed25519
+    IdentityFile ~/.ssh/id_ed25519
 
-Host *
-  IdentityAgent ~/.1password/agent.sock
