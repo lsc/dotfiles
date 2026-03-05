@@ -13,11 +13,11 @@ set --export EDITOR nvim
 set --export USE_GKE_GCLOUD_AUTH_PLUGIN True
 set --unexport fish_greeting
 
-set scratch_file ~/.scratch
 set teleport_host_list ~/.teleport_hosts
 
 set os (uname)
 set shell (basename $SHELL)
+set username (whoami)
 
 if status is-interactive && command -v mise &>/dev/null
     mise activate fish | source
@@ -49,6 +49,13 @@ if command -v gcloud &>/dev/null
         case '*'
             echo "Don't know about $os"
     end
+end
+
+switch $os
+    case Darwin
+        set --export SSH_AUTH_SOCK /Users/$username/.bitwarden-ssh-agent.sock
+    case Linux
+        set --export SSH_AUTH_SOCK /home/$username/.bitwarden-ssh-agent.sock
 end
 
 alias av aws-vault
