@@ -61,3 +61,8 @@ tooltip {
 .hidden {
   opacity: 0;
 }
+
+#custom-idle-indicator.active,
+#custom-notification-silencing-indicator.active {
+  color: #a55555;
+}
