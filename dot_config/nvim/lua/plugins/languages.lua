@@ -39,4 +39,7 @@ return {
       require("strudel").setup()
     end,
   },
+  {
+    "let-def/texpresso.nvim",
+  },
 }
