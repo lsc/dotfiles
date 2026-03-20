@@ -51,6 +51,9 @@ if command -v gcloud &>/dev/null
     end
 end
 
+if test -f ~/.github-token
+    set --universal --export GITHUB_TOKEN (cat ~/.github-token)
+end
 switch $os
     case Darwin
         set --export SSH_AUTH_SOCK /Users/$username/.bitwarden-ssh-agent.sock
