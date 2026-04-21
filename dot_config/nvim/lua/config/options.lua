@@ -7,3 +7,7 @@ o.foldmethod = "expr"
 o.foldexpr = "nvim_treesitter#foldexpr()"
 o.laststatus = 3
 o.splitkeep = "screen"
+
+if vim.g.neovide then
+  o.guifont = "Berkeley Mono:h14"
+end
