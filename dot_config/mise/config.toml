@@ -1,6 +1,5 @@
 [tools]
 age = "latest"
-"aqua:fish-shell/fish-shell" = "latest"
 atuin = "latest"
 aws-vault = "latest"
 awscli = { version = "latest", symlink_bins = "true" }
@@ -14,6 +13,7 @@ fnox = "latest"
 gh = "latest"
 go = "1.26.2"
 goreleaser = "2.15.3"
+hk = "latest"
 jj = "latest"
 just = "1.50.0"
 krew = "0.5.0"
@@ -38,6 +38,5 @@ zellij = "0.44.1"
 zig = "0.16.0"
 zoxide = "0.9.9"
 
-[settings]
 [settings.ruby]
 compile = false
