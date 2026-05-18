@@ -52,7 +52,7 @@ if command -v gcloud &>/dev/null
 end
 
 if test -f ~/.github-token
-    set --universal --export GITHUB_TOKEN (cat ~/.github-token)
+    set --export GITHUB_TOKEN (cat ~/.github-token)
 end
 switch $os
     case Darwin
