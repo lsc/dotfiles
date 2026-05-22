@@ -1,7 +1,6 @@
 return {
   { "khaveesh/vim-fish-syntax" },
   { "terramate-io/vim-terramate" },
-  { "NoahTheDuke/vim-just" },
   { "cappyzawa/starlark.vim" },
   { "Glench/Vim-Jinja2-Syntax" },
   {
