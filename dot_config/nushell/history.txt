@@ -1,2 +1,0 @@
-cd .config/
-c add nushell/
