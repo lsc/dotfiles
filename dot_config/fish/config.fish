@@ -11,6 +11,7 @@ bind \cg __zoxide_zi
 
 set --export EDITOR nvim
 set --export USE_GKE_GCLOUD_AUTH_PLUGIN True
+set --export TELEPORT_ADD_KEYS_TO_AGENT no
 set --unexport fish_greeting
 
 set teleport_host_list ~/.teleport_hosts
