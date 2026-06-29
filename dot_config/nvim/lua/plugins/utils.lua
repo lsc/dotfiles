@@ -25,17 +25,16 @@ return {
     },
   },
   {
-    "mistweaverco/kulala.nvim",
-    keys = {
-      { "<leader>Rs", desc = "Send request" },
-      { "<leader>Ra", desc = "Send all requests" },
-      { "<leader>Rb", desc = "Open scratchpad" },
-    },
-    ft = { "http", "rest" },
+    "obsidian-nvim/obsidian.nvim",
+    version = "*", -- use latest release, remove to use latest commit
     opts = {
-      global_keymaps = false,
-      global_keymaps_prefix = "<leader>R",
-      kulala_keymaps_prefix = "",
+      legacy_commands = false, -- this will be removed in 4.0.0
+      workspaces = {
+        {
+          name = "Personal",
+          path = "~/Documents/Notes/",
+        },
+      },
     },
   },
 }
