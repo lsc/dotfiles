@@ -1,2 +1,13 @@
 enter_accept = false
 dialect = "uk"
+search_mode = "daemon-fuzzy"
+
+[sync]
+records = true
+
+[ai]
+enabled = true
+
+[daemon]
+enabled = true
+autostart = true
