@@ -1,5 +1,0 @@
-(:name nurumacs
-       :description "Smooth-scrolling and minimap, like sublime editor"
-       :type http
-       :url "http://elpa.emacs-china.org/marmalade/nurumacs-3.5.4.el"
-       :localname "nurumacs.el")

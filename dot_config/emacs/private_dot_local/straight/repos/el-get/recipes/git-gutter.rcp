@@ -1,5 +1,0 @@
-(:name git-gutter
-       :description "Emacs port of GitGutter Sublime Text 2 Plugin"
-       :website "https://github.com/emacsorphanage/git-gutter"
-       :type github
-       :pkgname "emacsorphanage/git-gutter")

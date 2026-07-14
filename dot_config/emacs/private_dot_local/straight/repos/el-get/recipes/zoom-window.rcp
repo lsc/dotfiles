@@ -1,4 +1,0 @@
-(:name zoom-window
-       :description "Zoom window like tmux."
-       :type github
-       :pkgname "emacsorphanage/zoom-window")

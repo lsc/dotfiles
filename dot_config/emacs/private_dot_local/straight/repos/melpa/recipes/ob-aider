@@ -1,3 +1,0 @@
-(ob-aider
- :fetcher github
- :repo "localredhead/ob-aider.el")

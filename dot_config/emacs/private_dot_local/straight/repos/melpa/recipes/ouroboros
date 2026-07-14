@@ -1,4 +1,0 @@
-(ouroboros
- :fetcher github
- :repo "Titan-C/cardano.el"
- :files ("ouroboros.el"))

@@ -1,3 +1,0 @@
-(nerd-icons-dired
- :repo "rainstormstudio/nerd-icons-dired"
- :fetcher github)

@@ -1,3 +1,0 @@
-(org-mcp
- :fetcher github
- :repo "laurynas-biveinis/org-mcp")

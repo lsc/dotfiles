@@ -1,3 +1,0 @@
-(org-mac-link
- :repo "aimebertrand/org-mac-link"
- :fetcher gitlab)

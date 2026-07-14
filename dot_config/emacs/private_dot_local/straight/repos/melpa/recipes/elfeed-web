@@ -1,1 +1,0 @@
-(elfeed-web :fetcher github :repo "emacs-elfeed/elfeed-web")

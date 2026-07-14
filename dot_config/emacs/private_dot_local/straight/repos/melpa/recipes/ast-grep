@@ -1,1 +1,0 @@
-(ast-grep :fetcher github :repo "SunskyXH/ast-grep.el")

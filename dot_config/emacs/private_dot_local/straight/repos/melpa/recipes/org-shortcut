@@ -1,3 +1,0 @@
-(org-shortcut
- :fetcher github
- :repo "Endi1/org-shortcut")

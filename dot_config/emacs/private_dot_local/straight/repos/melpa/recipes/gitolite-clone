@@ -1,1 +1,0 @@
-(gitolite-clone :repo "colonelpanic8/gitolite-clone" :fetcher github)

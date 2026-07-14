@@ -1,1 +1,0 @@
-(static-unless noninteractive)

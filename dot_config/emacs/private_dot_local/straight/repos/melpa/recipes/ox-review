@@ -1,3 +1,0 @@
-(ox-review
- :fetcher github
- :repo "masfj/ox-review")

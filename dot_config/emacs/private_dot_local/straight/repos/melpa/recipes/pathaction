@@ -1,3 +1,0 @@
-(pathaction
- :fetcher github
- :repo "jamescherti/pathaction.el")

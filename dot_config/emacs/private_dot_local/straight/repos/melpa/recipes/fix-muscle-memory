@@ -1,3 +1,0 @@
-(fix-muscle-memory :repo "jonnay/fix-muscle-memory"
-                   :fetcher github
-                   :old-names (emagician-fix-spell-memory))

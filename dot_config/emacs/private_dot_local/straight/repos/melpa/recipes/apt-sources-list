@@ -1,2 +1,0 @@
-(apt-sources-list :fetcher gitlab
-                  :repo "joewreschnig/apt-sources-list-mode")

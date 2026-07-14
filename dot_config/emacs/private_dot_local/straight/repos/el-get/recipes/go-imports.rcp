@@ -1,8 +1,0 @@
-(:name go-imports
-       :description "Tool to fix (add, remove) your Go imports automatically"
-       :type github
-       :pkgname "golang/tools"
-       :load-path (()) ; The .el file comes from go-mode.
-       :depends (go-mode)
-       :build (("go" "build" "-o" "bin/goimports" "./cmd/goimports"))
-       :post-init (setq gofmt-command (concat default-directory "bin/goimports")))

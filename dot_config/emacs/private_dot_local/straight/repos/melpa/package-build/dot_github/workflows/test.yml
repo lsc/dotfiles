@@ -1,8 +1,0 @@
-name: Test
-on: [push, pull_request]
-jobs:
-  test:
-    name: Test
-    uses: | # zizmor: ignore[unpinned-uses] same maintainer as this repo
-      emacscollective/workflows/.github/workflows/test.yml@main
-    permissions: {}

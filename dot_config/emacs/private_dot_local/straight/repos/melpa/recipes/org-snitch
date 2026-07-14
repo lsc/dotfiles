@@ -1,3 +1,0 @@
-(org-snitch
- :fetcher github
- :repo "morazotti/org-snitch")

@@ -1,3 +1,0 @@
-(bank-buddy
- :fetcher github
- :repo "captainflasmr/bank-buddy")

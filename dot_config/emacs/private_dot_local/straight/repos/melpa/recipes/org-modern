@@ -1,3 +1,0 @@
-(org-modern
- :repo "minad/org-modern"
- :fetcher github)

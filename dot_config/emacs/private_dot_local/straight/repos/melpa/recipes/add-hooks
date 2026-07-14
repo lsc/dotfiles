@@ -1,1 +1,0 @@
-(add-hooks :repo "nickserv/add-hooks" :fetcher github)

@@ -1,4 +1,0 @@
-(solarized-gruvbox-theme
- :fetcher github
- :repo "Umer-Arif/unique-emacs-theme-pack"
- :files ("Themes/solarized-gruvbox-theme.el"))

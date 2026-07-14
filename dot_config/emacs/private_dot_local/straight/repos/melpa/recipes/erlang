@@ -1,6 +1,0 @@
-(erlang
- :fetcher github
- :repo "erlang/otp"
- :version-regexp "OTP-%v"
- :files ("lib/tools/emacs/*.el"
-         (:exclude "lib/tools/emacs/erlang_appwiz.el")))

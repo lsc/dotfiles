@@ -1,1 +1,0 @@
-(exwm-modeline :repo "SqrtMinusOne/exwm-modeline" :fetcher github)

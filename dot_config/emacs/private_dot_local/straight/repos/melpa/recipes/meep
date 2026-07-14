@@ -1,3 +1,0 @@
-(meep
- :fetcher codeberg
- :repo "ideasman42/emacs-meep")

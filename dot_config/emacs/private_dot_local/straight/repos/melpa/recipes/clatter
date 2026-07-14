@@ -1,3 +1,0 @@
-(clatter
- :fetcher github
- :repo "parenworks/clatter.el")

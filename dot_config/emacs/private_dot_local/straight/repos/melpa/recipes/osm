@@ -1,3 +1,0 @@
-(osm
- :repo "minad/osm"
- :fetcher github)

@@ -1,1 +1,0 @@
-(vimscript-ts-mode :repo "nverno/vimscript-ts-mode" :fetcher github)

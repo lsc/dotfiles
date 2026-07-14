@@ -1,5 +1,0 @@
-(paren-face
- :fetcher github
- :repo "tarsius/paren-face"
- :files ("paren-face.el")
- :old-names (parenface))

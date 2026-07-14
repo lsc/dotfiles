@@ -1,3 +1,0 @@
-(md-ts-mode
- :fetcher github
- :repo "dnouri/md-ts-mode")

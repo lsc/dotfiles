@@ -1,1 +1,0 @@
-(org-inline-anim :repo "shg/org-inline-anim.el" :fetcher github)

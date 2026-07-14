@@ -1,3 +1,0 @@
-(ess-smart-underscore
- :fetcher github
- :repo "mattfidler/ess-smart-underscore.el")

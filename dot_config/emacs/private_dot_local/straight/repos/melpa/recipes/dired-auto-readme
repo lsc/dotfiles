@@ -1,1 +1,0 @@
-(dired-auto-readme :fetcher github :repo "amno1/dired-auto-readme")

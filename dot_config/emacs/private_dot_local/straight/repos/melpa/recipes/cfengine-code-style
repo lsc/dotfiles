@@ -1,3 +1,0 @@
-(cfengine-code-style
- :fetcher github
- :repo "cfengine/cfengine-code-style")

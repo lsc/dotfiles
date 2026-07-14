@@ -1,1 +1,0 @@
-(go-template-helper-mode :fetcher codeberg :repo "rch/go-template-helper-mode")

@@ -1,3 +1,0 @@
-(pip-frame
- :fetcher git
- :url "https://git.zamazal.org/pdm/pip-frame")

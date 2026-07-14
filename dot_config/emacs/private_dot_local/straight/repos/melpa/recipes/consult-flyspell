@@ -1,3 +1,0 @@
-(consult-flyspell
- :repo "OlMon/consult-flyspell"
- :fetcher gitlab)

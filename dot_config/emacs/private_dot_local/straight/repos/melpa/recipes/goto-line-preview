@@ -1,1 +1,0 @@
-(goto-line-preview :repo "emacs-vs/goto-line-preview" :fetcher github)

@@ -1,4 +1,0 @@
-(:name jsfmt
-       :description "Interface to jsfmt command for javascript files"
-       :type github
-       :pkgname "brettlangdon/jsfmt.el")

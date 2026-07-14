@@ -1,1 +1,0 @@
-(inputrc-mode :repo "nverno/inputrc-mode" :fetcher github)

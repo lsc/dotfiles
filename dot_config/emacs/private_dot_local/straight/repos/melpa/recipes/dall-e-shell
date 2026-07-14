@@ -1,3 +1,0 @@
-(dall-e-shell
- :fetcher github
- :repo "xenodium/dall-e-shell")

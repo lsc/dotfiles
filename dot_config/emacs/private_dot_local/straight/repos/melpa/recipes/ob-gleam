@@ -1,1 +1,0 @@
-(ob-gleam :fetcher github :repo "takeokunn/ob-gleam")

@@ -1,2 +1,0 @@
-(stem-reading-mode :repo "wavexx/stem-reading-mode.el"
-                   :fetcher gitlab)

@@ -1,4 +1,0 @@
-(:name ruby-refactor
-       :description "Ruby refactor is inspired by the Vim plugin vim-refactoring-ruby"
-       :type github
-       :pkgname "ajvargo/ruby-refactor")

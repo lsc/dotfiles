@@ -1,1 +1,0 @@
-(rails-routes :repo "otavioschwanck/rails-routes.el" :fetcher github)

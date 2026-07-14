@@ -1,2 +1,0 @@
-(consult-company :fetcher github
-                 :repo "mohkale/consult-company")

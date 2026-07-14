@@ -1,1 +1,0 @@
-(just-ts-mode :fetcher github :repo "leon-barrett/just-ts-mode.el")

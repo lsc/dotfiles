@@ -1,4 +1,0 @@
-(feature-mode
- :fetcher github
- :repo "freesteph/cucumber.el"
- :files (:defaults "gherkin-languages.json" "snippets" "support"))

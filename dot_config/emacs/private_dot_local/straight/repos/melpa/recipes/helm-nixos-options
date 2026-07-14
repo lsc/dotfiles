@@ -1,4 +1,0 @@
-(helm-nixos-options
- :fetcher github
- :repo "nix-community/nix-emacs"
- :files ("helm-nixos-options.el"))

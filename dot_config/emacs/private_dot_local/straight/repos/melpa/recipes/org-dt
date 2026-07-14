@@ -1,3 +1,0 @@
-(org-dt
- :fetcher codeberg
- :repo "niqc/org-dynamic-templates")

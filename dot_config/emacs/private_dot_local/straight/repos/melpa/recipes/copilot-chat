@@ -1,3 +1,0 @@
-(copilot-chat
-  :fetcher github 
-  :repo "chep/gh-copilot-chat.el")

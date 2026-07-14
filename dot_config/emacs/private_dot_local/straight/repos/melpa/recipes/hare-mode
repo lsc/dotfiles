@@ -1,1 +1,0 @@
-(hare-mode :fetcher sourcehut :repo "grafov/hare-mode")

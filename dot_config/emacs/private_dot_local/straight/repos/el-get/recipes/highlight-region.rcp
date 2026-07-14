@@ -1,5 +1,0 @@
-(:name highlight-region
-       :website "https://github.com/YoungFrog/highlight-region"
-       :description "Highlight text matching marked region"
-       :type github
-       :pkgname "YoungFrog/highlight-region")

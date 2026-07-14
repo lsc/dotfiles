@@ -1,6 +1,0 @@
-(:name company-jedi
-       :description "Company backend for Python jedi."
-       :website "https://github.com/emacsorphanage/company-jedi"
-       :type github
-       :pkgname "emacsorphanage/company-jedi"
-       :depends (jedi-core))

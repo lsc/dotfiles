@@ -1,4 +1,0 @@
-(musicbrainz-interactive
- :fetcher github
- :repo "zzkt/metabrainz"
- :files ("musicbrainz-interactive.el"))

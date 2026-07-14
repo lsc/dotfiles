@@ -1,5 +1,0 @@
-*.egg-info
-*.elc
-*.eln
-__pycache__
-benchmark/emacsd

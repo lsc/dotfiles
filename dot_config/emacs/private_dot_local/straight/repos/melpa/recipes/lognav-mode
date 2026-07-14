@@ -1,1 +1,0 @@
-(lognav-mode :fetcher github :repo "ellisvelo/lognav-mode")

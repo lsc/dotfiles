@@ -1,4 +1,0 @@
-(org-ros
-  :fetcher github
-  :repo "LionyxML/ros"
-  :files (:defaults "*.ps1"))

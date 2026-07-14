@@ -1,3 +1,0 @@
-(undo-fu-session
- :fetcher codeberg
- :repo "ideasman42/emacs-undo-fu-session")

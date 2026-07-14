@@ -1,5 +1,0 @@
-(:name intellij-theme
-       :description "Emacs theme inspired by IntelliJ's default theme."
-       :website "https://gitlab.com/fommil/emacs-intellij-theme"
-       :type git
-       :url "https://gitlab.com/fommil/emacs-intellij-theme.git")

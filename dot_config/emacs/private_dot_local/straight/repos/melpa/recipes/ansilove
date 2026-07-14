@@ -1,4 +1,0 @@
-(ansilove
- :fetcher gitlab
- :repo "xgqt/xgqt-elisp-lib-ansilove"
- :files ("code/source/v3/ansilove-lib/src/main/elisp/ansilove/ansilove*.el"))

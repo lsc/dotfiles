@@ -1,3 +1,0 @@
-(outline-stars
- :fetcher codeberg
- :repo "phmcc/outline-stars")

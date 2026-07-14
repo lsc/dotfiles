@@ -1,4 +1,0 @@
-(projection-dape
- :fetcher github
- :repo "mohkale/projection"
- :files ("src/projection-dape/projection-dape*.el"))

@@ -1,4 +1,0 @@
-(:name recur
-       :description "Self-tail recursion optimization in emacs"
-       :type github
-       :pkgname "VincentToups/recur")

@@ -1,2 +1,0 @@
-(deflate :fetcher github
-         :repo "skuro/deflate")

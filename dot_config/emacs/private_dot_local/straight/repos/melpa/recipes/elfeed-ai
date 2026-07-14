@@ -1,3 +1,0 @@
-(elfeed-ai
- :fetcher github
- :repo "danielfleischer/elfeed-ai")

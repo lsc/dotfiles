@@ -1,1 +1,0 @@
-((safe-mode (user-emacs-directory :path "~/.config/emacs/profiles" "safe-mode/")))

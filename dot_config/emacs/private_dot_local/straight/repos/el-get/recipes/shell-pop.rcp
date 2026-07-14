@@ -1,5 +1,0 @@
-(:name shell-pop
-       :description "Helps you pop up and pop out shell buffer easily."
-       :website "https://github.com/kyagi/shell-pop-el"
-       :type github
-       :pkgname "kyagi/shell-pop-el")

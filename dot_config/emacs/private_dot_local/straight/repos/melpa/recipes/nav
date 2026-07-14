@@ -1,1 +1,0 @@
-(nav :fetcher github :repo "emacsorphanage/nav" :files ("ack*" "nav.el"))

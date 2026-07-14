@@ -1,1 +1,0 @@
-(magit-vcsh :fetcher git :url "https://git.smrk.net/magit-vcsh.el")

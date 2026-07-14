@@ -1,5 +1,0 @@
-(:name undohist
-       :type github
-       :pkgname "emacsorphanage/undohist"
-       :description "Record and recover undo history"
-       :website "http://d.hatena.ne.jp/m2ym/20090707/1246933894")

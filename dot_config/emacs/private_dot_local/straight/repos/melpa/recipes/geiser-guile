@@ -1,4 +1,0 @@
-(geiser-guile
- :fetcher codeberg
- :repo "geiser/guile"
- :files (:defaults ("src" "src/*")))

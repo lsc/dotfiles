@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: autoclass
-# --
-.. autoclass:: $0
-   ${1::members: ${2:members}}

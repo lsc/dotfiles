@@ -1,3 +1,0 @@
-(scopeline
-  :fetcher github
-  :repo "meain/scopeline.el")

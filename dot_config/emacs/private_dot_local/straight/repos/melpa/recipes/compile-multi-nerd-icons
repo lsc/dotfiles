@@ -1,4 +1,0 @@
-(compile-multi-nerd-icons
- :fetcher github
- :repo "mohkale/compile-multi"
- :files ("extensions/compile-multi-nerd-icons/compile-multi-nerd-icons.el"))

@@ -1,2 +1,0 @@
-(repeat-ring :fetcher github
-             :repo "countvajhula/repeat-ring")

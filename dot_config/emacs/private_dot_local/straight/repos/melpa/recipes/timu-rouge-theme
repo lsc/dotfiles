@@ -1,3 +1,0 @@
-(timu-rouge-theme
- :repo "aimebertrand/timu-rouge-theme"
- :fetcher gitlab)

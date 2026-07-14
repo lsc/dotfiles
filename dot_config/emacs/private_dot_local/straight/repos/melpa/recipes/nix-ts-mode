@@ -1,1 +1,0 @@
-(nix-ts-mode :fetcher github :repo "nix-community/nix-ts-mode")

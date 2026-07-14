@@ -1,4 +1,0 @@
-(scratch
- :fetcher codeberg
- :repo "emacs-weirdware/scratch"
- :files ("scratch.el"))

@@ -1,4 +1,0 @@
-(vertico
- :repo "minad/vertico"
- :files (:defaults "extensions/vertico-*.el")
- :fetcher github)

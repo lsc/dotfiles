@@ -1,4 +1,0 @@
-(k8s-mode
- :fetcher github
- :repo "TxGVNN/emacs-k8s-mode"
- :files ("*.el" ("snippets/k8s-mode" "snippets/k8s-mode/*")))

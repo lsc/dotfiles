@@ -1,3 +1,0 @@
-(evil-tutor-sc :repo "clsty/evil-tutor-sc"
-	:fetcher github
-	:files (:defaults "tutor-sc.txt"))

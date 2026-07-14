@@ -1,3 +1,0 @@
-(termint
-  :fetcher github
-  :repo "milanglacier/termint.el")

@@ -1,4 +1,0 @@
-(:name olivetti
-       :description "Emacs minor mode for a nice writing environment"
-       :type github
-       :pkgname "rnkn/olivetti")

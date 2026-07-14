@@ -1,1 +1,0 @@
-(wordel :repo "progfolio/wordel" :fetcher github :files (:defaults "words"))

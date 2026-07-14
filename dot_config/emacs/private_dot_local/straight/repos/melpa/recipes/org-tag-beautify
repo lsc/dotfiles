@@ -1,1 +1,0 @@
-(org-tag-beautify :url "https://repo.or.cz/org-tag-beautify.git" :fetcher git)

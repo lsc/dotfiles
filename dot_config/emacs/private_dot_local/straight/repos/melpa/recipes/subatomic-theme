@@ -1,3 +1,0 @@
-(subatomic-theme
- :fetcher codeberg
- :repo "cryon/subatomic-theme")

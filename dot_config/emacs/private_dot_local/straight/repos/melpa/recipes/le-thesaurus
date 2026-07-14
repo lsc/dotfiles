@@ -1,3 +1,0 @@
-(le-thesaurus
- :repo "AnselmC/le-thesaurus.el"
- :fetcher github)

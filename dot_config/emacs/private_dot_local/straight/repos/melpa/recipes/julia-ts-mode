@@ -1,2 +1,0 @@
-(julia-ts-mode :repo "JuliaEditorSupport/julia-ts-mode"
-               :fetcher github)

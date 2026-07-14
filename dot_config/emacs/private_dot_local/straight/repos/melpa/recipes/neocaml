@@ -1,1 +1,0 @@
-(neocaml :repo "bbatsov/neocaml" :fetcher github)

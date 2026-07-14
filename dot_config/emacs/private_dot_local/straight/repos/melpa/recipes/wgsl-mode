@@ -1,1 +1,0 @@
-(wgsl-mode :repo "acowley/wgsl-mode" :fetcher github)

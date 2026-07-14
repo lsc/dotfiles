@@ -1,3 +1,0 @@
-(:name anchored-transpose
-       :description "Transposes a phrase around an anchor phrase"
-       :type emacswiki)

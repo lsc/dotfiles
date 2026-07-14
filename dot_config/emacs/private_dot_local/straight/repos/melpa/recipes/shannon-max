@@ -1,2 +1,0 @@
-(shannon-max :fetcher github
-             :repo "sstraust/shannonmax")

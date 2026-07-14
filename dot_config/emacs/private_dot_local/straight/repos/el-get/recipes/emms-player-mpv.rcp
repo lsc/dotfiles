@@ -1,6 +1,0 @@
-(:name emms-player-mpv
-       :website "https://github.com/dochang/emms-player-mpv"
-       :description "mpv support for EMMS"
-       :depends (emms)
-       :type github
-       :pkgname "dochang/emms-player-mpv")

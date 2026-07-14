@@ -1,1 +1,0 @@
-(go-prettify-mode :fetcher codeberg :repo "snyssfx/go-prettify-mode.el")

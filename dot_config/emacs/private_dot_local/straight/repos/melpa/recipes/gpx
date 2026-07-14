@@ -1,3 +1,0 @@
-(gpx :fetcher github
-     :repo "mkcms/gpx-mode"
-     :files (:defaults "*.py"))

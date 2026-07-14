@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: Hypothesis
-# key: hyp
-# --
-Hypothesis $1: $2

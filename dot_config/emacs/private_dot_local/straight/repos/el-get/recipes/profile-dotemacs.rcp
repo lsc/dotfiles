@@ -1,4 +1,0 @@
-(:name profile-dotemacs
-       :type github
-       :pkgname "raxod502/profile-dotemacs"
-       :description "profiles your .emacs")

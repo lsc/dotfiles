@@ -1,3 +1,0 @@
-(phoenix-dark-pink-theme
- :repo "mhcat/emacs-phoenix-dark-pink-theme"
- :fetcher sourcehut)

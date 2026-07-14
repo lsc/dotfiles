@@ -1,8 +1,0 @@
-(chatgpt-shell
- :fetcher github
- :repo "xenodium/chatgpt-shell"
- :files ("*.el" (:exclude "test_chatgpt-shell.el"
-                          "shell-maker.el"
-                          "ob-chatgpt-shell.el"
-                          "dall-e-shell.el"
-                          "ob-dall-e-shell.el")))

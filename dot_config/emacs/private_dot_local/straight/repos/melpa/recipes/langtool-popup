@@ -1,5 +1,0 @@
-(langtool-popup
- :fetcher github
- :repo "mhayashi1120/Emacs-langtool"
- :files ("langtool-popup.el")
- :version-regexp "popup-%v")

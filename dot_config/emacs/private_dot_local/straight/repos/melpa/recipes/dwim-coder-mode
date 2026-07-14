@@ -1,1 +1,0 @@
-(dwim-coder-mode :fetcher gitlab :repo "sadiq/dwim-coder-mode")

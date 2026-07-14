@@ -1,3 +1,0 @@
-(duplexer
- :fetcher github
- :repo "eki3z/duplexer.el")

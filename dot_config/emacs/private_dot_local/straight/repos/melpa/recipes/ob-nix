@@ -1,3 +1,0 @@
-(ob-nix
- :fetcher codeberg
- :repo "theesm/ob-nix")

@@ -1,4 +1,0 @@
-(:name todotxt-mode
-       :description "major mode for editing todo.txt files"
-       :type github
-       :pkgname "avillafiorita/todotxt-mode")

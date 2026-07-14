@@ -1,5 +1,0 @@
-(:name openwith
-       :description "Open files with external programs"
-       :type emacsmirror
-       :features openwith
-       :post-init (openwith-mode t))

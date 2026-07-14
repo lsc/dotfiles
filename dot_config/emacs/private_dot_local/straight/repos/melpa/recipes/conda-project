@@ -1,1 +1,0 @@
-(conda-project :fetcher github :repo "gilbertwong96/conda-project.el")

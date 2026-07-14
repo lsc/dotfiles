@@ -1,5 +1,0 @@
-(:name yasnippets-orgmode
-       :description "YASnippet bundle for Emacs org-mode"
-       :type github
-       :pkgname "yyr/yasnippets-orgmode"
-       :depends (yasnippet))

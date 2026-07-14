@@ -1,4 +1,0 @@
-(:name ws-butler
-       :description "Unobtrusively trim extraneous white-space *ONLY* in lines edited."
-       :type elpa
-       :repo ("nongnu" . "https://elpa.nongnu.org/nongnu/"))

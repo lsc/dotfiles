@@ -1,3 +1,0 @@
-(scroll-on-drag
- :fetcher codeberg
- :repo "ideasman42/emacs-scroll-on-drag")

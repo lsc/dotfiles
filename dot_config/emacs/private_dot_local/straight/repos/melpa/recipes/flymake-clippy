@@ -1,3 +1,0 @@
-(flymake-clippy
- :fetcher github
- :repo "mak-kirkland/flymake-clippy")

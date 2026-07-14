@@ -1,3 +1,0 @@
-(lisp-chat :fetcher github
-           :repo "ryukinix/lisp-chat"
-           :files ("emacs/lisp-chat*.el"))

@@ -1,3 +1,0 @@
-(fancy-urls-menu
- :fetcher codeberg
- :repo "kakafarm/emacs-fancy-urls-menu")

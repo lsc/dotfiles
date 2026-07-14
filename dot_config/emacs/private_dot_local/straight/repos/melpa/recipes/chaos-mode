@@ -1,1 +1,0 @@
-(chaos-mode :repo "thechampagne/chaos-mode" :fetcher github)

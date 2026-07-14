@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: Example
-# key: exa
-# --
-Example $1:$2 := $3.

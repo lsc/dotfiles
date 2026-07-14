@@ -1,3 +1,0 @@
-(kill-file-path
- :repo "chyla/kill-file-path"
- :fetcher github)

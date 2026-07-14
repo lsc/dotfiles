@@ -1,6 +1,0 @@
-(:name combobulate
-       :description "Structured Editing and Navigation in Emacs"
-       :type github
-       :pkgname "mickeynp/combobulate"
-       :load-path (".")
-       :minimum-emacs-version "29")

@@ -1,4 +1,0 @@
-(:name xterm-extras
-       :description "define additional function key sequences for recent versions of xterm"
-       :type github
-       :pkgname "yyr/xterm-extras.el")

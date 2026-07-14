@@ -1,4 +1,0 @@
-(ekg-denote
- :fetcher github
- :repo "ahyatt/ekg"
- :files ("ekg-denote.el"))

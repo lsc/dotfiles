@@ -1,4 +1,0 @@
-(automoji
- :fetcher github
- :repo "Dev380/automoji-el"
- :files (:defaults "generated.data"))

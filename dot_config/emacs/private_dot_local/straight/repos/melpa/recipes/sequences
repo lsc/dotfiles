@@ -1,1 +1,0 @@
-(sequences :repo "timvisher/sequences.el" :fetcher github)

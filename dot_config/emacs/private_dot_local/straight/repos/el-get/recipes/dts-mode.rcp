@@ -1,4 +1,0 @@
-(:name dts-mode
-       :description "Major mode for Devicetree source code"
-       :type github
-       :pkgname "bgamari/dts-mode")

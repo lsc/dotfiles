@@ -1,3 +1,0 @@
-(transient-posframe
- :fetcher github
- :repo "emacsorphanage/transient-posframe")

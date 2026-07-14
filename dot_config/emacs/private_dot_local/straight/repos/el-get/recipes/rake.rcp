@@ -1,5 +1,0 @@
-(:name rake
-       :description "Run rake commands"
-       :type github
-       :pkgname "asok/rake"
-       :depends (f dash cl-lib))

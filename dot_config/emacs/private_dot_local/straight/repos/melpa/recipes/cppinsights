@@ -1,2 +1,0 @@
-(cppinsights :fetcher github
-             :repo "ignity21/cppinsights.el")

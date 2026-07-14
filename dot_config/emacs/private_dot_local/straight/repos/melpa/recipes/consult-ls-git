@@ -1,3 +1,0 @@
-(consult-ls-git
- :repo "rcj/consult-ls-git"
- :fetcher github)

@@ -1,1 +1,0 @@
-(transient :fetcher github :repo "magit/transient")

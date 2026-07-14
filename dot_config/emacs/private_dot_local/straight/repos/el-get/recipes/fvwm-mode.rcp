@@ -1,4 +1,0 @@
-(:name fvwm-mode
-       :description "major mode for editing Fvwm configuration files."
-       :type github
-       :pkgname "theBlackDragon/fvwm-mode")

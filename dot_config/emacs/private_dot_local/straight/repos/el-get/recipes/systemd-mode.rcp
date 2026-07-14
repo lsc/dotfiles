@@ -1,4 +1,0 @@
-(:name systemd-mode
-       :description "Major mode for editing systemd units"
-       :type github
-       :pkgname "holomorph/systemd-mode")

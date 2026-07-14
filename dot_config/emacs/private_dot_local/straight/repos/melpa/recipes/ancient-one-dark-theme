@@ -1,3 +1,0 @@
-(ancient-one-dark-theme
- :fetcher github
- :repo "sigvt/ancient-one-dark-emacs")

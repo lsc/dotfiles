@@ -1,3 +1,0 @@
-(recomplete
- :fetcher codeberg
- :repo "ideasman42/emacs-recomplete")

@@ -1,3 +1,0 @@
-(visible-mark
- :fetcher codeberg
- :repo "ideasman42/emacs-visible-mark")

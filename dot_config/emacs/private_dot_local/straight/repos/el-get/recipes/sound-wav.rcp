@@ -1,5 +1,0 @@
-(:name sound-wav
-       :type github
-       :pkgname "emacsorphanage/sound-wav"
-       :description "Play WAV files in Emacs"
-       :depends (deferred))

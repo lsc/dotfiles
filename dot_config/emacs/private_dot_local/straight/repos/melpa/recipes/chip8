@@ -1,3 +1,0 @@
-(chip8
- :fetcher github
- :repo "gabrielelana/chip8.el")

@@ -1,2 +1,0 @@
-(consult-yasnippet :fetcher github
-                   :repo "mohkale/consult-yasnippet")

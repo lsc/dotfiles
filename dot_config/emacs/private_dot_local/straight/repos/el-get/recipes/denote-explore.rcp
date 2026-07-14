@@ -1,7 +1,0 @@
-(:name denote-explore
-       :description "A collection of functions to explore Denote files"
-       :type github
-       :pkgname "pprevos/denote-explore"
-       :load-path (".")
-       :depends (denote f emacs-dashboard)
-       :minimum-emacs-version "29.1")

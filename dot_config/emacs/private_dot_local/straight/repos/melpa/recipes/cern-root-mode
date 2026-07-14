@@ -1,3 +1,0 @@
-(cern-root-mode
- :fetcher github
- :repo "jaypmorgan/cern-root-mode")

@@ -1,3 +1,0 @@
-(hl-prog-extra
- :fetcher codeberg
- :repo "ideasman42/emacs-hl-prog-extra")

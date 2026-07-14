@@ -1,3 +1,0 @@
-(simplicity-theme
- :fetcher github
- :repo "smallwat3r/emacs-simplicity-theme")

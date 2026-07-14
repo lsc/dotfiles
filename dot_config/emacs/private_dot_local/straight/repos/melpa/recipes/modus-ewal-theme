@@ -1,3 +1,0 @@
-(modus-ewal-theme
- :fetcher github
- :repo "deadendpl/modus-ewal-theme")

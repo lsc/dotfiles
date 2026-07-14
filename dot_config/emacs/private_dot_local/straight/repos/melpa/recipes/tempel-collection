@@ -1,4 +1,0 @@
-(tempel-collection
- :repo "Crandel/tempel-collection"
- :fetcher github
- :files (:defaults "templates"))

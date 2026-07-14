@@ -1,4 +1,0 @@
-(ansible
- :fetcher gitlab
- :repo "emacs-ansible/emacs-ansible"
- :files (:defaults "snippets" "dict"))

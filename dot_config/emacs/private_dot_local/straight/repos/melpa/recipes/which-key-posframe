@@ -1,3 +1,0 @@
-(which-key-posframe
- :fetcher github
- :repo "emacsorphanage/which-key-posframe")

@@ -1,4 +1,0 @@
-(:name pangu-spacing
-       :description "Minor-mode to add space between Chinese and English characters."
-       :type github
-       :pkgname "coldnew/pangu-spacing")

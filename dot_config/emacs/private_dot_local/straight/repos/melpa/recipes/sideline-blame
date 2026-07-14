@@ -1,1 +1,0 @@
-(sideline-blame :repo "emacs-sideline/sideline-blame" :fetcher github)

@@ -1,3 +1,0 @@
-(dbml-mode
- :fetcher github
- :repo "KeyWeeUsr/dbml-mode")

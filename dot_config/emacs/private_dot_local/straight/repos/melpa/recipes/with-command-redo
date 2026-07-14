@@ -1,3 +1,0 @@
-(with-command-redo
- :fetcher codeberg
- :repo "ideasman42/emacs-with-command-redo")

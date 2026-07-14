@@ -1,6 +1,0 @@
-*.elc
-/dist
-
-# ELPA-generated files
-/buttercup-autoloads.el
-/buttercup-pkg.el

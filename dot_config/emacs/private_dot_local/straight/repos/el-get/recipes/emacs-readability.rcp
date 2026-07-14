@@ -1,7 +1,0 @@
-(:name emacs-readability
-       :description "Read articles from Readability in Emacs."
-       :website "https://github.com/emacsattic/readability"
-       :type github
-       :minimum-emacs-version "24.3"
-       :depends (oauth ov)
-       :pkgname "emacsattic/readability")

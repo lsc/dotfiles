@@ -1,1 +1,0 @@
-(counsel-mairix :fetcher sourcehut :repo "ane/counsel-mairix")

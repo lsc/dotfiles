@@ -1,1 +1,0 @@
-(asciidoc-mode :fetcher github :repo "bbatsov/asciidoc-mode")

@@ -1,3 +1,0 @@
-(pixelblaze
- :repo "mgsb/emacs-pixelblaze"
- :fetcher github)

@@ -1,3 +1,0 @@
-(russian-techwriter
- :repo "dunmaksim/emacs-russian-techwriter-input-method"
- :fetcher github)

@@ -1,4 +1,0 @@
-# -*- mode: snippet -*-
-# name: saveFrame
-# --
-saveFrame(${2:"${1:filename-####.ext}"});

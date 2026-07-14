@@ -1,2 +1,0 @@
-(org-visibility :repo "nullman/emacs-org-visibility"
-                :fetcher github)

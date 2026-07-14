@@ -1,2 +1,0 @@
-(mmm-mode :repo "dgutov/mmm-mode" :fetcher github)
-

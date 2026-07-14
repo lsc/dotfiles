@@ -1,3 +1,0 @@
-(denote-journal-capture
- :fetcher sourcehut
- :repo "swflint/denote-journal-capture")

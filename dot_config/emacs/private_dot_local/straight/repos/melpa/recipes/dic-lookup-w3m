@@ -1,3 +1,0 @@
-(dic-lookup-w3m
- :fetcher github
- :repo "emacsattic/dic-lookup-w3m")

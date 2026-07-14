@@ -1,3 +1,0 @@
-(wollok-mode
- :fetcher github
- :repo "tralph3/wollok-mode")

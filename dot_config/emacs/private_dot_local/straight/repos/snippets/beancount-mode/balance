@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: Balance assertion
-# key: bal
-# condition: (bolp)
-# --
-`(format-time-string "%Y-%m-%d")` balance $1 ${2:0.00}

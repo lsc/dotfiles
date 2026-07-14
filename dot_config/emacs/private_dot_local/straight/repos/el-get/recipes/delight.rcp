@@ -1,4 +1,0 @@
-(:name delight
-       :website "https://savannah.nongnu.org/projects/delight"
-       :description "A dimmer switch for your lighter text."
-       :type elpa)

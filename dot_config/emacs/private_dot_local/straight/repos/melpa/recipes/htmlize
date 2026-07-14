@@ -1,3 +1,0 @@
-(htmlize
- :fetcher github
- :repo "emacsorphanage/htmlize")

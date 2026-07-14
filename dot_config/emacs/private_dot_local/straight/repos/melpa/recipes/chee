@@ -1,4 +1,0 @@
-(chee
- :fetcher github
- :repo "eikek/chee"
- :files ("emacs/*.el"))

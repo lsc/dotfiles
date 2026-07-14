@@ -1,1 +1,0 @@
-(consult-notmuch :fetcher codeberg :repo "jao/consult-notmuch")

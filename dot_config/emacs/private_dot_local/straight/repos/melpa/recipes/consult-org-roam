@@ -1,3 +1,0 @@
-(consult-org-roam
- :repo "jgru/consult-org-roam"
- :fetcher github)

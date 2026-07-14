@@ -1,3 +1,0 @@
-(:name fsm
-       :description "State machine library."
-       :type elpa)

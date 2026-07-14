@@ -1,3 +1,0 @@
-(sq
- :repo "sequoia-pgp/sqel"
- :fetcher gitlab)

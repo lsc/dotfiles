@@ -1,3 +1,0 @@
-(roc-ts-mode
- :fetcher gitlab
- :repo "tad-lispy/roc-ts-mode")

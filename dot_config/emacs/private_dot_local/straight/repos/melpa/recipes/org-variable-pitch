@@ -1,4 +1,0 @@
-(org-variable-pitch
- :fetcher codeberg
- :repo "kutuptiyini/elisp"
- :files ("org-variable-pitch.el"))

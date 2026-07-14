@@ -1,3 +1,0 @@
-(flymake-sqlfluff
-  :fetcher github
-  :repo "erickgnavar/flymake-sqlfluff")

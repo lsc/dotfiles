@@ -1,3 +1,0 @@
-(ddp
- :fetcher github
- :repo "eki3z/ddp.el")

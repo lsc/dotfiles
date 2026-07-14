@@ -1,4 +1,0 @@
-(lsp-scheme
- :fetcher codeberg
- :repo "rgherdt/emacs-lsp-scheme"
- :files (:defaults "scripts"))

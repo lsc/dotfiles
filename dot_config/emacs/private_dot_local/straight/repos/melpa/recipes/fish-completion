@@ -1,3 +1,0 @@
-(fish-completion
- :repo "LemonBreezes/emacs-fish-completion"
- :fetcher github)

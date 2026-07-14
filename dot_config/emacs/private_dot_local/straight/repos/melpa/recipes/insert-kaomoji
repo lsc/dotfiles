@@ -1,4 +1,0 @@
-(insert-kaomoji
- :fetcher codeberg
- :repo "pkal/insert-kaomoji.el"
- :files (:defaults "KAOMOJIS"))

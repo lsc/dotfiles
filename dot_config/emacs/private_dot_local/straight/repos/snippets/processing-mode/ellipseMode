@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: ellipseMode
-# key: ellipsem
-# --
-ellipseMode(${1:CENTER});

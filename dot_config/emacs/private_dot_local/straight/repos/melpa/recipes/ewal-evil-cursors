@@ -1,4 +1,0 @@
-(ewal-evil-cursors
- :fetcher github
- :repo "cyruseuros/ewal"
- :files ("evil-cursors/*.el"))

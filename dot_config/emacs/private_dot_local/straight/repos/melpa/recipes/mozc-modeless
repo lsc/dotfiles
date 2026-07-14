@@ -1,1 +1,0 @@
-(mozc-modeless :fetcher github :repo "kiyoka/mozc-modeless-emacs")

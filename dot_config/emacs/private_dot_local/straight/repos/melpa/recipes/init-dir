@@ -1,3 +1,0 @@
-(init-dir
- :fetcher github
- :repo "chaosemer/init-dir")

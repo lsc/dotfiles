@@ -1,3 +1,0 @@
-(company-spell
- :fetcher github
- :repo "enzuru/company-spell")

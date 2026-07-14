@@ -1,1 +1,0 @@
-(vcsh :fetcher git :url "https://git.smrk.net/vcsh.el")

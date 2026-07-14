@@ -1,4 +1,0 @@
-(:name org-html5presentation
-       :type github
-       :pkgname "kinjo/org-html5presentation.el"
-       :description "HTML5 Presentation Back-End for Org Export Engine")

@@ -1,2 +1,0 @@
-(ob-bitfield :repo "gsingh93/ob-bitfield"
-             :fetcher github)

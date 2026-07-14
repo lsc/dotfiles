@@ -1,1 +1,0 @@
-(helm-recoll :fetcher github :repo "emacs-helm/helm-recoll")

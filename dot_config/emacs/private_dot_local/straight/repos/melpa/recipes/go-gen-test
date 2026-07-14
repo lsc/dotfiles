@@ -1,4 +1,0 @@
-(go-gen-test
- :fetcher github
- :repo "s-kostyaev/go-gen-test"
- :files ("go-gen-test.el"))

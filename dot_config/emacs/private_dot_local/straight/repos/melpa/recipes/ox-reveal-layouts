@@ -1,3 +1,0 @@
-(ox-reveal-layouts
- :fetcher github
- :repo "GerardoCendejas/ox-reveal-layouts")

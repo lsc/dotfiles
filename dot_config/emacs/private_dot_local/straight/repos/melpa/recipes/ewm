@@ -1,2 +1,0 @@
-(ewm :fetcher github
-     :repo "laluxx/ewm")

@@ -1,4 +1,0 @@
-(roseline-theme
- :fetcher github
- :repo "Umer-Arif/unique-emacs-theme-pack"
- :files ("Themes/roseline-theme.el"))

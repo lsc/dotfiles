@@ -1,3 +1,0 @@
-(mermaid-ts-mode
- :fetcher github
- :repo "JonathanHope/mermaid-ts-mode")

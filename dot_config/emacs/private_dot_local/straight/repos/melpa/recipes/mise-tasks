@@ -1,3 +1,0 @@
-(mise-tasks
- :fetcher github
- :repo "klochowicz/mise-tasks.el")

@@ -1,2 +1,0 @@
-(unison-ts-mode :fetcher github
-                :repo "fmguerreiro/unison-ts-mode")

@@ -1,3 +1,0 @@
-(tree-sitter-ispell
-  :fetcher github
-  :repo "erickgnavar/tree-sitter-ispell.el")

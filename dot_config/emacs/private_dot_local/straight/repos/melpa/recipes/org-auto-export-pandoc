@@ -1,1 +1,0 @@
-(org-auto-export-pandoc :fetcher github :repo "Y0ngg4n/org-auto-export-pandoc")

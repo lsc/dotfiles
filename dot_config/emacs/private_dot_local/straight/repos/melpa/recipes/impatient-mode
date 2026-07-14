@@ -1,5 +1,0 @@
-(impatient-mode
- :fetcher github
- :repo "skeeto/impatient-mode"
- :files ("*.html" "*.js" "impatient-mode.el"))
-

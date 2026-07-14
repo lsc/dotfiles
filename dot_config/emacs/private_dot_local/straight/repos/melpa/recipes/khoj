@@ -1,4 +1,0 @@
-(khoj
- :fetcher github
- :repo "khoj-ai/khoj"
- :files ("src/interface/emacs/*.el"))

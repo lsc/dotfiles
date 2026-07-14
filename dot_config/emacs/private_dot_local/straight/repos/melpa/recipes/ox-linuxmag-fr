@@ -1,4 +1,0 @@
-(ox-linuxmag-fr
- :fetcher github
- :repo "DamienCassou/ox-linuxmag-fr"
- :files (:defaults "resources"))

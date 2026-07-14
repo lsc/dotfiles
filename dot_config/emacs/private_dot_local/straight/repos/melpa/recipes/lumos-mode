@@ -1,3 +1,0 @@
-(lumos-mode
- :fetcher github
- :repo "getlumos/lumos-mode")

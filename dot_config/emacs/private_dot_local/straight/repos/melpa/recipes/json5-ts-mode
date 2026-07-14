@@ -1,3 +1,0 @@
-(json5-ts-mode
- :fetcher github
- :repo "dochang/json5-ts-mode")

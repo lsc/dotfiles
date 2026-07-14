@@ -1,4 +1,0 @@
-(osa-chrome
- :fetcher github
- :repo "atomontage/osa-chrome"
- :files (:defaults ("scripts" "scripts/*.js")))

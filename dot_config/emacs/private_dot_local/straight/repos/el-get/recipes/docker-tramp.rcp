@@ -1,4 +1,0 @@
-(:name docker-tramp
-       :description "TRAMP integration for docker containers"
-       :type github
-       :pkgname "emacs-pe/docker-tramp.el" )

@@ -1,1 +1,0 @@
-(sailfish-scratchbox :repo "iddm/sailfish-scratchbox.el" :fetcher github)

@@ -1,3 +1,0 @@
-(bray
- :fetcher codeberg
- :repo "ideasman42/emacs-bray")

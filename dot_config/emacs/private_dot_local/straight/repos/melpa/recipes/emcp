@@ -1,3 +1,0 @@
-(emcp :fetcher codeberg
-      :repo "martenlienen/emcp"
-      :files (:defaults "emacs.svg"))

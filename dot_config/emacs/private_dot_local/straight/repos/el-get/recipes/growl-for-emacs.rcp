@@ -1,5 +1,0 @@
-(:name growl-for-emacs
-       :description "A simple Emacs wrapper for growlnotify that supports coalescing"
-       :type github
-       :pkgname "SkydiveMike/growl-for-emacs"
-       )

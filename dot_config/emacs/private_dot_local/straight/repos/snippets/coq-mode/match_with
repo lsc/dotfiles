@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: match with
-# key: mw
-# --
-match $1 with
-| $2 => $3
-end

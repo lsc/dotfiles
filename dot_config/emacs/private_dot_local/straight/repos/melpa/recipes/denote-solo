@@ -1,3 +1,0 @@
-(denote-solo
- :fetcher github
- :repo "pavlo/denote-solo")

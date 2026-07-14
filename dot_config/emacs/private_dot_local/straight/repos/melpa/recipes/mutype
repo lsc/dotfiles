@@ -1,3 +1,0 @@
-(mutype :fetcher github
-        :repo "suxiaogang223/mutype"
-        :files (:defaults "sources/*.txt"))

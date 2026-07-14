@@ -1,4 +1,0 @@
-(:name pov-mode
-       :description "Major mode for Povray scene files"
-       :type github
-       :pkgname "emacsmirror/pov-mode")

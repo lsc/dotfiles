@@ -1,7 +1,0 @@
-(:name scratch
-       :description "Mode-specific scratch buffers"
-       :type git
-       :url "https://codeberg.org/emacs-weirdware/scratch"
-       :info "."
-       :build (("make"))
-       :load-path ".")

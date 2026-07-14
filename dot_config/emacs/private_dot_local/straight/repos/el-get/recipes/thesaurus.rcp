@@ -1,3 +1,0 @@
-(:name thesaurus
-       :description "replace a word with a synonym looked up in a web service."
-       :type emacswiki)

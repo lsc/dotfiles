@@ -1,3 +1,0 @@
-(scad-ts-mode
- :fetcher github
- :repo "yoshinari-nomura/scad-ts-mode")

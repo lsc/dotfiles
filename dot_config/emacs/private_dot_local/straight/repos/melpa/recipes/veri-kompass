@@ -1,6 +1,0 @@
-(veri-kompass
- :fetcher gitlab
- :repo "koral/veri-kompass"
- ;; The latest release tag is from before the package was renamed.
- ;; See https://github.com/melpa/melpa/issues/8691.
- :version-regexp "none-since-rename")

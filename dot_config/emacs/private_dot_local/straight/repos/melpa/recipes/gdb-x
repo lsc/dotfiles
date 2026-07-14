@@ -1,1 +1,0 @@
-(gdb-x :fetcher codeberg :repo "pastor/gdb-x")

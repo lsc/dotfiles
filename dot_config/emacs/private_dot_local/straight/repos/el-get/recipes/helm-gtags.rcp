@@ -1,5 +1,0 @@
-(:name helm-gtags
-       :description "GNU GLOBAL Helm interface."
-       :type github
-       :pkgname "emacsorphanage/helm-gtags"
-       :depends (helm))

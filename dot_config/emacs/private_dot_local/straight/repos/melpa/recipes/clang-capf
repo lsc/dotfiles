@@ -1,4 +1,0 @@
-(clang-capf
- :fetcher codeberg
- :repo "pkal/clang-capf.el"
- :old-names (cpp-capf))

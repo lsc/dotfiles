@@ -1,4 +1,0 @@
-(restclient-helm
- :fetcher github
- :repo "emacsorphanage/restclient"
- :files ("restclient-helm.el"))

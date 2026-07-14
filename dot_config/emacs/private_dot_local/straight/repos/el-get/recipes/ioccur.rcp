@@ -1,5 +1,0 @@
-(:name ioccur
-       :description "Incremental occur."
-       :type github
-       :pkgname "thierryvolpiatto/ioccur"
-       :features ioccur)

@@ -1,1 +1,0 @@
-(cilk-mode :repo "ailiop/cilk-mode" :fetcher github)

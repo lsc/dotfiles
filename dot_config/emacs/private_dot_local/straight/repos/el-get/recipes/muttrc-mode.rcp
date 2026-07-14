@@ -1,3 +1,0 @@
-(:name muttrc-mode
-       :description "Major mode to edit muttrc under Emacs."
-       :type emacswiki)

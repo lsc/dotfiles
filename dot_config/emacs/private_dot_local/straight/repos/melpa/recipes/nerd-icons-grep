@@ -1,3 +1,0 @@
-(nerd-icons-grep
- :fetcher github
- :repo "hron/nerd-icons-grep")

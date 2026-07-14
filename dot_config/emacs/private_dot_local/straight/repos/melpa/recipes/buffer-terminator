@@ -1,1 +1,0 @@
-(buffer-terminator :fetcher github :repo "jamescherti/buffer-terminator.el")

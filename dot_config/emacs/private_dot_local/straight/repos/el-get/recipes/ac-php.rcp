@@ -1,6 +1,0 @@
-(:name ac-php
-       :description "Auto complete source for php"
-       :type github
-       :pkgname "xcwen/ac-php"
-       :compile "ac-php.el" ;; We split from core to handle dependencies.
-       :depends (ac-php-core yasnippet auto-complete))

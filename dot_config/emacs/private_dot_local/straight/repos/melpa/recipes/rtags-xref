@@ -1,5 +1,0 @@
-(rtags-xref
- :fetcher github
- :repo "Andersbakken/rtags"
- :version-regexp "use-header-instead" ;see #8692
- :files ("src/rtags-xref.el"))

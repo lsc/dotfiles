@@ -1,1 +1,0 @@
-(mocker :repo "sigma/mocker.el" :fetcher github)

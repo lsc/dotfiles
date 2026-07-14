@@ -1,3 +1,0 @@
-(org-incoming :fetcher github
-              :repo "tinloaf/org-incoming"
-              :files (:defaults ("doc" "doc/*.png")))

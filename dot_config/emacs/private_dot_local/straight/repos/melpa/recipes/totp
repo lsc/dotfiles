@@ -1,3 +1,0 @@
-(totp
- :fetcher github
- :repo "juergenhoetzel/emacs-totp")

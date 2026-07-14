@@ -1,4 +1,0 @@
-(:name manage-minor-mode
-       :description "Manage your minor-mode on the dedicated interface buffer."
-       :type github
-       :pkgname "emacsorphanage/manage-minor-mode")

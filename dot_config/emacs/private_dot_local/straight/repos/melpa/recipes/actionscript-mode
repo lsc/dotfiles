@@ -1,4 +1,0 @@
-(actionscript-mode 
- :fetcher codeberg
- :repo "austinhaas/actionscript-mode"
- :files ("actionscript-mode.el"))

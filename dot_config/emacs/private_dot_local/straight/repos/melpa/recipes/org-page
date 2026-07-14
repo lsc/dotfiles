@@ -1,4 +1,0 @@
-(org-page
- :fetcher github
- :repo "emacsorphanage/org-page"
- :files ("*.el" "doc" "themes"))

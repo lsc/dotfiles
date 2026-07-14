@@ -1,3 +1,0 @@
-(iota
- :fetcher sourcehut
- :repo "mango/iota.el")

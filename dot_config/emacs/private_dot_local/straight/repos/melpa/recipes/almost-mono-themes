@@ -1,3 +1,0 @@
-(almost-mono-themes
- :fetcher codeberg
- :repo "cryon/almost-mono-themes")

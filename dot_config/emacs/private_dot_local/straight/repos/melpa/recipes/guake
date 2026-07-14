@@ -1,3 +1,0 @@
-(guake
- :fetcher github
- :repo "juergenhoetzel/emacs-guake")

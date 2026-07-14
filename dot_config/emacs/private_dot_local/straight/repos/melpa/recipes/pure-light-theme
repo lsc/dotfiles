@@ -1,3 +1,0 @@
-(pure-light-theme
- :fetcher github
- :repo "nyrell/pure-light-eink-color")

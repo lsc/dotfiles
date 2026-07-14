@@ -1,2 +1,0 @@
-(elune-theme :repo "hsnovel/elune-theme"
-              :fetcher github)

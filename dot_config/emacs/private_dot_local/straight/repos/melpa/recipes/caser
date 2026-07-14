@@ -1,3 +1,0 @@
-(caser
- :fetcher hg
- :url "https://hg.sr.ht/~zck/caser.el")

@@ -1,1 +1,0 @@
-(shell-here :fetcher codeberg :repo "emacs-weirdware/shell-here")

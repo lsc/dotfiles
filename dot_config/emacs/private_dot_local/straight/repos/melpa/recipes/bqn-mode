@@ -1,3 +1,0 @@
-(bqn-mode
- :fetcher github
- :repo "museoa/bqn-mode")

@@ -1,3 +1,0 @@
-(elfeed-tube-mpv :repo "karthink/elfeed-tube"
-                 :fetcher github
-                 :files ("elfeed-tube-mpv.el"))

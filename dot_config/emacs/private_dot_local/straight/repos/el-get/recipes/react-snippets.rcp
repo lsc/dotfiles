@@ -1,5 +1,0 @@
-(:name react-snippets
-       :description "YASnippet snippets for React"
-       :depends (yasnippet)
-       :type github
-       :pkgname "johnmastro/react-snippets.el")

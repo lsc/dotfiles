@@ -1,3 +1,0 @@
-(ultisnips-mode
- :fetcher github
- :repo "jamescherti/ultisnips-mode.el")

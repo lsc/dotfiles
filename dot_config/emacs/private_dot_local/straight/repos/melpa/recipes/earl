@@ -1,4 +1,0 @@
-(earl
- :fetcher github
- :repo "axelf4/earl"
- :old-names (derl))

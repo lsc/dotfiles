@@ -1,3 +1,0 @@
-(poetry
- :fetcher github
- :repo "cybniv/poetry.el")

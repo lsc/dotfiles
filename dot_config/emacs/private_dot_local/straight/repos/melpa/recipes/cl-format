@@ -1,1 +1,0 @@
-(cl-format :fetcher gitlab :repo "akater/elisp-cl-format")

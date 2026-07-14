@@ -1,5 +1,0 @@
-(:name ghub+
-       :type github
-       :description "Wrappers for GitHub API resources built on ghub"
-       :pkgname "vermiculus/ghub-plus"
-       :depends (ghub apiwrap))

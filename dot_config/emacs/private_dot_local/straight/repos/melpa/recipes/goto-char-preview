@@ -1,1 +1,0 @@
-(goto-char-preview :repo "emacs-vs/goto-char-preview" :fetcher github)

@@ -1,4 +1,0 @@
-(paper-theme
- :fetcher codeberg
- :repo "kutuptiyini/elisp"
- :files ("paper-theme.el"))

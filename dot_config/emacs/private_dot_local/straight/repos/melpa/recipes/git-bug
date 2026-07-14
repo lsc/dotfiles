@@ -1,3 +1,0 @@
-(git-bug
- :fetcher github
- :repo "WillForan/emacs-git-bug")

@@ -1,3 +1,0 @@
-(zoxide
- :fetcher sourcehut
- :repo "vonfry/zoxide.el")

@@ -1,4 +1,0 @@
-(:name stylus-mode
-       :description "Emacs major mode for stylus template highlighting."
-       :type github
-       :pkgname "vladh/stylus-mode")

@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: Event directive
-# key: ev
-# condition: (bolp)
-# --
-`(format-time-string "%Y-%m-%d")` event "$1" "$2"

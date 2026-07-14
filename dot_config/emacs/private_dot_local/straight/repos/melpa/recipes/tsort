@@ -1,1 +1,0 @@
-(tsort :repo "echawk/tsort.el" :fetcher github)

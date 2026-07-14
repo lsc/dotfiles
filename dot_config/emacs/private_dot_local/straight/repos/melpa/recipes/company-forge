@@ -1,3 +1,0 @@
-(company-forge :fetcher github
-               :repo "pkryger/company-forge.el"
-               :files (:defaults "icons"))

@@ -1,3 +1,0 @@
-(org-ai :fetcher github
-        :repo "rksm/org-ai"
-        :files (:defaults "snippets"))

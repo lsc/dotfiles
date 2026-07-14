@@ -1,4 +1,0 @@
-(ewal-spacemacs-themes
- :fetcher github
- :repo "cyruseuros/ewal"
- :files ("spacemacs-themes/*.el"))

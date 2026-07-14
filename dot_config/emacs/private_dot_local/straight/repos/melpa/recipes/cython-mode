@@ -1,1 +1,0 @@
-(cython-mode :fetcher github :repo "cython/emacs-cython-mode")

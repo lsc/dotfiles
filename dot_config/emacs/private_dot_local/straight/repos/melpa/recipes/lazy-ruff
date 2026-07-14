@@ -1,2 +1,0 @@
-(lazy-ruff :fetcher github
-           :repo "christophermadsen/emacs-lazy-ruff")

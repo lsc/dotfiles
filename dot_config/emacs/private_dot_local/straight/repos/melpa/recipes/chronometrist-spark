@@ -1,5 +1,0 @@
-(chronometrist-spark
- :fetcher codeberg
- :repo "contrapunctus/chronometrist"
- :branch "dev"
- :files ("elisp/chronometrist-spark.el" "elisp/chronometrist-spark.org"))

@@ -1,4 +1,0 @@
-(stumpwm-mode
- :fetcher github
- :repo "stumpwm/stumpwm-contrib"
- :files ("util/swm-emacs/*.el"))

@@ -1,3 +1,0 @@
-(gt :fetcher github
-    :repo "lorniu/gt.el"
-    :old-names (go-translate))

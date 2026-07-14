@@ -1,3 +1,0 @@
-(consult-compile-multi
- :fetcher github :repo "mohkale/compile-multi"
- :files ("extensions/consult-compile-multi/*.el"))

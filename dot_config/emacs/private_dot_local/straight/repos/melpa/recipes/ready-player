@@ -1,3 +1,0 @@
-(ready-player
- :fetcher github
- :repo "xenodium/ready-player")

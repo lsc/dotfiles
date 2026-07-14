@@ -1,3 +1,0 @@
-(eyebrowse-restore
- :fetcher github
- :repo "FrostyX/eyebrowse-restore")

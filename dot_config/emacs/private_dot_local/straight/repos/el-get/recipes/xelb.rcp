@@ -1,7 +1,0 @@
-(:name xelb
-       :description "X protocol Emacs Lisp binding."
-       :type github
-       :pkgname "ch11ng/xelb"
-       ;; The autoloads generated for XELB will trigger an error due to
-       ;; `xcb:-error-or-event-class->number' not being defined.
-       :autoloads nil)

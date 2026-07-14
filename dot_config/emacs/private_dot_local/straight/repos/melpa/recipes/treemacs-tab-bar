@@ -1,4 +1,0 @@
-(treemacs-tab-bar
- :fetcher github
- :repo "Alexander-Miller/treemacs"
- :files ("src/extra/treemacs-tab-bar.el"))

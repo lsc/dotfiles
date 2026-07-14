@@ -1,3 +1,0 @@
-(exec-in-buffer
-  :fetcher github
-  :repo "arteen1000/exec-in-buffer")

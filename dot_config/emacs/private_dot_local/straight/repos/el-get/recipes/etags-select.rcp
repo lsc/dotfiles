@@ -1,4 +1,0 @@
-(:name etags-select
-       :description "Select from multiple tags"
-       :type emacsmirror
-       :features etags-select)

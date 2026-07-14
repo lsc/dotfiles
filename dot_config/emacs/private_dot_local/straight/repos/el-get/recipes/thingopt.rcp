@@ -1,5 +1,0 @@
-(:name thingopt
-       :website "https://github.com/emacsorphanage/thingopt"
-       :description "Thing at Point optional utilities"
-       :type github
-       :pkgname "emacsorphanage/thingopt")

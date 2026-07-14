@@ -1,1 +1,0 @@
-(brec-mode :repo "Michael-Allan/Breccia.Emacs" :fetcher github)

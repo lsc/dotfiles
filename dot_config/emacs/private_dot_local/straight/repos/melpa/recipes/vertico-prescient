@@ -1,3 +1,0 @@
-(vertico-prescient :fetcher github
-                 :repo "radian-software/prescient.el"
-                 :files ("vertico-prescient.el"))

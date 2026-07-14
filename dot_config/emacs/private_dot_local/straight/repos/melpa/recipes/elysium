@@ -1,3 +1,0 @@
-(elysium
- :fetcher github
- :repo "lanceberge/elysium")

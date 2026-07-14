@@ -1,4 +1,0 @@
-(flycheck-cfn
- :fetcher gitlab
- :repo "worr/cfn-mode"
- :files ("flycheck-cfn/flycheck-cfn.el"))

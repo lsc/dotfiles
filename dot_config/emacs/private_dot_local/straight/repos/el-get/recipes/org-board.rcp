@@ -1,4 +1,0 @@
-(:name org-board
-       :description "Org mode's web archiver."
-       :type github
-       :pkgname "scallywag/org-board")

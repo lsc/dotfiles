@@ -1,1 +1,0 @@
-(simplecov :repo "zenspider/simplecov.el" :fetcher github)

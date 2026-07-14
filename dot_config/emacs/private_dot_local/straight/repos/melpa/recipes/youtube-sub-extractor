@@ -1,1 +1,0 @@
-(youtube-sub-extractor :repo "agzam/youtube-sub-extractor.el" :fetcher github)

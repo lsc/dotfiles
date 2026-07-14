@@ -1,2 +1,0 @@
-(shell-command-x :fetcher github
-                 :repo "elizagamedev/shell-command-x.el")

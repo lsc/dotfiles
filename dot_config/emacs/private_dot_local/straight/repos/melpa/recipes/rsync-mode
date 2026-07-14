@@ -1,1 +1,0 @@
-(rsync-mode :repo "r-zip/rsync-mode" :fetcher github)

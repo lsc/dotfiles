@@ -1,4 +1,0 @@
-(:name selectric-mode
-       :description "Make your Emacs sound like a proper typewriter"
-       :type github
-       :pkgname "rbanffy/selectric-mode")

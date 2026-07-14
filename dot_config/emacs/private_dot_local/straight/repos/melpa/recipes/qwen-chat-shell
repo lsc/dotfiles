@@ -1,3 +1,0 @@
-(qwen-chat-shell
- :repo "Pavinberg/qwen-chat-shell"
- :fetcher github)

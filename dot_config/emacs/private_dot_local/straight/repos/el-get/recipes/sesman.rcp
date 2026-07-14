@@ -1,4 +1,0 @@
-(:name sesman
-       :description "Generic Session Manager for Emacs"
-       :type github
-       :pkgname "vspinu/sesman")

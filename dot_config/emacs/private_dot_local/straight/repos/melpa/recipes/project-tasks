@@ -1,3 +1,0 @@
-(project-tasks
- :repo "TxGVNN/project-tasks"
- :fetcher github)

@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: void mouseDragged() {...}
-# key: moused
-# --
-void mouseDragged() {
-  `%`$0
-}

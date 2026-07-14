@@ -1,1 +1,0 @@
-(puppet-ts-mode :fetcher github :repo "smoeding/puppet-ts-mode")

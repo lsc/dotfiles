@@ -1,3 +1,0 @@
-(tempel
- :repo "minad/tempel"
- :fetcher github)

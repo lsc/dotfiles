@@ -1,3 +1,0 @@
-(kill-dollar-mode
- :fetcher github
- :repo "sandinmyjoints/kill-dollar-mode")

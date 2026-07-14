@@ -1,3 +1,0 @@
-(elisp-dev-mcp
- :fetcher github
- :repo "laurynas-biveinis/elisp-dev-mcp")

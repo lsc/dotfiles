@@ -1,5 +1,0 @@
-(:name eval-sexp-fu
-       :type github
-       :pkgname "hchbaw/eval-sexp-fu.el"
-       :description "Tiny functionality enhancements for evaluating sexps."
-       :website "https://github.com/hchbaw/eval-sexp-fu.el")

@@ -1,4 +1,0 @@
-(math-symbols
- :fetcher github
- :repo "kawabata/math-symbols"
- :files ("math-symbols*.el" "unimathsymbols.txt"))

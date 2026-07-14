@@ -1,4 +1,0 @@
-(company-rtags :repo "Andersbakken/rtags"
-               :fetcher github
-               :version-regexp "use-header-instead" ;see #8692
-               :files ("src/company-rtags.el"))

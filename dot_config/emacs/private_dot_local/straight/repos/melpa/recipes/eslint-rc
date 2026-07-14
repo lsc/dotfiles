@@ -1,2 +1,0 @@
-(eslint-rc :repo "jjuliano/eslint-rc-emacs" :fetcher github)
-

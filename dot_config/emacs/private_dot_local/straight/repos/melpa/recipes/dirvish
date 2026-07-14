@@ -1,4 +1,0 @@
-(dirvish
- :fetcher github
- :repo "alexluigit/dirvish"
- :files (:defaults "extensions/*.el"))

@@ -1,3 +1,0 @@
-(default-font-presets
- :fetcher codeberg
- :repo "ideasman42/emacs-default-font-presets")

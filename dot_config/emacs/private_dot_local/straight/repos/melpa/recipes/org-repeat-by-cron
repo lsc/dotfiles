@@ -1,1 +1,0 @@
-(org-repeat-by-cron :fetcher github :repo "TomoeMami/org-repeat-by-cron.el")

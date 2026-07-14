@@ -1,1 +1,0 @@
-(gptel-agent :fetcher github :repo "karthink/gptel-agent" :files (:defaults "agents"))

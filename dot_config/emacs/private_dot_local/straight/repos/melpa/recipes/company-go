@@ -1,1 +1,0 @@
-(company-go :repo "emacsattic/company-go" :fetcher github)

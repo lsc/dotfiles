@@ -1,1 +1,0 @@
-(fmo-mode :fetcher github :repo "xeechou/fmo-mode.el")

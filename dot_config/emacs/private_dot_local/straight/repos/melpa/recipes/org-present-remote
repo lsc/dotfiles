@@ -1,3 +1,0 @@
-(org-present-remote
- :fetcher sourcehut
- :repo "duncan-bayne/org-present-remote")

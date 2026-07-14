@@ -1,3 +1,0 @@
-(helm-raindrop
- :fetcher github
- :repo "masutaka/emacs-helm-raindrop")

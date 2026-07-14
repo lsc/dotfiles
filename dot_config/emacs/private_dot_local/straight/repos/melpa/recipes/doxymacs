@@ -1,4 +1,0 @@
-(doxymacs
- :fetcher github
- :repo "pniedzielski/doxymacs"
- :files (:defaults ("c" "c/*")))

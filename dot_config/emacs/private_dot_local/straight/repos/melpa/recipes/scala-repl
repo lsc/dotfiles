@@ -1,1 +1,0 @@
-(scala-repl :fetcher github :repo "sheepduke/scala-repl.el")

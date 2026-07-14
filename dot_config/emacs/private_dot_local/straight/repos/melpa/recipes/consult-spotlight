@@ -1,3 +1,0 @@
-(consult-spotlight
- :fetcher github
- :repo "guibor/consult-spotlight")

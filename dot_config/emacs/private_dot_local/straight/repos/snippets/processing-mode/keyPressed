@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: void keyPressed() {...}
-# key: keyp
-# --
-void keyPressed() {
-  `%`$0
-}

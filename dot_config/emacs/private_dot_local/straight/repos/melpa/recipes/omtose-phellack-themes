@@ -1,4 +1,0 @@
-(omtose-phellack-themes
- :fetcher github
- :repo "emacsorphanage/omtose-phellack-themes"
- :old-names (omtose-phellack-theme))

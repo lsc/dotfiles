@@ -1,2 +1,0 @@
-(tab-bar-notch :fetcher github
-               :repo "jimeh/tab-bar-notch")

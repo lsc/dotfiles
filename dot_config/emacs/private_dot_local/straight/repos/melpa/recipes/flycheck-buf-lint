@@ -1,3 +1,0 @@
-(flycheck-buf-lint
- :fetcher github
- :repo "shuxiao9058/flycheck-buf-lint")

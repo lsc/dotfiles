@@ -1,8 +1,0 @@
-(racket-mode
- :fetcher github
- :repo "greghendershott/racket-mode"
- :files (:defaults
-         "*.rkt"
-         ("racket" "racket/*")
-         (:exclude "racket/example/*"
-                   "racket/test/*")))

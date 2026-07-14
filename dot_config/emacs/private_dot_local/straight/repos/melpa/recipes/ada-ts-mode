@@ -1,3 +1,0 @@
-(ada-ts-mode
- :fetcher github
- :repo "brownts/ada-ts-mode")

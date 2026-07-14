@@ -1,3 +1,0 @@
-(portage-modes
- :fetcher github
- :repo "OpenSauce04/portage-modes")

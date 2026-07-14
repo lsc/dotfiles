@@ -1,4 +1,0 @@
-(:name ert-expectations
-       :description "Minimalist unit testing framework"
-       :type github
-       :pkgname "emacsorphanage/ert-expectations")

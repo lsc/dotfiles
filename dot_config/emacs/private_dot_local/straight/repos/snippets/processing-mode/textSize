@@ -1,4 +1,0 @@
-# -*- mode: snippet -*-
-# name: textSize
-# --
-textSize(${1:size});

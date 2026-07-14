@@ -1,3 +1,0 @@
-(project-cmake
- :fetcher github
- :repo "lucius-martius/project-cmake")

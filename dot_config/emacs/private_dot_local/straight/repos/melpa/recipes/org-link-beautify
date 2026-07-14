@@ -1,1 +1,0 @@
-(org-link-beautify :url "https://repo.or.cz/org-link-beautify.git" :fetcher git :files (:defaults "scripts"))

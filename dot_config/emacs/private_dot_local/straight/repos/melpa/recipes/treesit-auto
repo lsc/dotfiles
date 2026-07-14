@@ -1,3 +1,0 @@
-(treesit-auto
- :fetcher github
- :repo "renzmann/treesit-auto")

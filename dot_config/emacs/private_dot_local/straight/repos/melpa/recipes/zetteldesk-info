@@ -1,3 +1,0 @@
-(zetteldesk-info :fetcher github
-	    	 :repo "Vidianos-Giannitsis/zetteldesk.el"
-	    	 :files ("zetteldesk-info.el"))

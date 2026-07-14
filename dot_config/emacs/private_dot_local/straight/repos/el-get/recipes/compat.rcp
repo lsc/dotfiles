@@ -1,3 +1,0 @@
-(:name compat
-       :description "Emacs compatibility Library"
-       :type elpa)

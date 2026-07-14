@@ -1,4 +1,0 @@
-(:name debian-changelog-mode
-       :description "Major mode for Debian changelog files"
-       :type github
-       :pkgname "pcarrier/debian-changelog-mode")

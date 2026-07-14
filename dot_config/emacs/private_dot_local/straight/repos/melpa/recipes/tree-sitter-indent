@@ -1,3 +1,0 @@
-(tree-sitter-indent
- :fetcher codeberg
- :repo "FelipeLema/tree-sitter-indent.el")

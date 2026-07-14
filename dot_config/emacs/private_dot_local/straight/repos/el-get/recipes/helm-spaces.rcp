@@ -1,5 +1,0 @@
-(:name helm-spaces
-       :description "helm sources for spaces."
-       :type github
-       :pkgname "yasuyk/helm-spaces"
-       :depends (spaces helm))

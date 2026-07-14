@@ -1,1 +1,0 @@
-(flycheck-actionlint :fetcher github :repo "tirimia/flycheck-actionlint")

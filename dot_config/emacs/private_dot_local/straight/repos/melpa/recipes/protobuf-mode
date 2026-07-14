@@ -1,3 +1,0 @@
-(protobuf-mode :fetcher github
-               :repo "protocolbuffers/protobuf"
-               :files ("editors/protobuf-mode.el"))

@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: createWriter
-# key: createw
-# --
-createWriter(${1:filename});

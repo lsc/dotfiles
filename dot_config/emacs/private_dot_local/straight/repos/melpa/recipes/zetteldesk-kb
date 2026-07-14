@@ -1,3 +1,0 @@
-(zetteldesk-kb :fetcher github
-	       :repo "Vidianos-Giannitsis/zetteldesk.el"
-	       :files ("zetteldesk-kb.el"))

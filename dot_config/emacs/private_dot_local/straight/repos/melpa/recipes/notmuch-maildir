@@ -1,1 +1,0 @@
-(notmuch-maildir :fetcher github :repo "tarsius/notmuch-maildir")

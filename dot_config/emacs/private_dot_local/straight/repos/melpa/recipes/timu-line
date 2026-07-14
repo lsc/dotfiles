@@ -1,3 +1,0 @@
-(timu-line
-  :repo "aimebertrand/timu-line"
-  :fetcher gitlab)

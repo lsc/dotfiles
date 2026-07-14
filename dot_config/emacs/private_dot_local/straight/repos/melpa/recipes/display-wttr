@@ -1,3 +1,0 @@
-(display-wttr
- :fetcher sourcehut
- :repo "josegpt/display-wttr")

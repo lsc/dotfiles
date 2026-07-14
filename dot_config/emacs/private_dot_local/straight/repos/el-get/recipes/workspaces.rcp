@@ -1,5 +1,0 @@
-(:name workspaces
-       :description "Really just a wrapper around Noah Friedman's escreen."
-       :type http
-       :url "http://grapevine.net.au/~striggs/elisp/workspaces.el"
-       :depends (escreen))

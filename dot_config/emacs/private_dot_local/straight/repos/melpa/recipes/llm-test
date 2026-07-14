@@ -1,2 +1,0 @@
-(llm-test :fetcher github :repo "ahyatt/llm-test"
-          :files ("llm-test.el"))

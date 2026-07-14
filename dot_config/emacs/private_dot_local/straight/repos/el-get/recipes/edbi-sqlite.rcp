@@ -1,5 +1,0 @@
-(:name edbi-sqlite
-       :description "Open SQLite files with edbi."
-       :depends (edbi)
-       :type github
-       :pkgname "emacsattic/edbi-sqlite")

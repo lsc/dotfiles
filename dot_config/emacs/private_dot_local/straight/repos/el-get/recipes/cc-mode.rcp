@@ -1,4 +1,0 @@
-(:name cc-mode
-       :type hg
-       :url "http://hg.code.sf.net/p/cc-mode/cc-mode"
-       :description "Major mode for editing C and similar languages.")

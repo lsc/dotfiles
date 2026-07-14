@@ -1,3 +1,0 @@
-(shift-number
- :fetcher codeberg
- :repo "ideasman42/emacs-shift-number")

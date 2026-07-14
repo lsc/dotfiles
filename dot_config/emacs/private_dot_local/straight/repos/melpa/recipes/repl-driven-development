@@ -1,3 +1,0 @@
-(repl-driven-development
- :fetcher github
- :repo "alhassy/repl-driven-development")

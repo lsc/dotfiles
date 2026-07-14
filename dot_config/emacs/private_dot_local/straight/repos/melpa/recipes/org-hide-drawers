@@ -1,3 +1,0 @@
-(org-hide-drawers
- :fetcher github
- :repo "krisbalintona/org-hide-drawers")

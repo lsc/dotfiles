@@ -1,3 +1,0 @@
-(xkb-mode
- :fetcher github
- :repo "captainflasmr/xkb-mode")

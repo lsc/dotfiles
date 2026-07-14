@@ -1,3 +1,0 @@
-(keychain-environment
- :fetcher github
- :repo "emacsorphanage/keychain-environment")

@@ -1,3 +1,0 @@
-(loopy-dash :fetcher codeberg
-            :repo "okamsn/loopy-dash"
-            :files ("loopy-dash.el"))

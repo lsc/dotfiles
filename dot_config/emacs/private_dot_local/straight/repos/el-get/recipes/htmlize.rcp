@@ -1,4 +1,0 @@
-(:name htmlize
-       :type github
-       :description "Convert buffer text and decorations to HTML."
-       :pkgname "hniksic/emacs-htmlize")

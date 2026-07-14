@@ -1,6 +1,0 @@
-(:name cython-mode
-       :description "Major mode for the Cython language"
-       :type http
-       :url "https://raw.githubusercontent.com/cython/emacs-cython-mode/master/cython-mode.el"
-       :features cython-mode
-       :localname "cython-mode.el")

@@ -1,3 +1,0 @@
-(lsp-julia :fetcher github
-           :repo "gdkrmr/lsp-julia"
-           :files (:defaults "languageserver"))

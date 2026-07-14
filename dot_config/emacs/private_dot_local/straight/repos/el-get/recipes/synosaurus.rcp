@@ -1,4 +1,0 @@
-(:name synosaurus
-       :description "An Emacs frontend for thesauri."
-       :type github
-       :pkgname "rootzlevel/synosaurus")

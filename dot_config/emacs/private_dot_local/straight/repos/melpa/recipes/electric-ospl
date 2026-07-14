@@ -1,3 +1,0 @@
-(electric-ospl
- :fetcher sourcehut
- :repo "swflint/electric-ospl-mode")

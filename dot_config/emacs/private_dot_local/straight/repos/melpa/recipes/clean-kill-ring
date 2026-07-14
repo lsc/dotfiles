@@ -1,1 +1,0 @@
-(clean-kill-ring :repo "NicholasBHubbard/clean-kill-ring.el" :fetcher github)

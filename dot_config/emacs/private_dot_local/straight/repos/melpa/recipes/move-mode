@@ -1,2 +1,0 @@
-(move-mode :repo "amnn/move-mode"
-           :fetcher github)

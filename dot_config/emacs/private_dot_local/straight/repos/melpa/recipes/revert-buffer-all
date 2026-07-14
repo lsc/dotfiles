@@ -1,3 +1,0 @@
-(revert-buffer-all
- :fetcher codeberg
- :repo "ideasman42/emacs-revert-buffer-all")

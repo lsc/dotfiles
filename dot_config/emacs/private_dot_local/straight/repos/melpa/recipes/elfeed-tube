@@ -1,4 +1,0 @@
-(elfeed-tube
- :fetcher github
- :repo "karthink/elfeed-tube"
- :files (:defaults (:exclude "elfeed-tube-mpv.el")))

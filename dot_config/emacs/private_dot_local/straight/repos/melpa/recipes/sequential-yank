@@ -1,3 +1,0 @@
-(sequential-yank
- :fetcher github
- :repo "knu/sequential-yank.el")

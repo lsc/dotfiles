@@ -1,3 +1,0 @@
-(splunk-mode
- :fetcher github
- :repo "jakewilliami/splunk-mode")

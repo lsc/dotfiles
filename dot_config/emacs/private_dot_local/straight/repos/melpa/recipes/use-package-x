@@ -1,3 +1,0 @@
-(use-package-x
- :fetcher github
- :repo "DevelopmentCool2449/use-package-x")

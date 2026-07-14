@@ -1,1 +1,0 @@
-(org-transclusion-http :fetcher sourcehut :repo "ushin/org-transclusion-http")

@@ -1,3 +1,0 @@
-(po-mode
- :fetcher git
- :url "https://git.savannah.gnu.org/git/gettext/po-mode.git")

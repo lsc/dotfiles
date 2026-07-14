@@ -1,3 +1,0 @@
-(evil-keypad
- :fetcher github
- :repo "achyudh/evil-keypad")

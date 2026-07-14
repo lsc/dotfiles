@@ -1,3 +1,0 @@
-(dock
- :fetcher github
- :repo "hron/dock.el")

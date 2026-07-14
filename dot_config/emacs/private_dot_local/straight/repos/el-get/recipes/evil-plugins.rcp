@@ -1,5 +1,0 @@
-(:name evil-plugins
-       :type github
-       :description "Plugins for Emacs Evil."
-       :pkgname "tarao/evil-plugins"
-       :depends (evil))

@@ -1,3 +1,0 @@
-(dired-rsync-transient :repo "stsquad/dired-rsync"
-                       :fetcher github
-                       :files ("dired-rsync-transient.el"))

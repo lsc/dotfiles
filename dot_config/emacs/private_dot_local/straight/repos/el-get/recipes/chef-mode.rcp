@@ -1,4 +1,0 @@
-(:name chef-mode
-       :description "Major mode for Chef resources and recipes."
-       :type github
-       :pkgname "mpasternacki/chef-mode")

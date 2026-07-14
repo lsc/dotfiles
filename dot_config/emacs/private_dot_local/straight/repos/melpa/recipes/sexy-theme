@@ -1,3 +1,0 @@
-(sexy-theme
- :fetcher github
- :repo "xenodesire/sexy-theme.el")

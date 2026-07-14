@@ -1,5 +1,0 @@
-(:name bbdb2erc
-       :description "Make bbdb show if pal is online with ERC, click i to chat."
-       :type github
-       :pkgname "unhammer/bbdb2erc"
-       :depends (bbdb erc))

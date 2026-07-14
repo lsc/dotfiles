@@ -1,4 +1,0 @@
-(pony-mode
- :fetcher github
- :repo "davidmiller/pony-mode"
- :files ("src/*.el" "src/snippets"))

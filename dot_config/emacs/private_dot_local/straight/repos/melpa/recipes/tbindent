@@ -1,3 +1,0 @@
-(tbindent
- :fetcher github
- :repo "pierre-rouleau/tab-based-indent")

@@ -1,2 +1,0 @@
-(plaster :repo "shirakumo/plaster"
-         :fetcher codeberg)

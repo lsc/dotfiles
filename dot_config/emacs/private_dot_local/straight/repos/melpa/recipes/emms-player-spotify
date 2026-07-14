@@ -1,1 +1,0 @@
-(emms-player-spotify :fetcher github :repo "sarg/emms-spotify")

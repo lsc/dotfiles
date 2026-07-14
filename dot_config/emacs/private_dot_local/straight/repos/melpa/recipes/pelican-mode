@@ -1,2 +1,0 @@
-(pelican-mode :fetcher gitlab
-              :repo "joewreschnig/pelican-mode")

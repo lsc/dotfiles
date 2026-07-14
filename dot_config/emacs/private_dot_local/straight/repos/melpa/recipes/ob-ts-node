@@ -1,1 +1,0 @@
-(ob-ts-node :fetcher github :repo "tmythicator/ob-ts-node")

@@ -1,3 +1,0 @@
-(auto-complete-auctex
- :fetcher github
- :repo "emacsattic/auto-complete-auctex")

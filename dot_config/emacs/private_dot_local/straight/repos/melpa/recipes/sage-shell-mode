@@ -1,3 +1,0 @@
-(sage-shell-mode :fetcher github
-                 :repo "sagemath/sage-shell-mode"
-                 :files (:defaults "*.py" (:exclude "*test.py")))

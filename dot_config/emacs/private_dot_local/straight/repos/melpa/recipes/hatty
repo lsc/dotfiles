@@ -1,3 +1,0 @@
-(hatty
- :fetcher github
- :repo "ErikPrantare/hatty.el")

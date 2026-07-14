@@ -1,6 +1,0 @@
-(tc
- :fetcher github
- :repo "kanchoku/tc"
- ;; The only tag is from 16 years ago.
- :version-regexp "ignore-all-tags"
- :files ("*.el" "tcode"))

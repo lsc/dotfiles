@@ -1,4 +1,0 @@
-(ob-ipython
- :fetcher github
- :repo "gregsexton/ob-ipython"
- :files (:defaults "*.py"))

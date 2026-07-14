@@ -1,5 +1,0 @@
-(:name org-alert
-       :description "System notifications of org agenda items"
-       :type github
-       :pkgname "groksteve/org-alert"
-       :depends (s dash alert))

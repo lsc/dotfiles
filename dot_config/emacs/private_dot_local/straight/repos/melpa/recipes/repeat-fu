@@ -1,3 +1,0 @@
-(repeat-fu
- :fetcher codeberg
- :repo "ideasman42/emacs-repeat-fu")

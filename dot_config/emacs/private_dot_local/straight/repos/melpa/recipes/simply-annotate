@@ -1,3 +1,0 @@
-(simply-annotate
- :fetcher github
- :repo "captainflasmr/simply-annotate")

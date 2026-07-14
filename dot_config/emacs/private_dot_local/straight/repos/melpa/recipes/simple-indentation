@@ -1,3 +1,0 @@
-(simple-indentation
- :repo "semenInRussia/simple-indentation.el"
- :fetcher github)

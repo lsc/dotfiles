@@ -1,4 +1,0 @@
-(:name zjl-hl
-       :description "highlight variable and function call and others in c/emacs"
-       :type emacswiki
-       :depends (highlight region-list-edit))

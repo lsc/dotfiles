@@ -1,4 +1,0 @@
-(org-roam-timeline
- :fetcher github
- :repo "GerardoCendejas/org-roam-timeline"
- :files (:defaults "html"))

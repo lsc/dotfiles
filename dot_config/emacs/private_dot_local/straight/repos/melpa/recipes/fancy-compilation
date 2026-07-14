@@ -1,3 +1,0 @@
-(fancy-compilation
- :fetcher codeberg
- :repo "ideasman42/emacs-fancy-compilation")

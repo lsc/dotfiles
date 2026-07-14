@@ -1,3 +1,0 @@
-(pr-review :fetcher github
-           :repo "blahgeek/emacs-pr-review"
-           :files (:defaults "graphql"))

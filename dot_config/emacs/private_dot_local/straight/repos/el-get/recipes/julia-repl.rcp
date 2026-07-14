@@ -1,6 +1,0 @@
-(:name julia-repl
-       :description "run an inferior Julia REPL in Emacs"
-       :minimum-emacs-version "29.1"
-       :type github
-       :pkgname "tpapp/julia-repl"
-       :depends (s))

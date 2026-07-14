@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: decompose record
-# key: decre
-# --
-decompose record $1

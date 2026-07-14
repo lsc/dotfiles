@@ -1,3 +1,0 @@
-(macports
- :repo "amake/macports.el"
- :fetcher github)

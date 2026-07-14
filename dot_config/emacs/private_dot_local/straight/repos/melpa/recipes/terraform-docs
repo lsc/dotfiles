@@ -1,3 +1,0 @@
-(terraform-docs
- :fetcher github
- :repo "loispostula/terraform-docs.el")

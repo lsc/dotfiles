@@ -1,5 +1,0 @@
-(:name yatemplate
-       :description "File templates with yasnippet"
-       :type github
-       :depends (yasnippet)
-       :pkgname "mineo/yatemplate")

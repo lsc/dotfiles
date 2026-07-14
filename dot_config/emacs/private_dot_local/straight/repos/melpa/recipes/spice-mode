@@ -1,3 +1,0 @@
-(spice-mode
- :fetcher git
- :url "https://repo.or.cz/spice-mode.git")

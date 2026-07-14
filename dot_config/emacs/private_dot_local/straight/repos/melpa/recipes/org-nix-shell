@@ -1,1 +1,0 @@
-(org-nix-shell :repo "AntonHakansson/org-nix-shell" :fetcher github)

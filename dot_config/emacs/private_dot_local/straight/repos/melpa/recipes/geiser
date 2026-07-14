@@ -1,4 +1,0 @@
-(geiser
- :fetcher codeberg
- :repo "geiser/geiser"
- :files ("elisp/*.el" "doc/dir" "doc/geiser.texi"))

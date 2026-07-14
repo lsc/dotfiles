@@ -1,4 +1,0 @@
-(emacsc
- :fetcher github
- :repo "knu/emacsc"
- :files (:defaults "bin"))

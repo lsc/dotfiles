@@ -1,3 +1,0 @@
-(countdown-modeline
- :fetcher github
- :repo "jholland82/countdown-modeline")

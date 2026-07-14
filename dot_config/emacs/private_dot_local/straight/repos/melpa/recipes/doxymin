@@ -1,3 +1,0 @@
-(doxymin
- :fetcher gitlab
- :repo "L0ren2/doxymin")

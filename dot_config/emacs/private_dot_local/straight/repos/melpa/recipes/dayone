@@ -1,4 +1,0 @@
-(dayone
- :fetcher github
- :repo "mori-dev/emacs-dayone"
- :files ("*.el" "*.mustache"))

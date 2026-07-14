@@ -1,3 +1,0 @@
-(alabaster-themes
- :fetcher github
- :repo "vedang/alabaster-themes")

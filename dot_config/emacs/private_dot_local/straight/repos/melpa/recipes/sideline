@@ -1,1 +1,0 @@
-(sideline :repo "emacs-sideline/sideline" :fetcher github)

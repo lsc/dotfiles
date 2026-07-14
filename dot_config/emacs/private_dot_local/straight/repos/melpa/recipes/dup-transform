@@ -1,4 +1,0 @@
-(dup-transform
- :fetcher github
- :repo "garyo/dup-transform.el"
-)

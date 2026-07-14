@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: bezierDetail
-# key: bezierd
-# --
-bezierDetail(${1:detail});

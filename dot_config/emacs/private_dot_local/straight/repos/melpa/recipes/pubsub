@@ -1,2 +1,0 @@
-(pubsub :fetcher github
-        :repo "countvajhula/pubsub")

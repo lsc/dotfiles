@@ -1,4 +1,0 @@
-(:name ac-html-csswatcher
-       :description "HTML Class and ID completion for emacs by using ac-html.el and csswatcher projects"
-       :type github
-       :pkgname "osv/ac-html-csswatcher")

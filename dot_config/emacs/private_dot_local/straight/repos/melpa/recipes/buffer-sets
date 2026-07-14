@@ -1,3 +1,0 @@
-(buffer-sets
- :fetcher sourcehut
- :repo "swflint/buffer-sets")

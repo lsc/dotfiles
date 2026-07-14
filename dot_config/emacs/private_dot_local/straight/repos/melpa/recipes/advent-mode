@@ -1,3 +1,0 @@
-(advent-mode
- :fetcher github
- :repo "vkazanov/advent-mode")

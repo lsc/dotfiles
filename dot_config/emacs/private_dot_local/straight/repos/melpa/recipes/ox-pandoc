@@ -1,2 +1,0 @@
-(ox-pandoc :repo "emacsorphanage/ox-pandoc"
-           :fetcher github)

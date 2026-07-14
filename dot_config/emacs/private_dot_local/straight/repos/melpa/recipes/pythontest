@@ -1,3 +1,0 @@
-(pythontest
- :fetcher github
- :repo "erickgnavar/pythontest.el")

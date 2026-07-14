@@ -1,2 +1,0 @@
-(intellij-theme :fetcher github
-                :repo "fommil/intellij-theme.el")

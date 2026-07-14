@@ -1,3 +1,0 @@
-(meshtastic :fetcher git
-            :url "https://git.andros.dev/andros/meshtastic.el"
-            :files ("meshtastic.el" "meshtastic-bridge.py"))

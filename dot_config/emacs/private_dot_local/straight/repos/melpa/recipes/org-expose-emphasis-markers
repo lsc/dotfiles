@@ -1,2 +1,0 @@
-(org-expose-emphasis-markers :fetcher github
-                             :repo "lorniu/org-expose-emphasis-markers")

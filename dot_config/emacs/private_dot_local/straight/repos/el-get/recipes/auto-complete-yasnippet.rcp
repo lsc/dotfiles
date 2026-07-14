@@ -1,5 +1,0 @@
-(:name auto-complete-yasnippet
-       :description "Auto-complete sources for YASnippet"
-       :type github
-       :pkgname "rosrad/auto-complete-yasnippet"
-       :depends (auto-complete yasnippet))

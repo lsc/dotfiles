@@ -1,3 +1,0 @@
-(notmuch-multi
-   :fetcher github
-   :repo "pivaldi/notmuch-multi")

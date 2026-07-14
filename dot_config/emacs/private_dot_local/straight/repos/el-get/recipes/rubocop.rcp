@@ -1,5 +1,0 @@
-(:name rubocop
-       :description "A simple Emacs interface for RuboCop."
-       :type github
-       :pkgname "bbatsov/rubocop-emacs"
-       :depends (dash))

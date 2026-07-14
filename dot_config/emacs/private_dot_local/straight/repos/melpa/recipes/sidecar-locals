@@ -1,3 +1,0 @@
-(sidecar-locals
- :fetcher codeberg
- :repo "ideasman42/emacs-sidecar-locals")

@@ -1,4 +1,0 @@
-(mew
- :fetcher github
- :repo "kazu-yamamoto/Mew"
- :files ("elisp/*.el" "etc" "info/*.info*"))

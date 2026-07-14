@@ -1,1 +1,0 @@
-(eldoc-toml :repo "it-is-wednesday/eldoc-toml" :fetcher github)

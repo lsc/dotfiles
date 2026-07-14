@@ -1,6 +1,0 @@
-(:name anzu
-       :website "https://github.com/emacsorphanage/anzu"
-       :description "A minor mode which displays current match and total matches."
-       :type "github"
-       :branch "master"
-       :pkgname "emacsorphanage/anzu")

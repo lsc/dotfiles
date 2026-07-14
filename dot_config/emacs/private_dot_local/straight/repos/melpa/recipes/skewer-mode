@@ -1,4 +1,0 @@
-(skewer-mode
- :fetcher github
- :repo "skeeto/skewer-mode"
- :files ("*.html" "*.js" "*.el"))

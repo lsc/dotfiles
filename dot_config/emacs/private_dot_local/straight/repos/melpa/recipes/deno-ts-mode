@@ -1,3 +1,0 @@
-(deno-ts-mode
- :fetcher github
- :repo "mgmarlow/deno-ts-mode")

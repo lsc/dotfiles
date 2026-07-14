@@ -1,3 +1,0 @@
-(trailing-newline-indicator
- :fetcher github
- :repo "saulotoledo/trailing-newline-indicator")

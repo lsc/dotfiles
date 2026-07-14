@@ -1,5 +1,0 @@
-(:name 0xc
-       :description "Base conversion made easy"
-       :type github
-       :pkgname "AdamNiederer/0xc"
-       :depends (s))

@@ -1,6 +1,0 @@
-(:name scpaste
-       :website "http://www.emacswiki.org/cgi-bin/wiki/SCPaste"
-       :description "Paste to the web via scp."
-       :type github
-       :pkgname "technomancy/scpaste"
-       )

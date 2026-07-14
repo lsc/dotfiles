@@ -1,3 +1,0 @@
-(txl
- :fetcher github
- :repo "tmalsburg/txl.el")

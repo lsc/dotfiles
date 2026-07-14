@@ -1,2 +1,0 @@
-(elfeed-goodies :repo "jeetelongname/elfeed-goodies"
-                :fetcher github)

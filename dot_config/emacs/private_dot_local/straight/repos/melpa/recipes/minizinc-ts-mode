@@ -1,3 +1,0 @@
-(minizinc-ts-mode
- :fetcher github
- :repo "AjaiKN/minizinc-ts-mode")

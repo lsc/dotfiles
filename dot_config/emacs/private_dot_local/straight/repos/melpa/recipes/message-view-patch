@@ -1,1 +1,0 @@
-(message-view-patch :repo "seanfarley/message-view-patch" :fetcher github)

@@ -1,4 +1,0 @@
-(:name nmcobol-mode
-       :description "Tandem COBOL mode."
-       :type emacswiki
-       :depends (anchored-transpose))

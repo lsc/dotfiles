@@ -1,5 +1,0 @@
-(:name sml-modeline
-       :description "Show position in a scrollbar like way in mode-line"
-       :type github
-       :pkgname "emacsorphanage/sml-modeline"
-       :features "sml-modeline")

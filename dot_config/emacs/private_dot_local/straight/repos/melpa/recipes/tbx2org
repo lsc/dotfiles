@@ -1,1 +1,0 @@
-(tbx2org :repo "emacsattic/tbx2org" :fetcher github)

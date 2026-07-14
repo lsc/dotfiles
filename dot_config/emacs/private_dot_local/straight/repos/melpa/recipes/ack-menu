@@ -1,6 +1,0 @@
-(ack-menu
- :fetcher github
- :repo "chumpage/ack-menu"
- ;; The latest release tag is from before the package was renamed.
- ;; See https://github.com/melpa/melpa/issues/8691.
- :version-regexp "none-since-rename")

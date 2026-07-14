@@ -1,3 +1,0 @@
-(quakec-mode
- :fetcher github
- :repo "vkazanov/quakec-mode")

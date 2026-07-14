@@ -1,1 +1,0 @@
-(helm-comint :fetcher github :repo "emacs-helm/helm-comint")

@@ -1,2 +1,0 @@
-(flymake-eldev :repo "emacs-eldev/flymake-eldev"
-               :fetcher github)

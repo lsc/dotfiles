@@ -1,3 +1,0 @@
-(org-change
- :fetcher github
- :repo "drghirlanda/org-change")

@@ -1,3 +1,0 @@
-(template-literals-ts-mode
- :fetcher github
- :repo "ispringle/template-literals-ts-mode")

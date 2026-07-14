@@ -1,1 +1,0 @@
-(json-rpc :fetcher github :repo "skeeto/elisp-json-rpc")

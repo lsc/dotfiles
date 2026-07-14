@@ -1,3 +1,0 @@
-(markdown-ts-mode
-  :repo "LionyxML/markdown-ts-mode"
-  :fetcher github)

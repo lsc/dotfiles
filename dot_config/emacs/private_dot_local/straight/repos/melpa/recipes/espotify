@@ -1,4 +1,0 @@
-(espotify
- :fetcher codeberg
- :repo "jao/espotify"
- :files ("espotify.el"))

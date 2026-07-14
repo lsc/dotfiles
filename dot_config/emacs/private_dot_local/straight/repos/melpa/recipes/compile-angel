@@ -1,1 +1,0 @@
-(compile-angel :fetcher github :repo "jamescherti/compile-angel.el")

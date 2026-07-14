@@ -1,5 +1,0 @@
-(:name project-mode
-       :description "Emacs global minor mode for defining and navigating projects"
-       :type github
-       :pkgname "kurtharriger/emacs-project-mode"
-       :depends (levenshtein))

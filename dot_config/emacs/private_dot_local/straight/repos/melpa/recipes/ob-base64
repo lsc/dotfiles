@@ -1,3 +1,0 @@
-(ob-base64
- :fetcher github
- :repo "KeyWeeUsr/ob-base64")

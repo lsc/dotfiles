@@ -1,4 +1,0 @@
-(kubernetes
- :fetcher github
- :repo "kubernetes-el/kubernetes-el"
- :files (:defaults (:exclude "kubernetes-evil.el")))

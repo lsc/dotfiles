@@ -1,1 +1,0 @@
-(http-server :fetcher codeberg :repo "martenlienen/http-server.el")

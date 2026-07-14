@@ -1,3 +1,0 @@
-(org-iv
- :fetcher github
- :repo "kuangdash/org-iv")

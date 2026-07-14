@@ -1,3 +1,0 @@
-(js-ts-defs
- :fetcher github
- :repo "jacksonrayhamilton/js-ts-defs")

@@ -1,4 +1,0 @@
-(projection-multi-embark
- :fetcher github
- :repo "mohkale/projection"
- :files ("src/projection-multi-embark/projection-multi-embark*.el"))

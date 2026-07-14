@@ -1,4 +1,0 @@
-(ac-php-core
- :fetcher github
- :repo "xcwen/ac-php"
- :files ( "ac-php-comm-tags-data.el" "ac-php-core.el" "phpctags" "*.json" ))

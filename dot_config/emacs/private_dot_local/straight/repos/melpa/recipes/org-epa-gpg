@@ -1,3 +1,0 @@
-(org-epa-gpg
- :fetcher github
- :repo "KeyWeeUsr/org-epa-gpg")

@@ -1,3 +1,0 @@
-[submodule "doc/eldomain"]
-	path = doc/eldomain
-	url = ../../tkf/sphinx-eldomain.git

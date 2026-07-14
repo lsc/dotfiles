@@ -1,3 +1,0 @@
-(git-commit-ts-mode
- :repo "danilshvalov/git-commit-ts-mode"
- :fetcher github)

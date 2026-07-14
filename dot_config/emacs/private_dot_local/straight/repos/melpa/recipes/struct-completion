@@ -1,1 +1,0 @@
-(struct-completion :fetcher github :repo "gggion/struct-completion.el")

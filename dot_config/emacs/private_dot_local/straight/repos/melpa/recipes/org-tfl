@@ -1,4 +1,0 @@
-(org-tfl
- :fetcher github
- :repo "storax/org-tfl"
- :files (:defaults "*.svg"))

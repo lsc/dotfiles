@@ -1,3 +1,0 @@
-(org-eval
- :fetcher github
- :repo "skx/org-eval")

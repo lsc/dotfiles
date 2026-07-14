@@ -1,4 +1,0 @@
-(log4j-mode
- :repo "dykstrom/log4j-mode"
- :fetcher github
- :files ("src/*.el"))

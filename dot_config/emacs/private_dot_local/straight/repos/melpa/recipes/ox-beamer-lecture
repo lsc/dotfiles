@@ -1,3 +1,0 @@
-(ox-beamer-lecture
- :fetcher github
- :repo "fjesser/ox-beamer-lecture")

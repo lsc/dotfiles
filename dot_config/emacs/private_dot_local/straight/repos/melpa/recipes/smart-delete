@@ -1,2 +1,0 @@
-(smart-delete :repo "leodag/smart-delete"
-              :fetcher github)

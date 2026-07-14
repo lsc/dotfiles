@@ -1,3 +1,0 @@
-(denote-project-notes
- :fetcher sourcehut
- :repo "swflint/denote-project-notes")

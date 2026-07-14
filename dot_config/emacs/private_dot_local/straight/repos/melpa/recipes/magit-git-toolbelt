@@ -1,1 +1,0 @@
-(magit-git-toolbelt :fetcher github :repo "jonathanchu/magit-git-toolbelt")

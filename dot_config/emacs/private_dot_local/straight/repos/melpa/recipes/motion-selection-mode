@@ -1,3 +1,0 @@
-(motion-selection-mode
- :fetcher github
- :repo "alexispurslane/motion-selection-mode")

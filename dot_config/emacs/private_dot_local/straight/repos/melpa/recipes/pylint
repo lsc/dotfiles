@@ -1,4 +1,0 @@
-(pylint
- :fetcher github
- :repo "emacsorphanage/pylint"
- :files (:defaults "epylint.py"))

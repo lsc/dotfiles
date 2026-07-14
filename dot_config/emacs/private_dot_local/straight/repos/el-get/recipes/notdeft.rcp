@@ -1,4 +1,0 @@
-(:name notdeft
-       :description "Spin off of Deft: Quickly browse, filter, and edit plain text notes."
-       :type github
-       :pkgname "hasu/notdeft")

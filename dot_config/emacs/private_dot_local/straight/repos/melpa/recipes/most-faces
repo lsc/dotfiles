@@ -1,3 +1,0 @@
-(most-faces
- :fetcher codeberg
- :repo "mekeor/most-faces")

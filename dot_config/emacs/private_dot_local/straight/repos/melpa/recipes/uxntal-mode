@@ -1,2 +1,0 @@
-(uxntal-mode :fetcher github
-             :repo "non/uxntal-mode")

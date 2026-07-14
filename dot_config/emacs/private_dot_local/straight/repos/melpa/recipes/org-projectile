@@ -1,4 +1,0 @@
-(org-projectile
- :repo "colonelpanic8/org-project-capture"
- :fetcher github
- :files ("org-projectile.el"))

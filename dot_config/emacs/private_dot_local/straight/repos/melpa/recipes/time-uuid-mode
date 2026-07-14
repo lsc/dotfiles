@@ -1,2 +1,0 @@
-(time-uuid-mode :fetcher github
-          :repo "RobertPlant/time-uuid-mode")

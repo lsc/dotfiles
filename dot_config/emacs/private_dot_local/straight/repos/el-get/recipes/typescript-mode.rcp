@@ -1,5 +1,0 @@
-(:name typescript-mode
-       :description "TypeScript support for Emacs"
-       :type github
-       :minimum-emacs-version "24.3"
-       :pkgname "emacs-typescript/typescript.el")

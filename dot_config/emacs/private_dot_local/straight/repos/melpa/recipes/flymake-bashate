@@ -1,1 +1,0 @@
-(flymake-bashate :fetcher github :repo "jamescherti/flymake-bashate.el")

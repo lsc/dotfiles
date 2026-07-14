@@ -1,3 +1,0 @@
-(telega :fetcher github
-        :repo "zevlg/telega.el"
-        :files (:defaults "etc" "server" "contrib" "Makefile"))

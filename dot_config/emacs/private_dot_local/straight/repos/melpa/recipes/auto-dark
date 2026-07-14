@@ -1,3 +1,0 @@
-(auto-dark
-  :repo "LionyxML/auto-dark-emacs"
-  :fetcher github)

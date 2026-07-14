@@ -1,4 +1,0 @@
-# -*- mode: snippet -*-
-# name: textLeading
-# --
-textLeading(${1:size});

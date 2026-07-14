@@ -1,4 +1,0 @@
-# -*- mode: snippet -*-
-# name: textWidth
-# --
-textWidth(${1:data});

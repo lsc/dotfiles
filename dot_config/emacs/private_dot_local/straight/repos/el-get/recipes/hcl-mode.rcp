@@ -1,4 +1,0 @@
-(:name hcl-mode
-       :type github
-       :pkgname "syohex/emacs-hcl-mode"
-       :description "Major mode of Hashicorp Configuration Language")

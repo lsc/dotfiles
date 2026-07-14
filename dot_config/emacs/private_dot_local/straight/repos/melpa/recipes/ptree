@@ -1,2 +1,0 @@
-(ptree :fetcher github
-       :repo "alpha-catharsis/ptree")

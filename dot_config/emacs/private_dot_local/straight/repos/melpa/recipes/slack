@@ -1,1 +1,0 @@
-(slack :fetcher github :repo "emacs-slack/emacs-slack")

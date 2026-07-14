@@ -1,5 +1,0 @@
-(org-vcard
- :fetcher github
- :repo "pinoaffe/org-vcard"
- :files ("org-vcard.el"
-         "styles"))

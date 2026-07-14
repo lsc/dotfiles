@@ -1,3 +1,0 @@
-(org-inline-pdfcomment
- :fetcher sourcehut
- :repo "swflint/org-inline-pdfcomment")

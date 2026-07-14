@@ -1,1 +1,0 @@
-(php-cs-fixer :repo "pivaldi/php-cs-fixer" :fetcher github)

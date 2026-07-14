@@ -1,1 +1,0 @@
-(glue :repo "hajovonta/glue" :fetcher sourcehut)

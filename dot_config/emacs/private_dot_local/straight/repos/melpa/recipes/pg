@@ -1,3 +1,0 @@
-(pg
- :repo "emarsden/pg-el"
- :fetcher github)

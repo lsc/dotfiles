@@ -1,3 +1,0 @@
-(tiles
- :fetcher github
- :repo "ctanas/tiles")

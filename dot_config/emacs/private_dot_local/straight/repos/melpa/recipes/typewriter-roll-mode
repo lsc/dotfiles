@@ -1,3 +1,0 @@
-(typewriter-roll-mode
- :fetcher github
- :repo "KeyWeeUsr/typewriter-roll-mode")

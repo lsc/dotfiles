@@ -1,3 +1,0 @@
-(:name typing
-       :description "The Typing Of Emacs"
-       :type emacsmirror)

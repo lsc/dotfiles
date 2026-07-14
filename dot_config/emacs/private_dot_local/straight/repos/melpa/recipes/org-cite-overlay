@@ -1,4 +1,0 @@
-(org-cite-overlay
- :fetcher sourcehut
- :repo "swflint/org-cite-overlay"
- :files ("org-cite-overlay.el"))

@@ -1,5 +1,0 @@
-(:name ponylang-mode
-       :description "Pony language mode"
-       :type github
-       :pkgname "seantallen/ponylang-mode"
-       :depends (dash))

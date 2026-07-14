@@ -1,5 +1,0 @@
-(:name color-moccur
-       :website "https://github.com/myuhe/color-moccur.el"
-       :description "multi-buffer occur (grep) mode"
-       :type github
-       :pkgname "myuhe/color-moccur.el")

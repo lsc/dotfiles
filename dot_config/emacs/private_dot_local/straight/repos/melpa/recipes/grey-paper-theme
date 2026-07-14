@@ -1,3 +1,0 @@
-(grey-paper-theme
- :fetcher github
- :repo "gugod/grey-paper-theme")

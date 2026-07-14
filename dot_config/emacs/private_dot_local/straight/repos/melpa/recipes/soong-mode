@@ -1,2 +1,0 @@
-(soong-mode :repo "bobrofon/soong-mode"
-            :fetcher github)

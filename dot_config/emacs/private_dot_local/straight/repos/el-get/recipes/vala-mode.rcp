@@ -1,4 +1,0 @@
-(:name vala-mode
-       :description "Major mode for Vala language"
-       :type github
-       :pkgname "emacsorphanage/vala-mode")

@@ -1,1 +1,0 @@
-(org-ivy-search :repo "beacoder/org-ivy-search" :fetcher github)

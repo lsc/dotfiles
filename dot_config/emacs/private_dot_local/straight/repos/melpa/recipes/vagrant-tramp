@@ -1,4 +1,0 @@
-(vagrant-tramp
- :fetcher github
- :repo "dougm/vagrant-tramp"
- :files ("*.el" "bin"))

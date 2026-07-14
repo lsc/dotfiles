@@ -1,4 +1,0 @@
-(:name llama
-       :description "Compact syntax for short lambda"
-       :type github
-       :pkgname "tarsius/llama")

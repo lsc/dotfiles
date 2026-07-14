@@ -1,3 +1,0 @@
-(magit-commit-mark
- :fetcher codeberg
- :repo "ideasman42/emacs-magit-commit-mark")

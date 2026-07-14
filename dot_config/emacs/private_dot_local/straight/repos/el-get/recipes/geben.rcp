@@ -1,7 +1,0 @@
-(:name geben
-       :description "GEBEN is a software package that interfaces Emacs to DBGp protocol with which you can debug running scripts interactively."
-       :website "https://github.com/ahungry/geben"
-       :type "github"
-       :branch "master"
-       :pkgname "ahungry/geben"
-)

@@ -1,3 +1,0 @@
-(scad-mode
- :repo "openscad/emacs-scad-mode"
- :fetcher github)

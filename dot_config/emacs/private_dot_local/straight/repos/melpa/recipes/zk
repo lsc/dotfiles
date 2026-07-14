@@ -1,3 +1,0 @@
-(zk :repo "localauthor/zk"
-    :fetcher github
-    :files ("zk.el"))

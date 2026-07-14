@@ -1,3 +1,0 @@
-(tmux-csi-u
-  :fetcher github
-  :repo "lajarre/tmux-csi-u.el")

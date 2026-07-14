@@ -1,3 +1,0 @@
-(org-tag-cloud
- :fetcher github
- :repo "skx/org-tag-cloud")

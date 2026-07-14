@@ -1,1 +1,0 @@
-(fsharp-ts-mode :fetcher github :repo "bbatsov/fsharp-ts-mode")

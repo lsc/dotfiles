@@ -1,4 +1,0 @@
-(pig-snippets
- :fetcher github
- :repo "motus/pig-mode"
- :files ("pig-snippets*.el" "snippets"))

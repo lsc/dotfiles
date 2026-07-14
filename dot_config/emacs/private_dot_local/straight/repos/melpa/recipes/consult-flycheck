@@ -1,1 +1,0 @@
-(consult-flycheck :fetcher github :repo "minad/consult-flycheck")

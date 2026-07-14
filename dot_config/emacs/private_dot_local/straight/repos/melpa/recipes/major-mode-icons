@@ -1,4 +1,0 @@
-(major-mode-icons :fetcher git
-                  :url "https://repo.or.cz/major-mode-icons.git"
-                  :files (:defaults "icons")
-                  )

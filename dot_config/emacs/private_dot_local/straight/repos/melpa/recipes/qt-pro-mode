@@ -1,3 +1,0 @@
-(qt-pro-mode
- :fetcher github
- :repo "emacsorphanage/qt-pro-mode")

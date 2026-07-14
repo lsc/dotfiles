@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: ambient
-# key: ambient
-# --
-ambient(${8:${3:value1}, ${4:value2}, ${5:value3}});

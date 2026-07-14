@@ -1,4 +1,0 @@
-(nordless-theme
- :fetcher sourcehut
- :repo "lthms/colorless-themes.el"
- :files ("nordless-theme.el"))

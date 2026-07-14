@@ -1,1 +1,0 @@
-(harpoon :repo "otavioschwanck/harpoon.el" :fetcher github)

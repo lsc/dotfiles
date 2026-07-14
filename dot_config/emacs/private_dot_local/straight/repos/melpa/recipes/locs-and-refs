@@ -1,3 +1,0 @@
-(locs-and-refs
- :fetcher github
- :repo "phf-1/locs-and-refs")

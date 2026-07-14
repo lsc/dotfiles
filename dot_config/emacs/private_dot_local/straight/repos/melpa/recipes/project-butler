@@ -1,3 +1,0 @@
-(project-butler
- :fetcher codeberg
- :repo "jabbo/project-butler")

@@ -1,1 +1,0 @@
-(eglot-luau :fetcher github :repo "kennethloeffler/eglot-luau")

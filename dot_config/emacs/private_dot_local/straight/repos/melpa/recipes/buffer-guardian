@@ -1,3 +1,0 @@
-(buffer-guardian
- :fetcher github
- :repo "jamescherti/buffer-guardian.el")

@@ -1,4 +1,0 @@
-(listenbrainz
- :repo "zzkt/metabrainz"
- :fetcher github
- :files ("listenbrainz.el"))

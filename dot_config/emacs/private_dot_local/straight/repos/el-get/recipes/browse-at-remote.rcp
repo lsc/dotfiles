@@ -1,5 +1,0 @@
-(:name browse-at-remote
-       :description "Browse target page on github/bitbucket from emacs buffers"
-       :type github
-       :pkgname "rmuslimov/browse-at-remote"
-       :depends (f s cl-lib))

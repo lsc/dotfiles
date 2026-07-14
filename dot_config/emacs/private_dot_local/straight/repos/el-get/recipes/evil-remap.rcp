@@ -1,6 +1,0 @@
-(:name evil-remap
-       :description "Additional mapping functions for evil"
-       :type github
-       :pkgname "GuiltyDolphin/evil-remap"
-       :branch "master"
-       :depends (evil))

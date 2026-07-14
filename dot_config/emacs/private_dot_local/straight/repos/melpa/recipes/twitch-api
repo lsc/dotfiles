@@ -1,1 +1,0 @@
-(twitch-api :repo "BenediktBroich/twitch-api"  :fetcher github)

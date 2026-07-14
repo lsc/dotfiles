@@ -1,3 +1,0 @@
-(flower :repo "FlowerAutomation/flower"
-        :files (:defaults "project.clj")
-        :fetcher github)

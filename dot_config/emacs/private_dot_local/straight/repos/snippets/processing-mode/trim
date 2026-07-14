@@ -1,4 +1,0 @@
-# -*- mode: snippet -*-
-# name: trim
-# --
-trim(${3:str});

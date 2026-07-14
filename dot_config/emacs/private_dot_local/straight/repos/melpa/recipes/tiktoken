@@ -1,1 +1,0 @@
-(tiktoken :fetcher github :repo "zkry/tiktoken.el")

@@ -1,4 +1,0 @@
-(eglot-python-preset
- :fetcher github
- :repo "mwolson/eglot-python-preset"
- :files (:defaults ("templates" "templates/*.tpl.py")))

@@ -1,6 +1,0 @@
-(:name ampc
-       :description "Asynchronous Music Player Controller"
-       :type github
-       :pkgname "emacsattic/ampc"
-       :features ampc
-       :prepare (autoload 'ampc "ampc" nil t))

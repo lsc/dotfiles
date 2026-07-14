@@ -1,3 +1,0 @@
-(compile-multi-embark
- :fetcher github :repo "mohkale/compile-multi"
- :files ("extensions/compile-multi-embark/compile-multi-embark*.el"))

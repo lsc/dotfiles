@@ -1,3 +1,0 @@
-(ddgr
- :fetcher github
- :repo "necaris/ddgr.el")

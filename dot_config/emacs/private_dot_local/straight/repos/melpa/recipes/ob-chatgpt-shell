@@ -1,3 +1,0 @@
-(ob-chatgpt-shell
- :fetcher github
- :repo "xenodium/ob-chatgpt-shell")

@@ -1,4 +1,0 @@
-(projmake-mode
- :fetcher github
- :repo "emacsattic/projmake-mode"
- :files ("src/*.el"))

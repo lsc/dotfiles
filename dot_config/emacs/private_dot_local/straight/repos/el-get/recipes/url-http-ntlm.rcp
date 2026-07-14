@@ -1,3 +1,0 @@
-(:name url-http-ntlm
-       :description "NTLM authentication for the url library."
-       :type elpa)

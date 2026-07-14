@@ -1,3 +1,0 @@
-(:name highlight
-       :description "Highlighting commands."
-       :type emacsmirror)

@@ -1,5 +1,0 @@
-(nethack
- :fetcher github
- :repo "Feyorsh/nethack-el"
- :files ("nethack*.el"
-         "enh-*.patch"))

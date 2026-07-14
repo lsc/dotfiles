@@ -1,2 +1,0 @@
-(tikz :repo "emiliotorres/tikz" :fetcher github
-	  :files (:defaults "templates"))

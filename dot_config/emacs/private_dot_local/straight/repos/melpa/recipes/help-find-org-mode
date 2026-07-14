@@ -1,3 +1,0 @@
-(help-find-org-mode
- :fetcher github
- :repo "emacsorphanage/help-find-org-mode")

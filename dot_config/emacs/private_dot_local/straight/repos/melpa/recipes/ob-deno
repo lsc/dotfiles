@@ -1,1 +1,0 @@
-(ob-deno :repo "isamert/ob-deno" :fetcher github)

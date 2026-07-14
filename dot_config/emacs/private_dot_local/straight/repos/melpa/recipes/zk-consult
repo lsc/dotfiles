@@ -1,3 +1,0 @@
-(zk-consult :fetcher github
-            :repo "localauthor/zk"
-            :files ("zk-consult.el"))

@@ -1,4 +1,0 @@
-(:name org-mime
-       :type github
-       :description "org html export for text/html MIME emails"
-       :pkgname "org-mime/org-mime")

@@ -1,3 +1,0 @@
-(sink
- :fetcher github
- :repo "alcah/sink.el")

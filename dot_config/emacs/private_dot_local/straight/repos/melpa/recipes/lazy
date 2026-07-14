@@ -1,1 +1,0 @@
-(lazy :fetcher github :repo "conao3/lazy.el")

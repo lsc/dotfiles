@@ -1,1 +1,0 @@
-(julia-formatter :fetcher codeberg :repo "FelipeLema/julia-formatter.el")

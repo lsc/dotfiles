@@ -1,3 +1,0 @@
-(denote-agenda
- :fetcher sourcehut
- :repo "swflint/denote-agenda")

@@ -1,2 +1,0 @@
-(helm-tree-sitter :fetcher github
-                  :repo "Giedriusj1/helm-tree-sitter")

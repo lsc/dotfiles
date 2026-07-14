@@ -1,3 +1,0 @@
-(newspeak-mode
- :fetcher github
- :repo "danielsz/newspeak-mode")

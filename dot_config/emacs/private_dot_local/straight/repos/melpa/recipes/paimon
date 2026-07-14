@@ -1,3 +1,0 @@
-(paimon :fetcher github
-        :repo "r0man/paimon.el"
-        :files (:defaults "src/*.el"))

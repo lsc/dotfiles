@@ -1,3 +1,0 @@
-(consult-todo
- :fetcher github
- :repo "eki3z/consult-todo")

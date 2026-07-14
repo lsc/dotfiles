@@ -1,3 +1,0 @@
-(zk-index :repo "localauthor/zk"
-         :fetcher github
-         :files ("zk-index.el"))

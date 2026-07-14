@@ -1,4 +1,0 @@
-(projection-multi
- :fetcher github
- :repo "mohkale/projection"
- :files ("src/projection-multi/*.el"))

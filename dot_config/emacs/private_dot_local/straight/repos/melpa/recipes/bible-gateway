@@ -1,4 +1,0 @@
-(bible-gateway
- :fetcher github
- :repo "kristjoc/bible-gateway"
- :old-names (votd))

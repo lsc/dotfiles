@@ -1,5 +1,0 @@
-(:name emacs-aio
-       :description "async/await for Emacs Lisp"
-       :type github
-       :pkgname "skeeto/emacs-aio"
-       :minimum-emacs-version "26")

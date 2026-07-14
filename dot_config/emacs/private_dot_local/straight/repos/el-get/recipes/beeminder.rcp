@@ -1,5 +1,0 @@
-(:name beeminder
-       :description "Submit data to Beeminder from within Emacs. Also integrates with org-mode."
-       :depends (org-mode)
-       :type github
-       :pkgname "Sodaware/beeminder.el")

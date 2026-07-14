@@ -1,8 +1,0 @@
-.bumpversion.cfg
-.elpaignore
-.github
-Makefile
-README.md
-docs
-scripts
-tests

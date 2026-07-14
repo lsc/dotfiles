@@ -1,3 +1,0 @@
-(show-inactive-region
- :fetcher codeberg
- :repo "ideasman42/emacs-show-inactive-region")

@@ -1,3 +1,0 @@
-(org-people
- :fetcher github
- :repo "skx/org-people")

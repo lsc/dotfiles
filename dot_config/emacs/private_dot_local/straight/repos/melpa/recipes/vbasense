@@ -1,4 +1,0 @@
-(vbasense
- :fetcher github
- :repo "aki2o/emacs-vbasense"
- :files ("*.el" "*.vbs" "*.bat"))

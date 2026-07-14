@@ -1,3 +1,0 @@
-(pkl-mode
- :fetcher github
- :repo "sin-ack/pkl-mode")

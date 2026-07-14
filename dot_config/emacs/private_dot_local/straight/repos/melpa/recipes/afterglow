@@ -1,2 +1,0 @@
-(afterglow :fetcher github
-           :repo "ernstvanderlinden/emacs-afterglow")

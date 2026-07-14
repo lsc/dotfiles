@@ -1,3 +1,0 @@
-(rainbow-fart :fetcher git
-              :url "https://repo.or.cz/emacs-rainbow-fart.git"
-              :files (:defaults "voices"))

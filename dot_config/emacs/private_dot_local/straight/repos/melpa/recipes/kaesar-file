@@ -1,5 +1,0 @@
-(kaesar-file
- :fetcher github
- :repo "mhayashi1120/Emacs-kaesar"
- :files ("kaesar-file.el")
- :version-regexp "file-%v")

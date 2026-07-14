@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: void mouseReleased() {...}
-# key: mouser
-# --
-void mouseReleased() {
-  `%`$0
-}

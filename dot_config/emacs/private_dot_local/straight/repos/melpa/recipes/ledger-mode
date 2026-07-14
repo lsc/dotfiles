@@ -1,5 +1,0 @@
-(ledger-mode
- :fetcher github
- :repo "ledger/ledger-mode"
- :files ("ledger-*.el" "doc/*.texi")
- :old-names (ldg-mode))

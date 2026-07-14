@@ -1,4 +1,0 @@
-(consult-spotify
- :fetcher codeberg
- :repo "jao/espotify"
- :files ("consult-spotify.el"))

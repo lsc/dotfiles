@@ -1,3 +1,0 @@
-(session
- :fetcher github
- :repo "emacsattic/session")

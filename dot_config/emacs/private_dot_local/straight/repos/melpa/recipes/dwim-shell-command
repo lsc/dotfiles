@@ -1,3 +1,0 @@
-(dwim-shell-command
- :fetcher github
- :repo "xenodium/dwim-shell-command")

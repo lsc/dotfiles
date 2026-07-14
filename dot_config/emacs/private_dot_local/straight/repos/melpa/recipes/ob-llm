@@ -1,3 +1,0 @@
-(ob-llm
- :fetcher github
- :repo "sunflowerseastar/ob-llm")

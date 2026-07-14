@@ -1,3 +1,0 @@
-(gradle-mode
- :fetcher github
- :repo "scubacabra/emacs-gradle-mode")

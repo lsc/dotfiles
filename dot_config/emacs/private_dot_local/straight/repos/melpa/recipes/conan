@@ -1,3 +1,0 @@
-(conan
- :fetcher github
- :repo "Carl2/conan-elisp")

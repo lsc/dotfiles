@@ -1,3 +1,0 @@
-(gpt :fetcher github
-     :repo "stuhlmueller/gpt.el"
-     :files (:defaults "gpt.py" "providers" "providers/*.py"))

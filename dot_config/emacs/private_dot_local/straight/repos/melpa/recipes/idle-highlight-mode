@@ -1,3 +1,0 @@
-(idle-highlight-mode
- :fetcher codeberg
- :repo "ideasman42/emacs-idle-highlight-mode")

@@ -1,5 +1,0 @@
-(kaesar-pbkdf2
- :fetcher github
- :repo "mhayashi1120/Emacs-kaesar"
- :files ("kaesar-pbkdf2.el")
- :version-regexp "pbkdf2-%v")

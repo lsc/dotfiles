@@ -1,3 +1,0 @@
-(quarto-mode
- :fetcher github
- :repo "quarto-dev/quarto-emacs")

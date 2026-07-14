@@ -1,4 +1,0 @@
-(elcute
- :fetcher codeberg
- :repo "vilij/slurpbarf-elcute"
- :files ("elcute.el"))

@@ -1,4 +1,0 @@
-(evil-ghostel
- :fetcher github
- :repo "dakra/ghostel"
- :files ("extensions/evil-ghostel/evil-ghostel.el"))

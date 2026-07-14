@@ -1,4 +1,0 @@
-(org-roam-ql
- :fetcher github
- :repo "ahmed-shariff/org-roam-ql"
- :files ("org-roam-ql.el"))

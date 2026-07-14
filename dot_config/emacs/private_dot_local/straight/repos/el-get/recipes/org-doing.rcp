@@ -1,5 +1,0 @@
-(:name org-doing
-       :description "Keep track of what you're doing right now and what you've worked on before."
-       :type github
-       :pkgname "emacsattic/org-doing"
-       :depends (org-mode))

@@ -1,3 +1,0 @@
-(octo-mode
- :fetcher codeberg
- :repo "cryon/octo-mode")

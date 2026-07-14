@@ -1,1 +1,0 @@
-(counsel-toki :repo "emiflake/counsel-toki" :fetcher github)

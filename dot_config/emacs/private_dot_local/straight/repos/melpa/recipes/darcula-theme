@@ -1,2 +1,0 @@
-(darcula-theme :fetcher github
-               :repo "fommil/darcula-theme.el")

@@ -1,4 +1,0 @@
-(:name delim-pad
-       :description "This package helps to manage space padding around paired delimiters."
-       :type github
-       :pkgname "lewang/delim-pad")

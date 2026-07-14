@@ -1,5 +1,0 @@
-(:name asn1-mode
-       :description "ASN.1/GDMO editing mode"
-       :type github
-       :pkgname "kawabata/asn1-mode"
-       :depends (cl-lib s))

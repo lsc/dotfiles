@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: graph
-# --
-.. graph:: $1
-
-   $0

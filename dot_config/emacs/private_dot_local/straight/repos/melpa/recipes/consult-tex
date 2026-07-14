@@ -1,3 +1,0 @@
-(consult-tex
-  :repo "titus.pinta/consult-tex"
-  :fetcher gitlab)

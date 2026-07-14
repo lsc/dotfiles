@@ -1,5 +1,0 @@
-(:name emux
-       :description "Emacs terminal multiplexer."
-       :type github
-       :pkgname "re5et/emux"
-       :prepare (autoload 'emux-term "emux-term" nil t))

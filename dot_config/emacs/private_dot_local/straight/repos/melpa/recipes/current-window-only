@@ -1,3 +1,0 @@
-(current-window-only
- :fetcher github
- :repo "FrostyX/current-window-only")

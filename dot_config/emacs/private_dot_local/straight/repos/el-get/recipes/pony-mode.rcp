@@ -1,7 +1,0 @@
-(:name pony-mode
-       :website "https://github.com/davidmiller/pony-mode"
-       :description "A Django mode for Emacs."
-       :type github
-       :pkgname "davidmiller/pony-mode"
-       :load-path "src"
-       )

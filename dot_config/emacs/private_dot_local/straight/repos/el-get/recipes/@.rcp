@@ -1,4 +1,0 @@
-(:name @
-       :description "Multiple-inheritance, prototype-based objects domain-specific language"
-       :type github
-       :pkgname "skeeto/at-el")

@@ -1,4 +1,0 @@
-(:name mode-icons
-       :website "https://ryuslash.org/projects/mode-icons.html"
-       :description "Replaces certain major mode names with icons, thus reducing their size in the mode-line."
-       :type elpa)

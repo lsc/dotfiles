@@ -1,3 +1,0 @@
-(company-prescient :fetcher github
-                   :repo "radian-software/prescient.el"
-                   :files ("company-prescient.el"))

@@ -1,3 +1,0 @@
-(too-wide-minibuffer-mode
- :fetcher github
- :repo "hron/too-wide-minibuffer-mode")

@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: expect { ... }.to ...
-# uuid: exp2
-# --
-expect { $1 }.to $0

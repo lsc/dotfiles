@@ -1,4 +1,0 @@
-# -*- mode: snippet -*-
-# name: throw
-# --
-throw new Exception("${1:Name}");

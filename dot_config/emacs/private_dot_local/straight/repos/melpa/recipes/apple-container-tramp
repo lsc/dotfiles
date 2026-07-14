@@ -1,3 +1,0 @@
-(apple-container-tramp
- :fetcher github
- :repo "major1201/apple-container-tramp.el")

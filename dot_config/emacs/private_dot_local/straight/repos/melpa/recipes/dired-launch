@@ -1,1 +1,0 @@
-(dired-launch :fetcher codeberg :repo "thomp/dired-launch")

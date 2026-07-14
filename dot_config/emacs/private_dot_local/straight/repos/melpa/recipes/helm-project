@@ -1,1 +1,0 @@
-(helm-project :repo "cmccloud/helm-project" :fetcher github)
