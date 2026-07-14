@@ -1,0 +1,14 @@
+;; -*- lisp-data -*-
+
+((name			"NonGNU")
+ (gitrepo		"emacs/nongnu.git")
+ (url			"https://elpa.nongnu.org/nongnu/")
+ ;;(branch-prefix		"elpa/")
+ ;;(release-branch-prefix	"elpa-release/")
+ ;;(specs-file		"elpa-packages")
+ ;;(debug		nil)
+ )
+
+;; Local Variables:
+;; indent-tabs-mode: nil
+;; End:

@@ -1,0 +1,9 @@
+;; -*- no-byte-compile: t; -*-
+;;; ui/zen/packages.el
+
+(package! writeroom-mode :pin "cca2b4b3cfcfea1919e1870519d79ed1a69aa5e2")
+(package! mixed-pitch :pin "519e05f74825abf04b7d2e0e38ec040d013a125a")
+(when (modulep! +focus)
+  (package! focus :pin "a58e29e70948512dbcdbb24745e3fb0a59984925")
+  (when (modulep! :tools lsp -eglot)
+    (package! lsp-focus :pin "675a20610c63577bb5363c2ed9b253705bbfee4f")))

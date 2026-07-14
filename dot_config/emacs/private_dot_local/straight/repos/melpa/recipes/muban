@@ -1,0 +1,1 @@
+(muban :repo "jiahaoli95/muban.el" :fetcher github)

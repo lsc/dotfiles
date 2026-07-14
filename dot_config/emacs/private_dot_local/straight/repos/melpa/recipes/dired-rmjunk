@@ -1,0 +1,1 @@
+(dired-rmjunk :fetcher sourcehut :repo "jakob/dired-rmjunk")

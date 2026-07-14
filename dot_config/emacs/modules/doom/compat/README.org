@@ -1,0 +1,114 @@
+:PROPERTIES:
+:ID:       7a7065bd-18d5-4622-8d56-6df760fd8015
+:END:
+#+title:     :doom compat
+#+subtitle:  Backwards compatibility with Doom v2
+#+created:   June 06, 2026
+#+since:     26.06.0
+
+#+begin_quote
+  *This module is hardcoded to be enabled until v3 is released.* Its flags can't
+    be customized yet, but are documented here as a reference for posterity.
+
+    Also, because this is a compatibility module, its packages will rarely be
+    bumped (except to resolve upstream breakage) and it won't be developed to
+    support new features. If you need newer versions, I recommend you install
+    the package manually instead of relying on this module!
+#+end_quote
+
+* Description :unfold:
+This module provides backwards compatibility with v2 of Doom's core. It
+reinstates old APIs, variables, packages, and configuration that are slated for
+removal in v3. This exists to give you more time to adapt to the changes.
+
+For a full table of what's been changed and what to use instead, see the Usage
+section below.
+
+** Maintainers
+- @hlissner
+
+[[doom-contrib-maintainer:][Become a maintainer?]]
+
+** Module flags
+- -better-jumper ::
+  Don't install or configure ~better-jumper~.
+- -general ::
+  Don't install ~general~ and don't provide the ~map!~ macro.
+- -projectile ::
+  Don't install or configure ~projectile~.
+- -smartparens ::
+  Don't install or configure ~smartparens~.
+- -use-package ::
+  Don't install or configure ~use-package~, or define ~use-package!~ or
+  ~use-package-hook!~.
+
+** Packages
+- [[doom-package:better-jumper]] unless [[doom-module:-better-jumper]]
+- [[doom-package:general]] unless [[doom-module:-general]]
+- [[doom-package:projectile]] unless [[doom-module:-projectile]]
+- [[doom-package:smartparens]] unless [[doom-module:-smartparens]]
+- [[doom-package:use-package]] unless [[doom-module:-use-package]]
+
+** Hacks
+/No hacks documented for this module./
+
+** TODO Changelog
+# This section will be machine generated. Don't edit it by hand.
+/This module does not have a changelog yet./
+
+* Installation
+This module is hardcoded to be enabled *very* early during startup. Until v3 is
+released, this can't be changed.
+
+* Usage
+#+begin_quote
+ 󱌣 /This module's configuration documentation is incomplete./ [[doom-contrib-module:][Complete it?]]
+#+end_quote
+
+| Syntax                      | Type     | What to use instead                                                       |
+|-----------------------------+----------+---------------------------------------------------------------------------|
+| IS-MAC                      | var      | ~(featurep :system 'macos)~                                                 |
+| IS-LINUX                    | var      | ~(featurep :system 'linux)~                                                 |
+| IS-WINDOWS                  | var      | ~(featurep :system 'windows)~                                               |
+| IS-BSD                      | var      | ~(featurep :system 'bsd)~                                                   |
+| EMACS28+                    | var      | ~(>= emacs-major-version 28)~                                               |
+| EMACS29+                    | var      | ~(>= emacs-major-version 29)~                                               |
+| MODULES                     | var      | ~(bound-and-true-p module-file-suffix)~                                     |
+| NATIVECOMP                  | var      | ~(featurep 'native-compile)~                                                |
+| doom-private-dir            | var      | ~doom-user-dir~                                                             |
+| doom-etc-dir                | var      | ~doom-data-dir~ or ~doom-profile-data-dir~                                    |
+| ~(featurep 'dynamic-modules)~ | form     | ~(bound-and-true-p module-file-suffix)~                                     |
+| ~(featurep 'jansson)~         | form     | ~(fboundp #'json-parse-string)~                                             |
+| ~(featurep 'harfbuzz)~        | form     | ~(string-match-p "HARFBUZZ" system-configuration-features)~                 |
+| ~featurep!~                   | macro    | ~modulep!~                                                                  |
+| ~letenv!~                     | macro    | ~with-environment-variables~                                                |
+| ~eval-if!~                    | macro    | ~static-if~                                                                 |
+| ~eval-when!~                  | macro    | ~static-when~                                                               |
+| ~setq!~                       | macro    | ~setopt~                                                                    |
+| ~doom-enlist~                 | function | ~ensure-list~                                                               |
+| ~appendq!~                    | macro    | ~(cl-callf append VAR LISTS...)~                                            |
+| ~prependq!~                   | macro    | ~(cl-callf2 append LISTS... VAR)~                                           |
+| ~delq!~                       | macro    | ~(cl-callf2 delq 'KEY ALIST)~ or ~(setf (alist-get 'KEY ALIST nil t) nil)~    |
+| ~pushnew!~                    | macro    | ~add-to-list~ or ~cl-pushnew~ in a loop                                       |
+| ~use-package!~                | macro    | ~use-package~                                                               |
+| ~def-project-mode!~           | macro    | (no alternative yet)                                                      |
+| ~map!~                        | macro    | ~define-key!~, ~keymap-set~, ~define-key~, ~global-set-key~, ~evil-define-key~, etc |
+
+There are in-depth examples for some of these in =docs/examples.org= in this
+module.
+
+* TODO Configuration
+#+begin_quote
+󱌣 This module has no configuration documentation yet. [[doom-contrib-module:][Write some?]]
+#+end_quote
+
+* Troubleshooting
+/There are no known problems with this module./ [[doom-report:][Report one?]]
+
+* Frequently asked questions
+/This module has no FAQs yet./ [[doom-suggest-faq:][Ask one?]]
+
+* TODO Appendix
+#+begin_quote
+󱌣 This module has no appendix yet. [[doom-contrib-module:][Write one?]]
+#+end_quote

@@ -1,0 +1,5 @@
+(:name quickrun
+       :description "Run commands quickly"
+       :website "https://github.com/emacsorphanage/quickrun"
+       :type github
+       :pkgname "emacsorphanage/quickrun")

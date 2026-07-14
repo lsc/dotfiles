@@ -1,0 +1,2 @@
+(iregister :fetcher github :repo "atykhonov/iregister.el"
+           :files (:defaults (:exclude ".bump-version.el")))

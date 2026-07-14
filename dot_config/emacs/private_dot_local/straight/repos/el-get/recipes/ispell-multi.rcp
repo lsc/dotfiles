@@ -1,0 +1,5 @@
+(:name ispell-multi
+       :description "Multiple ispell processes and multiple flyspell languages"
+       :type http
+       :url "https://raw.githubusercontent.com/phimuemue/emacs-hacks/master/ispell-multi.el"
+       :features ispell-multi)

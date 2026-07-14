@@ -1,0 +1,4 @@
+(:name dedicated
+       :description "A very simple minor mode for dedicated buffers"
+       :type github
+       :pkgname "emacsorphanage/dedicated")

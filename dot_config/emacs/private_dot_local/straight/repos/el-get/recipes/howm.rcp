@@ -1,0 +1,6 @@
+(:name howm
+       :website "https://kaorahi.github.io/howm/"
+       :description "Write fragmentarily and read collectively."
+       :type github
+       :pkgname "kaorahi/howm"
+       :build `(("./configure" ,(concat "--with-emacs=" el-get-emacs)) ("make")))

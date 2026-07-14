@@ -1,0 +1,22 @@
+(:name helm
+       :description "Emacs incremental completion and narrowing framework"
+       :type github
+       :pkgname "emacs-helm/helm"
+       :autoloads "helm-autoloads"
+       :build `(("make"
+                 ,(concat "ASYNC_ELPA_DIR=" (el-get-package-directory 'emacs-async))))
+       :depends (emacs-async wfnames)
+       :minimum-emacs-version "25.1"
+       :build/darwin `(("make"
+                        ,(concat "ASYNC_ELPA_DIR=" (el-get-package-directory 'emacs-async))
+                        ,(format "EMACS_COMMAND=%s" el-get-emacs)))
+       ;; Windows probably doesn't have make available so we fake it.
+       :build/windows-nt
+       (let ((generated-autoload-file (expand-file-name "helm-autoloads.el")) \
+             (backup-inhibited t))
+         (update-directory-autoloads default-directory)
+         nil)
+       :build/berkeley-unix `(("gmake"
+                               ,(concat "ASYNC_ELPA_DIR=" (el-get-package-directory 'emacs-async))))
+       :features "helm-autoloads"
+       :post-init (helm-mode))

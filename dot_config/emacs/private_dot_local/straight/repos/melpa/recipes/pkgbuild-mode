@@ -1,0 +1,1 @@
+(pkgbuild-mode :fetcher github :repo "juergenhoetzel/pkgbuild-mode")

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Hypotheses
+# key: hyps
+# --
+Hypotheses $1: $2

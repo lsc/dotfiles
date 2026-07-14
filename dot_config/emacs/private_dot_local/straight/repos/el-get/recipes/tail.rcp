@@ -1,0 +1,5 @@
+(:name tail
+       :description "Tail files within Emacs"
+       :type github
+       :pkgname "emacsorphanage/tail"
+       :features tail)

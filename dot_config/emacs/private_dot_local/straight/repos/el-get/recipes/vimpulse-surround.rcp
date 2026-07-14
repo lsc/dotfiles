@@ -1,0 +1,4 @@
+(:name vimpulse-surround
+       :description "Emulate surround.vim in Vimpulse"
+       :type github
+       :pkgname "timcharper/vimpulse-surround.el")

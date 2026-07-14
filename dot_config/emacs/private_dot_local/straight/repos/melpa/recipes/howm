@@ -1,0 +1,3 @@
+(howm
+ :fetcher github
+ :repo "kaorahi/howm")

@@ -1,0 +1,4 @@
+(geiser-chez
+ :fetcher codeberg
+ :repo "geiser/chez"
+ :files (:defaults ("src" "src/*")))

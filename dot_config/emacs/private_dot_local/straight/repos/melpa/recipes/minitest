@@ -1,0 +1,4 @@
+(minitest
+ :fetcher sourcehut
+ :repo "shoshin/minitest-emacs"
+ :files (:defaults "snippets"))

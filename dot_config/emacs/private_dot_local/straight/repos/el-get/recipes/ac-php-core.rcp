@@ -1,0 +1,6 @@
+(:name ac-php-core
+       :description "Auto complete source for php - common core"
+       :type github
+       :pkgname "xcwen/ac-php"
+       :compile "ac-php-core.el" ;; This is common to company & ac.
+       :depends (php-mode s f popup xcscope dash))

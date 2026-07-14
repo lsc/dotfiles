@@ -1,0 +1,3 @@
+(better-defaults
+ :fetcher sourcehut
+ :repo "technomancy/better-defaults")

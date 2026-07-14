@@ -1,0 +1,674 @@
+#+AUTHOR: Alex Lu
+#+EMAIL: alexluigit@gmail.com
+#+startup: content
+
+*TL;DR*: Grab the [[#Sample-config][sample config]].  Read following docs in-depth if you want further
+customizations.
+
+-----
+* In relation to Dired
+
+Here are some Dirvish exclusive features or aspects that Dired and Dirvish
+handled differently.
+
+** Cursor display and line highlighting
+
+Dirvish by default hides the cursor in Dired buffers and highlights the current
+line.  It uses the ~dirvish-hl-line~ face for the active window and
+~dirvish-hl-line-inactive~ for inactive windows.  To modify this behavior,
+customize the ~dirvish-hide-cursor~ variable.
+
+** File details display
+
+~dired-hide-details-mode~ is enabled in Dirvish by default.  If you want the
+details at buffer initialization like in Dired, you can customize the
+~dirvish-hide-details~ option.
+
+Instead of ~dired-hide-details-mode~, configuring ~dirvish-attributes~ is the
+recommended approach for finer-grained control and greater flexibility in
+displaying and ordering file details.  See *Dirvish "Attributes"* below for
+detailed instructions.
+
+** Cache directory
+
+Dirvish uses ~dirvish-cache-dir~ to store cached images and other persistent data.
+
+** Usage of GNU =ls=
+
+It is recommended to use GNU =ls= (referred to as =gls= on macOS and FreeBSD) as
+your =insert-directory-program=.  If you are using macOS, FreeBSD, or Windows, you
+will need to manually install GNU =ls= and possibly configure it as your
+=insert-directory-program=.  On GNU/Linux systems, this program is typically
+pre-installed and utilized by Emacs without requiring additional setup.
+
+#+begin_src bash
+# macOS
+brew install coreutils
+
+# FreeBSD
+pkg install gnuls
+
+# Windows - install via Scoop: https://scoop.sh/
+scoop install coreutils
+#+end_src
+
+To ensure Dirvish correctly parses =dired-listing-switches=, adhere to specific
+formatting rules when setting this variable.  These rules ensure compatibility
+with the =dirvish-ls= extension powered by =transient=, allowing for straightforward
+decomposition and composition of included switches.
+
+1. Make sure to use the long name of ~ls~ flags whenever possible.
+
+   * use =--almost-all= instead of =-A=
+   * use =--sort=version= instead of =-v=
+
+2. avoid duplicate flags which makes no sense.
+
+   These 3 patterns give the same directory listing result, but the =sort=
+   attribute would only get correct information with the last one.
+
+   * =--sort=version --sort=time= (duplicate, the latter flag is ignored)
+   * =-v --sort-time= (same as the above one, meanwhile this also violates rule NO.1)
+   * =--sort=time=
+
+These rules should also be followed when setting the ~dirvish-fd-switches~ option.
+For changing the sort criteria of a buffer, ~dirvish-quicksort~ is recommended
+over ~dired-sort-toggle-or-edit~.  If you choose to use ~dired-sort-toggle-or-edit~,
+ensure the entered =ls= flags adhere to the specified rules.
+
+Additionally, it's best to avoid using options newly introduced in GNU =ls=.  For
+instance, while the =--time=mtime= option might function correctly on your local
+machine with =ls/gls= version 9.6, a remote host running GNU =ls= version 8.3 can
+not recognize it.  Consequently, if ~dired-listing-switches~ includes such an
+switch, Dirvish will display an empty buffer when you attempt to open any path
+on that remote host.
+
+** Buffer management
+
+A Dirvish session maintains a collection of Dired and preview buffers that are
+reused throughout the session.
+
+When you quit a Dirvish session, either by using ~dirvish-quit~ command (bound to
+=q=) or by opening a file (which automatically quits the session), all Dired
+buffers except the index buffer are killed.
+
+Dirvish respects the ~dired-kill-when-opening-new-dired-buffer~ option, preventing
+the creation of multiple Dired buffers. Alternatively, you may manually remove
+unwanted Dired buffers using the ~dired-find-alternate-file~ command.
+
+If you prefer Dirvish to kill all Dired buffers when quitting, instead of
+leaving the last index buffer open, set ~dirvish-reuse-session~ to =nil=.
+
+See: [[https://github.com/alexluigit/dirvish/discussions/102#discussioncomment-3205349][the rationale behind buffer management in Dirvish]]
+
+** Hooks
+
+Apart from the hooks provided by Dired, Dirvish got some additions.
+
+*** ~dirvish-setup-hook~
+
+Functions called when directory data for the root buffer is ready.
+
+*** ~dirvish-after-revert-hook~:
+
+Functions called after running =revert-buffer= command.
+
+*** ~dirvish-find-entry-hook~
+
+Functions to be called before opening a directory or file.
+
+Each function is called with the file's FILENAME and FIND-FN until one returns a
+non-nil value.  When a Dired buffer is created for the first time, FIND-FN is
+=dired=, and the function is called with that Dired buffer as =current-buffer=;
+Otherwise, it is one of =find-file=, =find-alternate-file=, or
+=find-file-other-window=.  A non-nil return value from
+=run-hook-with-args-until-succuss= terminates =dirvish--find-entry=, allowing
+interception of file opening and customized handling of specific file types.
+
+The code below configures ~dired-find-file*~ commands to automatically detect
+binary files based on their extensions and open them externally.
+
+#+begin_src emacs-lisp
+(defun dirvish-open-binaries-externally (file fn)
+  "When FN is not `dired', open binary FILE externally."
+  (when-let* (((not (eq fn 'dired)))
+              ((file-exists-p file))
+              ((not (file-directory-p file)))
+              ((member (downcase (or (file-name-extension file) ""))
+                       dirvish-binary-exts)))
+    ;; return t to terminate `dirvish--find-entry'.
+    (prog1 t (dired-do-open))))
+
+(add-hook 'dirvish-find-entry-hook #'dirvish-open-binaries-externally)
+#+end_src
+
+In practical applications, you might register multiple functions to handle
+different file types, assigning specific handlers for each.
+
+*** ~dirvish-preview-setup-hook~
+
+Functions called in the regular preview buffer.
+
+* Dirvish "Attributes"
+
+A Dirvish attribute is a visual indicator displayed inline within dired buffers,
+providing additional information about each file.
+
+** Available attributes
+
+For now Dirvish offers these attributes:
+
++ ~subtree-state~: a indicator for directory expanding state.
++ ~nerd-icon~ | ~all-the-icons~ | ~vscode-icon~: file icons provided by various backends.
++ ~collapse~: append unique nested paths to the end of filename.
++ ~git-msg~: short git commit log.
++ ~vc-state~: version control state at left fringe.
++ ~file-size~: file size or directories file counts.
++ ~file-time~: file modification time
++ ~file-modes~: file modes (*-rw-r--rwx*)
+
+Here is an overview of how does these attributes look like:
+
+[[https://user-images.githubusercontent.com/16313743/178137697-3ff4ca5a-aaf3-44d4-b644-9e9a2e7f911a.svg][https://user-images.githubusercontent.com/16313743/178137697-3ff4ca5a-aaf3-44d4-b644-9e9a2e7f911a.svg]]
+
+To achieve this, the only thing you need to do is put these symbols into
+~dirvish-attributes~, notice that the order matters for some attributes.
+
+#+begin_src emacs-lisp
+(setq dirvish-attributes
+      (append
+       ;; The order of these attributes is insignificant, they are always
+       ;; displayed in the same position.
+       '(vc-state subtree-state nerd-icons collapse)
+       ;; Other attributes are displayed in the order they appear in this list.
+       '(git-msg file-modes file-time file-size)))
+#+end_src
+
+After modifying this variable, you should call ~revert-buffer~ (bound to =g= by
+default) to apply the latest configuration.
+
+** Setup menu
+
+Alternatively, you can dynamically toggle or adjust the order of these
+attributes by ~M-x dirvish-setup-menu~.
+
+A quick demo:
+
+https://github.com/user-attachments/assets/b0d93a4e-92a4-4c17-9f82-6e5206ece9bf
+
+* Mode line | Header line
+
+Dirvish displays information about the current directory or session in the mode
+line and header line.  These features are enabled by default and include
+sensible default configurations.
+
+** Changing its placement, height and format
+
+The mode line only span the directory panes by default, to make them span all
+panes, just set ~dirvish-use-mode-line~ to ~global~.  Setting the same option to /nil/
+hides the mode line in dirvish buffers.
+
+To hide the leading bar image in mode-line and header-line, set
+~dirvish-mode-line-bar-image-width~ to 0.
+
+To configure the content in the mode line, put the segments you wanted into
+~dirvish-mode-line-format~.  There is also ~dirvish-mode-line-height~ for you to set
+the height of the mode line.
+
+The header line can be customized in the same way with ~dirvish-use-header-line~,
+~dirvish-header-line-format~ and ~dirvish-header-line-height~.
+
+The ~dired-switches-in-mode-line~ option is ignored in Dirvish.
+
+#+begin_src emacs-lisp
+;; Placement
+;; (setq dirvish-use-header-line nil)      ; hide header line (show the classic dired header)
+;; (setq dirvish-use-mode-line nil)        ; hide mode line
+(setq dirvish-use-header-line 'global)     ; make header line span all panes
+(setq dirvish-mode-line-bar-image-width 0) ; hide the leading bar image
+
+;; Height
+;;; '(25 . 35) means
+;;;   - height in single window sessions is 25
+;;;   - height in full-frame sessions is 35
+(setq dirvish-header-line-height '(25 . 35))
+(setq dirvish-mode-line-height 25) ; shorthand for '(25 . 25)
+
+;; Segments
+;;; 1. the order of segments *matters* here
+;;; 2. it's ok to place raw strings in it as separators
+(setq dirvish-header-line-format
+      '(:left (path) :right (free-space))
+      dirvish-mode-line-format
+      '(:left (sort file-time " " file-size symlink) :right (omit yank index)))
+#+end_src
+
+** Special buffers for displaying mode-line and header-line
+
+When Dirvish uses a layout that occupies the entire frame, the mode-line and
+header-line are displayed in separate buffers and their corresponding
+windows. These buffers are initialized with ~dirvish-misc-mode~.  To customize the
+settings of these buffers, append your configuration to ~dirvish-misc-mode-hook~.
+
+* File preview with various window layouts
+
+~M-x dirvish~ creates a full-frame window *layout* consists of a central file
+listing window accompanied by an preview window and 0 or more additional parent
+windows denoted by ~dirvish-default-layout~.  The command ~dirvish-layout-toggle~
+toggles between the working layout (see ~dirvish-layout-recipes~ below) and the
+original window configuration before entering the full-frame layout, it can also
+be called on buffers created by ~dired~ and alike commands.
+
+You can define multiple layouts tailored to different tasks within the variable
+~dirvish-layout-recipes~, and cycle through them using ~dirvish-layout-switch~. This
+enables you to configure different pane ratios as needed. For instance, you
+might use a 1:3 ratio for image previews or a 1:3:5 ratio for more detailed file
+previews.
+
+When a layout is active, you can use ~C-x o~ (~other-window~) to switch focus
+between the main file listing window and the preview window. Note that the
+contents of the preview buffers are generally read-only.
+
+** Install dependencies for an enhanced preview experience
+
+Dirvish offers out-of-the-box file previews for text files and directories and a
+few presets for other common file types that expects specific binaries installed
+in your operating system.  If you don't want these extra preview features, you
+can remove the corresponding entries from ~dirvish-preview-dispatchers~
+(documented below).  Dirvish will then no longer prompt you to install the
+associated programs.
+
++ [[https://github.com/libvips][vipsthumbnail]] for image preview
++ [[https://poppler.freedesktop.org/][poppler]] | [[https://github.com/vedang/pdf-tools][pdf-tools]] for pdf preview
++ [[https://github.com/dirkvdb/ffmpegthumbnailer][ffmpegthumbnailer]] (Linux/macOS) | [[https://gitlab.com/movie_thumbnailer/mtn][mtn]] (Windows) for video preview
++ [[https://github.com/MediaArea/MediaInfo][mediainfo]] for audio/video metadata generation
++ [[https://www.7-zip.org][7-zip]] for archive files preview
++ [[https://imagemagick.org/index.php][imagemagick]] for font preview
+
+@@html:<details>@@
+@@html:<summary>@@ @@html:<b>@@Toggle install instructions@@html:</b>@@ @@html:</summary>@@
+
+@@html:<h2>@@macOS@@html:</h2>@@
+#+begin_src bash
+brew install poppler ffmpegthumbnailer mediainfo vips 7zip imagemagick
+#+end_src
+
+@@html:<h2>@@Debian-based@@html:</h2>@@
+#+begin_src bash
+apt install poppler-utils ffmpegthumbnailer mediainfo libvips-tools imagemagick
+#+end_src
+
+@@html:<h2>@@Arch-based@@html:</h2>@@
+#+begin_src bash
+pacman -S poppler ffmpegthumbnailer mediainfo libvips 7zip imagemagick
+#+end_src
+
+@@html:<h2>@@FreeBSD@@html:</h2>@@
+#+begin_src bash
+pkg install poppler ffmpegthumbnailer vips 7-zip ImageMagick7
+#+end_src
+
+@@html:<h2>@@Windows@@html:</h2>@@
+#+begin_src bash
+# install via Scoop: https://scoop.sh/
+scoop install poppler mtn mediainfo libvips 7zip imagemagick
+#+end_src
+
+@@html:</details>@@
+
+** Preview methods for various filetypes
+
+Dirvish uses different preview strategies towards various filetypes.  You may
+want to turn off preview for certain file extensions,
+~dirvish-preview-disabled-exts~ allows you to do that.
+
+A preview dispatcher represents a strategy for file preview on certain
+conditions. The variable ~dirvish-preview-dispatchers~, which holds all the active
+dispatchers, has the default value looks like:
+
+#+begin_src emacs-lisp
+(image gif video audio epub pdf archive)
+#+end_src
+
++ ~image~: preview image files, requires =vipsthumbnail=
++ ~gif~: preview GIF image files with animation
++ ~video~: preview videos files with thumbnail,
+    requires =ffmpegthumbnailer= on Linux/macOS
+    requires =mtn= on Windows (special thanks to @samb233!)
++ ~audio~: preview audio files with metadata, requires =mediainfo=
++ ~epub~: preview epub documents, requires [[https://github.com/alexluigit/dirvish/issues/85][epub-thumbnail]]
++ ~pdf~: preview pdf documents via =pdf-tools=
++ ~archive~: preview archive files such as =.tar=, =.zip=, requires =7z=
+
+Each dispatcher in this list handles the validation and preview content
+generation for the corresponding filetype.  To enable/disable certain preview
+methods, just modify this list to your preferences.
+
+For example, if for some reason you are not able to install [[https://github.com/alexluigit/dirvish/issues/85][epub-thumbnail]] or
+want to display preview for epub files via packages like =nov=, just remove the
+~epub~ dispatcher like this:
+
+#+begin_src emacs-lisp
+(setq dirvish-preview-dispatchers (remove 'epub dirvish-preview-dispatchers))
+#+end_src
+
+Two dispatchers, ~dired~ and ~fallback~, are enabled by default as fallback
+handlers. These dispatchers are used to preview text files and directories
+respectively, but can be overridden by custom dispatchers.  For example, you can
+use ~eza~ to preview directories instead of ~dired~ (see *Preview directory using
+eza command* section below).
+
+The ~dirvish-preview-dired-sync-omit~ option allows ~dired~ preview buffers to sync
+your =dired-omit-mode= and its settings from the root window, it is turned off by
+default.
+
+Dirvish also offers these user options to customize its preview behavior. Refer
+to the docstrings of these options for detailed information.
+
+ * ~dirvish-preview-buffers-max-count~
+ * ~dirvish-preview-environment~
+ * ~dirvish-preview-large-file-threshold~
+
+** Customizations for preview buffers
+
+There are several types of buffer can be placed in the preview window in Dirvish.
+
+*** Directory files listing
+
+The ~dired~ preview dispatcher creates buffers in ~dirvish-directory-view-mode~.
+This mode is also used for the parent directory listing buffers.  Consequently,
+a single hook can configure both the parent buffer and the dired preview buffer.
+
+#+begin_src emacs-lisp
+(add-hook 'dirvish-directory-view-mode-hook #'diredfl-mode)
+#+end_src
+
+*** Regular files with certain major mode
+
+When a regular file with certain major mode is being previewed, you can change
+its settings by the ~dirvish-preview-setup-hook~.
+
+*** Special preview buffer
+
+A ~dirvish-special-preview-mode~ buffer is displayed in the preview window for all
+the rest filetypes.  This includes cases for shell command output, error/warning
+info display, image and metadata and etc.
+
+** Other use cases
+
+Here are several examples on how to extend the preview capabilities of Dirvish.
+
+*** Preview PDF files with ~pdf-tools~
+
+By default, PDF previews display a thumbnail and metadata generated by the
+=pdftoppm= and =pdfinfo= utilities, enabling quick, non-blocking previews, even for
+large files.
+
+Alternatively, Dirvish offers a ~pdf-tools~ dispatcher that utilizes [[https://github.com/vedang/pdf-tools][pdf-tools]] to
+open a fully functional PDF buffer in the preview window. However, this approach
+can be slower for large documents, as they are loaded synchronously.
+
+#+begin_src emacs-lisp
+(setq dirvish-preview-dispatchers
+      (cl-substitute 'pdf-tools 'pdf dirvish-preview-dispatchers))
+#+end_src
+
+*** Preview directory using ~eza~ command
+
+If you find Dired's default directory previews unsatisfactory, you can create a
+custom previewer using the ~eza~ command.
+
+#+begin_src emacs-lisp
+(dirvish-define-preview eza (file)
+  "Use `eza' to generate directory preview."
+  :require ("eza") ; tell Dirvish to check if we have the executable
+  (when (file-directory-p file) ; we only interest in directories here
+    `(shell . ("eza" "-al" "--color=always" "--icons=always"
+               "--group-directories-first" ,file))))
+
+(push 'eza dirvish-preview-dispatchers)
+#+end_src
+
+This makes Dirvish use the output from ~exa~ shell command as your preview content
+for a directory entry.  On a side note, you can customize the corresponding
+=ansi-color= faces to change the coloring in the preview window if your theme
+doesn't have good integration with the =ansi-color= package.
+
+#+begin_src emacs-lisp
+  (set-face-attribute 'ansi-color-blue nil :foreground "#FFFFFF")
+#+end_src
+
+[[https://user-images.githubusercontent.com/16313743/158852998-ebf4f1f7-7e12-450d-bb34-ce04ac22309c.png][https://user-images.githubusercontent.com/16313743/158852998-ebf4f1f7-7e12-450d-bb34-ce04ac22309c.png]]
+
+*** Contrib preview dispatchers
+
+Here are some user-contributed preview dispatchers. Explore these if the
+built-in preview handlers don't meet your needs for certain file types.
+Contributions to this list are welcome!
+
+https://github.com/alexluigit/dirvish/wiki/Contrib-preview-dispatchers
+
+* =fd= integration
+
+Dirvish integrates [[https://github.com/sharkdp/fd][fd]] at its core.
+
+** Install =fd=
+
+Please ensure [[https://github.com/sharkdp/fd][fd]] is installed on your OS before using relevant features.
+
+@@html:<details>@@
+@@html:<summary>@@ @@html:<b>@@Toggle install instructions@@html:</b>@@ @@html:</summary>@@
+
+@@html:<h2>@@macOS@@html:</h2>@@
+#+begin_src bash
+brew install fd
+#+end_src
+
+@@html:<h2>@@Debian-based@@html:</h2>@@
+#+begin_src bash
+apt install fd-find
+#+end_src
+
+@@html:<h2>@@Arch-based@@html:</h2>@@
+#+begin_src bash
+pacman -S fd
+#+end_src
+
+@@html:<h2>@@FreeBSD@@html:</h2>@@
+#+begin_src bash
+pkg install fd-find
+#+end_src
+
+@@html:<h2>@@Windows@@html:</h2>@@
+#+begin_src bash
+# install via Scoop: https://scoop.sh/
+scoop install fd
+#+end_src
+
+@@html:</details>@@
+
+** Non-blocking large directory opening
+
+Opening large directories (e.g., 50,000+ files) using Dired can cause noticeable
+freezing.  This occurs because Dired's default method involves synchronously
+calling the =ls= shell command, processing its entire output, and adding text
+properties before displaying the buffer, blocking user input until completion.
+While acceptable for small directories, this behavior is disruptive for very
+large ones.
+
+Dirvish addresses this by offering an asynchronous alternative using the =fd=
+command.  To enable it, set the ~dirvish-large-directory-threshold~ variable to a
+suitable file count (e.g., 20000).  When opening a directory exceeding this
+threshold, Dirvish initiates an asynchronous =fd= process instead of calling
+Dired.  It then incrementally parses the output and populates the buffer,
+avoiding the freeze associated with synchronous operations and keeping Emacs
+responsive.
+
+** Use =dirvish-fd= directly
+
+You can also use ~dirvish-fd~ directly to list all entries in a directory.
+Here is a quick demo of how it works:
+
+https://user-images.githubusercontent.com/16313743/170814774-98cc598d-6bc5-4fc3-9eea-21c98d6d4772.mp4
+
+Let's break it down:
+
+1. C-u C-u M-x ~dirvish-fd~, input /test/ as the search pattern
+2. M-x ~dirvish-fd-switches-menu~ for additional filtering
+3. Press =f= (show file only，no directories)
+4. Press =-e=, input "/py,yaml/", meaning search for these 2 extensions only
+5. Press =-E=, input "/Emacs/", exclude the glob in the results
+6. Press =RET=, refresh the results
+
+This command becomes more powerful when combined with the ~dirvish-narrow~
+extension, which adds asynchronous filtering capabilities.  See: [[file:EXTENSIONS.org][Extensions]]
+
+** About =find-dired=
+
+=find-dired= should work seamlessly with Dirvish. However, there are currently no
+plans to integrate Dirvish further into its output buffer, as =dirvish-fd= offers
+a superior alternative.
+
+* Sample config
+** Dirvish
+
+The extra commands in this sample config are documented at [[file:EXTENSIONS.org][Extensions]].  All of
+these extensions are inactive by default and will be loaded on demand (usually
+you don't have to require them explicitly if you installed dirvish from MELPA or
+=/path/to/dirvish/extensions/= is in your ~load-path~).
+
+#+begin_src emacs-lisp
+(use-package dired
+  :config
+  (setq dired-listing-switches
+        "-l --almost-all --human-readable --group-directories-first --no-group")
+  ;; this command is useful when you want to close the window of `dirvish-side'
+  ;; automatically when opening a file
+  (put 'dired-find-alternate-file 'disabled nil))
+
+(use-package dirvish
+  :ensure t
+  :init
+  (dirvish-override-dired-mode)
+  :custom
+  (dirvish-quick-access-entries ; It's a custom option, `setq' won't work
+   '(("h" "~/"                          "Home")
+     ("d" "~/Downloads/"                "Downloads")
+     ("m" "/mnt/"                       "Drives")
+     ("s" "/ssh:my-remote-server")      "SSH server"
+     ("e" "/sudo:root@localhost:/etc")  "Modify program settings"
+     ("t" "~/.local/share/Trash/files/" "TrashCan")))
+  :config
+  ;; (dirvish-peek-mode)             ; Preview files in minibuffer
+  ;; (dirvish-side-follow-mode)      ; similar to `treemacs-follow-mode'
+  (setq dirvish-mode-line-format
+        '(:left (sort symlink) :right (omit yank index)))
+  (setq dirvish-attributes           ; The order *MATTERS* for some attributes
+        '(vc-state subtree-state nerd-icons collapse git-msg file-time file-size)
+        dirvish-side-attributes
+        '(vc-state nerd-icons collapse file-size))
+  ;; open large directory (over 20000 files) asynchronously with `fd' command
+  (setq dirvish-large-directory-threshold 20000)
+  :bind ; Bind `dirvish-fd|dirvish-side|dirvish-dwim' as you see fit
+  (("C-c f" . dirvish)
+   :map dirvish-mode-map               ; Dirvish inherits `dired-mode-map'
+   (";"   . dired-up-directory)        ; So you can adjust `dired' bindings here
+   ("?"   . dirvish-dispatch)          ; [?] a helpful cheatsheet
+   ("a"   . dirvish-setup-menu)        ; [a]ttributes settings:`t' toggles mtime, `f' toggles fullframe, etc.
+   ("f"   . dirvish-file-info-menu)    ; [f]ile info
+   ("o"   . dirvish-quick-access)      ; [o]pen `dirvish-quick-access-entries'
+   ("s"   . dirvish-quicksort)         ; [s]ort flie list
+   ("r"   . dirvish-history-jump)      ; [r]ecent visited
+   ("l"   . dirvish-ls-switches-menu)  ; [l]s command flags
+   ("v"   . dirvish-vc-menu)           ; [v]ersion control commands
+   ("*"   . dirvish-mark-menu)
+   ("y"   . dirvish-yank-menu)
+   ("N"   . dirvish-narrow)
+   ("^"   . dirvish-history-last)
+   ("TAB" . dirvish-subtree-toggle)
+   ("M-f" . dirvish-history-go-forward)
+   ("M-b" . dirvish-history-go-backward)
+   ("M-e" . dirvish-emerge-menu)))
+#+end_src
+
+** Mouse settings
+
+/Disclaimer/: you can skip this section if you don't care about mouse support.
+
+Emacs 29 added mouse drag-and-drop support for Dired, the following settings
+will enable it:
+
+#+begin_src emacs-lisp
+  (setq dired-mouse-drag-files t)                   ; added in Emacs 29
+  (setq mouse-drag-and-drop-region-cross-program t) ; added in Emacs 29
+#+end_src
+
+Some keybindings for mouse:
+- /left click/:   expanding/collapsing a directory or opening a file
+- /right click/:  opening a file/directory
+- /middle click/: opening a file/directory in new window
+
+#+begin_src emacs-lisp
+(setq mouse-1-click-follows-link nil)
+(define-key dirvish-mode-map (kbd "<mouse-1>") 'dirvish-subtree-toggle-or-open)
+(define-key dirvish-mode-map (kbd "<mouse-2>") 'dired-mouse-find-file-other-window)
+(define-key dirvish-mode-map (kbd "<mouse-3>") 'dired-mouse-find-file)
+#+end_src
+
+** TRAMP integration
+
+Dirvish integrates TRAMP at its core.  Some features such as file preview are
+*disabled* over synchronous TRAMP connections (see below on how to bypass this
+limitation).  For certain commands such as ~dirvish-yank~ you should configure
+your ssh authentication properly to avoid being stuck with a prompt you will not
+be able to answer to in the child emacs.
+
+#+begin_src emacs-lisp
+(use-package tramp
+  :config
+  ;; Enable full-featured Dirvish over TRAMP on ssh connections
+  ;; https://www.gnu.org/software/tramp/#Improving-performance-of-asynchronous-remote-processes
+  (connection-local-set-profile-variables
+   'remote-direct-async-process
+   '((tramp-direct-async-process . t)))
+  (connection-local-set-profiles
+   '(:application tramp :protocol "ssh")
+   'remote-direct-async-process)
+  ;; Tips to speed up connections
+  (setq tramp-verbose 0)
+  (setq tramp-chunksize 2000)
+  (setq tramp-ssh-controlmaster-options nil))
+#+end_src
+
+** Complementary packages
+
+These packages are only listed here for discoverability.
+
+#+begin_src emacs-lisp
+
+(use-package dired-x
+  :config
+  ;; Make dired-omit-mode hide all "dotfiles"
+  (setq dired-omit-files
+        (concat dired-omit-files "\\|^\\..*$")))
+
+;; Additional syntax highlighting for dired
+(use-package diredfl
+  :hook
+  ((dired-mode . diredfl-mode)
+   ;; highlight parent and directory preview as well
+   (dirvish-directory-view-mode . diredfl-mode))
+  :config
+  (set-face-attribute 'diredfl-dir-name nil :bold t))
+
+;; Use `nerd-icons' as Dirvish's icon backend
+(use-package nerd-icons)
+
+;; Or, use `vscode-icon' instead
+;; (use-package vscode-icon
+;;   :config
+;;   (push '("jpg" . "image") vscode-icon-file-alist))
+
+;; miscs
+(setq delete-by-moving-to-trash t)
+#+end_src

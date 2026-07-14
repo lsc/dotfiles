@@ -1,0 +1,4 @@
+(go-snippets
+ :fetcher github
+ :repo "toumorokoshi/go-snippets"
+ :files ("*.el" "snippets"))

@@ -1,0 +1,4 @@
+(capture
+ :fetcher github
+ :repo "pashinin/capture.el"
+ :files ("src/*.el"))

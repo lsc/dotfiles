@@ -1,0 +1,1 @@
+(applescript-mode :fetcher github :repo "emacsorphanage/applescript-mode")

@@ -1,0 +1,2 @@
+(sdcv :fetcher git
+      :url "https://repo.or.cz/sdcv.el.git")

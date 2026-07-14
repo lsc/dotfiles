@@ -1,0 +1,3 @@
+(phoenix-dark-mono-theme
+ :repo "mhcat/phoenix-dark-mono"
+ :fetcher sourcehut)

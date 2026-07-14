@@ -1,0 +1,4 @@
+(bongo
+ :fetcher github
+ :repo "dbrock/bongo"
+ :files ("*.el" "*.texi" "images" "*.rb"))

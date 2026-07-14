@@ -1,0 +1,5 @@
+(:name pkg-info
+       :description "Provide information about Emacs packages."
+       :type github
+       :pkgname "emacsorphanage/pkg-info"
+       :depends (dash epl))

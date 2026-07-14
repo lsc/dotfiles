@@ -1,0 +1,5 @@
+(:name highlight-indentation
+       :description "Function for highlighting indentation"
+       :type github
+       :pkgname "antonj/Highlight-Indentation-for-Emacs"
+       )

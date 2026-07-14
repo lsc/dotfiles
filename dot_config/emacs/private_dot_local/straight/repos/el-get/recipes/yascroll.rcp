@@ -1,0 +1,5 @@
+(:name yascroll
+       :description "Yet Another Scroll Bar Mode"
+       :website "https://github.com/emacsorphanage/yascroll"
+       :type github
+       :pkgname "emacsorphanage/yascroll")

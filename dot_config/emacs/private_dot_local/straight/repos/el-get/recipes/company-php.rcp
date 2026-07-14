@@ -1,0 +1,6 @@
+(:name company-php
+       :description "Company source for php"
+       :type github
+       :pkgname "xcwen/ac-php"
+       :compile "company-php.el"
+       :depends (ac-php-core company-mode))

@@ -1,0 +1,9 @@
+(:name edb
+       :website "http://www.gnuvola.org/software/edb"
+       :description "The Emacs database."
+       :type github
+       :pkgname "emacsorphanage/edb"
+       :info "doc"
+       :load-path ("lisp")
+       :build `(("./configure")
+                (,(format "make EMACS=\"%s\"" el-get-emacs))))

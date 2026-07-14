@@ -1,0 +1,4 @@
+(ncl-mode
+ :fetcher github
+ :repo "yyr/ncl-mode"
+ :files ("*.el" "snippets" "snippets_generated" "dict" "tools" "img"))

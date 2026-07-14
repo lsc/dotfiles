@@ -1,0 +1,2715 @@
+;;; -*- lexical-binding: t -*-
+(require 'f)
+(require 'noflet)
+(require 'el-mock)
+;;
+(require 'dumb-jump)
+;;; Code:
+
+;; Utilities - locate test files
+;; -----------------------------
+
+(defun dumb-jump-output-rule-test-failures (failures)
+  (dolist (it failures) (princ (format "\t%s\n" it))))
+
+;; The test data directory path is adjusted to the location of the
+;; current working directory being either inside the top directory
+;; where dumb-jump.el and test directory are located or inside the test
+;; sub-directory where the test file and the data sub-directory are
+;; located. Anywhere else is invalid.
+(defconst test-data-dir (if (and (f-exists? "./dumb-jump.el")
+                                 (f-dir? "./test/data"))
+                            (f-expand "./test/data")
+                          (if (and (f-exists? "./dumb-jump-test.el")
+                                   (f-dir? "./data"))
+                              (f-expand "./data")
+                            "INVALID-Current-Working-Directory-for-ERT-Tests!"))
+  "Test directory.")
+(defconst test-dumb-jump-root-dir (if (and (f-exists? "./dumb-jump.el")
+                                           (f-dir? "./test/data"))
+                                      (f-expand ".")
+                          (if (and (f-exists? "./dumb-jump-test.el")
+                                   (f-dir? "./data"))
+                              (f-expand "..")
+                            "INVALID-Current-Working-Directory-for-ERT-Tests!"))
+  "Test directory.")
+
+(defconst test-data-dir-elisp (f-join test-data-dir "proj2-elisp")
+  "Test directory.")
+
+(defconst test-data-dir-proj1 (f-join test-data-dir "proj1")
+  "Test directory.")
+(defconst test-data-dir-proj3 (f-join test-data-dir "proj3-clj")
+  "Test directory.")
+(defconst test-data-dir-multiproj (f-join test-data-dir "multiproj")
+  "Test directory.")
+
+(defconst test-dumb-jump-file-path (if (and (f-exists? "./dumb-jump.el")
+                                            (f-dir? "./test/data"))
+                                       "dumb-jump.el"
+                                     (if (and (f-exists? "./dumb-jump-test.el")
+                                              (f-dir? "./data"))
+                                         "../dumb-jump.el"
+                                       "INVALID-Current-Working-Directory-for-dumb-jump!"))
+  "Relative path of dumb-jump.el ")
+
+;; ---------------------------------------------------------------------------
+;; Test Setup Utilities
+;; --------------------
+
+;; Prevent dumb-jump from prompting user during test
+
+;; dumb-jump commands will prompt the user when a search operation finds more
+;; than 1 destination candidate.  This prompting cannot be performed when the
+;; code is automatically tested as the test will hang if it is allowed to
+;; proceed.
+;;
+;; The following macro must be used to wrap test code that access a dumb-jump
+;; command that may prompt.  The macro force test failure when dumb-jump
+;; prompting function, `dumb-jump-prompt-user-for-choice', is invoked.
+
+(defmacro with-mock-forbidding-prompt (&rest body)
+  "Test BODY.  Ensure no prompting occurs; fail test if prompting did occur."
+  (declare (indent 0))
+  `(with-mock
+     (stub
+      dumb-jump-prompt-user-for-choice
+      => (error "Unexpected call to dumb-jump-prompt-user-for-choice"))
+     ,@body))
+
+;; ---------------------------------------------------------------------------
+;; Tests
+;; -----
+
+;; Test `with-mock-forbidding-prompt':
+
+;; - Ensure with-mock-forbidding-prompt actually detects prompts.
+(ert-deftest with-mock-forbidding-prompt-really-detects-prompt ()
+  "Test that `with-mock-forbidding-prompt' properly detects/fails on prompts."
+  (should-error
+   (with-mock-forbidding-prompt
+     ;; This should trigger the error
+     (dumb-jump-prompt-user-for-choice "/test/path" '((:path "a" :line 1))))))
+
+;; - Ensure that it does not misinterpret another exception as a prompt.
+(defun test-function-that-errors ()
+  "A test utility that issues an error."
+  (error "Issued by test-function-that-errors!"))
+
+(ert-deftest with-mock-forbidding-prompt-does-not-catch-other-exceptions ()
+  "Test detection of other error signalling by `with-mock-forbidding-prompt'."
+  (let ((err (should-error
+              (with-mock-forbidding-prompt
+                (test-function-that-errors)))))
+    ;; The error description is a list, often in the format (ERROR-SYMBOL . DATA).
+    ;; The error message string is typically the second element (car of the DATA,
+    ;; which is the cdr of the error description).
+    (should (string-match "Issued by test-function-that-errors!" (cadr err)))))
+
+;; --------------------
+
+
+(ert-deftest data-dir-exists-test ()
+  (should (f-dir? test-data-dir)))
+
+(ert-deftest data-dir-proj2-exists-test ()
+  (should (f-dir? test-data-dir-elisp)))
+
+(ert-deftest dumb-jump-get-lang-by-ext-test ()
+  (let ((lang1 (dumb-jump-get-language-by-filename "sldkfj.el"))
+        (lang1b (dumb-jump-get-language-by-filename "sldkfj.el.gz"))
+        (lang2 (dumb-jump-get-language-by-filename "/askdfjkl/somefile.js"))
+        (lang3 (dumb-jump-get-language-by-filename "/askdfjkl/somefile.d"))
+        (lang3b (dumb-jump-get-language-by-filename "/askdfjkl/somefile.di"))
+        (nolang (dumb-jump-get-language-by-filename "/blah/somefile.bin")))
+    (should (string= lang1 "elisp"))
+    (should (string= lang1b "elisp"))
+    (should (string= lang2 "javascript"))
+    (should (string= lang3 "dlang"))
+    (should (string= lang3b "dlang"))
+    (should (null nolang))))
+
+(ert-deftest dumb-jump-get-lang-major-mode-test ()
+  (let* ((major-mode 'php)
+         (lang1 (dumb-jump-get-language "blah/file.install"))
+         (lang1b (dumb-jump-get-mode-base-name))
+         (lang2 (dumb-jump-get-language-by-filename "/askdfjkl/somefile.js")))
+    (should (string= lang1 "php"))
+    (should (string= lang1b "php"))
+    (should (string= lang2 "javascript"))))
+
+(ert-deftest dumb-jump-get-lang-major-mode-alias-test ()
+  (let* ((major-mode 'd-mode)
+         (lang (dumb-jump-get-language "blah/file.install")))
+    (should (string= lang "dlang"))))
+
+(ert-deftest dumb-jump-current-files-results-test ()
+  (let ((results '((:path "blah") (:path "rarr")))
+        (expected '((:path "blah"))))
+    (should (equal (dumb-jump-current-file-results "blah" results) expected))))
+
+(ert-deftest dumb-jump-exclude-path-test ()
+  (let* ((expected (list (f-join test-data-dir-proj1 "ignored")
+                         (f-join test-data-dir-proj1 "ignored2")))
+         (config (dumb-jump-read-config test-data-dir-proj1  ".dumbjump")))
+    (should (equal (plist-get config :exclude)  expected))))
+
+(ert-deftest dumb-jump-include-path-test ()
+  (let* ((config (dumb-jump-read-config test-data-dir-proj1 ".dumbjump-include"))
+         (expected (list (f-join test-data-dir-proj1 "../fake-library")
+                         "/etc/var/some/code")))
+    (should (equal (plist-get config :include) expected))))
+
+(ert-deftest dumb-jump-exclude-path-blank-test ()
+  (let* ((config (dumb-jump-read-config test-data-dir-proj1 ".dumbjump-blank")))
+    (should (null (plist-get config :exclude)))
+    (should (null (plist-get config :include)))))
+
+(ert-deftest dumb-jump-config-lang-test ()
+  (let* ((config (dumb-jump-read-config test-data-dir-proj1 ".dumbjump-lang")))
+    (should (string= "python" (plist-get config :language)))))
+
+(ert-deftest dumb-jump-language-to-ext-test ()
+  (should (member "el" (dumb-jump-get-file-exts-by-language "elisp"))))
+
+(ert-deftest dumb-jump-generate-cmd-include-args ()
+  (let ((args (dumb-jump-get-ext-includes "javascript"))
+        (expected " --include \\*.js --include \\*.jsx --include \\*.vue --include \\*.html --include \\*.css "))
+    (should (string= expected args))))
+
+(defconst dumb-jump--expected-elisp-regexps-templates
+  '("\\((defun|cl-defun|cl-defgeneric|cl-defmethod|cl-defsubst)\\s+JJJ\\j"
+    "\\((defmacro|cl-defmacro|cl-define-compiler-macro)\\s+JJJ\\j"
+    "\\(defhydra\\b\\s*JJJ\\j"
+    ;;
+    "\\(defvar(-local)?\\b\\s*JJJ\\j"
+    "\\(defconst\\b\\s*JJJ\\j"
+    "\\(defcustom\\b\\s*JJJ\\j"
+    "\\(setq\\b\\s*JJJ\\j"
+    "\\(JJJ\\s+"
+    "\\((cl-defstruct|cl-deftype)\\s+JJJ\\j"
+    "\\((defun|cl-defun|cl-defgeneric|cl-defmethod)\\s*.+\\(?\\s*JJJ\\j\\s*\\)?")
+  "List of regexp templates equal to what is in dumb-jump.el.")
+
+(defun dumb-jump--elisp-expected-regexps (variant &optional type)
+  "Return a list of elisp regexps adjusted with word boundary of VARIANT.
+VARIANT must be one of: ag, rg, grep, gnu-grep, git-grep, or git-grep-plus-ag."
+  (let ((regexes (if (eq type 'elisp-functions)
+                     ;; take the first 3 regexps: used for functions
+                     (seq-take dumb-jump--expected-elisp-regexps-templates 3)
+                   dumb-jump--expected-elisp-regexps-templates))
+        (word-boundary-regexp
+         (symbol-value
+          (intern
+           (format "dumb-jump-%s-word-boundary"
+                   (if (eq variant 'git-grep-plus-ag)
+                       'ag
+                     variant)))))
+        (formatted-regexps '()))
+    ;; perform translation of each regexp template
+    (dolist (r regexes (reverse formatted-regexps))
+      (setq r (dumb-jump--replace "JJJ" "tester" r))
+      (setq r (dumb-jump--replace "\\j" word-boundary-regexp r))
+      (when (dumb-jump-use-space-bracket-exp-for variant)
+        (setq r (dumb-jump--replace "\\s" "[[:space:]]" r)))
+      (push r formatted-regexps))))
+
+(ert-deftest dumb-jump-generate-grep-command-no-ctx-test ()
+  (let* ((system-type 'darwin)
+         (regexes (dumb-jump-get-contextual-regexes "elisp" nil 'grep))
+         (expected-regexes (mapcar (lambda (it) (concat " -e " (shell-quote-argument it)))
+                                   (dumb-jump--elisp-expected-regexps 'grep)))
+         (expected (concat
+                    "LANG=C grep -REn --include \\*.el --include \\*.el.gz"
+                    (string-join expected-regexes "")
+                    " .")))
+    (should (string= expected  (dumb-jump-generate-grep-command  "tester" "blah.el" "." regexes "elisp" nil)))))
+
+(ert-deftest dumb-jump-generate-gnu-grep-command-no-ctx-test ()
+  (let* ((system-type 'darwin)
+         (regexes (dumb-jump-get-contextual-regexes "elisp" nil 'gnu-grep))
+         (expected-regexes (mapcar (lambda (it) (concat " -e " (shell-quote-argument it)))
+                                   (dumb-jump--elisp-expected-regexps 'gnu-grep)))
+         (expected (concat "LANG=C grep -rEn" (string-join expected-regexes "") " .")))
+    (should (string= expected  (dumb-jump-generate-gnu-grep-command  "tester" "blah.el" "." regexes "elisp" nil)))))
+
+(ert-deftest dumb-jump-generate-ag-command-no-ctx-test ()
+  (let* ((regexes (dumb-jump-get-contextual-regexes "elisp" nil 'ag))
+         (base-regexes (dumb-jump--elisp-expected-regexps 'ag))
+         ;; The ag tool accepts a list of regexps separated by "\\|".
+         ;; Each of the regexp must be shell-quoted (but not "\\|").
+         (expected-regexes
+          (append (mapcar (lambda (elem)
+                            (concat (shell-quote-argument elem) "\\|"))
+                          (butlast base-regexes))
+                  (list (shell-quote-argument (car (last base-regexes))))))
+         (expected (concat "ag --nocolor --nogroup --elisp -- "
+                           (mapconcat #'identity expected-regexes "")
+                           " .")))
+    (should (string= expected
+                     (dumb-jump-generate-ag-command  "tester" "blah.el" "." regexes "elisp" nil)))))
+
+(ert-deftest dumb-jump-generate-ag-command-exclude-test ()
+  (let* ((regexes (dumb-jump-get-contextual-regexes "elisp" nil 'ag))
+         (expected-regexes (mapconcat #'identity
+                                      (dumb-jump--elisp-expected-regexps 'ag)
+                                      "|"))
+         (expected
+          (concat
+           "ag --nocolor --nogroup --elisp --ignore-dir this/is/excluded -- "
+           (shell-quote-argument expected-regexes)
+           " " (shell-quote-argument "/path/to/proj-root"))))
+    (should (string= expected
+                     (dumb-jump-generate-ag-command
+                      "tester" "blah.el" "/path/to/proj-root"
+                      regexes "elisp"
+                      '("/path/to/proj-root/this/is/excluded"))))))
+
+(ert-deftest dumb-jump-generate-git-grep-plus-ag-command-no-ctx-test ()
+  (let* ((regexes (dumb-jump-get-contextual-regexes "elisp" nil 'ag))
+         (expected-regexes (mapconcat #'identity
+                                      (dumb-jump--elisp-expected-regexps 'git-grep-plus-ag)
+                                      "|"))
+         (expected
+          ;; NOTE no "--elisp" and the `-G` arg is new
+          (concat "ag --nocolor --nogroup -G '(/path/to/proj-root/blah.el)' "
+                  (shell-quote-argument expected-regexes)
+                  " " (shell-quote-argument "/path/to/proj-root"))))
+    (with-mock
+      (mock
+       (dumb-jump-get-git-grep-files-matching-symbol-as-ag-arg * *) => "'(/path/to/proj-root/blah.el)'")
+      (should (string= expected
+                       (dumb-jump-generate-git-grep-plus-ag-command
+                        "tester" "blah.el" "/path/to/proj-root"
+                        regexes "elisp" nil))))))
+
+
+(ert-deftest dumb-jump-generate-git-grep-plus-ag-command-exclude-test ()
+  (let* ((regexes (dumb-jump-get-contextual-regexes "elisp" nil 'ag))
+         (expected-regexes
+          (mapconcat #'identity
+                     (dumb-jump--elisp-expected-regexps 'git-grep-plus-ag)
+                     "|"))
+         (expected
+          ;; NOTE no "--elisp" and the `-G` arg is new
+          (concat "ag --nocolor --nogroup -G '(/path/to/proj-root/blah.el)' --ignore-dir this/is/excluded "
+                  (shell-quote-argument expected-regexes)
+                  " " (shell-quote-argument "/path/to/proj-root"))))
+    (with-mock
+      (mock (dumb-jump-get-git-grep-files-matching-symbol-as-ag-arg * *) => "'(/path/to/proj-root/blah.el)'")
+      (should (string= expected
+                       (dumb-jump-generate-git-grep-plus-ag-command
+                        "tester" "blah.el" "/path/to/proj-root" regexes "elisp"
+                        '("/path/to/proj-root/this/is/excluded")))))))
+
+
+(ert-deftest dumb-jump-generate-rg-command-no-ctx-test ()
+  (let* ((regexes (dumb-jump-get-contextual-regexes "elisp" nil 'rg))
+         (expected-regexes
+          (mapconcat #'identity
+                     (dumb-jump--elisp-expected-regexps 'rg)
+                     "|"))
+         (expected (concat "rg --color never --no-heading --line-number -U --pcre2 --type elisp -- "
+                           (shell-quote-argument expected-regexes) " .")))
+    (should (string= expected  (dumb-jump-generate-rg-command
+                                "tester" "blah.el" "." regexes "elisp" nil)))))
+
+(ert-deftest dumb-jump-generate-rg-command-remote-test ()
+  (let* ((regexes (dumb-jump-get-contextual-regexes "elisp" nil 'rg))
+         (expected-regexes
+          (mapconcat #'identity
+                     (dumb-jump--elisp-expected-regexps 'rg)
+                     "|"))
+         (expected
+          (concat "rg --color never --no-heading --line-number -U --pcre2 --type elisp -g \\!this/is/excluded -- "
+                  (shell-quote-argument expected-regexes)
+                  " " (shell-quote-argument "/path/to/proj-root"))))
+    (should (string= expected
+                     (dumb-jump-generate-rg-command
+                      "tester" "blah.el" "/path/to/proj-root" regexes "elisp"
+                      '("/path/to/proj-root/this/is/excluded"))))))
+
+(ert-deftest dumb-jump-generate-ag-command-unicode-path-test ()
+  "Test that ag command correctly quotes unicode characters in project path."
+  (let* ((regexes (dumb-jump-get-contextual-regexes "elisp" nil 'ag))
+         (proj "/path/to/проект")
+         (expected-regexes
+          (mapconcat #'identity
+                     (dumb-jump--elisp-expected-regexps 'ag)
+                     "|"))
+         (expected
+          (concat
+           "ag --nocolor --nogroup --elisp -- "
+           (shell-quote-argument expected-regexes)
+           " " (shell-quote-argument proj))))
+    (should (string= expected
+                     (dumb-jump-generate-ag-command
+                      "tester" "blah.el" proj
+                      regexes "elisp" nil)))))
+
+(ert-deftest dumb-jump-generate-rg-command-unicode-path-test ()
+  "Test that rg command correctly quotes unicode characters in project path."
+  (let* ((regexes (dumb-jump-get-contextual-regexes "elisp" nil 'rg))
+         (proj "/path/to/проект")
+         (expected-regexes
+          (mapconcat #'identity
+                     (dumb-jump--elisp-expected-regexps 'rg)
+                     "|"))
+         (expected
+          (concat "rg --color never --no-heading --line-number -U --pcre2 --type elisp -- "
+                  (shell-quote-argument expected-regexes)
+                  " " (shell-quote-argument proj))))
+    (should (string= expected
+                     (dumb-jump-generate-rg-command
+                      "tester" "blah.el" proj
+                      regexes "elisp" nil)))))
+
+(ert-deftest dumb-jump-generate-git-grep-command-no-ctx-test ()
+  (let* ((regexes (dumb-jump-get-contextual-regexes "elisp" nil 'git-grep))
+         (expected-regexes
+          (mapconcat #'identity
+                     (dumb-jump--elisp-expected-regexps 'git-grep)
+                     "|"))
+         (excludes '("one" "two" "three"))
+         (expected
+          (concat "git grep --color=never --line-number --untracked -E "
+                  (shell-quote-argument expected-regexes)
+                  " -- ./\\*.el ./\\*.el.gz \\:\\(exclude\\)one \\:\\(exclude\\)two \\:\\(exclude\\)three")))
+    (should (string= expected
+                     (dumb-jump-generate-git-grep-command
+                      "tester" "blah.el" "." regexes "elisp" excludes)))))
+
+(ert-deftest dumb-jump-generate-git-grep-command-no-ctx-extra-args ()
+  (let* ((regexes (dumb-jump-get-contextual-regexes "elisp" nil 'git-grep))
+         (expected-regexes
+          (mapconcat #'identity
+                     (dumb-jump--elisp-expected-regexps 'git-grep)
+                     "|"))
+         (excludes '("one" "two" "three"))
+         (dumb-jump-git-grep-search-args "--recurse-submodules")
+         (expected
+          (concat
+           "git grep --color=never --line-number --untracked --recurse-submodules -E "
+           (shell-quote-argument expected-regexes)
+           " -- ./\\*.el ./\\*.el.gz \\:\\(exclude\\)one \\:\\(exclude\\)two \\:\\(exclude\\)three")))
+    (should (string= expected
+                     (dumb-jump-generate-git-grep-command
+                      "tester" "blah.el" "." regexes "elisp" excludes)))))
+
+(ert-deftest dumb-jump-generate-ag-command-no-ctx-extra-args ()
+  ;; ag args
+  (let* ((regexes (dumb-jump-get-contextual-regexes "elisp" nil 'ag))
+         (expected-regexes
+          (mapconcat #'identity
+                     (dumb-jump--elisp-expected-regexps 'ag)
+                     "|"))
+         (dumb-jump-ag-search-args "--follow")
+         (expected
+          (concat "ag --nocolor --nogroup --follow --elisp -- "
+                  (shell-quote-argument expected-regexes) " .")))
+    (should (string= expected
+                     (dumb-jump-generate-ag-command
+                      "tester" "blah.el" "." regexes "elisp" nil)))))
+
+(ert-deftest dumb-jump-generate-rg-command-no-ctx-extra-args ()
+  ;; rg-args
+  (let* ((regexes (dumb-jump-get-contextual-regexes "elisp" nil 'rg))
+         (expected-regexes (mapconcat #'identity
+                                      (dumb-jump--elisp-expected-regexps 'rg)
+                                      "|"))
+         (dumb-jump-rg-search-args "--no-pcre2 --follow")
+         (expected
+          (concat "rg --color never --no-heading --line-number -U --no-pcre2 --follow --type elisp -- "
+                  (shell-quote-argument expected-regexes)
+                  " .")))
+    (should (string= expected
+                     (dumb-jump-generate-rg-command
+                      "tester" "blah.el" "." regexes "elisp" nil)))))
+
+(ert-deftest dumb-jump-generate-git-grep-command-not-search-untracked-test ()
+  (let* ((dumb-jump-git-grep-search-args "")
+         (dumb-jump-git-grep-search-untracked nil)
+         (regexes (dumb-jump-get-contextual-regexes "elisp" nil 'git-grep))
+         (expected-regexes (mapconcat #'identity
+                                      (dumb-jump--elisp-expected-regexps 'git-grep)
+                                      "|"))
+         (excludes '("one" "two" "three"))
+         (expected
+          (concat "git grep --color=never --line-number -E "
+                  (shell-quote-argument expected-regexes)
+                  " -- ./\\*.el ./\\*.el.gz \\:\\(exclude\\)one \\:\\(exclude\\)two \\:\\(exclude\\)three")))
+    (should (string= expected
+                     (dumb-jump-generate-git-grep-command
+                      "tester" "blah.el" "." regexes "elisp" excludes)))))
+
+(ert-deftest dumb-jump-generate-grep-command-no-ctx-funcs-only-test ()
+  (let* ((system-type 'darwin)
+         (dumb-jump-functions-only t)
+         (regexes (dumb-jump-get-contextual-regexes "elisp" nil 'grep))
+         (expected-regexes (string-join
+                            (mapcar (lambda (it) (concat " -e " (shell-quote-argument it)))
+                                    (dumb-jump--elisp-expected-regexps 'grep 'elisp-functions))
+                            ""))
+         (expected (concat "LANG=C grep -REn" expected-regexes " ."))
+         (zexpected (concat "LANG=C zgrep -REn" expected-regexes " .")))
+    (should (string= expected  (dumb-jump-generate-grep-command  "tester" "blah.el" "." regexes "" nil)))
+    (should (string= zexpected  (dumb-jump-generate-grep-command  "tester" "blah.el.gz" "." regexes "" nil)))))
+
+(ert-deftest dumb-jump-generate-grep-command-with-ctx-test ()
+  (let* ((system-type 'darwin)
+         (ctx-type (dumb-jump-get-ctx-type-by-language "elisp" '(:left "(" :right nil)))
+         (dumb-jump-ignore-context nil) ;; overriding the default
+         (regexes (dumb-jump-get-contextual-regexes "elisp" ctx-type 'grep))
+         (expected-regexes (mapcar (lambda (it) (concat " -e " (shell-quote-argument it)))
+                                   (dumb-jump--elisp-expected-regexps 'grep 'elisp-functions)))
+         (expected (concat "LANG=C grep -REn" (string-join expected-regexes "") " .")))
+    ;; the point context being passed should match a "function" type so only the one command
+    (should (string= expected  (dumb-jump-generate-grep-command "tester" "blah.el" "." regexes "" nil)))))
+
+(ert-deftest dumb-jump-generate-grep-command-on-windows-test ()
+  (noflet ((shell-quote-argument (it) (format "'%s'" it)))
+    (let* ((system-type 'windows-nt)
+           (ctx-type (dumb-jump-get-ctx-type-by-language "elisp" '(:left "(" :right nil)))
+           (dumb-jump-ignore-context nil)
+           (regexes (dumb-jump-get-contextual-regexes "elisp" ctx-type 'grep))
+           (expected-regexes (mapcar (lambda (it) (concat " -e " (shell-quote-argument it)))
+                                     (dumb-jump--elisp-expected-regexps 'grep 'elisp-functions)))
+           (expected (concat "grep -REn" (string-join expected-regexes "") " " (shell-quote-argument "."))))
+      (should (string= expected  (dumb-jump-generate-grep-command "tester" "blah.el" "." regexes "" nil))))))
+
+(ert-deftest dumb-jump-generate-grep-command-with-ctx-but-ignored-test ()
+  (let* ((system-type 'darwin)
+         (ctx-type (dumb-jump-get-ctx-type-by-language "elisp" '(:left "(" :right nil)))
+         (dumb-jump-ignore-context t)
+         (regexes (dumb-jump-get-contextual-regexes "elisp" ctx-type nil))
+         (expected-regexes (mapcar (lambda (it) (concat " -e " (shell-quote-argument it)))
+                                   (dumb-jump--elisp-expected-regexps 'grep)))
+         (expected (concat "LANG=C grep -REn" (string-join expected-regexes "") " .")))
+
+    ;; the point context being passed is ignored so ALL should return
+    (should (string= expected  (dumb-jump-generate-grep-command "tester" "blah.el" "." regexes "" nil)))))
+
+(ert-deftest dumb-jump-generate-grep-command-exclude-test ()
+  "Test that grep exclude paths are converted from absolute to relative (#462)."
+  (let* ((system-type 'darwin)
+         (regexes (dumb-jump-get-contextual-regexes "elisp" nil 'grep))
+         (expected-regexes (mapcar (lambda (it) (concat " -e " (shell-quote-argument it)))
+                                   (dumb-jump--elisp-expected-regexps 'grep)))
+         (expected (concat
+                    "LANG=C grep -REn --exclude-dir this/is/excluded"
+                    " --include \\*.el --include \\*.el.gz"
+                    (string-join expected-regexes "")
+                    " /path/to/proj-root")))
+    (should (string= expected
+                     (dumb-jump-generate-grep-command
+                      "tester" "blah.el" "/path/to/proj-root"
+                      regexes "elisp"
+                      '("/path/to/proj-root/this/is/excluded"))))))
+
+(ert-deftest dumb-jump-generate-bad-grep-command-test ()
+    (should (string-blank-p (dumb-jump-generate-grep-command "tester" "blah.el" "." nil "" (list "skaldjf")))))
+
+(ert-deftest dumb-jump-generate-bad-ag-command-test ()
+    (should (string-blank-p (dumb-jump-generate-ag-command "tester" "blah.el" "." nil "" (list "skaldjf")))))
+
+(ert-deftest dumb-jump-generate-bad-rg-command-test ()
+  (should (string-blank-p (dumb-jump-generate-rg-command "tester" "blah.el" "." nil "" (list "skaldjf")))))
+
+(ert-deftest dumb-jump-generate-bad-git-grep-command-test ()
+    (should (string-blank-p (dumb-jump-generate-git-grep-command "tester" "blah.el" "." nil "" (list "skaldjf")))))
+
+(ert-deftest dumb-jump-grep-parse-test ()
+  (let* ((resp "./dumb-jump.el:22:(defun dumb-jump-asdf ()\n./dumb-jump.el:26:(defvar some-var )\n./dumb-jump2.el:28:(defvar some-var)")
+         (parsed (dumb-jump-parse-grep-response resp "dumb-jump2.el" 28))
+         (test-result (nth 1 parsed)))
+    (should (= (plist-get test-result :diff) 2))
+    (should (= (length parsed) 2))
+    (should (string= (plist-get test-result :path) "dumb-jump.el"))
+    (should (= (plist-get test-result ':line) 26))))
+
+(ert-deftest dumb-jump-grep-parse-no-filter-test ()
+  (let* ((resp "./dumb-jump.el:22:(defun dumb-jump-asdf ()\n./dumb-jump.el:26:(defvar some-var )\n")
+         (parsed (dumb-jump-parse-grep-response resp "dumb-jump2.el" 28))
+         (test-result (nth 1 parsed)))
+    (should (= (plist-get test-result :diff) 2))
+    (should (= (length parsed) 2))
+    (should (string= (plist-get test-result :path) "dumb-jump.el"))
+    (should (= (plist-get test-result ':line) 26))))
+
+(ert-deftest dumb-jump-ag-parse-test ()
+  (let* ((resp "./dumb-jump.el:22:(defun dumb-jump-asdf ()\n./dumb-jump.el:26:(defvar some-var )\n./dumb-jump2.el:28:1:(defvar some-var)")
+         (parsed (dumb-jump-parse-ag-response resp "dumb-jump2.el" 28))
+         (test-result (nth 1 parsed)))
+    (should (= (plist-get test-result :diff) 2))
+    (should (= (length parsed) 2))
+    (should (string= (plist-get test-result :path) "dumb-jump.el"))
+    (should (= (plist-get test-result ':line) 26))))
+
+(ert-deftest dumb-jump-ag-parse-wsl-test ()
+  (let* ((resp "/wsl$/Ubuntu/test.js:10:function test() {}")
+         (parsed (dumb-jump-parse-ag-response resp "other.js" 1))
+         (test-result (car parsed)))
+    (should (string= (plist-get test-result :path) "//wsl$/Ubuntu/test.js"))
+    (should (= (plist-get test-result :line) 10))))
+
+(ert-deftest dumb-jump-ag-parse-cmd-unc-warning-test ()
+  (let* ((resp "CMD.EXE was started with the above path as the current directory.\nUNC paths are not supported.  Defaulting to Windows directory.\n./dumb-jump.el:22:(defun test ())")
+         (parsed (dumb-jump-parse-ag-response resp "other.js" 1))
+         (test-result (car parsed)))
+    (should (= (length parsed) 1))
+    (should (string= (plist-get test-result :path) "dumb-jump.el"))
+    (should (= (plist-get test-result :line) 22))))
+
+(ert-deftest dumb-jump-rg-parse-test ()
+  (let* ((resp "./dumb-jump.el:22:(defun dumb-jump-asdf ()\n./dumb-jump.el:26:(defvar some-var )\n./dumb-jump2.el:28:1:(defvar some-var)")
+         (parsed (dumb-jump-parse-rg-response resp "dumb-jump2.el" 28))
+         (test-result (nth 1 parsed)))
+    (should (= (plist-get test-result :diff) 2))
+    (should (= (length parsed) 2))
+    (should (string= (plist-get test-result :path) "dumb-jump.el"))
+    (should (= (plist-get test-result ':line) 26))))
+
+(ert-deftest dumb-jump-git-grep-parse-test ()
+  (let* ((resp "./dumb-jump.el:22:(defun dumb-jump-asdf ()\n./dumb-jump.el:26:(defvar some-var )\n./dumb-jump2.el:28:1:(defvar some-var)")
+         (parsed (dumb-jump-parse-git-grep-response resp "dumb-jump2.el" 28))
+         (test-result (nth 1 parsed)))
+    (should (= (plist-get test-result :diff) 2))
+    (should (= (length parsed) 2))
+    (should (string= (plist-get test-result :path) "dumb-jump.el"))
+    (should (= (plist-get test-result ':line) 26))))
+
+(ert-deftest dumb-jump-run-cmd-test ()
+  (with-mock
+    (stub dumb-jump-rg-installed? => t)
+    (let* ((gen-funcs (dumb-jump-pick-grep-variant test-data-dir-elisp))
+           (parse-fn (plist-get gen-funcs :parse))
+           (generate-fn (plist-get gen-funcs :generate))
+           (searcher (plist-get gen-funcs :searcher))
+           (regexes (dumb-jump-get-contextual-regexes "elisp" nil searcher))
+           (results (dumb-jump-run-command "another-fake-function" test-data-dir-elisp regexes "" ""
+                                           "blah.el" 3 parse-fn generate-fn))
+           (first-result (car results)))
+      (should (dumb-jump--contains-p "/fake.el" (plist-get first-result :path)))
+      (should (= (plist-get first-result :line) 6)))))
+
+(ert-deftest dumb-jump-run-cmd-debug-before-shell-command-test ()
+  (let ((dumb-jump-debug t)
+        (dumb-jump-fallback-search t)
+        (debug-args '())
+        (shell-calls 0))
+    (cl-letf (((symbol-function 'dumb-jump-message)
+               (lambda (&rest args)
+                 (setq debug-args (cons args debug-args))
+                 nil))
+              ((symbol-function 'shell-command-to-string)
+               (lambda (cmd)
+                 (setq shell-calls (1+ shell-calls))
+                 (should debug-args)
+                 (should (equal cmd (cadr (car debug-args))))
+                 (if (= shell-calls 1)
+                     ""
+                   "fake.el:6:(defun another-fake-function)"))))
+      (let* ((generate-fn (lambda (_look-for _cur-file _proj-root run-regexes _lang _exclude-args)
+                            (if (equal run-regexes (list dumb-jump-fallback-regex))
+                                "fallback-cmd"
+                              "primary-cmd")))
+             (parse-fn (lambda (rawresults _cur-file _line-num)
+                         (if (string-blank-p rawresults)
+                             nil
+                           (list (list :context "another-fake-function"
+                                       :path "fake.el"
+                                       :line 6)))))
+             (results (dumb-jump-run-command
+                       "another-fake-function"
+                       test-data-dir-elisp
+                       (list "fake-regex")
+                       "elisp"
+                       nil
+                       "blah.el"
+                       3
+                       parse-fn
+                       generate-fn)))
+        (should (= shell-calls 2))
+        (should (= (length results) 1))
+        (should (equal (plist-get (car results) :path) "fake.el"))
+        (should (= (plist-get (car results) :line) 6))))))
+
+(ert-deftest dumb-jump-run-cmd-fail-test ()
+  (with-mock
+    (stub dumb-jump-rg-installed? => t)
+    (let* ((gen-funcs (dumb-jump-pick-grep-variant test-data-dir-elisp))
+           (parse-fn (plist-get gen-funcs :parse))
+           (generate-fn (plist-get gen-funcs :generate))
+           (results (dumb-jump-run-command "hidden-function" test-data-dir-elisp nil "" "" "blah.el" 3
+                                           parse-fn generate-fn))
+           (first-result (car results)))
+      (should (null first-result)))))
+
+(ert-deftest dumb-jump-run-cmd-pcre2-warning-test ()
+  "Test that a warning is shown when rg output contains PCRE2 error."
+  (let ((dumb-jump--detected-env-problems nil)
+        (warned nil))
+    (cl-letf (((symbol-function 'shell-command-to-string)
+               (lambda (_cmd) "PCRE2 is not available in this build of ripgrep"))
+              ((symbol-function 'dumb-jump-message)
+               (lambda (str &rest _args)
+                 (when (string-match-p "PCRE2" str)
+                   (setq warned t)))))
+      (let* ((generate-fn (lambda (&rest _args) "rg --pcre2 test"))
+             (parse-fn (lambda (_raw _file _line) nil))
+             (results (dumb-jump-run-command "test-func" "/tmp" '("regex") "c" "" "test.c" 1
+                                             parse-fn generate-fn)))
+        (should (null results))
+        (should warned)
+        (should (cl-some (lambda (p) (string-match-p "PCRE2" p))
+                         dumb-jump--detected-env-problems))))))
+
+(ert-deftest dumb-jump-run-cmd-pcre2-warning-no-false-positive-test ()
+  "Test that a search hit containing the PCRE2 error text does not trigger the warning."
+  (let ((dumb-jump--detected-env-problems nil)
+        (warned nil))
+    (cl-letf (((symbol-function 'shell-command-to-string)
+               (lambda (_cmd) "src/foo.c:42:// PCRE2 is not available in this build"))
+              ((symbol-function 'dumb-jump-message)
+               (lambda (str &rest _args)
+                 (when (string-match-p "PCRE2" str)
+                   (setq warned t)))))
+      (let* ((generate-fn (lambda (&rest _args) "rg --pcre2 test"))
+             (parse-fn (lambda (raw _file _line)
+                         (unless (string-blank-p raw)
+                           (list (list :context "PCRE2 is not available"
+                                       :path "src/foo.c"
+                                       :line 42)))))
+             (results (dumb-jump-run-command "PCRE2" "/tmp" '("regex") "c" "" "test.c" 1
+                                             parse-fn generate-fn)))
+        (should-not warned)
+        (should (null dumb-jump--detected-env-problems))))))
+
+(ert-deftest dumb-jump-find-proj-root-test ()
+  (let* ((js-file (f-join test-data-dir-proj1 "src" "js"))
+         (found-project (dumb-jump-get-project-root js-file)))
+    (should (f-exists? found-project))
+    (should (string= found-project test-data-dir-proj1))
+    (should (string= ".dumbjump" (dumb-jump-get-config found-project)))))
+
+(ert-deftest dumb-jump-find-proj-root-project-el-test ()
+  "When no denoter is found, project.el root should be used over default project."
+  (with-mock
+    (stub project-current => '(vc Git "/tmp/fake-project/"))
+    (stub project-root => "/tmp/fake-project/")
+    (mock (locate-dominating-file * *))
+    (let ((dumb-jump-project nil)
+          (found-project (dumb-jump-get-project-root "/tmp/fake-project/src/foo.c")))
+      (should (string= found-project "/tmp/fake-project")))))
+
+(ert-deftest dumb-jump-find-proj-root-project-el-override-test ()
+  "When `dumb-jump-project' is set, it should take priority over project.el."
+  (with-mock
+    (stub project-current => (error "project-current should not be called"))
+    (stub project-root => (error "project-root should not be called"))
+    (let* ((dumb-jump-project "/tmp/explicit-override")
+           (found-project (dumb-jump-get-project-root "/tmp/fake-project/src/foo.c")))
+      (should (string= found-project "/tmp/explicit-override")))))
+
+(ert-deftest dumb-jump-find-proj-root-default-test ()
+  (with-mock
+    (mock (locate-dominating-file * *))
+    (let ((found-project (dumb-jump-get-project-root ""))
+          (expected (f-expand dumb-jump-default-project)))
+      (should (string= found-project expected)))))
+
+(ert-deftest dumb-jump-get-point-symbol-region-active-test ()
+  (with-mock
+   (mock (region-active-p) => t)
+   (mock (region-beginning) => 0)
+   (mock (region-end) => 1)
+   (mock (buffer-substring-no-properties * *) => "blah")
+   (dumb-jump-get-point-symbol)))
+
+(ert-deftest dumb-jump-goto-file-line-test ()
+  (let ((js-file (f-join test-data-dir-proj1 "src" "js" "fake.js")))
+    (with-mock-forbidding-prompt
+      (when (version< emacs-version "29")
+        (mock (ring-insert * *)))
+      (dumb-jump-goto-file-line js-file 3 0)
+      (should (string= (buffer-file-name) js-file))
+      (should (= (line-number-at-pos) 3)))))
+
+(ert-deftest dumb-jump-test-grep-rules-test ()
+  (let ((rule-failures (dumb-jump-test-grep-rules)))
+    (dumb-jump-output-rule-test-failures rule-failures)
+    (should (= (length rule-failures) 0))))
+
+(defun dumb-jump--noop (&rest _args)
+  "Do nothing, return nil."
+  nil)
+
+(when (dumb-jump-ag-installed?)
+  (ert-deftest dumb-jump-test-ag-rules-test ()
+    ;; Some of the tests write text inside a temporary buffer and save the
+    ;; text to a file to perform testing. That will work as long as Emacs is
+    ;; not setup to execute `delete-trailing-whitespace' in the
+    ;; `before-save-hook' which might be the case for users systems.
+    ;; To prevent that from happening advice the `delete-trailing-whitespace'
+    ;; function into something that does nothing for the duration of the test.
+    (unwind-protect
+        (progn
+          (advice-add 'delete-trailing-whitespace :override 'dumb-jump--noop)
+          (let ((rule-failures (dumb-jump-test-ag-rules)))
+            (dumb-jump-output-rule-test-failures rule-failures)
+            (should (= (length rule-failures) 0))))
+      ;; restore `delete-trailing-whitespace'
+      (advice-remove 'delete-trailing-whitespace 'dumb-jump--noop))))
+
+(when (dumb-jump-rg-installed?)
+  (ert-deftest dumb-jump-test-rg-rules-test ()
+    (let ((rule-failures (dumb-jump-test-rg-rules)))
+      (dumb-jump-output-rule-test-failures rule-failures)
+      (should (= (length rule-failures) 0)))))
+
+(when (and (not (eq system-type 'darwin))   ; git grep is broken on macOS as of Jan 2026.
+           (dumb-jump-git-grep-installed?))
+  (ert-deftest dumb-jump-test-git-grep-rules-test ()
+    (let ((rule-failures (dumb-jump-test-git-grep-rules)))
+      (dumb-jump-output-rule-test-failures rule-failures)
+      (should (= (length rule-failures) 0)))))
+
+(ert-deftest dumb-jump-test-grep-rules-not-test () ;; :not tests
+  (let ((rule-failures (dumb-jump-test-grep-rules t)))
+    (dumb-jump-output-rule-test-failures rule-failures)
+    (should (= (length rule-failures) 0))))
+
+(when (dumb-jump-ag-installed?)
+  (ert-deftest dumb-jump-test-ag-rules-not-test () ;; :not tests
+    (let ((rule-failures (dumb-jump-test-ag-rules t)))
+    (dumb-jump-output-rule-test-failures rule-failures)
+    (should (= (length rule-failures) 0)))))
+
+(when (dumb-jump-rg-installed?)
+  (ert-deftest dumb-jump-test-rg-rules-not-test () ;; :not tests
+    (let ((rule-failures (dumb-jump-test-rg-rules t)))
+      (dumb-jump-output-rule-test-failures rule-failures)
+      (should (= (length rule-failures) 0)))))
+
+(ert-deftest dumb-jump-test-grep-rules-fail-test ()
+  (let* ((bad-rule '(:type "variable"
+                           :supports ("ag" "grep" "rg" "git-grep")
+                           :language "elisp"
+                           :regex "\\\(defvarJJJ\\b\\s*"
+                           :tests ("(defvar test ")))
+         (dumb-jump-find-rules (cons bad-rule dumb-jump-find-rules))
+         (rule-failures (dumb-jump-test-grep-rules)))
+    (should (= (length rule-failures) 1))))
+
+(when (dumb-jump-ag-installed?)
+  (ert-deftest dumb-jump-test-ag-rules-fail-test ()
+    ;; Some of the tests write text inside a temporary buffer and save the
+    ;; text to a file to perform testing. That will work as long as Emacs is
+    ;; not setup to execute `delete-trailing-whitespace' in the
+    ;; `before-save-hook' which might be the case for users systems.
+    ;; To prevent that from happening advice the `delete-trailing-whitespace'
+    ;; function into something that does nothing for the duration of the test.
+    (unwind-protect
+        (progn
+          (advice-add 'delete-trailing-whitespace :override 'dumb-jump--noop)
+          (let* ((bad-rule '(:type "variable"
+                                   :supports ("ag" "grep" "rg" "git-grep")
+                                   :language "elisp"
+                                   :regex "\\\(defvarJJJ\\b\\s*"
+                                   :tests ("(defvar test ")))
+                 (dumb-jump-find-rules (cons bad-rule dumb-jump-find-rules))
+                 (rule-failures (dumb-jump-test-ag-rules)))
+            (should (= (length rule-failures) 1))))
+      ;; restore `delete-trailing-whitespace'
+      (advice-remove 'delete-trailing-whitespace 'dumb-jump--noop))))
+
+(when (dumb-jump-rg-installed?)
+  (ert-deftest dumb-jump-test-rg-rules-fail-test ()
+    (let* ((bad-rule '(:type "variable"
+                             :supports ("ag" "grep" "rg" "git-grep")
+                             :language "elisp"
+                             :regex "\\\(defvarJJJ\\b\\s*"
+                             :tests ("(defvar test ")))
+           ;; Add a bad rules to the rules normally used by dumb-jump.
+	   (dumb-jump-find-rules (cons bad-rule dumb-jump-find-rules))
+           ;; then test all rules to detect the ones that fail.
+	   (rule-failures (dumb-jump-test-rg-rules)))
+      ;; No rule taken from dumb-jump.el should fail: the only one that
+      ;; should fail should be the `bad-rule' defined above.
+      (should (= (length rule-failures) 1)))))
+
+(when (and (not (eq system-type 'darwin))   ; git grep is broken on macOS as of Jan 2026.
+           (dumb-jump-git-grep-installed?))
+  (ert-deftest dumb-jump-test-git-grep-rules-fail-test ()
+    (let* ((bad-rule '(:type "variable"
+                             :supports ("ag" "grep" "rg" "git-grep")
+                             :language "elisp"
+                             :regex "\\\(defvarJJJ\\b\\s*"
+                             :tests ("(defvar test ")))
+	   (dumb-jump-find-rules (cons bad-rule dumb-jump-find-rules))
+	   (rule-failures (dumb-jump-test-git-grep-rules)))
+      (should (= (length rule-failures) 1)))))
+
+(when (and (not (eq system-type 'darwin))  ; git grep is broken on macOS as of Jan 2026.
+           (dumb-jump-git-grep-installed?))
+  (ert-deftest dumb-jump-test-git-grep-rules-not-test () ;; :not tests
+    (let ((rule-failures (dumb-jump-test-git-grep-rules t)))
+    (dumb-jump-output-rule-test-failures rule-failures)
+    (should (= (length rule-failures) 0)))))
+
+(ert-deftest dumb-jump-match-test ()
+  (should (not (dumb-jump-re-match nil "asdf")))
+  (should (dumb-jump-re-match "^asdf$" "asdf"))
+  (should (string= (car (dumb-jump-re-match "^[0-9]+$" "123")) "123")))
+
+(ert-deftest dumb-jump-context-point-test ()
+  (let* ((sentence "mainWindow.loadUrl('file://')")
+         (func "loadUrl")
+         (ctx (dumb-jump-get-point-context sentence func 11)))
+         (should (string= (plist-get ctx :left) "mainWindow."))
+         (should (string= (plist-get ctx :right) "('file://')"))))
+
+(ert-deftest dumb-jump-context-point-type-test ()
+  (let* ((sentence "mainWindow.loadUrl('file://' + __dirname + '/dt/inspector.html?electron=true');")
+         (func "loadUrl")
+         (pt-ctx (dumb-jump-get-point-context sentence func 11))
+         (ctx-type (dumb-jump-get-ctx-type-by-language "javascript" pt-ctx)))
+    (should (string= ctx-type "function"))))
+
+(ert-deftest dumb-jump-context-point-typescript-type-annotation-test ()
+  (let* ((sentence "const foo: MyType = {}")
+         (sym "MyType")
+         (pt-ctx (dumb-jump-get-point-context sentence sym 11))
+         (ctx-type (dumb-jump-get-ctx-type-by-language "typescript" pt-ctx)))
+    (should (string= ctx-type "type"))))
+
+(ert-deftest dumb-jump-context-point-typescript-type-alias-test ()
+  (let* ((sentence "type MyType = { foo: string }")
+         (sym "MyType")
+         (pt-ctx (dumb-jump-get-point-context sentence sym 5))
+         (ctx-type (dumb-jump-get-ctx-type-by-language "typescript" pt-ctx)))
+    (should (string= ctx-type "type"))))
+
+(ert-deftest dumb-jump-prompt-user-for-choice-correct-test ()
+  (let* ((dumb-jump-selector 'completing-read)
+         (results '((:path "/usr/blah/test.txt" :line 54 :context "function thing()")
+                    (:path "/usr/blah/test2.txt" :line 52 :context "var thing = function()" :target "a"))))
+    (with-mock
+     (mock (dumb-jump--select-choice * *) => "/test2.txt:52: var thing = function()")
+     (mock (dumb-jump-result-follow '(:path "/usr/blah/test2.txt" :line 52 :context "var thing = function()" :target "a")))
+     (dumb-jump-prompt-user-for-choice "/usr/blah" results))))
+
+(ert-deftest dumb-jump-prompt-user-for-choice-correct-helm-test ()
+  (let* ((dumb-jump-selector 'helm)
+         (results '((:path "/usr/blah/test.txt" :line 54 :context "function thing()")
+                    (:path "/usr/blah/test2.txt" :line 52 :context "var thing = function()" :target "a"))))
+    (with-mock
+     (mock (helm-make-source "Jump to: " 'helm-source-sync :action * :candidates * :persistent-action *))
+     (mock (helm * * :buffer "*helm dumb jump choices*"))
+     (dumb-jump-prompt-user-for-choice "/usr/blah" results))))
+
+(ert-deftest dumb-jump-prompt-user-for-choice-correct-helm-persistent-action-test ()
+  (dumb-jump-helm-persist-action (list
+                                  :path test-dumb-jump-file-path
+                                  :line 1
+                                  :context " (defn status"))
+  (should (get-buffer " *helm dumb jump persistent*")))
+
+(ert-deftest dumb-jump-prompt-user-for-choice-correct-ivy-test ()
+  (let* ((dumb-jump-selector 'ivy)
+         (dumb-jump-ivy-jump-to-selected-function
+          #'dumb-jump-ivy-jump-to-selected)
+         (results '((:path "/usr/blah/test.txt" :line 54 :context "function thing()")
+                    (:path "/usr/blah/test2.txt" :line 52 :context "var thing = function()" :target "a"))))
+    (with-mock
+     (mock (ivy-read * * :action * :caller *)  => "/test2.txt:52: var thing = function()")
+     (dumb-jump-prompt-user-for-choice "/usr/blah" results))))
+
+(ert-deftest dumb-jump-a-back-test ()
+  (let ((js-file (f-join test-data-dir-proj1 "src" "js" "fake2.js")))
+    (with-current-buffer (find-file-noselect js-file t)
+      (goto-char (point-min))
+      (forward-char 13)
+      (with-mock-forbidding-prompt
+        (mock (pop-tag-mark))
+        (stub dumb-jump-rg-installed? => t)
+        (with-no-warnings (dumb-jump-go))
+        (with-no-warnings (dumb-jump-back))))))
+
+(ert-deftest dumb-jump-fetch-results-test ()
+  (let ((js-file (f-join test-data-dir-proj1 "src" "js" "fake.js")))
+    (with-current-buffer (find-file-noselect js-file t)
+      (goto-char (point-min))
+      (forward-line 2)
+      (forward-char 10)
+      (with-mock
+        (stub dumb-jump-rg-installed? => t)
+        (let ((results (dumb-jump-fetch-file-results)))
+          (should (string= "doSomeStuff" (plist-get results :symbol)))
+          (should (string= "javascript" (plist-get results :lang))))))))
+
+(ert-deftest dumb-jump-go-shell-test ()
+  (with-current-buffer (get-buffer-create "*shell*")
+    (setq major-mode 'shell-mode)
+    (insert ".js doSomeStuff()")
+    (goto-char (point-min))
+    (forward-char 6)
+    (with-mock
+      (stub dumb-jump-rg-installed? => t)
+      (let ((results (dumb-jump-get-results)))
+        (should (string= "doSomeStuff" (plist-get results :symbol)))
+        (should (string= "javascript" (plist-get results :lang)))))))
+
+(ert-deftest dumb-jump-go-test ()
+  (let ((js-file (f-join test-data-dir-proj1 "src" "js" "fake2.js"))
+        (go-js-file (f-join test-data-dir-proj1 "src" "js" "fake.js")))
+    (with-current-buffer (find-file-noselect js-file t)
+      (goto-char (point-min))
+      (forward-char 13)
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 3 9))
+        (should (string= go-js-file (with-no-warnings (dumb-jump-go))))))))
+
+(ert-deftest dumb-jump-go-other-window-test ()
+  (let ((js-file (f-join test-data-dir-proj1 "src" "js" "fake2.js"))
+        (go-js-file (f-join test-data-dir-proj1 "src" "js" "fake.js")))
+    (with-current-buffer (find-file-noselect js-file t)
+      (goto-char (point-min))
+      (forward-char 13)
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 3 9))
+        (should (string= go-js-file (with-no-warnings (dumb-jump-go-other-window))))))))
+
+(ert-deftest dumb-jump-go-current-window-test ()
+  (let ((js-file (f-join test-data-dir-proj1 "src" "js" "fake2.js"))
+        (go-js-file (f-join test-data-dir-proj1 "src" "js" "fake.js")))
+    (with-current-buffer (find-file-noselect js-file t)
+      (goto-char (point-min))
+      (forward-char 13)
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 3 9))
+        (should (string= go-js-file (with-no-warnings (dumb-jump-go-current-window))))))))
+
+(ert-deftest dumb-jump-quick-look-test ()
+  (let ((js-file (f-join test-data-dir-proj1 "src" "js" "fake2.js"))
+        (go-js-file (f-join test-data-dir-proj1 "src" "js" "fake.js")))
+    (with-current-buffer (find-file-noselect js-file t)
+      (goto-char (point-min))
+      (forward-char 13)
+      (with-mock
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump--show-preview "/src/js/fake.js:3: function doSomeStuff() {"))
+        (should (string= go-js-file (with-no-warnings (dumb-jump-quick-look))))))))
+
+(ert-deftest dumb-jump-go-js2-test ()
+  (let ((js-file (f-join test-data-dir-proj1 "src" "js" "fake.js")))
+    (with-current-buffer (find-file-noselect js-file t)
+      (goto-char (point-min))
+      (forward-line 11)
+      (forward-char 76)
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 7 35))
+        (should (string= js-file (with-no-warnings (dumb-jump-go))))))))
+
+(ert-deftest dumb-jump-go-js-es6a-test ()
+  (let ((js-file (f-join test-data-dir-proj1 "src" "js" "es6.js")))
+    (with-current-buffer (find-file-noselect js-file t)
+      (goto-char (point-min))
+      (forward-line 20)
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 1 4))
+        (should (string= js-file (with-no-warnings (dumb-jump-go))))))))
+
+(ert-deftest dumb-jump-go-js-es6b-test ()
+  (let ((js-file (f-join test-data-dir-proj1 "src" "js" "es6.js")))
+    (with-current-buffer (find-file-noselect js-file t)
+      (goto-char (point-min))
+      (forward-line 21)
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 3 6))
+        (should (string= js-file (with-no-warnings (dumb-jump-go))))))))
+
+(ert-deftest dumb-jump-go-js-es6c-test ()
+  (let ((js-file (f-join test-data-dir-proj1 "src" "js" "es6.js")))
+    (with-current-buffer (find-file-noselect js-file t)
+      (goto-char (point-min))
+      (forward-line 22)
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 5 6))
+        (should (string= js-file (with-no-warnings (dumb-jump-go))))))))
+
+(ert-deftest dumb-jump-go-js-es6d-test ()
+  (let ((js-file (f-join test-data-dir-proj1 "src" "js" "es6.js")))
+    (with-current-buffer (find-file-noselect js-file t)
+      (goto-char (point-min))
+      (forward-line 23)
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 10 2))
+        (should (string= js-file (with-no-warnings (dumb-jump-go))))))))
+
+(ert-deftest dumb-jump-go-js-es6e-test ()
+  (let ((js-file (f-join test-data-dir-proj1 "src" "js" "es6.js")))
+    (with-current-buffer (find-file-noselect js-file t)
+      (goto-char (point-min))
+      (forward-line 24)
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 16 2))
+        (should (string= js-file (with-no-warnings (dumb-jump-go))))))))
+
+(ert-deftest dumb-jump-go-js-es6-class-test ()
+  (let ((js-file (f-join test-data-dir-proj1 "src" "js" "es6.js")))
+    (with-current-buffer (find-file-noselect js-file t)
+      (goto-char (point-min))
+      (forward-line 36)
+      (forward-char 12)
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 28 6))
+        (should (string= js-file (with-no-warnings (dumb-jump-go))))))))
+
+
+(ert-deftest dumb-jump-go-sig-def-test ()
+  (let ((dumb-jump-aggressive t)
+        (js-file (f-join test-data-dir-proj1 "src" "js" "fake2.js")))
+    (with-current-buffer (find-file-noselect js-file t)
+      (goto-char (point-min))
+      (forward-line 7)
+      (forward-char 35)
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 6 25))
+        (should (string= js-file (with-no-warnings (dumb-jump-go))))))))
+
+(ert-deftest dumb-jump-go-sig-def2-test ()
+  (let ((dumb-jump-aggressive t)
+        (js-file (f-join test-data-dir-proj1 "src" "js" "fake2.js")))
+    (with-current-buffer (find-file-noselect js-file t)
+      (goto-char (point-min))
+      (forward-line 13)
+      (forward-char 35)
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 12 32))
+        (should (string= js-file (with-no-warnings (dumb-jump-go))))))))
+
+(ert-deftest dumb-jump-go-sig-def3-test ()
+  (let ((dumb-jump-aggressive t)
+        (js-file (f-join test-data-dir-proj1 "src" "js" "fake2.js")))
+    (with-current-buffer (find-file-noselect js-file t)
+      (goto-char (point-min))
+      (forward-line 20)
+      (forward-char 35)
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 19 32))
+        (should (string= js-file (with-no-warnings (dumb-jump-go))))))))
+
+(ert-deftest dumb-jump-go-var-let-test ()
+  (let ((dumb-jump-aggressive t)
+        (el-file (f-join test-data-dir-elisp "fake2.el")))
+    (with-current-buffer (find-file-noselect el-file t)
+      (goto-char (point-min))
+      (forward-line 13)
+      (forward-char 33)
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 11 10))
+        (should (string= el-file (with-no-warnings (dumb-jump-go))))))))
+
+(ert-deftest dumb-jump-go-var-let-repeat-test ()
+  (let ((dumb-jump-aggressive t)
+        (el-file (f-join test-data-dir-elisp "fake2.el")))
+    (with-current-buffer (find-file-noselect el-file t)
+      (goto-char (point-min))
+      (forward-line 21)
+      (forward-char 33)
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 18 10))
+        (should (string= el-file (with-no-warnings (dumb-jump-go))))))))
+
+(ert-deftest dumb-jump-go-var-arg-test ()
+  (let ((dumb-jump-aggressive t)
+        (el-file (f-join test-data-dir-elisp "fake2.el")))
+    (with-current-buffer (find-file-noselect el-file t)
+      (goto-char (point-min))
+      (forward-line 4)
+      (forward-char 12)
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 3 27))
+        (should (string= el-file (with-no-warnings (dumb-jump-go))))))))
+
+(ert-deftest dumb-jump-go-no-result-test ()
+  (let ((js-file (f-join test-data-dir-proj1 "src" "js" "fake2.js")))
+    (with-current-buffer (find-file-noselect js-file t)
+      (goto-char (point-min))
+      (forward-line 1)
+      (forward-char 4)
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-message "'%s' %s %s %s not found." "nothing" * * "declaration"))
+        (with-no-warnings (dumb-jump-go))))))
+
+(ert-deftest dumb-jump-go-no-rules-test ()
+  (let ((txt-file (f-join test-data-dir-proj1 "src" "js" "nocode.txt")))
+    (with-current-buffer (find-file-noselect txt-file t)
+      (goto-char (point-min))
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-message "Could not find rules for '%s'." ".txt file"))
+        (with-no-warnings (dumb-jump-go))))))
+
+(ert-deftest dumb-jump-go-too-long-test ()
+  (let ((txt-file (f-join test-data-dir-proj1 "src" "js" "nocode.txt"))
+        (dumb-jump-max-find-time 0.2))
+    (with-current-buffer (find-file-noselect txt-file t)
+      (goto-char (point-min))
+      (noflet ((dumb-jump-fetch-file-results (&optional _prompt)
+                 (with-no-warnings
+                   (if (version< emacs-version "29.1")
+                       (sleep-for 0 300)
+                     (sleep-for 0.3)))
+                 '(:results (:result))))
+        (with-mock-forbidding-prompt
+          (stub dumb-jump-rg-installed? => t)
+          (mock (dumb-jump-message "Took over %ss to find '%s'. Please install ag or rg, or add a .dumbjump file to '%s' with path exclusions" * * *))
+          (mock (dumb-jump-result-follow * * *))
+          (with-no-warnings (dumb-jump-go)))))))
+
+(ert-deftest dumb-jump-message-handle-results-test ()
+  (let ((dumb-jump-aggressive t)
+        (results '((:path "src/file.js" :line 62 :context "var isNow = true" :diff 7 :target "isNow")
+                   (:path "src/file.js" :line 69 :context "isNow = false" :diff 0 :target "isNow"))))
+    (with-mock-forbidding-prompt
+      (mock (dumb-jump-goto-file-line "src/file.js" 62 4))
+      (dumb-jump-handle-results results "src/file.js" "/code/redux" "" "isNow" nil nil))))
+
+(ert-deftest dumb-jump-message-handle-results-choices-test ()
+  (let ((results '((:path "src/file2.js" :line 62 :context "var isNow = true" :diff 7 :target "isNow")
+                   (:path "src/file2.js" :line 63 :context "var isNow = true" :diff 7 :target "isNow")
+                   (:path "src/file2.js" :line 69 :context "isNow = false" :diff 0 :target "isNow"))))
+    (with-mock
+      (mock (dumb-jump-prompt-user-for-choice "/code/redux" *))
+      (dumb-jump-handle-results results "src/file.js" "/code/redux" "" "isNow" nil nil))))
+
+(ert-deftest dumb-jump-grep-installed?-bsd-test ()
+  (let ((dumb-jump--grep-installed? 'unset))
+    (with-mock
+      (mock (shell-command-to-string *) => "grep (BSD grep) 2.5.1-FreeBSD\n" :times 1)
+      (should (eq (dumb-jump-grep-installed?) 'bsd)))
+    ;; confirm memoization of the previous result
+    (should (eq (dumb-jump-grep-installed?) 'bsd))))
+
+(ert-deftest dumb-jump-grep-installed?-gnu-test ()
+  (let ((dumb-jump--grep-installed? 'unset))
+    (with-mock
+      (mock (shell-command-to-string *) => "grep (GNU grep) 2.4.2\n" :times 1)
+      (should (eq (dumb-jump-grep-installed?) 'gnu))
+      ;; confirm memoization of the previous result
+      (should (eq (dumb-jump-grep-installed?) 'gnu)))))
+
+(ert-deftest dumb-jump-ag-installed?-test ()
+  (let ((dumb-jump--ag-installed? 'unset))
+    (with-mock
+      (mock (shell-command-to-string *) => "ag version 0.33.0\n" :times 1)
+      (should (eq (dumb-jump-ag-installed?) t))
+      ;; confirm memoization of the previous result
+      (should (eq (dumb-jump-ag-installed?) t)))))
+
+(ert-deftest dumb-jump-git-grep-plus-ag-installed?-test ()
+  (let ((dumb-jump--git-grep-plus-ag-installed? 'unset)
+        (dumb-jump--ag-installed? 'unset)
+        (dumb-jump--git-grep-installed? 'unset))
+    (with-mock
+      ;; this isn't ideal but combining the ag and git grep responses but this shouldn't matter in practice with :times 2
+      (mock (shell-command-to-string *) => "ag version 0.33.0\nfatal: no pattern given\n" :times 2)
+      (should (eq (dumb-jump-git-grep-plus-ag-installed?) t))
+      ;; confirm memoization of the previous result
+      (should (eq (dumb-jump-git-grep-plus-ag-installed?) t)))))
+
+(ert-deftest dumb-jump-rg-installed?-test-no ()
+  (let ((dumb-jump--rg-installed? 'unset))
+    (with-mock
+      (mock (executable-find *) => t)
+      (mock (shell-command-to-string *) => "ripgrep 0.3.1\n" :times 1)
+      (should (not (eq (dumb-jump-rg-installed?) t)))
+      ;; confirm memoization of the previous result
+      (should (not (eq (dumb-jump-rg-installed?) t))))))
+
+(ert-deftest dumb-jump-rg-installed?-test-yes ()
+  (let ((dumb-jump--rg-installed? 'unset))
+    (with-mock
+      (mock (executable-find *) => t)
+      (mock (shell-command-to-string *) => "ripgrep 0.10.0\n\nfeatures:+pcre2\n\n" :times 1)
+      (should (eq (dumb-jump-rg-installed?) t))
+      ;; confirm memoization of the previous result
+      (should (eq (dumb-jump-rg-installed?) t)))))
+
+(ert-deftest dumb-jump-rg-installed?-test-old ()
+  (let ((dumb-jump--rg-installed? 'unset))
+    (with-mock
+      (mock (executable-find *) => t)
+      (mock (shell-command-to-string *) => "ripgrep 0.09.0\n\nfeatures:+pcre2\n\n" :times 1)
+      (should (eq (dumb-jump-rg-installed?) nil))
+      ;; confirm memoization of the previous result
+      (should (eq (dumb-jump-rg-installed?) nil)))))
+
+(ert-deftest dumb-jump-rg-installed?-test-yes-no-pcre2 ()
+  (let ((dumb-jump--rg-installed? 'unset))
+    (with-mock
+      (mock (executable-find *) => t)
+      (mock (shell-command-to-string *) => "ripgrep 0.10.0\n" :times 1)
+      (should (eq (dumb-jump-rg-installed?) nil))
+      ;; confirm memoization of the previous result
+      (should (eq (dumb-jump-rg-installed?) nil)))))
+
+(ert-deftest dumb-jump-rg-installed?-test-yes2 ()
+  (let ((dumb-jump--rg-installed? 'unset))
+    (with-mock
+      (mock (executable-find *) => t)
+      (mock (shell-command-to-string *) => "ripgrep 1.1.0\n\n\nfeatures:+pcre2\n" :times 1)
+      (should (eq (dumb-jump-rg-installed?) t))
+      ;; confirm memoization of the previous result
+      (should (eq (dumb-jump-rg-installed?) t)))))
+
+(ert-deftest dumb-jump-rg-installed?-test-yes2-no-pcre2 ()
+  (let ((dumb-jump--rg-installed? 'unset))
+    (with-mock
+      (mock (executable-find *) => t)
+      (mock (shell-command-to-string *) => "ripgrep 1.1.0\n" :times 1)
+      (should (eq (dumb-jump-rg-installed?) nil))
+      ;; confirm memoization of the previous result
+      (should (eq (dumb-jump-rg-installed?) nil)))))
+
+(ert-deftest dumb-jump-git-grep-installed?-test ()
+  (let ((dumb-jump--git-grep-installed? 'unset))
+    (with-mock
+      (mock (shell-command-to-string *) => "fatal: no pattern given\n" :times 1)
+      (should (eq (dumb-jump-git-grep-installed?) t))
+      ;; confirm memoization of the previous result
+      (should (eq (dumb-jump-git-grep-installed?) t)))))
+
+(ert-deftest dumb-jump-go-nogrep-test ()
+  (let ((js-file (f-join test-data-dir-proj1 "src" "js" "fake2.js")))
+    (with-current-buffer (find-file-noselect js-file t)
+      (goto-char (point-min))
+      (forward-char 13)
+      (with-mock-forbidding-prompt
+        ;; (mock (executable-find *) => t)
+        (mock (dumb-jump-rg-installed?) => nil)
+        (mock (dumb-jump-ag-installed?) => nil)
+        (mock (dumb-jump-git-grep-installed?) => nil)
+        (mock (dumb-jump-grep-installed?) => nil)
+        (mock (dumb-jump-message "Please install ag, rg, git grep or grep!"))
+        (with-no-warnings (dumb-jump-go))))))
+
+(ert-deftest dumb-jump-go-nosymbol-test ()
+  (let ((js-file (f-join test-data-dir-proj1 "src" "js" "fake2.js")))
+    (with-current-buffer (find-file-noselect js-file t)
+      (goto-char (point-min))
+      (forward-line 1)
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-message "No symbol under point."))
+        (with-no-warnings (dumb-jump-go))))))
+
+(ert-deftest dumb-jump-message-get-results-nogrep-test ()
+  (with-mock
+    ;; (mock (executable-find *) => t)
+    (mock (dumb-jump-rg-installed?) => nil)
+    (mock (dumb-jump-ag-installed?) => nil)
+    (mock (dumb-jump-git-grep-installed?) => nil)
+    (mock (dumb-jump-grep-installed?) => nil)
+    (let ((results (dumb-jump-get-results)))
+      (should (eq (plist-get results :issue) 'nogrep)))))
+
+(ert-deftest dumb-jump-message-result-follow-test ()
+  (with-mock
+   (mock (dumb-jump-goto-file-line "src/file.js" 62 4))
+   (let ((result '(:path "src/file.js" :line 62 :context "var isNow = true" :diff 7 :target "isNow")))
+     (dumb-jump--result-follow result))))
+
+(ert-deftest dumb-jump-message-result-follow-remote-fullpath-test ()
+  (with-mock
+    (mock (dumb-jump-goto-file-line * * *))
+    (mock (file-remote-p *) => "/ssh:user@1.2.3.4#5678:")
+    (let ((result '(:path "/usr/src/file.js" :line 62 :context "var isNow = true" :diff 7 :target "isNow")))
+      (should (string=
+               (dumb-jump--result-follow result)
+               "/ssh:user@1.2.3.4#5678:/usr/src/file.js")))))
+
+(ert-deftest dumb-jump-message-result-follow-remote-relative-test ()
+  (with-mock
+    (mock (dumb-jump-goto-file-line * * *))
+    (mock (file-remote-p *) => "/ssh:user@1.2.3.4#5678:")
+    (let ((result '(:path "here/is/file.js" :line 62 :context "var isNow = true" :diff 7 :target "isNow"))
+          (default-directory "/ssh:user@1.2.3.4#5678:/path/to/default-directory/"))
+      (should (string=
+               (dumb-jump--result-follow result)
+               "/ssh:user@1.2.3.4#5678:/path/to/default-directory/here/is/file.js")))))
+
+(ert-deftest dumb-jump-message-result-follow-tooltip-test ()
+  (with-mock
+   (mock (dumb-jump--show-preview "/file.js:62: var isNow = true"))
+   (let ((result '(:path "src/file.js" :line 62 :context "var isNow = true" :diff 7 :target "isNow")))
+     (dumb-jump--result-follow result t "src"))))
+
+(ert-deftest dumb-jump-populate-regexes-grep-test ()
+  (should (equal (dumb-jump-populate-regexes "testvar" '("JJJ\\s*=\\s*") 'grep) '("testvar\\s*=\\s*")))
+  (should (equal (dumb-jump-populate-regexes "$testvar" '("JJJ\\s*=\\s*") 'grep) '("\\$testvar\\s*=\\s*"))))
+
+(ert-deftest dumb-jump-populate-regexes-ag-test ()
+  (should (equal (dumb-jump-populate-regexes "testvar" '("JJJ\\s*=\\s*") 'ag) '("testvar\\s*=\\s*")))
+  (should (equal (dumb-jump-populate-regexes "$testvar" '("JJJ\\s*=\\s*") 'ag) '("\\$testvar\\s*=\\s*"))))
+
+(ert-deftest dumb-jump-populate-regexes-git-grep-plus-ag-test ()
+  ;; this is effectively the same as `ag even with 'git-grep-plus-ag since that's where the regexes are used in this mode
+  (should (equal (dumb-jump-populate-regexes "testvar" '("JJJ\\s*=\\s*") 'git-grep-plus-ag) '("testvar\\s*=\\s*")))
+  (should (equal (dumb-jump-populate-regexes "$testvar" '("JJJ\\s*=\\s*") 'git-grep-plus-ag) '("\\$testvar\\s*=\\s*"))))
+
+(ert-deftest dumb-jump-populate-regexes-rg-test ()
+  (should (equal (dumb-jump-populate-regexes "testvar" '("JJJ\\s*=\\s*") 'rg) '("testvar\\s*=\\s*")))
+  (should (equal (dumb-jump-populate-regexes "$testvar" '("JJJ\\s*=\\s*") 'rg) '("\\$testvar\\s*=\\s*")))
+  (should (equal (dumb-jump-populate-regexes "-testvar" '("JJJ\\s*=\\s*") 'rg) '("-testvar\\s*=\\s*"))))
+
+(ert-deftest dumb-jump-populate-regexes-git-grep-test ()
+  (should (equal (dumb-jump-populate-regexes "testvar" '("JJJ\\s*=\\s*") 'git-grep) '("testvar\\s*=\\s*")))
+  (should (equal (dumb-jump-populate-regexes "$testvar" '("JJJ\\s*=\\s*") 'git-grep) '("\\$testvar\\s*=\\s*"))))
+
+(ert-deftest dumb-jump-message-prin1-test ()
+  (with-mock
+   (mock (message "%s %s" "(:path \"test\" :line 24)" "3"))
+   (dumb-jump-message-prin1 "%s %s" '(:path "test" :line 24) 3)))
+
+(ert-deftest dumb-jump-message-test ()
+  (with-mock
+   (mock (message "%s %s" "two" "three"))
+   (dumb-jump-message "%s %s" "two" "three")))
+
+(ert-deftest dumb-jump-concat-command-test ()
+  (should (string= (dumb-jump-concat-command " test1 " "test2 " "   test3")
+                   "test1 test2 test3")))
+
+(ert-deftest dumb-jump-issue-result-test ()
+  (let ((result (dumb-jump-issue-result "unsaved")))
+    (should (eq (plist-get result :issue) 'unsaved))))
+
+(ert-deftest dumb-jump-process-symbol-by-lang-test ()
+  (let ((result (dumb-jump-process-symbol-by-lang "elisp" "somefunc"))
+        (result2 (dumb-jump-process-symbol-by-lang "clojure" "myns/myfunc"))
+        (result3 (dumb-jump-process-symbol-by-lang "ruby" ":myrubyfunc"))
+        (result3b (dumb-jump-process-symbol-by-lang "ruby" "Health::Checks::QueueGrowth"))
+        (result3c (dumb-jump-process-symbol-by-lang "ruby" "::Health"))
+        (result4 (dumb-jump-process-symbol-by-lang "systemverilog" "`myvlfunc")))
+    (should (string= result "somefunc"))
+    (should (string= result2 "myfunc"))
+    (should (string= result3 "myrubyfunc"))
+    (should (string= result3b "QueueGrowth"))
+    (should (string= result3c "Health"))
+    (should (string= result4 "myvlfunc"))))
+
+(ert-deftest dumb-jump--result-follow-test ()
+  (let* ((data '(:path "/usr/blah/test2.txt" :line 52 :context "var thing = function()" :target "a")))
+    (with-mock
+     (mock (dumb-jump-goto-file-line "/usr/blah/test2.txt" 52 1))
+     (dumb-jump--result-follow data nil "/usr/blah"))))
+
+(ert-deftest dumb-jump-go-include-lib-test ()
+  (let ((el-file (f-join test-data-dir-elisp "fake2.el"))
+        (lib-file (f-join test-data-dir-elisp "../fake-library/lib.el")))
+    (with-current-buffer (find-file-noselect el-file t)
+      (goto-char (point-min))
+      (forward-line 23)
+      (forward-char 19)
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 4 7))
+        (should (string= (with-no-warnings (dumb-jump-go)) lib-file))))))
+
+(ert-deftest dumb-jump-parse-response-line-test ()
+  (let ((t1 (dumb-jump-parse-response-line "/opt/test/foo.js:44: var test = 12;" "/opt/test/blah.js"))
+        (t1b (dumb-jump-parse-response-line "/path/to/file.f90:1701: subroutine test(foo)" "/path/to/file2.f90"))
+        (t2 (dumb-jump-parse-response-line "47: var test = 13;" "/opt/test/blah.js"))
+        (t3 (dumb-jump-parse-response-line "c:\\Users\\test\\foo.js:1: var test = 14;" "c:\\Users\\test\\foo.js"))
+        (t4 (dumb-jump-parse-response-line "c:\\Users\\test\\foo2.js:2:test = {a:1,b:1};" "c:\\Users\\test\\foo.js"))
+        (t5 (dumb-jump-parse-response-line "/opt/test/foo1.js:41: var test = {c:3, d: 4};" "/opt/test/b2.js")))
+    ;; normal
+    (should (equal t1 '("/opt/test/foo.js" "44" " var test = 12;")))
+    ;; normal fortran
+    (should (equal t1b '("/path/to/file.f90" "1701"  " subroutine test(foo)")))
+    ;; no file name in response (searched single file)
+    (should (equal t2 '("/opt/test/blah.js" "47" " var test = 13;")))
+    ;; windows
+    (should (equal t3 '("c:\\Users\\test\\foo.js" "1" " var test = 14;")))
+    ;; windows w/ extra :
+    (should (equal t4 '("c:\\Users\\test\\foo2.js" "2" "test = {a:1,b:1};")))
+    ;; normal w/ extra :
+    (should (equal t5 '("/opt/test/foo1.js" "41" " var test = {c:3, d: 4};")))))
+
+(ert-deftest dumb-jump-agtype-test ()
+  (should (equal (dumb-jump-get-ag-type-by-language "python") '("python"))))
+
+(ert-deftest dumb-jump-rgtype-test ()
+  (should (equal (dumb-jump-get-rg-type-by-language "python") '("py"))))
+
+(ert-deftest dumb-jump-git-grep-type-test ()
+  (should (equal (dumb-jump-get-git-grep-type-by-language "python") '("py"))))
+
+;; react tests
+
+(ert-deftest dumb-jump-react-jsx-to-class-component ()
+  (let ((js-file (f-join test-data-dir-proj1 "src" "js" "react.js")))
+    (with-current-buffer (find-file-noselect js-file t)
+      (goto-char (point-min))
+      (forward-line 8)
+      (forward-char 2)
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 3 6))
+        (should (string= js-file (with-no-warnings (dumb-jump-go))))))))
+
+(ert-deftest dumb-jump-react-jsx-to-destructured-arrow ()
+  (let ((js-file (f-join test-data-dir-proj1 "src" "js" "react.js")))
+    (with-current-buffer (find-file-noselect js-file t)
+      (goto-char (point-min))
+      (forward-line 22)
+      (forward-char 2)
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 13 6))
+        (should (string= js-file (with-no-warnings (dumb-jump-go))))))))
+
+
+(ert-deftest dumb-jump-react-jsx-to-stateless-arrow ()
+  (let ((js-file (f-join test-data-dir-proj1 "src" "js" "react.js")))
+    (with-current-buffer (find-file-noselect js-file t)
+      (goto-char (point-min))
+      (forward-line 27)
+      (forward-char 2)
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 26 6))
+        (should (string= js-file (with-no-warnings (dumb-jump-go))))))))
+
+(ert-deftest dumb-jump-react-jsx-to-inline-variable ()
+  (let ((js-file (f-join test-data-dir-proj1 "src" "js" "react.js")))
+    (with-current-buffer (find-file-noselect js-file t)
+      (goto-char (point-min))
+      (forward-line 32)
+      (forward-char 7)
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 31 6))
+        (should (string= js-file (with-no-warnings (dumb-jump-go))))))))
+
+(ert-deftest dumb-jump-react-jsx-to-decorated-component ()
+  (let ((js-file (f-join test-data-dir-proj1 "src" "js" "react.js")))
+    (with-current-buffer (find-file-noselect js-file t)
+      (goto-char (point-min))
+      (forward-line 39)
+      (forward-char 2)
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 37 6))
+        (should (string= js-file (with-no-warnings (dumb-jump-go))))))))
+
+;; c++ tests
+
+(ert-deftest dumb-jump-cpp-test1 ()
+  (let ((cpp-file (f-join test-data-dir-proj1 "src" "cpp" "test.cpp")))
+    (with-current-buffer (find-file-noselect cpp-file t)
+      (goto-char (point-min))
+      (forward-line 8)
+      (forward-char 14)
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 3 6))
+        (should (string= cpp-file (with-no-warnings (dumb-jump-go))))))))
+
+(ert-deftest dumb-jump-cpp-test2 ()
+  (let ((cpp-file (f-join test-data-dir-proj1 "src" "cpp" "test.cpp")))
+    (with-current-buffer (find-file-noselect cpp-file t)
+      (goto-char (point-min))
+      (forward-line 8)
+      (forward-char 9)
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 1 6))
+        (should (string= cpp-file (with-no-warnings (dumb-jump-go))))))))
+
+(ert-deftest dumb-jump-cpp-issue87 ()
+  (let ((cpp-file (f-join test-data-dir-proj1 "src" "cpp" "issue-87.cpp")))
+    (with-current-buffer (find-file-noselect cpp-file t)
+      (goto-char (point-min))
+      (forward-line 16)
+      (forward-char 12)
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 6 18))
+        (should (string= cpp-file (with-no-warnings (dumb-jump-go))))))))
+
+(ert-deftest dumb-jump-org-test1 ()
+  (let ((org-file (f-join test-data-dir-proj1 "src" "org" "test.org"))
+        (oldpar dumb-jump-force-searcher))
+    (setq dumb-jump-force-searcher 'rg)
+    (with-current-buffer (find-file-noselect org-file t)
+      (goto-char (point-min))
+      (forward-line 3)
+      (forward-char 2)
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 9 6))
+        (should (string= org-file (with-no-warnings (dumb-jump-go))))))
+    (setq dumb-jump-force-searcher oldpar)))
+
+(ert-deftest dumb-jump-org-test2 ()
+  (let ((org-file (f-join test-data-dir-proj1 "src" "org" "test.org"))
+        (oldpar dumb-jump-force-searcher))
+    (setq dumb-jump-force-searcher 'rg)
+    (with-current-buffer (find-file-noselect org-file t)
+      (goto-char (point-min))
+      (forward-line 14)
+      (forward-char 10)
+       (with-mock-forbidding-prompt
+         (stub dumb-jump-rg-installed? => t)
+         (mock (dumb-jump-goto-file-line * 21 2))
+         (should (string= org-file (with-no-warnings (dumb-jump-go))))))
+    (setq dumb-jump-force-searcher oldpar)))
+
+(ert-deftest dumb-jump-org-issue135 ()
+      (require 'org)
+      (require 'ob-python)
+      (org-babel-do-load-languages 'org-babel-load-languages '((python . t)))
+      (let ((org-file (f-join test-data-dir-proj1 "src" "org" "test.org"))
+            (oldpar dumb-jump-force-searcher)
+            (oldproject dumb-jump-project))
+        ;; in docker test AG version is 0.3 and 2.1.0 is needed
+        (setq dumb-jump-force-searcher 'rg)
+    ;; old version of org does not lead to point to the right directory
+    (if (version< org-version "9")
+        (setq dumb-jump-project (f-join test-data-dir-proj1 "src" "org")))
+    (with-current-buffer (find-file-noselect org-file t)
+     (goto-char (point-min))
+      (forward-line 3)
+      (forward-char 2)
+      (org-edit-src-code)
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 9 6))
+        (should (string= org-file (with-no-warnings (dumb-jump-go))))))
+    (setq dumb-jump-force-searcher oldpar)
+    (if (version< org-version "9")
+        (setq dumb-jump-project oldproject))))
+
+(ert-deftest dumb-jump-org-named-block-test ()
+  "Test jumping to org named block definition"
+  (let ((org-file (f-join test-data-dir-proj1 "src" "org" "named-blocks.org"))
+        (oldpar dumb-jump-force-searcher)
+        (old-rg-installed dumb-jump--rg-installed?))
+    (setq dumb-jump-force-searcher 'rg)
+    (setq dumb-jump--rg-installed? 'unset)
+    (with-current-buffer (find-file-noselect org-file t)
+      (goto-char (point-min))
+      (forward-line 38)  ; Line 39: "Test for uniqueblock lookup: uniqueblock"
+      (forward-char 34)  ; Position cursor on "uniqueblock" at end of line
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 41 8))  ; Line 41 is #+name: uniqueblock (col 8)
+        (should (string= org-file (with-no-warnings (dumb-jump-go))))))
+    (setq dumb-jump-force-searcher oldpar)
+    (setq dumb-jump--rg-installed? old-rg-installed)))
+
+(ert-deftest dumb-jump-org-heading-test ()
+  "Test jumping to org heading"
+  (let ((org-file (f-join test-data-dir-proj1 "src" "org" "named-blocks.org"))
+        (oldpar dumb-jump-force-searcher)
+        (old-rg-installed dumb-jump--rg-installed?))
+    (setq dumb-jump-force-searcher 'rg)
+    (setq dumb-jump--rg-installed? 'unset)
+    (with-current-buffer (find-file-noselect org-file t)
+      (goto-char (point-min))
+      (forward-line 65)  ; Line 66: "Reference to MainTopic heading: MainTopic"
+      (forward-char 35)  ; Position cursor on "MainTopic" at end of line
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 68 4))  ; Line 68 is *** MainTopic (col 4)
+        (should (string= org-file (with-no-warnings (dumb-jump-go))))))
+    (setq dumb-jump-force-searcher oldpar)
+    (setq dumb-jump--rg-installed? old-rg-installed)))
+
+(ert-deftest dumb-jump-org-custom-id-test ()
+  "Test jumping to org CUSTOM_ID"
+  (let ((org-file (f-join test-data-dir-proj1 "src" "org" "named-blocks.org"))
+        (oldpar dumb-jump-force-searcher)
+        (old-rg-installed dumb-jump--rg-installed?))
+    (setq dumb-jump-force-searcher 'rg)
+    (setq dumb-jump--rg-installed? 'unset)
+    (with-current-buffer (find-file-noselect org-file t)
+      (goto-char (point-min))
+      (forward-line 57)  ; Line 58: "See also the section with ID call-section for more info."
+      (forward-char 34)  ; Position cursor on "call-section"
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 55 12))  ; Line 55 is :CUSTOM_ID: call-section (col 12)
+        (should (string= org-file (with-no-warnings (dumb-jump-go))))))
+    (setq dumb-jump-force-searcher oldpar)
+    (setq dumb-jump--rg-installed? old-rg-installed)))
+
+(ert-deftest dumb-jump-org-call-test ()
+  "Test jumping from #+call reference to named block definition"
+  (let ((org-file (f-join test-data-dir-proj1 "src" "org" "named-blocks.org"))
+        (oldpar dumb-jump-force-searcher)
+        (old-rg-installed dumb-jump--rg-installed?))
+    (setq dumb-jump-force-searcher 'rg)
+    (setq dumb-jump--rg-installed? 'unset)
+    (with-current-buffer (find-file-noselect org-file t)
+      (goto-char (point-min))
+      (forward-line 61)  ; Line 62: "#+CALL: UPPERCASE()"
+      (forward-char 8)   ; Position cursor on "UPPERCASE"
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 20 8))  ; Line 20 is #+NAME: UPPERCASE (col 8)
+        (should (string= org-file (with-no-warnings (dumb-jump-go))))))
+    (setq dumb-jump-force-searcher oldpar)
+    (setq dumb-jump--rg-installed? old-rg-installed)))
+
+(ert-deftest dumb-jump-org-named-block-nospace-test ()
+  "Test jumping to org named block definition without space after colon"
+  (let ((org-file (f-join test-data-dir-proj1 "src" "org" "named-blocks.org"))
+        (oldpar dumb-jump-force-searcher)
+        (old-rg-installed dumb-jump--rg-installed?))
+    (setq dumb-jump-force-searcher 'rg)
+    (setq dumb-jump--rg-installed? 'unset)
+    (with-current-buffer (find-file-noselect org-file t)
+      (goto-char (point-min))
+      (forward-line 45)  ; Line 46: "Test for nospace lookup: nospace"
+      (forward-char 28)  ; Position cursor on "nospace" at end of line
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 48 7))  ; Line 48 is #+name:nospace (col 7)
+        (should (string= org-file (with-no-warnings (dumb-jump-go))))))
+    (setq dumb-jump-force-searcher oldpar)
+    (setq dumb-jump--rg-installed? old-rg-installed)))
+
+(ert-deftest dumb-jump-org-custom-id-nospace-test ()
+  "Test jumping to org CUSTOM_ID without space after colon"
+  (let ((org-file (f-join test-data-dir-proj1 "src" "org" "named-blocks.org"))
+        (oldpar dumb-jump-force-searcher)
+        (old-rg-installed dumb-jump--rg-installed?))
+    (setq dumb-jump-force-searcher 'rg)
+    (setq dumb-jump--rg-installed? 'unset)
+    (with-current-buffer (find-file-noselect org-file t)
+      (goto-char (point-min))
+      (forward-line 87)  ; Line 88: "Reference to nospace-id custom ID: nospace-id"
+      (forward-char 36)  ; Position cursor on "nospace-id" at end of line
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 85 11))  ; Line 85 is :CUSTOM_ID:nospace-id (col 11)
+        (should (string= org-file (with-no-warnings (dumb-jump-go))))))
+    (setq dumb-jump-force-searcher oldpar)
+    (setq dumb-jump--rg-installed? old-rg-installed)))
+
+
+;; This test verifies that having ".dumbjumpignore" files in the two sub-projects will make it find
+;; the "multiproj" folder as project root since it has a ".dumbjump" file. The two sub-projects have
+;; a dummy ".git" folder to signify it as a repository that would normally become the root without
+;; the ignore file.
+(ert-deftest dumb-jump-multiproj ()
+  (let ((main-file (f-join test-data-dir-multiproj "subproj1" "main.cc"))
+        (header-file (f-join test-data-dir-multiproj "subproj2" "header.h")))
+    (with-current-buffer (find-file-noselect main-file t)
+      (goto-char (point-min))
+      (forward-line 3)
+      (forward-char 18)
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 6 6))
+        (should (string= header-file (with-no-warnings (dumb-jump-go))))))))
+
+;; This test makes sure that even though there's a local match it will jump to the external file
+;; match instead.
+(ert-deftest dumb-jump-prefer-external ()
+  (let ((dumb-jump-aggressive t)
+        (main-file (f-join test-data-dir-proj1 "src" "cpp" "external.cpp"))
+        (header-file (f-join test-data-dir-proj1 "src" "cpp" "external.h")))
+    (with-current-buffer (find-file-noselect main-file t)
+      (goto-char (point-min))
+      (forward-line 10)
+      (forward-char 2)
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 4 6))
+        (should (string= header-file (with-no-warnings (dumb-jump-go-prefer-external))))))))
+
+(ert-deftest dumb-jump-prefer-only-external ()
+  (let ((main-file (f-join test-data-dir-multiproj "subproj1" "main.cc"))
+        (header-file (f-join test-data-dir-multiproj "subproj2" "header.h")))
+    (with-current-buffer (find-file-noselect main-file t)
+      (goto-char (point-min))
+      (forward-line 3)
+      (forward-char 18)
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 6 6))
+        (should (string= header-file (with-no-warnings (dumb-jump-go-prefer-external))))))))
+
+(ert-deftest dumb-jump-prefer-external-only-current ()
+  (let ((main-file (f-join test-data-dir-proj1 "src" "cpp" "only.cpp")))
+    (with-current-buffer (find-file-noselect main-file t)
+      (goto-char (point-min))
+      (forward-line 1)
+      (forward-char 2)
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 6 6))
+        (should (string= main-file (with-no-warnings (dumb-jump-go-prefer-external))))))))
+
+(ert-deftest dumb-jump-prefer-external-other-window ()
+  (let ((dumb-jump-aggressive t)
+        (main-file (f-join test-data-dir-proj1 "src" "cpp" "external.cpp"))
+        (header-file (f-join test-data-dir-proj1 "src" "cpp" "external.h")))
+    (with-current-buffer (find-file-noselect main-file t)
+      (goto-char (point-min))
+      (forward-line 10)
+      (forward-char 2)
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 4 6))
+        (should (string= header-file
+                         (with-no-warnings
+                           (dumb-jump-go-prefer-external-other-window))))))))
+
+(ert-deftest dumb-jump-filter-no-start-comments ()
+  (should (equal '((:context "yield me"))
+                 (dumb-jump-filter-no-start-comments
+                  '((:context "// filter me out")
+                    (:context "yield me"))
+                  "c++"))))
+
+(ert-deftest dumb-jump-filter-no-start-comments-unknown-language ()
+  (should (equal nil (dumb-jump-filter-no-start-comments '() "unknownlanguage"))))
+
+(defun generators-valid (pl searcher)
+  (and (eq 8 (length pl))
+       (functionp (plist-get pl :parse))
+       (functionp (plist-get pl :generate))
+       (functionp (plist-get pl :installed))
+       (eq searcher (plist-get pl :searcher))))
+
+(ert-deftest dumb-jump-generators-by-searcher-git-grep ()
+  (let* ((searcher 'git-grep)
+         (gen-funcs (dumb-jump-generators-by-searcher searcher)))
+    (should (generators-valid gen-funcs searcher))))
+
+(ert-deftest dumb-jump-generators-by-searcher-ag ()
+  (let* ((searcher 'ag)
+         (gen-funcs (dumb-jump-generators-by-searcher searcher)))
+    (should (generators-valid gen-funcs searcher))))
+
+(ert-deftest dumb-jump-generators-by-searcher-git-grep-plus-ag ()
+  (let* ((searcher 'git-grep-plus-ag)
+         (gen-funcs (dumb-jump-generators-by-searcher searcher)))
+    (should (generators-valid gen-funcs searcher))))
+
+(ert-deftest dumb-jump-generators-by-searcher-rg ()
+  (let* ((searcher 'rg)
+         (gen-funcs (dumb-jump-generators-by-searcher searcher)))
+    (should (generators-valid gen-funcs searcher))))
+
+(ert-deftest dumb-jump-generators-by-searcher-gnu-grep ()
+  (let* ((searcher 'gnu-grep)
+         (gen-funcs (dumb-jump-generators-by-searcher searcher)))
+    (should (generators-valid gen-funcs searcher))))
+
+(ert-deftest dumb-jump-generators-by-searcher-grep ()
+  (let* ((searcher 'grep)
+         (gen-funcs (dumb-jump-generators-by-searcher searcher)))
+    (should (generators-valid gen-funcs searcher))))
+
+(defun generator-plist-equal (pl1 pl2)
+  (and (eq (length pl1) (length pl2))
+       (eq (plist-get pl1 :parse)
+           (plist-get pl2 :parse))
+       (eq (plist-get pl1 :generate)
+           (plist-get pl2 :generate))
+       (eq (plist-get pl1 :installed)
+           (plist-get pl2 :installed))
+       (eq (plist-get pl1 :searcher)
+           (plist-get pl2 :searcher))))
+
+;; Test the search tool selection based on the 2 user-options:
+;; - `dumb-jump-prefer-searcher'
+;; - `dumb-jump-force-searcher' acting as an override
+;; First run  simple tests that only check one combination.
+(ert-deftest dumb-jump-selected-grep-variant-test-nil-nil-with-nothing ()
+  (let ((dumb-jump-prefer-searcher nil)
+        (dumb-jump-force-searcher nil))
+    (with-mock
+      ;; (mock (executable-find *) => t)
+      (mock (dumb-jump-ag-installed?) => nil)
+      (mock (dumb-jump-rg-installed?) => nil)
+      (mock (dumb-jump-grep-installed?) => 'bsd)
+      (should (eq (dumb-jump-selected-grep-variant) 'grep)))))
+
+(ert-deftest dumb-jump-selected-grep-variant-test-nil-nil-with-really-nothing ()
+  (let ((dumb-jump-prefer-searcher nil)
+        (dumb-jump-force-searcher nil))
+    (with-mock
+      ;; (mock (executable-find *) => t)
+      (mock (dumb-jump-ag-installed?) => nil)
+      (mock (dumb-jump-rg-installed?) => nil)
+      (mock (dumb-jump-grep-installed?) => nil)
+      ;; [:todo 2026-01-14, by Pierre Rouleau: When dumb-jump-grep-installed?
+      ;;                    returns nil the selection is still 'grep. Is this OK??]
+      (should (eq (dumb-jump-selected-grep-variant) 'grep)))))
+
+(ert-deftest dumb-jump-selected-grep-variant-test-nil-nil-with-ag ()
+  (let ((dumb-jump-prefer-searcher nil)
+        (dumb-jump-force-searcher nil))
+    (with-mock
+      (mock (dumb-jump-ag-installed?) => t)
+      (should (eq (dumb-jump-selected-grep-variant) 'ag)))))
+
+(ert-deftest dumb-jump-selected-grep-variant-test-nil-nil-with-rg ()
+  (let ((dumb-jump-prefer-searcher nil)
+        (dumb-jump-force-searcher nil))
+    (with-mock
+      ;; (mock (executable-find *) => t)
+      (mock (dumb-jump-ag-installed?) => nil)
+      (mock (dumb-jump-rg-installed?) => t)
+      (should (eq (dumb-jump-selected-grep-variant) 'rg)))))
+
+(ert-deftest dumb-jump-selected-grep-variant-test-ag-nil ()
+  (let ((dumb-jump-prefer-searcher 'ag)
+        (dumb-jump-force-searcher nil))
+    (with-mock
+      (mock (dumb-jump-ag-installed?) => t)
+      (should (eq (dumb-jump-selected-grep-variant) 'ag)))))
+
+(ert-deftest dumb-jump-selected-grep-variant-test-rg-nil ()
+  (let ((dumb-jump-prefer-searcher 'rg)
+        (dumb-jump-force-searcher nil))
+    (with-mock
+      (mock (dumb-jump-rg-installed?) => t)
+      (should (eq (dumb-jump-selected-grep-variant) 'rg)))))
+
+(ert-deftest dumb-jump-selected-grep-variant-test-rg-grep ()
+  (let ((dumb-jump-prefer-searcher 'rg)
+        (dumb-jump-force-searcher 'grep))
+    (should (eq (dumb-jump-selected-grep-variant) 'grep))))
+
+(ert-deftest dumb-jump-selected-grep-variant-test-grep-nil ()
+  (let ((dumb-jump-prefer-searcher 'grep)
+        (dumb-jump-force-searcher nil))
+    (should (eq (dumb-jump-selected-grep-variant) 'grep))))
+
+(ert-deftest dumb-jump-selected-grep-variant-test-gnu-grep-nil ()
+  (let ((dumb-jump-prefer-searcher 'gnu-grep)
+        (dumb-jump-force-searcher nil))
+    (should (eq (dumb-jump-selected-grep-variant) 'gnu-grep))))
+
+;; Run a test that go through all combinations
+
+(defvar dumb-jump-search-selector-tester-choice nil
+  "What `dumb-jump-search-selector-tester' returns.")
+(defun dumb-jump-search-selector-tester (_dir)
+  "Mocker for a user-supplied selector as override. Ignore DIR."
+  dumb-jump-search-selector-tester-choice)
+
+(ert-deftest dumb-jump-selected-grep-variant-tests ()
+  (let ((dumb-jump-prefer-searcher nil)
+        (dumb-jump-force-searcher nil))
+    (with-mock
+      ;; (mock (executable-find *) => t)
+      (mock (dumb-jump-ag-installed?) => t)
+      (mock (dumb-jump-rg-installed?) => t)
+      (mock (dumb-jump-grep-installed?) => 'gnu)
+      (mock (dumb-jump-git-grep-installed?) => t)
+      ;; [:todo 2026-01-14, by Pierre Rouleau: the next one is never called.  Why?]
+      ;; (mock (dumb-jump--git-grep-plus-ag-installed?) => t)
+
+      (dolist (dumb-jump-prefer-searcher '(ag rg grep gnu-grep
+                                              git-grep git-grep-plus-ag))
+        ;;
+        ;; When there is no overriding, the preference is honoured.
+        (setq dumb-jump-force-searcher nil)
+        (should (eq (dumb-jump-selected-grep-variant)
+                    dumb-jump-prefer-searcher))
+        ;;
+        ;; when there is an overriding of the old/deprecated style,
+        ;; the preference is ignored.
+        (dolist (dumb-jump-force-searcher '(ag rg grep gnu-grep
+                                               git-grep git-grep-plus-ag))
+          (should (eq (dumb-jump-selected-grep-variant)
+                      dumb-jump-force-searcher)))
+        ;;
+        ;; When the overriding is provided by a user-specified function, that
+        ;; function determines the selection. Drive user selection via the
+        ;; `dumb-jump-search-selector-tester-choice' variable in this test:
+        (setq dumb-jump-force-searcher #'dumb-jump-search-selector-tester)
+        (dolist (dumb-jump-search-selector-tester-choice '(ag rg grep gnu-grep
+                                                              git-grep
+                                                              git-grep-plus-ag))
+          (should (eq (dumb-jump-selected-grep-variant)
+                      dumb-jump-search-selector-tester-choice)))
+        ;;
+        ;; When the provided overriding is based on directories: the identified
+        ;; directories in the list are requesting the use of git-grep but only
+        ;; inside those directories
+        (setq dumb-jump-force-searcher (list (f-expand ".")))
+        (should (eq (dumb-jump-selected-grep-variant (f-expand "."))
+                    'git-grep))
+        ;;
+        ;; When overriding for a directory that is not the current directory,
+        ;; then this overriding does not take effect and the
+        ;; `dumb-jump-prefer-searcher'  value is used.
+        (setq dumb-jump-force-searcher '("/some/non/existing/directory"))
+        (should (eq (dumb-jump-selected-grep-variant (f-expand "."))
+                    dumb-jump-prefer-searcher))))))
+
+;; --
+(ert-deftest dumb-jump-pick-grep-variant-force ()
+  (let* ((dumb-jump-force-searcher 'grep)
+         (gen-funcs (dumb-jump-generators-by-searcher 'grep))
+         (variant (dumb-jump-pick-grep-variant)))
+    (should (generator-plist-equal gen-funcs variant))))
+
+(ert-deftest dumb-jump-pick-grep-variant-prefer ()
+  (let* ((dumb-jump-force-searcher nil)
+         (dumb-jump-prefer-searcher 'grep)
+         (gen-funcs (dumb-jump-generators-by-searcher 'grep))
+         (variant (dumb-jump-pick-grep-variant)))
+    (should (generator-plist-equal gen-funcs variant))))
+
+(ert-deftest dumb-jump-pick-grep-variant-fallback-ag ()
+  (let* ((dumb-jump-force-searcher nil)
+         (dumb-jump-prefer-searcher nil)
+	 (dumb-jump--ag-installed? t)
+         (dumb-jump--rg-installed? nil)
+         (gen-funcs (dumb-jump-generators-by-searcher 'ag))
+         (variant (dumb-jump-pick-grep-variant)))
+    (should (generator-plist-equal gen-funcs variant))))
+
+(ert-deftest dumb-jump-pick-grep-variant-fallback-rg ()
+  (let* ((dumb-jump-force-searcher nil)
+         (dumb-jump-prefer-searcher nil)
+         (dumb-jump--ag-installed? nil)
+         (dumb-jump--rg-installed? t)
+         (gen-funcs (dumb-jump-generators-by-searcher 'rg))
+         (variant (dumb-jump-pick-grep-variant)))
+    (should (generator-plist-equal gen-funcs variant))))
+
+(ert-deftest dumb-jump-pick-grep-variant-fallback-gnu-grep ()
+  (let* ((dumb-jump-force-searcher nil)
+         (dumb-jump-prefer-searcher nil)
+         (dumb-jump--ag-installed? nil)
+         (dumb-jump--rg-installed? nil)
+         (dumb-jump--grep-installed? 'gnu)
+         (gen-funcs (dumb-jump-generators-by-searcher 'gnu-grep))
+         (variant (dumb-jump-pick-grep-variant)))
+    (should (generator-plist-equal gen-funcs variant))))
+
+(ert-deftest dumb-jump-pick-grep-variant-fallback-grep ()
+  (let* ((dumb-jump-force-searcher nil)
+         (dumb-jump-prefer-searcher nil)
+         (dumb-jump--ag-installed? nil)
+         (dumb-jump--rg-installed? nil)
+         (dumb-jump--grep-installed? 'bsd)
+         (gen-funcs (dumb-jump-generators-by-searcher 'grep))
+         (variant (dumb-jump-pick-grep-variant)))
+    (should (generator-plist-equal gen-funcs variant))))
+
+(ert-deftest dumb-jump-get-rules-by-language-haskell-rg ()
+  "Haskell rules should be available for rg searcher."
+  (let ((rules (dumb-jump-get-rules-by-language "haskell" 'rg)))
+    (should (> (length rules) 0))
+    (should (seq-find (lambda (r) (string= (plist-get r :type) "module")) rules))
+    (should (seq-find (lambda (r) (string= (plist-get r :type) "top level function")) rules))
+    (should (seq-find (lambda (r) (string= (plist-get r :type) "typeclass")) rules))))
+
+(ert-deftest dumb-jump-get-rules-by-language-haskell-grep ()
+  "Haskell portable rules should be available for grep searcher.
+Non-portable rules (multiline/lookahead) should not be."
+  (let ((rules (dumb-jump-get-rules-by-language "haskell" 'grep)))
+    (should (> (length rules) 0))
+    ;; Portable rules should be present
+    (should (seq-find (lambda (r) (string= (plist-get r :type) "module")) rules))
+    (should (seq-find (lambda (r) (string= (plist-get r :type) "type-like")) rules))
+    (should (seq-find (lambda (r) (string= (plist-get r :type) "typeclass")) rules))
+    ;; Non-portable rules should NOT be present
+    (should-not (seq-find (lambda (r) (string= (plist-get r :type) "top level function")) rules))
+    (should-not (seq-find (lambda (r) (string= (plist-get r :type) "(data)type constructor 1")) rules))
+    (should-not (seq-find (lambda (r) (string= (plist-get r :type) "data/newtype record field")) rules))))
+
+(ert-deftest dumb-jump-searcher-fallback-when-no-rules ()
+  "When selected searcher has no rules for a language, fall back to one that does.
+Exercises the actual fallback path in dumb-jump-fetch-results."
+  (let ((dumb-jump-force-searcher nil)
+        ;; Prefer rg so it's selected initially (not ag).
+        (dumb-jump-prefer-searcher 'rg)
+        (dumb-jump--ag-installed? t)
+        (dumb-jump--rg-installed? t)
+        (dumb-jump--grep-installed? nil)
+        (dumb-jump--git-grep-installed? nil)
+        ;; fakelang only has ag rules — rg has no rules for it.
+        (dumb-jump-find-rules
+         (list '(:language "fakelang" :type "function"
+                 :supports ("ag")
+                 :regex "def\\s+JJJ\\b"
+                 :tests ("def test"))))
+        (used-generate-fn nil))
+    ;; Verify rg is selected but has no rules for fakelang
+    (should (eq (dumb-jump-selected-grep-variant) 'rg))
+    (should (null (dumb-jump-get-rules-by-language "fakelang" 'rg)))
+    (should (dumb-jump-get-rules-by-language "fakelang" 'ag))
+    ;; Call dumb-jump-fetch-results and verify the fallback switches to ag
+    (with-temp-buffer
+      (insert "def test")
+      (goto-char 5)
+      (let ((buffer-file-name "/tmp/fake.fakelang"))
+        (noflet ((dumb-jump-run-command
+                  (look-for proj regexes lang exclude-paths
+                            cur-file cur-line-num parse-fn generate-fn)
+                  (setq used-generate-fn generate-fn)
+                  nil))
+          (dumb-jump-fetch-results "/tmp/fake.fakelang" "/tmp" "fakelang" nil)
+          ;; The fallback should have switched from rg to ag
+          (should (eq used-generate-fn 'dumb-jump-generate-ag-command)))))))
+
+;; This test makes sure that if the `cur-file' is absolute but results are relative, then it must
+;; still find and sort results correctly.
+(ert-deftest dumb-jump-handle-results-relative-current-file-test ()
+  (let ((dumb-jump-aggressive t)
+        (results '((:path "relfile.js" :line 62 :context "var isNow = true" :diff 7 :target "isNow")
+                   (:path "src/absfile.js" :line 69 :context "isNow = false" :diff 0 :target "isNow"))))
+    (with-mock
+     (mock (dumb-jump-goto-file-line "relfile.js" 62 4))
+     (dumb-jump-handle-results results "/code/redux/relfile.js" "/code/redux" "" "isNow" nil nil))))
+
+;; Make sure it jumps aggressively, i.e. normally.
+(ert-deftest dumb-jump-handle-results-aggressively-test ()
+  (let ((dumb-jump-aggressive t)
+        (results '((:path "relfile.js" :line 62 :context "var isNow = true" :diff 7 :target "isNow")
+                   (:path "src/absfile.js" :line 69 :context "isNow = false" :diff 0 :target "isNow"))))
+    (with-mock
+     (mock (dumb-jump-goto-file-line "relfile.js" 62 4))
+     (dumb-jump-handle-results results "relfile.js" "/code/redux" "" "isNow" nil nil))))
+
+;; Make sure non-aggressive mode shows choices when more than one possibility.
+(ert-deftest dumb-jump-handle-results-non-aggressively-test ()
+  (let ((dumb-jump-aggressive nil)
+        (results '((:path "relfile.js" :line 62 :context "var isNow = true" :diff 7 :target "isNow")
+                   (:path "src/absfile.js" :line 69 :context "isNow = false" :diff 0 :target "isNow"))))
+    (with-mock
+     (mock (dumb-jump-prompt-user-for-choice "/code/redux" *))
+     (dumb-jump-handle-results results "relfile.js" "/code/redux" "" "isNow" nil nil))))
+
+(ert-deftest dumb-jump-handle-results-non-aggressively-quick-look-test ()
+  (let ((dumb-jump-aggressive nil)
+        (results '((:path "relfile.js" :line 62 :context "var isNow = true" :diff 7 :target "isNow")
+                   (:path "src/absfile.js" :line 69 :context "isNow = false" :diff 0 :target "isNow"))))
+    (with-mock
+     (mock (dumb-jump--select-choice '("relfile.js:62: var isNow = true" "src/absfile.js:69: isNow = false") "Matches: ")
+           => "src/absfile.js:69: isNow = false")
+     (mock (dumb-jump--show-preview "src/absfile.js:69: isNow = false") :times 1)
+     (dumb-jump-handle-results results "relfile.js" "/code/redux" "" "isNow" t nil))))
+
+;; Make sure it jumps when there's only one possibility in non-aggressive mode.
+(ert-deftest dumb-jump-handle-results-non-aggressive-do-jump-test ()
+  (let ((dumb-jump-aggressive nil)
+        (results '((:path "relfile.js" :line 62 :context "var isNow = true" :diff 7 :target "isNow"))))
+    (with-mock
+     (mock (dumb-jump-goto-file-line "relfile.js" 62 4))
+     (dumb-jump-handle-results results "relfile.js" "/code/redux" "" "isNow" nil nil))))
+
+(ert-deftest dumb-jump-shell-command-switch-zsh-test ()
+  (let ((shell-file-name "/usr/bin/zsh"))
+    (should (string-equal "-icf" (dumb-jump-shell-command-switch)))))
+
+(ert-deftest dumb-jump-shell-command-switch-csh-test ()
+  (let ((shell-file-name "/usr/bin/csh"))
+    (should (string-equal "-icf" (dumb-jump-shell-command-switch)))))
+
+(ert-deftest dumb-jump-shell-command-switch-tcsh-test ()
+  (let ((shell-file-name "/usr/bin/zsh"))
+    (should (string-equal "-icf" (dumb-jump-shell-command-switch)))))
+
+(ert-deftest dumb-jump-shell-command-switch-bash-test ()
+  (let ((shell-file-name "/usr/bin/bash"))
+    (should (string-equal "-c" (dumb-jump-shell-command-switch)))))
+
+(ert-deftest dumb-jump-shell-command-switch-unknown-test ()
+  (let ((shell-file-name "/usr/bin/thisshelldoesnotexist"))
+    (should (string-equal shell-command-switch (dumb-jump-shell-command-switch)))))
+
+(ert-deftest dumb-jump-go-clojure-question-mark-test ()
+  (let ((clj-jump-file (f-join test-data-dir-proj3 "file3.clj"))
+        (clj-to-file (f-join test-data-dir-proj3 "file2.clj")))
+    (with-current-buffer (find-file-noselect clj-jump-file t)
+      (funcall 'lisp-mode)  ;; need a built in lisp mode so `?` is part of a symbol
+      (goto-char (point-min))
+      (forward-line 2)
+      (forward-char 2)
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 1 6))
+        (should (string= clj-to-file (with-no-warnings (dumb-jump-go))))))))
+
+
+(ert-deftest dumb-jump-go-clojure-no-question-mark-test ()
+  (let ((clj-jump-file (f-join test-data-dir-proj3 "file3.clj"))
+        (clj-to-file (f-join test-data-dir-proj3 "file1.clj")))
+    (with-current-buffer (find-file-noselect clj-jump-file t)
+      (funcall 'lisp-mode) ;; need a built in lisp mode so `?` is part of a symbol
+      (goto-char (point-min))
+      (forward-line 3)
+      (forward-char 2)
+      (with-mock-forbidding-prompt
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 2 6))
+        (should (string= clj-to-file (with-no-warnings (dumb-jump-go))))))))
+
+(ert-deftest dumb-jump-go-clojure-no-asterisk-test ()
+  (let ((clj-jump-file (f-join test-data-dir-proj3 "file3.clj"))
+        (clj-to-file (f-join test-data-dir-proj3 "file2.clj")))
+    (with-current-buffer (find-file-noselect clj-jump-file t)
+      (funcall 'lisp-mode) ;; need a built in lisp mode so `?` is part of a symbol
+      (goto-char (point-min))
+      (forward-line 4)
+      (forward-char 2)
+      (with-mock-forbidding-prompt
+        ;; (stub dumb-jump-ag-installed? => t)
+        (stub dumb-jump-rg-installed? => t)
+        (mock (dumb-jump-goto-file-line * 4 9))
+        (should (string= clj-to-file (with-no-warnings (dumb-jump-go))))))))
+
+(ert-deftest dumb-jump-go-clojure-asterisk-test ()
+  (let ((clj-jump-file (f-join test-data-dir-proj3 "file3.clj"))
+        (clj-to-file (f-join test-data-dir-proj3 "file1.clj")))
+    (with-current-buffer (find-file-noselect clj-jump-file t)
+      (funcall 'lisp-mode) ;; need a built in lisp mode so `?` is part of a symbol
+      (goto-char (point-min))
+      (forward-line 5)
+      (forward-char 2)
+      (with-mock-forbidding-prompt
+       (stub dumb-jump-rg-installed? => t)
+       (mock (dumb-jump-goto-file-line * 5 7))
+       (should (string= clj-to-file (with-no-warnings (dumb-jump-go))))))))
+
+
+(ert-deftest dumb-jump-format-files-as-ag-arg-test ()
+  (let* ((fake-files '("one" "two" "three"))
+         (result (dumb-jump-format-files-as-ag-arg fake-files "path"))
+         (expected "'(path/one|path/two|path/three)'"))
+    (should (string= result expected))))
+
+(ert-deftest dumb-jump-get-git-grep-files-matching-symbol-test ()
+  (with-mock
+    (mock (shell-command-to-string "git grep --full-name -F -c symbol path") => "fileA:1\nfileB:2\n")
+    (should (equal (dumb-jump-get-git-grep-files-matching-symbol "symbol" "path") '("fileA" "fileB")))))
+
+(ert-deftest dumb-jump-get-git-grep-files-matching-symbol-as-ag-arg-test ()
+  (with-mock
+    (mock (shell-command-to-string "git grep --full-name -F -c symbol path") => "fileA:1\nfileB:2\n")
+    (should (string= (dumb-jump-get-git-grep-files-matching-symbol-as-ag-arg "symbol" "path") "'(path/fileA|path/fileB)'"))))
+
+
+;; ---------------------------------------------------------------------------
+;; Tests for `dumb-jump-use-space-bracket-exp-for'
+
+(ert-deftest dumb-jump-use-space-bracket-exp-when-forced-on-grep ()
+  "Test dumb-jump-use-space-bracket-exp-for returned value."
+  ;; When `dumb-jump-force-using-space-bracket-exp' is t (like on Windows):
+  (let ((dumb-jump-force-using-space-bracket-exp t))
+    ;; It should return t for grep based tools to prevent problem when the
+    ;; system uses an old version of grep that did not support \s
+    (should (dumb-jump-use-space-bracket-exp-for 'grep))
+    (should (dumb-jump-use-space-bracket-exp-for 'gnu-grep))
+    (should (dumb-jump-use-space-bracket-exp-for 'git-grep))
+    (should (dumb-jump-use-space-bracket-exp-for 'git-grep-plus-ag))
+    ;; The other tools, ag, rg are not affected by this problem, so they can
+    ;; use \s in their regular expressions.
+    (should-not (dumb-jump-use-space-bracket-exp-for 'ag))
+    (should-not (dumb-jump-use-space-bracket-exp-for 'rg))
+    ))
+
+(ert-deftest dumb-jump-use-space-bracket-exp-when-not-forced ()
+  "Test that dumb-jump-use-space-bracket-exp-for returns nil when not forced."
+  (let ((dumb-jump-force-using-space-bracket-exp nil))
+    (should-not (dumb-jump-use-space-bracket-exp-for 'grep))
+    (should-not (dumb-jump-use-space-bracket-exp-for 'gnu-grep))
+    (should-not (dumb-jump-use-space-bracket-exp-for 'git-grep))
+    (should-not (dumb-jump-use-space-bracket-exp-for 'ag))
+    (should-not (dumb-jump-use-space-bracket-exp-for 'rg))))
+
+;; ---------------------------------------------------------------------------
+;; Tests space bracket expansion done by `dumb-jump-populate-regex'
+
+(ert-deftest dumb-jump-populate-regex-space-bracket-for-grep-tools-when-forced ()
+  "Test that \\s is replaced with [[:space:]] only for grep tools when forced."
+  (let ((dumb-jump-force-using-space-bracket-exp t))
+    ;; When forced, the bracket space should only be used in grep tools
+    (should (string= (dumb-jump-populate-regex "\\(defun\\s+JJJ\\j" "test-1" 'gnu-grep)
+                     "\\(defun[[:space:]]+test-1($|[^a-zA-Z0-9\\?\\*-])"))
+    (should (string= (dumb-jump-populate-regex "\\(defun\\s+JJJ\\j" "test-2" 'grep)
+                     "\\(defun[[:space:]]+test-2($|[^a-zA-Z0-9\\?\\*-])"))
+    (should (string= (dumb-jump-populate-regex "\\(defun\\s+JJJ\\j" "test-3" 'git-grep)
+                     "\\(defun[[:space:]]+test-3($|[^a-zA-Z0-9\\?\\*-])"))
+    ;; but not for the others.
+    ;; Note: ag uses a different regex
+    (should (string= (dumb-jump-populate-regex "\\(defun\\s+JJJ\\j" "test-4" 'ag)
+                     "\\(defun\\s+test-4(?![a-zA-Z0-9\\?\\*-])"))
+    (should (string= (dumb-jump-populate-regex "\\(defun\\s+JJJ\\j" "test-5" 'rg)
+                     "\\(defun\\s+test-5($|[^a-zA-Z0-9\\?\\*-])"))))
+
+(ert-deftest dumb-jump-populate-regex-space-bracket-for-no-tools-when-not-forced ()
+  "Test that \\s is replaced with [[:space:]] only for grep tools when forced."
+  (let ((dumb-jump-force-using-space-bracket-exp nil))
+    ;; When not forced, the bracket space should not be used by any tool
+    (should (string= (dumb-jump-populate-regex "\\(defun\\s+JJJ\\j" "test-1" 'gnu-grep)
+                     "\\(defun\\s+test-1($|[^a-zA-Z0-9\\?\\*-])"))
+    (should (string= (dumb-jump-populate-regex "\\(defun\\s+JJJ\\j" "test-2" 'grep)
+                     "\\(defun\\s+test-2($|[^a-zA-Z0-9\\?\\*-])"))
+    (should (string= (dumb-jump-populate-regex "\\(defun\\s+JJJ\\j" "test-3" 'git-grep)
+                     "\\(defun\\s+test-3($|[^a-zA-Z0-9\\?\\*-])"))
+    ;; Note: ag uses a different regex
+    (should (string= (dumb-jump-populate-regex "\\(defun\\s+JJJ\\j" "test-4" 'ag)
+                     "\\(defun\\s+test-4(?![a-zA-Z0-9\\?\\*-])"))
+    (should (string= (dumb-jump-populate-regex "\\(defun\\s+JJJ\\j" "test-5" 'rg)
+                     "\\(defun\\s+test-5($|[^a-zA-Z0-9\\?\\*-])"))))
+
+;; Rust dependency path tests
+
+(ert-deftest dumb-jump-rust-dep-paths-no-cargo-toml-test ()
+  "Test that nil is returned when no Cargo.toml exists."
+  (let ((dumb-jump--rust-deps-cache (make-hash-table :test 'equal)))
+    (should (null (dumb-jump-get-rust-dependency-paths "/nonexistent/path/")))))
+
+(ert-deftest dumb-jump-rust-dep-paths-parses-metadata-test ()
+  "Test that cargo metadata output is parsed into dependency paths."
+  (let ((dumb-jump--rust-deps-cache (make-hash-table :test 'equal))
+        (proj-root "/home/user/myproject/"))
+    (cl-letf (((symbol-function 'file-exists-p)
+               (lambda (f) (string-suffix-p "Cargo.toml" f)))
+              ((symbol-function 'call-process)
+               (lambda (_program _infile _destination _display &rest args)
+                 (when (equal (car args) "metadata")
+                   (insert (json-encode
+                            `((packages . [((manifest_path . "/home/user/.cargo/registry/src/crate-a/Cargo.toml"))
+                                           ((manifest_path . "/home/user/.cargo/registry/src/crate-b/Cargo.toml"))
+                                           ((manifest_path . "/home/user/myproject/Cargo.toml"))]))))
+                   0)))
+              ((symbol-function 'file-directory-p)
+               (lambda (_d) t)))
+      (let ((paths (dumb-jump-get-rust-dependency-paths proj-root)))
+        ;; should include dependency dirs but not project root
+        (should (member "/home/user/.cargo/registry/src/crate-a/" paths))
+        (should (member "/home/user/.cargo/registry/src/crate-b/" paths))
+        (should (not (member "/home/user/myproject/" paths)))
+        (should (= (length paths) 2))))))
+
+(ert-deftest dumb-jump-rust-dep-paths-caches-result-test ()
+  "Test that results are cached and cargo metadata is not called again."
+  (let ((dumb-jump--rust-deps-cache (make-hash-table :test 'equal))
+        (proj-root "/home/user/myproject/")
+        (call-count 0))
+    (cl-letf (((symbol-function 'file-exists-p)
+               (lambda (f) (string-suffix-p "Cargo.toml" f)))
+              ((symbol-function 'call-process)
+               (lambda (_program _infile _destination _display &rest args)
+                 (when (equal (car args) "metadata")
+                   (setq call-count (1+ call-count))
+                   (insert (json-encode
+                            `((packages . [((manifest_path . "/home/user/.cargo/registry/src/crate-a/Cargo.toml"))]))))
+                   0)))
+              ((symbol-function 'file-directory-p)
+               (lambda (_d) t)))
+      (dumb-jump-get-rust-dependency-paths proj-root)
+      (dumb-jump-get-rust-dependency-paths proj-root)
+      (should (= call-count 1)))))
+
+(ert-deftest dumb-jump-rust-dep-paths-caches-nil-result-test ()
+  "Test that a nil result from bad JSON is cached and cargo is not called again."
+  (let ((dumb-jump--rust-deps-cache (make-hash-table :test 'equal))
+        (proj-root "/home/user/myproject/")
+        (call-count 0))
+    (cl-letf (((symbol-function 'file-exists-p)
+               (lambda (f) (string-suffix-p "Cargo.toml" f)))
+              ((symbol-function 'call-process)
+               (lambda (_program _infile _destination _display &rest args)
+                 (when (equal (car args) "metadata")
+                   (setq call-count (1+ call-count))
+                   (insert "not valid json")
+                   0))))
+      (dumb-jump-get-rust-dependency-paths proj-root)
+      (dumb-jump-get-rust-dependency-paths proj-root)
+      (should (= call-count 1)))))
+
+(ert-deftest dumb-jump-rust-dep-paths-handles-bad-json-test ()
+  "Test that invalid cargo metadata output is handled gracefully."
+  (let ((dumb-jump--rust-deps-cache (make-hash-table :test 'equal))
+        (proj-root "/home/user/myproject/"))
+    (cl-letf (((symbol-function 'file-exists-p)
+               (lambda (f) (string-suffix-p "Cargo.toml" f)))
+              ((symbol-function 'call-process)
+               (lambda (_program _infile _destination _display &rest args)
+                 (when (equal (car args) "metadata")
+                   (insert "not valid json")
+                   0))))
+      (should (null (dumb-jump-get-rust-dependency-paths proj-root))))))
+
+(ert-deftest dumb-jump-rust-dep-paths-included-when-enabled-test ()
+  "Test that Rust dependency paths are added to search-paths when enabled."
+  (let ((dumb-jump-rust-search-dependencies t)
+        (dumb-jump--rust-deps-cache (make-hash-table :test 'equal))
+        (rs-file (make-temp-file "test" nil ".rs"))
+        (searched-paths nil)
+        buf)
+    (unwind-protect
+        (progn
+          (with-temp-file rs-file (insert "fn main() {}"))
+          (setq buf (find-file-noselect rs-file t))
+          (with-current-buffer buf
+            (cl-letf (((symbol-function 'dumb-jump-get-rust-dependency-paths)
+                       (lambda (_root) '("/fake/dep/path/")))
+                      ((symbol-function 'dumb-jump-run-command)
+                       (lambda (_look-for path &rest _args)
+                         (push path searched-paths)
+                         nil)))
+              (with-mock
+                (stub dumb-jump-rg-installed? => t)
+                (let ((results (dumb-jump-fetch-file-results)))
+                  (should (string= "rust" (plist-get results :lang)))
+                  (should (member "/fake/dep/path/" searched-paths)))))))
+      (when buf (kill-buffer buf))
+      (delete-file rs-file))))
+
+(ert-deftest dumb-jump-rust-dep-paths-not-included-when-disabled-test ()
+  "Test that Rust dependency paths are not searched when feature is disabled."
+  (let ((dumb-jump-rust-search-dependencies nil)
+        (dumb-jump--rust-deps-cache (make-hash-table :test 'equal))
+        (rs-file (make-temp-file "test" nil ".rs"))
+        (call-count 0)
+        buf)
+    (unwind-protect
+        (progn
+          (with-temp-file rs-file (insert "fn main() {}"))
+          (setq buf (find-file-noselect rs-file t))
+          (with-current-buffer buf
+            (cl-letf (((symbol-function 'dumb-jump-get-rust-dependency-paths)
+                       (lambda (_root)
+                         (setq call-count (1+ call-count))
+                         '("/fake/dep/path/")))
+                      ((symbol-function 'dumb-jump-run-command)
+                       (lambda (&rest _args) nil)))
+              (with-mock
+                (stub dumb-jump-rg-installed? => t)
+                (let ((results (dumb-jump-fetch-file-results)))
+                  (should (string= "rust" (plist-get results :lang)))
+                  (should (= call-count 0)))))))
+      (when buf (kill-buffer buf))
+      (delete-file rs-file))))
+
+(ert-deftest dumb-jump-cargo-toml-is-project-denoter-test ()
+  "Test that Cargo.toml is recognized as a project denoter."
+  (should (member "Cargo.toml" dumb-jump-project-denoters)))
+
+;; Extra search paths function tests
+
+(ert-deftest dumb-jump-extra-search-paths-included-test ()
+  "Test that extra search paths from hook function are added to search-paths."
+  (let* ((extra-dir-one (make-temp-file "dj-extra1" t))
+         (extra-dir-two (make-temp-file "dj-extra2" t))
+         (dumb-jump-extra-search-paths-function
+          (lambda (_lang _proj-root)
+            (list extra-dir-one extra-dir-two)))
+         (dumb-jump-rust-search-dependencies nil)
+         (js-file (make-temp-file "test" nil ".js"))
+         (searched-paths nil)
+         buf)
+    (unwind-protect
+        (progn
+          (with-temp-file js-file (insert "function doStuff() {}"))
+          (setq buf (find-file-noselect js-file t))
+          (with-current-buffer buf
+            (cl-letf (((symbol-function 'dumb-jump-run-command)
+                       (lambda (_look-for path &rest _args)
+                         (push path searched-paths)
+                         nil)))
+              (with-mock
+                (stub dumb-jump-rg-installed? => t)
+                (dumb-jump-fetch-file-results)
+                (should (member extra-dir-one searched-paths))
+                (should (member extra-dir-two searched-paths))))))
+      (when buf (kill-buffer buf))
+      (delete-file js-file)
+      (delete-directory extra-dir-one)
+      (delete-directory extra-dir-two))))
+
+(ert-deftest dumb-jump-extra-search-paths-nil-when-unset-test ()
+  "Test that no extra paths are added when the function is nil."
+  (let ((dumb-jump-extra-search-paths-function nil)
+        (dumb-jump-rust-search-dependencies nil)
+        (js-file (make-temp-file "test" nil ".js"))
+        (searched-paths nil)
+        buf)
+    (unwind-protect
+        (progn
+          (with-temp-file js-file (insert "function doStuff() {}"))
+          (setq buf (find-file-noselect js-file t))
+          (with-current-buffer buf
+            (cl-letf (((symbol-function 'dumb-jump-run-command)
+                       (lambda (_look-for path &rest _args)
+                         (push path searched-paths)
+                         nil)))
+              (with-mock
+                (stub dumb-jump-rg-installed? => t)
+                (dumb-jump-fetch-file-results)
+                (should (= (length searched-paths) 1))))))
+      (when buf (kill-buffer buf))
+      (delete-file js-file))))
+
+(ert-deftest dumb-jump-extra-search-paths-receives-args-test ()
+  "Test that the function receives the correct lang and proj-root."
+  (let* ((extra-dir (make-temp-file "dj-extra" t))
+         (received-args nil)
+         (dumb-jump-extra-search-paths-function
+          (lambda (lang proj-root)
+            (setq received-args (list lang proj-root))
+            (list extra-dir)))
+         (dumb-jump-rust-search-dependencies nil)
+         (js-file (make-temp-file "test" nil ".js"))
+         (searched-paths nil)
+         buf)
+    (unwind-protect
+        (progn
+          (with-temp-file js-file (insert "function doStuff() {}"))
+          (setq buf (find-file-noselect js-file t))
+          (with-current-buffer buf
+            (cl-letf (((symbol-function 'dumb-jump-run-command)
+                       (lambda (_look-for path &rest _args)
+                         (push path searched-paths)
+                         nil)))
+              (with-mock
+                (stub dumb-jump-rg-installed? => t)
+                (dumb-jump-fetch-file-results)
+                (should (member extra-dir searched-paths))
+                (should received-args)
+                (should (stringp (nth 1 received-args)))))))
+      (when buf (kill-buffer buf))
+      (delete-file js-file)
+      (delete-directory extra-dir))))
+
+(ert-deftest dumb-jump-extra-search-paths-nil-return-test ()
+  "Test that a function returning nil does not break the search."
+  (let ((dumb-jump-extra-search-paths-function
+         (lambda (_lang _proj-root) nil))
+        (dumb-jump-rust-search-dependencies nil)
+        (js-file (make-temp-file "test" nil ".js"))
+        (searched-paths nil)
+        buf)
+    (unwind-protect
+        (progn
+          (with-temp-file js-file (insert "function doStuff() {}"))
+          (setq buf (find-file-noselect js-file t))
+          (with-current-buffer buf
+            (cl-letf (((symbol-function 'dumb-jump-run-command)
+                       (lambda (_look-for path &rest _args)
+                         (push path searched-paths)
+                         nil)))
+              (with-mock
+                (stub dumb-jump-rg-installed? => t)
+                (dumb-jump-fetch-file-results)
+                (should (= (length searched-paths) 1))))))
+      (when buf (kill-buffer buf))
+      (delete-file js-file))))
+
+(ert-deftest dumb-jump-extra-search-paths-with-rust-deps-test ()
+  "Test that extra paths and Rust dependency paths coexist."
+  (let* ((extra-dir (make-temp-file "dj-extra" t))
+         (rust-dep-dir (make-temp-file "dj-rustdep" t))
+         (dumb-jump-extra-search-paths-function
+          (lambda (_lang _proj-root)
+            (list extra-dir)))
+         (dumb-jump-rust-search-dependencies t)
+         (dumb-jump--rust-deps-cache (make-hash-table :test 'equal))
+         (rs-file (make-temp-file "test" nil ".rs"))
+         (searched-paths nil)
+         buf)
+    (unwind-protect
+        (progn
+          (with-temp-file rs-file (insert "fn main() {}"))
+          (setq buf (find-file-noselect rs-file t))
+          (with-current-buffer buf
+            (cl-letf (((symbol-function 'dumb-jump-get-rust-dependency-paths)
+                       (lambda (_root) (list rust-dep-dir)))
+                      ((symbol-function 'dumb-jump-run-command)
+                       (lambda (_look-for path &rest _args)
+                         (push path searched-paths)
+                         nil)))
+              (with-mock
+                (stub dumb-jump-rg-installed? => t)
+                (dumb-jump-fetch-file-results)
+                (should (member rust-dep-dir searched-paths))
+                (should (member extra-dir searched-paths))))))
+      (when buf (kill-buffer buf))
+      (delete-file rs-file)
+      (delete-directory extra-dir)
+      (delete-directory rust-dep-dir))))
+
+;; Find references tests
+
+(ert-deftest dumb-jump-pcre-to-emacs-basic-test ()
+  "Test PCRE to Emacs regex conversion for basic patterns."
+  ;; Literal parens: \( in PCRE → ( in Emacs
+  (should (string= "def[[:space:]]*test(" (dumb-jump-pcre-to-emacs "def[[:space:]]*test\\(")))
+  ;; Group and alternation: (a|b) in PCRE → \(a\|b\) in Emacs
+  (should (string= "\\(foo\\|bar\\)" (dumb-jump-pcre-to-emacs "(foo|bar)")))
+  ;; Quantifiers: + and ? are special in both PCRE and Emacs, no conversion
+  (should (string= "[[:space:]]+" (dumb-jump-pcre-to-emacs "[[:space:]]+")))
+  (should (string= "x?" (dumb-jump-pcre-to-emacs "x?")))
+  ;; Escaped \+ and \? (literal in both) pass through unchanged
+  (should (string= "x\\+" (dumb-jump-pcre-to-emacs "x\\+")))
+  (should (string= "x\\?" (dumb-jump-pcre-to-emacs "x\\?")))
+  ;; Non-capturing group: (?:...) → \(?:...\)
+  (should (string= "\\(?:foo\\|bar\\)" (dumb-jump-pcre-to-emacs "(?:foo|bar)")))
+  ;; Lookahead/lookbehind: (?!...) (?=...) (?<=...) → valid Emacs groups
+  (should (string= "\\(?!class\\)" (dumb-jump-pcre-to-emacs "(?!class)")))
+  (should (string= "\\(?=foo\\)" (dumb-jump-pcre-to-emacs "(?=foo)")))
+  (should (string= "\\(?<=bar\\)" (dumb-jump-pcre-to-emacs "(?<=bar)")))
+  (should (string= "\\(?<!baz\\)" (dumb-jump-pcre-to-emacs "(?<!baz)")))
+  ;; Braces: {1,3} → \{1,3\}
+  (should (string= "x\\{1,3\\}" (dumb-jump-pcre-to-emacs "x{1,3}"))))
+
+(ert-deftest dumb-jump-populate-regex-for-emacs-test ()
+  "Test populating a dumb-jump regex for Emacs string-match-p."
+  (let ((emacs-re (dumb-jump-populate-regex-for-emacs "def\\s*JJJ\\b\\s*\\\(" "test")))
+    ;; Should match a Python def line
+    (should (string-match-p emacs-re "def test():"))
+    (should (string-match-p emacs-re "  def test(x, y):"))
+    ;; Should NOT match a usage
+    (should-not (string-match-p emacs-re "  test()"))))
+
+(ert-deftest dumb-jump-populate-regex-for-emacs-boundary-test ()
+  "Test that \\j boundary distinguishes identifiers with special chars.
+The \\j boundary should not match when followed by ?, *, or - (Lisp identifiers)."
+  (let ((emacs-re (dumb-jump-populate-regex-for-emacs
+                   "\\(defun\\s+JJJ\\j" "test"))
+        (star-re (dumb-jump-populate-regex-for-emacs
+                  "\\(defun\\s+JJJ\\j" "*foo*")))
+    ;; Should match (defun test followed by space or end
+    (should (string-match-p emacs-re "(defun test "))
+    (should (string-match-p emacs-re "(defun test)"))
+    ;; Should NOT match test? test- or tester (Lisp naming conventions)
+    (should-not (string-match-p emacs-re "(defun test?"))
+    (should-not (string-match-p emacs-re "(defun test-thing"))
+    (should-not (string-match-p emacs-re "(defun tester"))
+    ;; *foo* Lisp-style identifier
+    (should (string-match-p star-re "(defun *foo* "))
+    (should-not (string-match-p star-re "(defun *foo*bar "))))
+
+(ert-deftest dumb-jump-filter-definition-results-test ()
+  "Test that definition results are filtered out from reference search.
+Uses real Python rules from `dumb-jump-find-rules'."
+  (let* ((results '((:path "test.py" :line 1 :context "def test():" :diff 1 :target "test")
+                    (:path "test.py" :line 5 :context "  test()" :diff 5 :target "test")
+                    (:path "test.py" :line 10 :context "x = test()" :diff 10 :target "test")))
+         (filtered (dumb-jump-filter-definition-results results "python" "test" 'rg)))
+    ;; The "def test():" line should be filtered out
+    (should (= (length filtered) 2))
+    (should (string= (plist-get (nth 0 filtered) :context) "  test()"))
+    (should (string= (plist-get (nth 1 filtered) :context) "x = test()"))))
+
+(ert-deftest dumb-jump-filter-definition-results-cpp-lookaround-test ()
+  "Test that C++ rules with PCRE lookaround produce valid Emacs regexes.
+The C++ variable rule uses (?!...) negative lookahead which must not
+cause invalid-regexp errors in the filter."
+  (let* ((results '((:path "test.cpp" :line 3 :context "  int bar(int val) {" :diff 3 :target "bar")
+                    (:path "test.cpp" :line 9 :context "  return Foo::bar(42);" :diff 9 :target "bar")))
+         ;; Use real C++ rules (which contain (?! lookaround))
+         (filtered (dumb-jump-filter-definition-results results "c++" "bar" 'rg)))
+    ;; The function definition line should be filtered out
+    (should (= (length filtered) 1))
+    (should (string-match-p "Foo::bar" (plist-get (car filtered) :context)))))
+
+(ert-deftest dumb-jump-find-references-js-test ()
+  "Test finding references from a definition in JavaScript.
+Cursor on doSomeStuff definition in fake.js should find the call in fake2.js:1."
+  (let ((js-file (f-join test-data-dir-proj1 "src" "js" "fake.js")))
+    (with-current-buffer (find-file-noselect js-file t)
+      (goto-char (point-min))
+      (forward-line 2)
+      (forward-char 10)
+      (with-mock
+        (stub dumb-jump-rg-installed? => t)
+        (let* ((dumb-jump--search-mode 'references)
+               (info (dumb-jump-get-results))
+               (results (plist-get info :results)))
+          ;; Should find the call in fake2.js line 1
+          (should (seq-some
+                   (lambda (r)
+                     (and (string-match-p "fake2\\.js" (plist-get r :path))
+                          (= 1 (plist-get r :line))))
+                   results))
+          ;; The definition line must not appear
+          (should-not (seq-some
+                       (lambda (r)
+                         (string-match-p "function doSomeStuff"
+                                         (plist-get r :context)))
+                       results)))))))
+
+(ert-deftest dumb-jump-find-references-cpp-test ()
+  "Test finding references in C++ using existing test data.
+Cursor on bar definition in test.cpp:3 should find the usage on test.cpp:9."
+  (let ((cpp-file (f-join test-data-dir-proj1 "src" "cpp" "test.cpp")))
+    (with-current-buffer (find-file-noselect cpp-file t)
+      (goto-char (point-min))
+      (forward-line 2)
+      (forward-char 6)
+      (with-mock
+        (stub dumb-jump-rg-installed? => t)
+        (let* ((dumb-jump--search-mode 'references)
+               (info (dumb-jump-get-results))
+               (results (plist-get info :results)))
+          ;; Should find the usage Foo::bar(42) on line 9
+          (should (seq-some
+                   (lambda (r)
+                     (and (string-match-p "test\\.cpp" (plist-get r :path))
+                          (= 9 (plist-get r :line))
+                          (string-match-p "Foo::bar" (plist-get r :context))))
+                   results))
+          ;; The function definition "int bar(int val)" should be filtered
+          (should-not (seq-some
+                       (lambda (r)
+                         (string-match-p "int bar(int val)"
+                                         (plist-get r :context)))
+                       results)))))))
+
+(ert-deftest dumb-jump-find-references-public-api-test ()
+  "Test that `dumb-jump-find-references' correctly finds references via public API.
+Exercises the full public entry point including aggressive-jump suppression."
+  (let ((js-file (f-join test-data-dir-proj1 "src" "js" "fake.js")))
+    (with-current-buffer (find-file-noselect js-file t)
+      (goto-char (point-min))
+      (forward-line 2)
+      (forward-char 10)
+      (with-mock
+        (stub dumb-jump-rg-installed? => t)
+        ;; Mock dumb-jump-result-follow to prevent actual navigation
+        (stub dumb-jump-result-follow)
+        (let ((dumb-jump-aggressive t))
+          (dumb-jump-find-references)
+          ;; Mode should be reset after the let binding exits
+          (should (eq dumb-jump--search-mode 'definitions)))))))
+
+;;;

@@ -1,0 +1,1 @@
+(magit-stgit :fetcher github :repo "stacked-git/magit-stgit")

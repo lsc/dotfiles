@@ -1,0 +1,4 @@
+(web-completion-data
+ :fetcher github
+ :repo "osv/web-completion-data"
+ :files ("*.el" "html-stuff"))

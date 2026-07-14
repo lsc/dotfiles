@@ -1,0 +1,360 @@
+* 2.3.0
+
+** What's changed
+
++ add =file-modes= attribute
++ prevent =tab-bar-mode= from messing up window layout
++ add =dirvish-hl-line-inactive= face
++ remove =dirvish-open-with-programs= | improve =dirvish-find-entry-hook= (#182 #186 #275 #315)
++ fix race condition in =dirvish-subtree=
++ add =dirvish-peek-key= user option
++ asynchronous filtering and match highlighting with =dirvish-narrow=
++ add =dirvish-large-directory-threshold= user option, integrate =fd= to dirvish core
+
+* 2.2.7
+
+** What's changed
+
++ use different handlers for local / sudo / remote connections
++ responsive & aligned ~git-msg~ attribute (github style)
++ support changing display order of some attributes
++ bug fixes for ~dirvish-subtree~
+
+* 2.2.3
+
+Emergency fixes for 2 bugs in 2.2.0:
+
++ Error caused by mismatched vc-backend when expanding subtree
++ Incorrect resetting after quitting `dirvish-side`
+
+New feature:
+
++ `dirvish-quit` now works in all dirvish windows (#309)
+
+* 2.2.0
+
+** BREAKING Changes
+
++ preview text files using proxy buffer (#184 #195 #270 #295)
++ replace magick with libvips for faster image preview (#218)
++ use 7-zip for archive preview
++ support font preview
+
+** Other changes
+
++ ~dirvish-reuse-session~ now accepts new value =quit= and =open=
++ allow setting ~dirvish-default-layout~ to =nil=
++ add ~dirvish-subtree-icon-scale-factor~ user option (#185)
++ fetch =vc-info= attribute asynchronously
++ add ~dirvish-inactive~ face
++ add ~dirvish-collapse-separator~ user option (#263)
++ support session|buffer locally attributes and mode-line-format (#286)
++ add ~dirvish-special-preview-mode~ and ~dirvish-misc-mode~
++ support ~dired-find-alternate-file~ (#186)
++ sort history entries with access time (#265)
++ add ~dirvish-mode-line-bar-image-width~ option (#252)
+
+** Screenshots
+
+[[https://github.com/user-attachments/assets/ef44bf63-ff49-4d62-8126-36a5bc21ff57][https://github.com/user-attachments/assets/ef44bf63-ff49-4d62-8126-36a5bc21ff57]]
+
+** Full Changelog
+
+https://github.com/alexluigit/dirvish/compare/2.1.0...2.2.0
+
+* 2.1.0
+
+** What's changed
+
++ Fixed incorrect vc states https://github.com/alexluigit/dirvish/issues/224
++ ~dirvish-hide-cursors~ and ~dirvish-hide-details~ now support list of symbols
++ A lot of window dedication issues fixed (#194 #258 #262 #264 #293)
++ Mode line errors (#233)
++ Modular directory data fetching (#162 #238)
++ Fixed image preview with ~dirvish-peek~.
++ Performance imporvements with ~dirvish-side~.
++ Respect ~dired-kill-when-opening-new-dired-buffer~.
++ Fixed compatibility issue with =find-dired=.
+
+** Fixes from community
+
++ Fix #158 : Delete emerge overlays when turning off the mode by @aikrahguzar in https://github.com/alexluigit/dirvish/pull/159
++ docs: fix some typos by @feltcat in https://github.com/alexluigit/dirvish/pull/176
++ fix(core): don't quote conditions in condition-case by @tarsius in https://github.com/alexluigit/dirvish/pull/206
++ add nerd-icons support by @rainstormstudio in https://github.com/alexluigit/dirvish/pull/201
++ fix(core): resolve emacs binary path in a more reliable way by @isamert in https://github.com/alexluigit/dirvish/pull/192
++ Report error from fd to user by @dvzubarev in https://github.com/alexluigit/dirvish/pull/178
++ Use rsync for local file copying in dirvish-rsync by @dvzubarev in https://github.com/alexluigit/dirvish/pull/180
++ Add rsync transient map by @dvzubarev in https://github.com/alexluigit/dirvish/pull/181
++ fd: add function that reads pattern from user by @dvzubarev in https://github.com/alexluigit/dirvish/pull/187
++ Update CUSTOMIZING.org by @liguangsheng in https://github.com/alexluigit/dirvish/pull/198
++ Fix an error: void-variable dv in Emacs-30.0.50 by @dvzubarev in https://github.com/alexluigit/dirvish/pull/251
++ Remove the restriction on printing for `dirvish-data-for-dir` by @isamert in https://github.com/alexluigit/dirvish/pull/266
++ Define new faces for all VC states by @protesilaos in https://github.com/alexluigit/dirvish/pull/222
++ fix(dired-noselect): Support both lists and strings by @jcf in https://github.com/alexluigit/dirvish/pull/257
++ subtree respect dired-omit-mode now by @eki3z in https://github.com/alexluigit/dirvish/pull/268
++ refactor(yank): rework copying r2r case for rsync by @dvzubarev in https://github.com/alexluigit/dirvish/pull/215
++ fix(subtree): "toggle or open" should open file, not view it by @brownts in https://github.com/alexluigit/dirvish/pull/281
++ fix(yank): silence byte-compiler by @tarsius in https://github.com/alexluigit/dirvish/pull/220
++ Fix typos by @tarsius in https://github.com/alexluigit/dirvish/pull/227
++ Fix custom type specifications by @tarsius in https://github.com/alexluigit/dirvish/pull/239
++ yank: fixes for recent r2r refactor commit by @dvzubarev in https://github.com/alexluigit/dirvish/pull/287
++ Fix broken link to purcell's emacs in EMACS-NEWCOMERS.org by @LV in https://github.com/alexluigit/dirvish/pull/278
++ docs: document the nil case for dirvish-default-layout. by @nicolas-graves in https://github.com/alexluigit/dirvish/pull/231
++ Split dirvish-yank--execute into two functions by @dvzubarev in https://github.com/alexluigit/dirvish/pull/290
++ fix: prevent killing emacsclient started on a directory by @prati0100 in https://github.com/alexluigit/dirvish/pull/293
++ perf(dirvish-peek): prevent redundant updates by tracking previous candidate by @zsxh in https://github.com/alexluigit/dirvish/pull/297
+
+* 2.0.53
+
+** Breaking changes
+
++ Use simulated dired buffers for parent directory and directory preview
+
+  Prior to V2.0, `dirvish` command would create a ton of dired buffers because
+  `dired-noselect` function were used to generate parent buffers and preview
+  buffers for directory entries.  Now these buffers are created internally by
+  dirvish, meaning they'll not showing up as dired/dirvish buffers in your
+  buffer list.
+
+** Changes since 1.9.23
+
++ =core=:
+  - bind ~dirvish-dispatch~ to ~q~
+  - add basic perspective.el support
+  - allow user to have classic dired header (#96)
+  - basic mouse support
+  - add ~dirvish-hide-cursor~ user option (#119)
+  - add ~dirvish-redisplay-debounce~ option
++ =quick-access=:
+  - add ~dirvish-quick-access-function~ option
++ =media=:
+  - display media properties automatically
++ =fd=:
+  - allow user to select root directory for fd jump (#141)
+  - new option for default directory in dirvish-fd-jump (#138)
+  - interactive narrowing and orderless support
++ =widgets=:
+  - support mouse click on path header line segment
+  - add `dirvish-path-separators` option, closes #142
++ =side=:
+  - auto-expand to buffer file name (#113)
++ =extras=:
+  - add `dirvish-desktop-save-mode` (#133)
+  - add `dirvish-copy-remote-path` command, closes #110
++ =vc=:
+  - add `dirvish-vc-menu` prefix
+  - add `vc-log` `vc-blame` preview dispatchers
++ =subtree=:
+  - add indent guide
+  - make `dirvish-subtree-remove` an interactive function (#105)
+  - add subtree-up/clear commands
+
+** Fixes since 1.9.23
+
+- fix(core): set `dirvish--this` after session rebuild
+- fix(core): avoid unexpected fullscreen session
+- fix(core): disable font-lock-mode in shell preview
+- fix(core): allow wildcard as entry
+- fix(core): do not run dired-mode-hook in parent buffers
+- fix(core): session reuse issue #135 #136
+- fix(core): do not reuse sessions in other frames
+- fix(core): only revert window config when buffer is the current one
+- fix(core): `cursor-type` in `wdired-mode`, closes #132
+- fix(core): use local value of `other-window-scroll-buffer` (#131)
+- fix(core): remove `mod` from `dirvish-audio-exts`, closes #114
+- fix(core): revert buffer upon wdired exit
+- fix(core): inhibit undo-tree when previewing files (#107)
+- fix(core): use hollow cursor for evil normal state in wdired-mode (#104)
+- fix(core): emacs -q -> emacs -Q (#84)
+- fix(core): `window system should be used` warning on terminal (#93)
+- fix(core): escape %-constructs in path mode line segments (#97)
+- fix(core): mode-line not update on Emacs 27 (#93)
+- fix(core): use `start-file-process-shell-command` to print dir
+- fix(core): shell quote filenames for git-msg (#86)
+- fix(side): issues on frame resize update / subtree expansion #140
+- fix(side): show project in header line after project switching
+- fix(tramp): support TRAMP connections with nongnu ls
+- fix(yank): backup existed files instead of new files
+- fix(subtree): revert buffer correctly in emerged buffer
+- fix(subtree): ensure directory name ends with / on TRAMP
+- fix(extras): autoload `dirvish-copy-*`, closes #129
+- fix(extras): add offset when aligning text in TTY sessions (#115)
+- fix(extras): args-out-of-range error on file-size attribute
+- fix(fd): handle systems using `fdfind` by default (#122)
+- fix(fd): improve GNU ls detection (#92)
+- fix(collapse): endless while loop
+
+* 1.9.23
+** Breaking changes
+
++ Extract =dirvish-media= from =dirvish=
+
+  - ~dirvish-auto-cache-threshold~ -> ~dirvish-media-auto-cache-threshold~
+  - New faces: ~dirvish-media-info-heading~, ~dirvish-media-info-property-key~
+  - New command: ~dirvish-media-properties~
+
+** Changes since 1.8.14
+
++ =ls=: apply switches to current session on M-RET ([[https://github.com/alexluigit/dirvish/issues/63][#63]])
++ =narrow=: C-g to cancel the narrowing / custom regex builder
++ =emerge=:
+  - Add ~dirvish-emerge-toggle-current-group~ command to to toggle the visibility of the group
+  - Add ~dirvish-emerge-group-heading-map~, TAB -> ~dirvish-emerge-toggle-current-group~
+  - Add ~dirvish-emerge-next/previous-group~ commands
+  - Add some predicates
+
+** Fixes since 1.8.14
+
++ =core=:
+  - revert to `dirvish-mode` after quit `wdired-mode`
+  - guard `dired-current-directory` in dwim target ([[https://github.com/alexluigit/dirvish/issues/78][#78]])
+  - scroll preview util buffer with `scroll-other-window`
+  - set buffer-modified-p to nil at startup
+  - kill session util buffers on dirvish-kill-buffer-h
+  - rename obsolete command in `dirvish-dispatch`
+  - highlight current line in any case
+  - reuse fullscreen sessions unconditionally ([[https://github.com/alexluigit/dirvish/issues/64][#64]])
+  - kill overlapping session correctly ([[https://github.com/alexluigit/dirvish/issues/64][#64]])
++ =emerge=:
+  - apply changes in transient menu to buffer
+  - infinite while loop
+  - expunge invisible overlay property
++ =subtree=: revert subtrees after emerging groups
++ =extras=: increase file size string length to 8 ([[https://github.com/alexluigit/dirvish/issues/77][#77]])
++ =peek=: get candidate retriever at runtime ([[https://github.com/alexluigit/dirvish/issues/70][#70]])
++ =bookmark=: void variable error ([[https://github.com/alexluigit/dirvish/issues/75][#75]])
++ =narrow=: drop the overlay approach, accommodate subtree ([[https://github.com/alexluigit/dirvish/issues/67][#67]])
+
+* 1.8.14
+** Breaking changes
+
++ New extension: =dirvish-subtree=
++ New extension: =dirvish-collapse=
++ New extension: =dirvish-emerge=
++ New extension: =dirvish-fd=
++ New extension: =dirvish-narrow=
++ Require =transient.el= (inbuilt with Emacs 28)
+  + Extract =dirvish-ls= from =dirvish-menu=
+  + Extract =dirvish-bookmark= from =dirvish-menu=
+  + Extract =dirvish-history= from =dirvish-menu=
+  + Move ~dirvish-dispatch~ command from =dirvish-menu= to core.
++ Extract =dirvish-icons= from =dirvish-extras=
+
+** Changes since 1.3.20
+
+The lazy rendering and async I/O mechanism got a lot of improvements, Dirvish
+even outperforms Dired in terms of opening big directories.
+
++ =vc=: use fringe-bitmap to display vc-state attribute
++ =yank=: use TRAMP when SRC and DEST are in the same host ([[https://github.com/alexluigit/dirvish/issues/37][#37]])
++ =core=: add ~dirvish-open-with-programs~ user option
++ =core=: add ~dirvish-mode-line-position~ user option
++ =core=: deprecate ~dirvish-dired~ command
+
+** Fixes since 1.3.20
+
++ =core=: remove killed buffers from ~dv-roots~
++ =core=: hide dired header when exiting wdired-mode
++ =core=: ensure ~quit-window~ kill all dirvish buffers
++ =core=: incorrect ~default-directory~ for ~find-file~ ([[https://github.com/alexluigit/dirvish/issues/53][#53]])
++ =core=: do not quote filename when open externally ([[https://github.com/alexluigit/dirvish/issues/51][#51]])
++ =core=: Emacs crashes from dead index dirvish buffer ([[https://github.com/alexluigit/dirvish/issues/49][#49]])
++ =core=: uppercased file extensions
++ =core=: file name error on external file opening
++ =core=: make header/footer window dedicated ([[https://github.com/alexluigit/dirvish/issues/46][#46]])
++ =extras=: wrong-type-argument error in ~file-size-human-readable~
++ =core=: ensure the right cursor position when resuming
++ =core=: use new dirvish session for bookmark restoring
++ =core=: void :child prop caused by ~with-ivy-window~
++ =core=: ensure cursor hiding in ~evil-mode~ ([[https://github.com/alexluigit/dirvish/issues/43][#43]])
+
+* 1.3.20
+** Breaking changes
+
++ Add TRAMP support for ~dirvish-yank~ and friends
+
+** Changes since 1.2.0
+
++ =extras=: more mode-line segments ([[https://github.com/alexluigit/dirvish/issues/42][#42]])
++ =extras=: add ~dirvish-switch-layout~ command ([[https://github.com/alexluigit/dirvish/issues/33][#33]])
++ =core=: add symlink mode line ([[https://github.com/alexluigit/dirvish/issues/41][#41]])
++ =extras=: make ~file-size~ files count in directories ([[https://github.com/alexluigit/dirvish/issues/40][#40]])
++ =core=: add ~dirvish-dwim~ command
++ =core=: add auto cache facility ([[https://github.com/alexluigit/dirvish/issues/28][#28]])
++ =extras=: add ~dirvish-go-forward/backward-history~ cmds ([[https://github.com/alexluigit/dirvish/issues/32][#32]])
++ =yank=: add ~dirvish-yank-overwrite-existing-files~ option ([[https://github.com/alexluigit/dirvish/issues/38][#38]])
++ =core=: add ~free-space~ mode-line segment [[https://github.com/alexluigit/dirvish/issues/31][#31]])
++ =menu=: add ~dirvish-quicksort~ command ([[https://github.com/alexluigit/dirvish/issues/27][#27]])
++ =core=: add ~dirvish-hide-details~ user option
++ =menu=: add ~dirvish-ls-switches-menu~ prefix
++ =side=: add ~dirvish-side-follow-project-switch~ option ([[https://github.com/alexluigit/dirvish/issues/24][#24]])
++ =side=: make window of ~dirvish-side~ dedicated
++ =side=: add ~dirvish-side-follow-buffer-file~ option
++ =preview=: support remote files
++ =core=: add ~dirvish-enabled-features-on-remote~ option
++ =extras=: add ~dirvish-total-file-size~ command
++ =extras=: add ~dirvish-copy-file-true-path~ command
+
+** Fixes since 1.2.0
+
++ =core=: avoid util buffer get created after session kill
++ =core=: remove builtin attributes from dirvish--available-attrs
++ =core=: remove redundant session initialization
++ =core=: find-dired mode-line segment
++ =core=: retrieve path for auto cache correctly
++ =extras=: file permission error
++ =yank=: remote-to-remote handler
++ =core=: preserve size of header window when showing transient
++ =yank=: ensure new names when not overwrite ([[https://github.com/alexluigit/dirvish/issues/38][#38]])
++ =yank=: ensure live source file buffers
++ =yank=: autoload, recursive hardlink, errors on name collision
++ =menu=: add dirvish-quicksort to available-prefixs
++ =vc=: vc-info modeline segment
++ =core=: get correct dwim target
++ =core=: set ~face-remapping-alist~ only when it's non-nil ([[https://github.com/alexluigit/dirvish/issues/36][#36]])
++ =core=: reuse old session when calling ~dirvish--noselect~ ([[https://github.com/alexluigit/dirvish/issues/35][#35]])
++ =core=: inhibit vc follow link prompt while previewing ([[https://github.com/alexluigit/dirvish/issues/25][#25]])
++ =core=: initialize ~dirvish~ from side window correctly
++ =side=: remember new project root
++ =core=: raise error for overlapping fullscreen session
++ =core=: goto correct child-entry
++ =side=: problematic ~delete-window~ call
++ =core=: get project root properly
++ =core=: ensure correct index path
++ =yank=: disable file size calculation upon task start ([[https://github.com/alexluigit/dirvish/issues/23][#23]])
++ =core=: slow navigation on TRAMP ([[https://github.com/alexluigit/dirvish/issues/21][#21]])
++ =peek=: invalid metadata in ivy-read ([[https://github.com/alexluigit/dirvish/issues/20][#20]])
+
+* 1.2.0
+** Breaking changes
+
++ support asynchronous Dired listing.
++ scope awareness
+
+** Changes since 1.0.0
+
++ =side=: enable isolated atts/preview-dps/mode-line-format
++ =side=: add ~dirvish-side-open-file-window-function~ option
++ =vc=: add ~vc-info~ mode line segment
++ =extras=: add ~expand-state~ attribute
++ =peek=: support ~ivy-mode~ and builtin ~icomplete[-vertical]-mode~
++ =core=: allow user to disable the history tracking
++ =core=: add ~dirvish-hl-line~ face
+
+** Fixes since 1.0.0
+
++ =core=: ensure correct cache image path on Windows ([[https://github.com/alexluigit/dirvish/issues/15][#15]])
++ =core=: video thumbnail generation ([[https://github.com/alexluigit/dirvish/issues/19][#19]])
++ =vc=:   adjust position of ~vc-state~ attribute
++ =side=: ensure preview update on fullscreen toggle
++ =side=: use fixed width for side window
++ =side=: keep the side window alive on =delete-other-windows=
++ =core=: avoid void session error on window quit
++ =core=: error at initialization when ~dired-hide-details-mode~ is turned off
++ =core=: ensure retrieving dwim-target from live window
++ =core=: hide cursor in utility buffers
+
+* 1.0.0
+
+First release.

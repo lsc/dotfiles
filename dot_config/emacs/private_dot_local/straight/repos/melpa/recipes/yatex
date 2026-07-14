@@ -1,0 +1,3 @@
+(yatex
+ :fetcher hg
+ :url "https://www.yatex.org/hgrepos/yatex")

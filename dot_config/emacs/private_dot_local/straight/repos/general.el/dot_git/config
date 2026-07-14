@@ -1,0 +1,14 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "origin"]
+	url = https://github.com/noctuid/general.el.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[submodule "makem"]
+	active = true
+	url = https://github.com/alphapapa/makem.sh
+[submodule "with-gnu-utils"]
+	active = true
+	url = https://github.com/noctuid/with-gnu-utils

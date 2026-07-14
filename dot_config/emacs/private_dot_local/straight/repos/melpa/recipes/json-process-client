@@ -1,0 +1,3 @@
+(json-process-client
+ :fetcher github
+ :repo "DamienCassou/json-process-client")

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: inline function
+# key: fu
+# --
+function ${1:name}($2) $0 end

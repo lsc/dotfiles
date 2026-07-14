@@ -1,0 +1,57 @@
+** Highlight TODO and similar keywords in comments and strings
+
+To highlight keywords turn on ~hl-todo-mode~ in individual buffers
+or use the global variant ~global-hl-todo-mode~.
+
+You can customize the keywords that are recognized by customizing
+~hl-todo-keyword-faces~ either through the customization interface
+or by setting the variable directly in your init file, for example:
+
+#+begin_src emacs-lisp
+  (setq hl-todo-keyword-faces
+        '(("TODO"   . "#FF0000")
+          ("FIXME"  . "#FF0000")
+          ("DEBUG"  . "#A020F0")
+          ("GOTCHA" . "#FF4500")
+          ("STUB"   . "#1E90FF")))
+#+end_src
+
+This package also provides commands for moving to the next or
+previous keyword, to invoke ~occur~ with a regexp that matches all
+known keywords, and to insert a keyword.  If you want to use these
+commands, then you should bind them in ~hl-todo-mode-map~, e.g.:
+
+#+begin_src emacs-lisp
+  (keymap-set hl-todo-mode-map "C-c p" #'hl-todo-previous)
+  (keymap-set hl-todo-mode-map "C-c n" #'hl-todo-next)
+  (keymap-set hl-todo-mode-map "C-c o" #'hl-todo-occur)
+  (keymap-set hl-todo-mode-map "C-c i" #'hl-todo-insert)
+#+end_src
+
+*** FAQ and Common Issues
+
+See [[https://github.com/tarsius/hl-todo/wiki][FAQ and Common Issues]] if something isn't working as expected.
+
+*** Integrations
+
+- Command ~hl-todo-occur~ uses ~occur~ to list TODO keywords.
+- Command ~hl-todo-rgrep~ uses ~rgrep~ to list TODO keywords.
+- Function ~hl-todo-flymake~ teaches [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Flymake.html][flymake]] about TODO keywords.
+- Package [[https://github.com/alvarogonzalezsotillo/flycheck-hl-todo][flycheck-hl-todo]] adds TODO keywords to [[https://github.com/flycheck/flycheck][flycheck]].
+- Package [[https://github.com/alphapapa/magit-todos][magit-todos]] displays TODO keyboards in [[https://github.com/magit/magit][magit]]'s status buffer.
+- Package [[https://github.com/liuyinz/consult-todo][consult-todo]] supports searching and jumping to TODO keywords
+  using [[https://github.com/minad/consult][consult]].
+- To highlight TODO keywords in Magit use:
+  #+begin_src emacs-lisp
+    (with-eval-after-load 'magit
+      (add-hook 'magit-log-wash-summary-hook
+                #'hl-todo-search-and-highlight t)
+      (add-hook 'magit-revision-wash-message-hook
+                #'hl-todo-search-and-highlight t))
+  #+end_src
+
+
+#+html: <br><br>
+#+html: <a href="https://github.com/tarsius/hl-todo/actions/workflows/compile.yml"><img alt="Compile" src="https://github.com/tarsius/hl-todo/actions/workflows/compile.yml/badge.svg"/></a>
+#+html: <a href="https://stable.melpa.org/#/hl-todo"><img alt="MELPA Stable" src="https://stable.melpa.org/packages/hl-todo-badge.svg"/></a>
+#+html: <a href="https://melpa.org/#/hl-todo"><img alt="MELPA" src="https://melpa.org/packages/hl-todo-badge.svg"/></a>

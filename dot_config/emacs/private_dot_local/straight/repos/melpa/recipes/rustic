@@ -1,0 +1,3 @@
+(rustic
+    :repo "emacs-rustic/rustic"
+    :fetcher github)

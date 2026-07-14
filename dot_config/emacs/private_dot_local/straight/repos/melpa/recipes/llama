@@ -1,0 +1,4 @@
+(llama
+ :fetcher github
+ :repo "tarsius/llama"
+ :files ("llama.el" ".dir-locals.el"))

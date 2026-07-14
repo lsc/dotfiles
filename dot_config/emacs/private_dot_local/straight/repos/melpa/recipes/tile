@@ -1,0 +1,2 @@
+(tile :repo "colonelpanic8/tile"
+      :fetcher github)

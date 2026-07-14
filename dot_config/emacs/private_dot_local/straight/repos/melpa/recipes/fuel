@@ -1,0 +1,1 @@
+(fuel :fetcher github :repo "factor/fuel")

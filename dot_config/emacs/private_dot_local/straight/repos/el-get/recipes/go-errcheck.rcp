@@ -1,0 +1,6 @@
+(:name go-errcheck
+       :description "Program for checking for unchecked errors in go code"
+       :type github
+       :pkgname "dominikh/go-errcheck.el"
+       :build (("go" "install" "github.com/kisielk/errcheck@latest"))
+       :compile "go-errcheck.el")

@@ -1,0 +1,2 @@
+(evil-lispy :repo "mikavilpas/evil-lispy"
+            :fetcher github)

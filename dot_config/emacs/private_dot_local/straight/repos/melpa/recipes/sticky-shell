@@ -1,0 +1,1 @@
+(sticky-shell :repo "andrewdea/sticky-shell" :fetcher github)

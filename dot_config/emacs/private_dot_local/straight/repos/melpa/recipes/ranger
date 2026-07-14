@@ -1,0 +1,3 @@
+(ranger :fetcher github
+          :repo "punassuming/ranger.el"
+          :old-names (evil-ranger))

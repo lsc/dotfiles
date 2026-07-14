@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: saveStrings
+# key: saveStrings
+# --
+saveStrings(${1:filename}, ${2:strings});

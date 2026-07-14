@@ -1,0 +1,7 @@
+(:name scheme-complete
+       :website "http://synthcode.com/wiki/scheme-complete"
+       :description "Context-sensitive completion for Scheme code."
+       :type github
+       :pkgname "ashinn/scheme-complete"
+       :compile "scheme-complete.el"
+       )

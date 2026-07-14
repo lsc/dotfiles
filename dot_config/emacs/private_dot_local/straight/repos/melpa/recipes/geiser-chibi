@@ -1,0 +1,4 @@
+(geiser-chibi
+ :fetcher codeberg
+ :repo "geiser/chibi"
+ :files (:defaults ("src" "src/*")))

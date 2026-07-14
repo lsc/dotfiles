@@ -1,0 +1,4 @@
+# -*- mode: snippet -*-
+# name: subset
+# --
+subset(${1:array}, ${2:offset});

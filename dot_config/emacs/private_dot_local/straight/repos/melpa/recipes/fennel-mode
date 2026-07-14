@@ -1,0 +1,1 @@
+(fennel-mode :fetcher sourcehut :repo "technomancy/fennel-mode")

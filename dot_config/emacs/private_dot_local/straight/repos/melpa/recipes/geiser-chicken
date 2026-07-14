@@ -1,0 +1,4 @@
+(geiser-chicken
+ :fetcher codeberg
+ :repo "geiser/chicken"
+ :files (:defaults "src"))

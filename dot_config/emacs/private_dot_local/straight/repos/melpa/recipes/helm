@@ -1,0 +1,9 @@
+(helm
+ :fetcher github
+ :repo "emacs-helm/helm"
+ :files (:defaults
+         "emacs-helm.sh"
+         (:exclude "helm-lib.el"
+                   "helm-source.el"
+                   "helm-multi-match.el"
+                   "helm-core.el")))

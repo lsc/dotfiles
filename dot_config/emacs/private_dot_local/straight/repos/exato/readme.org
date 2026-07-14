@@ -1,0 +1,63 @@
+* EXATO: Evil XML Attributes Text Object
+
+[[https://travis-ci.org/ninrod/exato.svg?branch=master][https://travis-ci.org/ninrod/exato.svg?branch=master]]
+[[https://melpa.org/#/exato][file:https://melpa.org/packages/exato-badge.svg]]
+[[https://stable.melpa.org/#/exato][file:https://stable.melpa.org/packages/exato-badge.svg]]
+[[https://www.gnu.org/licenses/gpl-3.0.en.html][https://img.shields.io/badge/license-GPLv3-blue.svg]]
+
+[[https://www.w3schools.in/wp-content/uploads/2014/07/HTML-attribute.jpg][https://www.w3schools.in/wp-content/uploads/2014/07/HTML-attribute.jpg]]
+
+* Installation
+
+Just use [[https://melpa.org][MELPA]]. Here's an oneliner using [[https://github.com/jwiegley/use-package][use-package]]:
+
+#+BEGIN_SRC emacs-lisp
+  (use-package exato :ensure t)
+#+END_SRC
+
+* Usage
+
+This package provides the =x= text object to manipulate html/xml tag attributes.
+You can customize the binding.
+
+Try using =dax=, =vix= and =gUix=.
+
+* Examples
+
+cursor on =[]=
+
+- Issuing =dax= inside:
+
+#+BEGIN_SRC html
+  <a href="index.html" class="btn btn-primary [f]oo bar buz">link</a>
+#+END_SRC
+
+Results in:
+
+#+BEGIN_SRC html
+<a href="index.html">link</a>
+#+END_SRC
+
+* Customization
+
+=Exato= binds the =x= key for you by default. You can change this with the =exato-key= variable:
+
+#+BEGIN_SRC emacs-lisp
+  ;; this will bind the `h` text object: so dah, dih, etc... will work instead of dax, dix...
+  (use-package exato
+    :ensure t
+    :init
+    (setq exato-key "h"))
+#+END_SRC
+* Credits
+
+This package is inspired in Andrea Leopardi's [[https://github.com/whatyouhide/vim-textobj-xmlattr][vim-textobj-xmlattr]] plugin.
+
+* LICENSE
+
+- [[https://www.gnu.org/licenses/gpl-3.0.en.html][GNU General Public License v3]]
+#+BEGIN_SRC text
+GNU General Public License v3
+Copyright (c) 2017-2021 Filipe Silva (ninrod)
+#+END_SRC
+

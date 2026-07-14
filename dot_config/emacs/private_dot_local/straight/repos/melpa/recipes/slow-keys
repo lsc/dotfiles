@@ -1,0 +1,1 @@
+(slow-keys :fetcher sourcehut :repo "gitmux/slow-keys")

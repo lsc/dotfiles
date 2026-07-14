@@ -1,0 +1,1 @@
+(htmltagwrap :repo "emacs-vs/htmltagwrap" :fetcher github)

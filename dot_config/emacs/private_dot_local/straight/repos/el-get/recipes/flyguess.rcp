@@ -1,0 +1,5 @@
+(:name flyguess
+       :description "Guess language/dictionary for a buffer"
+       :type github
+       :pkgname "emacsmirror/flyguess"
+       :features flyguess)

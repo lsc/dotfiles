@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: void keyReleased() {...}
+# key: keyr
+# --
+void keyReleased(){
+  `%`$0
+}

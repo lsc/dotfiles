@@ -1,0 +1,154 @@
+#!/usr/bin/env doomscript
+;;; bin/doom-env --- envvar file generator -*- lexical-binding: t; mode: emacs-lisp -*-
+;;; Commentary:
+;;; Code:
+
+;;
+;;; * Variables
+
+;;;###autoload
+(defcustom doom-env-deny
+  '(;; Unix/shell state that shouldn't be persisted
+    "^HOME$" "^\\(OLD\\)?PWD$" "^SHLVL$" "^PS1$" "^R?PROMPT$" "^TERM\\(CAP\\)?$"
+    "^USER$" "^GIT_CONFIG" "^INSIDE_EMACS$"
+    ;; X server, Wayland, or services' env  that shouldn't be persisted
+    "^\\(WAYLAND_\\)?DISPLAY$" "^DBUS_SESSION_BUS_ADDRESS$" "^XAUTHORITY$"
+    ;; Windows+WSL envvars that shouldn't be persisted
+    "^WSL_INTEROP$"
+    ;; XDG variables that are best not persisted.
+    "^XDG_CURRENT_DESKTOP$" "^XDG_RUNTIME_DIR$"
+    "^XDG_\\(VTNR$\\|SEAT$\\|BACKEND$\\|SESSION_\\)"
+    ;; Socket envvars, like I3SOCK, GREETD_SOCK, SEATD_SOCK, SWAYSOCK, NIRI_SOCKET, etc.
+    "SOCK\\(ET\\)?$"
+    ;; ssh and gpg variables that could quickly become stale if persisted.
+    "^SSH_\\(AUTH_SOCK\\|AGENT_PID\\)$" "^\\(SSH\\|GPG\\)_TTY$"
+    "^GPG_AGENT_INFO$"
+    ;; Internal Doom envvars
+    "^DEBUG$" "^INSECURE$" "^\\(EMACS\\|DOOM\\(LOCAL\\)?\\)DIR$"
+    "^DOOM\\(PATH\\|PROFILE\\)$" "^__")
+  "Environment variables to omit from envvar files.
+
+Each string is a regexp, matched against variable names."
+  :type '(repeat regexp)
+  :group 'doom-cli)
+
+;;;###autoload
+(defcustom doom-env-allow '()
+  "Environment variables to include in envvar files.
+
+This overrules `doom-env-deny'. Each string is a regexp, matched against
+variable names."
+  :type '(repeat regexp)
+  :group 'doom-cli)
+
+
+;;
+;;; * Commands
+
+(defcli! env
+    ((allow-only  ("--allow-all"))
+     (deny-only   ("--deny-all"))
+     (reload?     ("-r" "--reload") "Regenerate OUTPUT-FILE in-place with the same options")
+     &multiple
+     (rules ("-a" "--allow" "-d" "--deny" regexp) "Allow/deny envvars that match REGEXP")
+     &optional output-file)
+  "(Re)generates an environment variables file from your shell environment.
+
+The envvars file is created by scraping the current shell environment into
+newline-delimited KEY=VALUE pairs. Typically by running '$SHELL -ic env' (or
+'$SHELL -c set' on windows). The user can load this file from their configs to
+ensure Emacs' mirrors your shell environment (particularly to ensure PATH and
+SHELL are correctly set).
+
+This is useful in cases where you cannot guarantee that Emacs (or the daemon)
+will be launched from the correct environment (e.g. on MacOS or through certain
+app launchers on Linux).
+
+Why this over exec-path-from-shell?
+
+  1. `exec-path-from-shell' spawns (at least) one process at startup to scrape
+     your shell environment. This can be arbitrarily slow and insecure depending
+     on the user's shell configuration. A single program (like pyenv or nvm) or
+     config framework (like oh-my-zsh) could inflate Emacs' startup time,
+     defeating the purpose of all Doom's startup optimizations.
+
+  2. `exec-path-from-shell' only scrapes some state from your shell. You have to
+     be proactive in order to get it to capture all the envvars relevant to your
+     development environment.
+
+     I'd rather it inherit your shell environment /correctly/ (and /completely/)
+     or not at all. It frontloads the debugging process rather than hiding it
+     until you least want to deal with it."
+  (unless output-file
+    (print! (error "Output file location required, but not specified. \n"))
+    (print! (p "If you're trying to generate an envvar file for your Doom config (what "
+               "'doom env' used to do), run 'doom sync --env' instead (and 'doom sync "
+               "--no-env' to delete it). After which, 'doom sync' will regenerate your "
+               "envvar file."))
+    (exit! 1))
+  (when (and reload?
+             (or (equal output-file "-")
+                 (not (file-exists-p output-file))))
+    (doom-log "cli:env: no envvar file to reload: %s" output-file)
+    (setq reload? nil))
+  (with-temp-buffer
+    (setq-local coding-system-for-write 'utf-8-unix)
+    (unless (equal output-file "-")
+      (print! (start "%s envvars file...") (if reload? "Reloading" "Generating")))
+    (let* ((deny  (if reload? (doom-file-cookie-p output-file "deny")))
+           (allow (if reload? (doom-file-cookie-p output-file "allow"))))
+      (pcase-dolist (`(,option . ,rule) rules)
+        (push rule (if (member option '("-a" "--allow")) allow deny)))
+      (if deny-only  (setq deny  '(".")))
+      (if allow-only (setq allow '(".")))
+      (insert ";; -*- mode: emacs-lisp; lexical-binding: t; coding: utf-8-unix; -*-\n"
+              ";;;###if (or initial-window-system (daemonp))\n"
+              ";;;###allow " (prin1-to-string allow) "\n"
+              ";;;###deny "  (prin1-to-string deny) "\n"
+              ";;;###date "  (format-time-string "%Y-%m-%d %H:%M:%S") "\n"
+              "(put 'process-environment 'doom t)\n")
+      (let ((deny  (append deny doom-env-deny))
+            (allow (append allow doom-env-allow))
+            envvars)
+        ;; We assume that this noninteractive session was spawned from the user's
+        ;; interactive shell, so simply dump `process-environment' to a file.
+        ;;
+        ;; This should be well-formatted, in case humans want to hand-modify it.
+        (dolist (env (get 'process-environment 'initial-value))
+          (catch 'skip
+            (let* ((var  (car (split-string env "=")))
+                   (pred (doom-rpartial #'string-match-p var)))
+              (when (seq-find pred deny)
+                (if (seq-find pred allow)
+                    (doom-log "cli:env: allow %s" var)
+                  (doom-log "cli:env: deny %s" var)
+                  (throw 'skip t)))
+              (push env envvars))))
+        (pp `(setq
+              process-environment (append ',(reverse envvars)
+                                          (default-value 'process-environment))
+              exec-path (append (split-string (getenv "PATH") path-separator t)
+                                (list exec-directory))
+              shell-file-name (or (getenv "SHELL")
+                                  (default-value 'shell-file-name)))
+            (current-buffer))
+        (if (equal output-file "-")
+            (print! "%s" (string-trim-right (buffer-string)))
+          (let ((dir (file-name-directory output-file)))
+            (unless (file-directory-p dir)
+              (print! (error "Containing directory does not exist: %s" dir))
+              (exit! 1)))
+          (write-region nil nil output-file)
+          (print-group!
+            (print! (success "Wrote %s") (filename output-file))))))
+    t))
+
+(defcli-obsolete! (env (clear c)) (sync --no-env --reload) "2.3.0")
+
+
+;;
+;;; * Execute
+
+(run! "env" (cdr (member "--" argv)))
+
+;;; doom-env ends here

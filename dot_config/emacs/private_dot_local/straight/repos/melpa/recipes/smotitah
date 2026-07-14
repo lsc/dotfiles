@@ -1,0 +1,4 @@
+(smotitah
+ :fetcher github
+ :repo "laynor/smotitah"
+ :files ("*.el" "templates"))

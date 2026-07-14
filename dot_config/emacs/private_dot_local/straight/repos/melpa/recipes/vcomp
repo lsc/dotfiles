@@ -1,0 +1,1 @@
+(vcomp :fetcher github :repo "tarsius/vcomp")

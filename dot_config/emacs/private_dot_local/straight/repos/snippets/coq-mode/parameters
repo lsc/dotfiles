@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Parameters
+# key: pars
+# --
+Parameters $1: $2

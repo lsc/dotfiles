@@ -1,0 +1,506 @@
+= Usage
+
+NOTE: Everything in this section assumes you've enabled `projectile-mode`.
+
+== Basic usage
+
+Just open some file in a version-controlled (e.g. `git`) or a project
+(e.g. `maven`) directory that's recognized by Projectile and you're
+ready for action. Projectile happens to recognize out of the box every common
+VCS and many popular project types for various programming languages.
+You can learn more about Projectile's notion of a project xref:projects.adoc[here].
+
+NOTE: The extent of the support for every VCS differs and Git is the best supported
+ one. Projectile supports some advanced features like working with Git submodules
+ and using `git-grep` instead of GNU grep.
+
+You need to know only a handful of Projectile commands to start benefiting from it.
+
+NOTE: The examples below (and throughout this manual) use the `s-p` prefix.
+ Projectile ships no default prefix key, so you need to bind one yourself as
+ shown in <<basic-configuration>>.
+
+* Find file in current project (kbd:[s-p f])
+* Switch project (kbd:[s-p p]) (you can also switch between open projects with kbd:[s-p q], or jump back to the previously active project with `projectile-switch-to-most-recent-project`)
+* Grep (search for text/regexp) in project (kbd:[s-p s g])
+* Replace in project (kbd:[s-p r])
+* Find references in project (kbd:[s-p ?] or kbd:[s-p s x])
+* Invoke any Projectile command via the Projectile dispatch menu (kbd:[s-p m])
+* Toggle between implementation and test (kbd:[s-p t])
+* Find another file with the same base name but a different extension, e.g. `foo.h` <-> `foo.c` (kbd:[s-p a])
+* Find a project file of a given kind, or jump between related files of a project type (e.g. a Rails model and its controller) (kbd:[s-p j] / kbd:[s-p J])
+* Run a shell command in the root of the project (kbd:[s-p !] for a sync command and kbd:[s-p &] for an async command)
+* Run various pre-defined project commands like:
+** build/compile project (kbd:[s-p c c])
+** test project (kbd:[s-p c t])
+** install project (kbd:[s-p c i])
+** package project (kbd:[s-p c p])
+** run project (kbd:[s-p c r])
+
+There are many more commands, covered in the sections below, but the basics can get you pretty far.
+
+== Basic setup
+
+In this section we'll cover the bare minimum of setup you might want to
+do. Projectile works fine with no setup, but if you tweak the configuration a
+bit you'll get more out of it.
+
+Check out the xref:configuration.adoc["Configuration"] section of the manual
+for a lot more information about configuring Projectile.
+
+=== Basic configuration
+
+Here's how a typical Projectile configuration would look:
+
+[source,elisp]
+----
+;; Optional: ag is nice alternative to using grep with Projectile
+(use-package ag
+  :ensure t)
+
+;; Optional: Enable vertico as the selection framework to use with Projectile
+(use-package vertico
+  :ensure t
+  :init
+  (vertico-mode +1))
+
+;; Optional: which-key will show you options for partially completed keybindings
+;; It's extremely useful for packages with many keybindings like Projectile.
+(use-package which-key
+  :ensure t
+  :config
+  (which-key-mode +1))
+
+(use-package projectile
+  :ensure t
+  :init
+  (setq projectile-project-search-path '("~/projects/" "~/work/" "~/playground"))
+  :config
+  ;; I typically use this keymap prefix on macOS
+  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+  ;; On Linux, however, I usually go with another one
+  (define-key projectile-mode-map (kbd "C-c C-p") 'projectile-command-map)
+  (global-set-key (kbd "C-c p") 'projectile-command-map)
+  (projectile-mode +1))
+----
+
+The example above builds upon the simpler setup demonstrated in the "Installation" section.
+
+=== Automated project discovery
+
+To add a project to Projectile's list of known projects, open a file
+in the project. If you have a projects directory, you can tell
+Projectile about all of the projects in it with the command `M-x
+projectile-discover-projects-in-directory`.
+
+You can go one step further and set a list of folders which Projectile
+is automatically going to check for projects on startup.
+
+Recursive discovery is configured by specifying the search depth in a cons cell:
+
+[source,elisp]
+----
+(setq projectile-project-search-path '("~/projects/" "~/work/" ("~/github" . 1)))
+----
+
+Automatic discovery is controlled by `projectile-auto-discover`, which
+is enabled by default. The search path is scanned the first time a
+project-switching command runs in an Emacs session (not on every switch),
+so pointing `projectile-project-search-path` at your projects directory
+is all you need. To turn the automatic scan off:
+
+[source,elisp]
+----
+(setq projectile-auto-discover nil)
+----
+
+You can always trigger a fresh scan manually with `M-x
+projectile-discover-projects-in-search-path`.
+
+NOTE: Remote (TRAMP) entries in the search path are skipped during
+discovery, so an unreachable remote host can't stall a project switch.
+
+=== Removal of missing projects
+
+From time to time you'll have projects in your list of known projects that are no longer
+around. (e.g. they were removed or renamed) You can either trigger the command
+`projectile-cleanup-known-projects` manually or set the variable
+`projectile-auto-cleanup-known-projects` to `t` to remove such projects automatically.
+
+[source,elisp]
+----
+(customize-set-variable 'projectile-auto-cleanup-known-projects t)
+----
+
+TIP: If you're a heavy TRAMP user it's probably not a good idea to auto-discover
+and cleanup projects, as the file operations are slower there.
+
+`projectile-cleanup-known-projects` is also available under the alias
+`projectile-forget-zombie-projects`, if you're used to that name from `project.el`.
+
+To drop a whole group of known projects at once (e.g. after deleting a directory
+that held several checkouts) use `projectile-forget-projects-under`. It prompts
+for a directory and removes the known projects that live directly under it; with
+a prefix argument it also removes projects nested deeper in the tree.
+
+=== Minibuffer completion
+
+Projectile reads through Emacs's built-in `completing-read`, so it works with
+whatever minibuffer UI you use. It works fine with the stock completion, but
+you're encouraged to pair it with a modern package like `vertico` (+ `consult`,
+`marginalia`, `orderless`) or `fido-mode`/`fido-vertical-mode`. See the
+xref:configuration.adoc#completion-options[Completion Options] section for
+details, including how to plug in a custom completion function.
+
+=== Installing external tools
+
+NOTE: Windows users can ignore this section unless they are using Emacs via WSL or `cygwin`.
+
+Projectile will work without any external dependencies out of the box.
+However, if you have various tools installed, they will be
+automatically used when appropriate to improve performance.
+
+Inside version control repositories, VC tools are used when installed
+to list files more efficiently. The supported tools include git, hg,
+fossil, bzr, darcs, pijul, svn, sapling and jujutsu.
+
+Outside version control repositories, file search tools are used when
+installed for a faster search than pure Elisp. The supported tools
+include https://github.com/sharkdp/fd[fd] and GNU/BSD find.
+
+By default, if fd is installed, it is also used inside Git
+repositories as an alternative to `git ls-files`, because `git
+ls-files` has the limitation that it also lists deleted files until
+the deletions are staged, which can be confusing. You can eliminate
+the use of fd in this circumstance by setting `projectile-git-use-fd`
+to nil.
+
+To benefit from the `projectile-ag` and `projectile-ripgrep` commands
+to perform file search, it's recommended to install
+https://github.com/ggreer/the_silver_searcher[ag] (`the_silver_searcher`) and/or
+https://github.com/BurntSushi/ripgrep[rg] (`ripgrep`)
+
+TIP: You should also install the Emacs packages `ag`, `ripgrep` or `rg` if you want to make use of Projectile's commands `projectile-ag` and `projectile-ripgrep`.
+
+== Interactive commands
+
+Projectile provides a large number of interactive commands. See
+xref:cheatsheet.adoc[the command cheat sheet] for the full keybinding reference.
+
+The two commands below open interactive review buffers and are worth a closer
+look on their own.
+
+=== Reviewing and applying replacements
+
+`projectile-replace` (kbd:[s-p r]) and `projectile-replace-regexp` run a
+blocking, file-by-file `query-replace` walk with no preview. When you'd
+rather see every match up front and pick which ones to apply, use the
+reviewable replace commands instead:
+
+* `projectile-replace-review` (kbd:[s-p R]) for a literal search.
+* `projectile-replace-regexp-review` for an Emacs regexp search, where the
+  replacement can reference capture groups (`\1`, `\&`).
+
+Both prompt for the search term and the replacement, then gather all the
+matches across the project into a `+*projectile-replace*+` buffer. Matches
+are collected in Emacs Lisp rather than via an external grep, so the regexp
+command honors full Emacs regexp syntax (e.g. symbol boundaries like
+`\_<foo\_>`) and the preview reflects the exact text that will be edited,
+including any unsaved changes in already-open buffers.
+
+Every match starts enabled (shown as `[X]`); toggle the ones you don't want
+off (`[ ]`) and apply only the rest, in any order. The results buffer
+supports these keys:
+
+|===
+| Key | Action
+
+| kbd:[RET]
+| Visit the match under point in another window.
+
+| kbd:[n] / kbd:[p]
+| Move to the next / previous match.
+
+| kbd:[M-n] / kbd:[M-p]
+| Move to the next / previous file.
+
+| kbd:[t] / kbd:[SPC]
+| Toggle whether the match under point will be applied.
+
+| kbd:[f]
+| Toggle all matches in the current file at once.
+
+| kbd:[r]
+| Re-read the replacement string and refresh the previews.
+
+| kbd:[c]
+| Toggle case sensitivity and re-scan.
+
+| kbd:[x]
+| Toggle between literal and regexp matching and re-scan.
+
+| kbd:[k] / kbd:[d]
+| Keep / flush the matches whose line matches a regexp you type.
+
+| kbd:[K] / kbd:[D]
+| Keep / flush the matches whose file matches a regexp you type.
+
+| kbd:[g]
+| Re-run the search (also undoes any filtering).
+
+| kbd:[!] (or kbd:[C-c C-c])
+| Apply all enabled matches.
+
+| kbd:[e]
+| Export the enabled matches to a `grep-mode` buffer for wgrep / `grep-edit-mode`.
+
+| kbd:[q]
+| Quit the results buffer.
+|===
+
+A status line at the top of the buffer shows the term, the replacement, the
+match and file counts, the active mode flags (`[literal]`/`[regexp]` and
+`[case-sensitive]`/`[ignore-case]`), and a `filtered` note once you've pruned
+the list.
+
+You can reshape the search without leaving the buffer. kbd:[c] toggles case
+sensitivity (seeded from `case-fold-search`) and kbd:[x] toggles literal
+versus Emacs-regexp matching, each re-scanning and re-rendering the previews
+in place; switching to regexp mode with a term that isn't a valid regexp is
+refused with a message rather than erroring. Because a toggle re-scans from
+scratch, it rebuilds the match list and every match comes back enabled, so
+any per-match include/exclude toggles you had set are reset (use the filter
+keys instead to prune while keeping the survivors' state). The filter keys
+narrow the shown matches, either by the match's line (kbd:[k] keep, kbd:[d]
+flush) or by its project-relative file name (kbd:[K] keep, kbd:[D] flush).
+Filtering only hides matches from the current list; re-running the search
+(kbd:[g]) gathers from scratch and brings them back.
+
+Applying edits a file's matches from the bottom up so earlier edits don't
+disturb later ones, edits already-open buffers in place under a single undo
+step (and saves them), and writes closed files back to disk preserving their
+coding system. A buffer that was modified after the search is skipped rather
+than risk a bad edit; re-run the search (kbd:[g]) to pick up its current
+state. Very large searches are capped at `projectile-replace-max-matches`.
+
+The project is scanned asynchronously: the `+*projectile-replace*+` buffer
+opens right away and matches stream in as they are found (the status line
+shows a `Searching...` note with the running count), so a large search never
+freezes Emacs. The scan is cancelable with kbd:[q], kbd:[C-g], or by killing
+the buffer. While it is still running, kbd:[!] and kbd:[e] refuse until it
+finishes, so the write-back never runs against a partial match set; starting a
+new scan (kbd:[g], kbd:[c], kbd:[x]) first cancels any in-flight one. Set
+`projectile-replace-async` to nil to force the old synchronous single-pass
+scan instead; batch (`noninteractive`) runs always scan synchronously.
+
+kbd:[!] applies the enabled matches with no external dependency. If you'd
+rather edit the results as text, kbd:[e] exports the enabled matches (the
+same set kbd:[!] would act on) to a `+*projectile-grep*+` buffer in `grep-mode`,
+with standard `RELPATH:LINE:CONTEXT` lines navigable with `next-error` and
+kbd:[RET]. This is the bridge to https://github.com/mhayashi1120/Emacs-wgrep[wgrep]
+(kbd:[C-c C-p] to make it editable, then kbd:[C-c C-c] to write back) or
+Emacs 31's `grep-edit-mode`. wgrep is an optional integration, not a
+dependency; after exporting, Projectile tells you which workflow is
+available based on what you have installed.
+
+=== Reviewing search matches
+
+When you want to look through every match for a term across the project
+without changing anything, the search reviewer is the read-only sibling of
+the replace reviewer:
+
+* `projectile-search-review` (kbd:[s-p s R]) for a literal search.
+* `projectile-search-regexp-review` (kbd:[s-p s X]) for an Emacs regexp
+  search (full Emacs regexp syntax, e.g. symbol boundaries like `\_<foo\_>`).
+
+Both prompt only for the search term (defaulting to the symbol or region at
+point) and gather every match into a read-only `+*projectile-search*+`
+buffer, grouped by file, one `LINE:COL: CONTEXT` line per match with the
+matched span highlighted. There is no replacement, no per-match toggle and
+no apply: the buffer never edits your files.
+
+The results buffer supports these keys:
+
+|===
+| Key | Action
+
+| kbd:[RET]
+| Visit the match under point in another window.
+
+| kbd:[n] / kbd:[p]
+| Move to the next / previous match.
+
+| kbd:[M-n] / kbd:[M-p]
+| Move to the next / previous file.
+
+| kbd:[c]
+| Toggle case sensitivity and re-scan.
+
+| kbd:[x]
+| Toggle between literal and regexp matching and re-scan.
+
+| kbd:[k] / kbd:[d]
+| Keep / flush the matches whose line matches a regexp you type.
+
+| kbd:[K] / kbd:[D]
+| Keep / flush the matches whose file matches a regexp you type.
+
+| kbd:[g]
+| Re-run the search (also undoes any filtering).
+
+| kbd:[r]
+| Hand the current search to the replace reviewer, prompting only for the replacement.
+
+| kbd:[e]
+| Export the shown matches to a `grep-mode` buffer for wgrep / `grep-edit-mode`.
+
+| kbd:[q]
+| Quit the results buffer.
+|===
+
+The status line, the case/regexp toggles, the filter keys, the grep export
+and the asynchronous, cancelable scanning (including `projectile-replace-async`)
+behave exactly as in the replace reviewer above; only the preview, per-match
+toggle and apply are absent. kbd:[r] is the search-to-replace
+bridge: it carries over the same term, literal-ness and case setting and
+opens the `+*projectile-replace*+` reviewer, prompting only for the
+replacement. It re-runs the search from scratch, so any filtering you did
+in the search buffer is not carried into the replacement. Very large
+searches are capped at `projectile-replace-max-matches`.
+
+When `projectile-search-use-ripgrep` is non-nil (the default) and the
+`rg` (ripgrep) executable is installed, a *literal* `projectile-search-review`
+scan runs through ripgrep instead of the pure-Emacs-Lisp scan, which
+returns near-instantly even on a large project; the matches stream into
+the same read-only buffer and every reviewer command works unchanged. The
+ripgrep fast-path follows ripgrep's own ignore rules (`.gitignore`,
+`.ignore`, hidden-file handling, and so on) plus Projectile's ignore globs
+(`.projectile` and the globally-ignored files and directories, passed to
+`rg` via `--glob`), which can differ slightly from the pure-elisp path's
+file set (for example in how hidden files or symlinks are treated).
+Matches in files that aren't valid UTF-8 are also skipped by the ripgrep
+path but found by the elisp path. This
+is an accepted trade-off for speed; set `projectile-search-use-ripgrep` to
+nil to force the elisp scan, whose result set matches Projectile's ignore
+configuration exactly. The regexp search command always uses the elisp
+scan (ripgrep's regex syntax is not Emacs regexp syntax), and the whole
+replace reviewer always uses the elisp scan (its write-back needs the
+exact buffer positions the elisp scan records).
+
+== Customizing Projectile's keybindings
+
+It is possible to add additional commands to
+`projectile-command-map` referenced by the prefix key in
+`projectile-mode-map`. You can add multiple keymap prefixes for all
+commands. Here's an example that adds `super-,` as a command prefix:
+
+[source,elisp]
+----
+(define-key projectile-mode-map (kbd "s-,") 'projectile-command-map)
+----
+
+You can also bind the `projectile-command-map` to any other map you'd
+like (including the global keymap).
+
+TIP: For some common commands you might want to take a little shortcut and
+leverage the fairly unused `Super` key (by default `Command` on Mac
+keyboards and `Windows` on Win keyboards).
+
+Here's something you can
+add to your Emacs config:
+
+[source,elisp]
+----
+(define-key projectile-mode-map [?\s-d] 'projectile-find-dir)
+(define-key projectile-mode-map [?\s-p] 'projectile-switch-project)
+(define-key projectile-mode-map [?\s-f] 'projectile-find-file)
+(define-key projectile-mode-map [?\s-g] 'projectile-grep)
+----
+
+NOTE: The `Super` keybindings are not usable in Windows, as Windows
+ makes heavy use of such keybindings itself. Emacs Prelude already adds those
+ extra keybindings.
+
+== Dispatch menu
+
+Projectile ships `projectile-dispatch`, a `transient` menu that mirrors
+`projectile-command-map`, for those of you who'd rather pick a command from a
+menu than memorize a lot of keybindings. The menu keys match the command map
+(e.g. kbd:[f] to find a file, kbd:[c c] to compile, kbd:[s g] to grep). Invoke
+it with kbd:[s-p m].
+
+It's also wired into project switching: press kbd:[C-u s-p p] and Projectile
+opens the dispatch menu after you select a project, so you can run any command
+in the project you just switched to. (The same happens if you set
+`projectile-switch-project-action` to `projectile-dispatch`.)
+
+You can bind the command to whatever you like as well:
+
+[source,elisp]
+----
+(define-key projectile-mode-map (kbd "C-c P") #'projectile-dispatch)
+----
+
+=== Modifiers
+
+The menu's *Modifiers* group holds switches that tweak how the commands run.
+Toggle one (or more), then trigger a command:
+
+* kbd:[-i] *invalidate cache* - rebuild the file cache first (the find file/dir commands)
+* kbd:[-r] *regexp search* - treat the search term as a regexp (the `search`, `ripgrep` and `ag` commands)
+* kbd:[-n] *new process* - start a fresh process instead of reusing one (the shells / REPLs)
+* kbd:[-d] *display in* - cycle the display target through this window / other window / other frame (the file, buffer and project commands)
+
+For example, toggle kbd:[-d] until it shows `frame` and then press kbd:[f] to
+find a file and show it in a new frame; or press kbd:[-i] then kbd:[f] to
+invalidate the cache and find a file. This replaces the old dedicated "other
+window" and "other frame" menu columns.
+
+NOTE: `projectile-dispatch` is powered by `transient`, which is bundled with
+Emacs 28.1+ (Projectile's minimum), so the menu is always available. It's bound
+to kbd:[s-p m], and kbd:[C-u s-p p] opens it when switching projects.
+
+== Using Projectile with project.el
+
+Starting with version 2.7 Projectile bundles some integration with
+`project.el` that makes `project.el` use Projectile's
+project lookup function (`projectile-project-root`) and project file
+lookup function (`projectile-project-files`) whenever `projectile-mode`
+is enabled. You can also enable the integration manually like this:
+
+[source,elisp]
+----
+(add-hook 'project-find-functions #'project-projectile)
+----
+
+Beyond root and file lookup, Projectile implements several of `project.el`'s
+backend methods (`project-root`, `project-files`, `project-name`,
+`project-buffers`, and `project-ignores`), so commands built on the protocol
+(e.g. `project-find-regexp`) behave correctly for Projectile-managed projects.
+
+TIP: You can read more about the implementation details of the integration https://github.com/bbatsov/projectile/issues/1591[here].
+
+That's useful as some packages (e.g. `eglot`) support natively only
+``project.el``'s API for project discovery. Fortunately, `project.el`
+makes it easy to install additional project lookup functions and that's
+exactly what Projectile does.
+
+The popular `xref` package also relies on `project.el` to infer the project for
+helpful commands like `xref-find-references` (kbd:[M-?]), so it's useful to teach
+it about Projectile's project discovery logic.
+
+TIP: Projectile provides its own alternative to `xref-find-references` that's named
+`projectile-find-references` (kbd:[s-p ?] or kbd:[s-p s x]). It's a backend-agnostic
+*textual* search: it greps the project for the symbol, scoped to the project root and
+honouring Projectile's ignore configuration (`.projectile` and the globally-ignored
+files/directories), just like `projectile-grep` and friends. Use it when you don't have
+a language server or tags table set up; otherwise `xref-find-references` gives you
+semantic results (and is scoped to the Projectile project too, thanks to the
+`project.el` integration above).
+
+You can disable the `project.el` integration like this:
+
+[source,elisp]
+----
+(remove-hook 'project-find-functions #'project-projectile)
+----

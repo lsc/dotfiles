@@ -1,0 +1,6 @@
+(:name req-package
+       :description "req-package wrapper for use-package with explicit ht dependency"
+       :type github
+       :features (req-package)
+       :depends (use-package dash log4e ht)
+       :pkgname "edvorg/req-package")

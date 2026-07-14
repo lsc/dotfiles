@@ -1,0 +1,6 @@
+(:name adoc-mode
+       :website "https://github.com/bbatsov/adoc-mode/wiki"
+       :description "A major-mode for editing AsciiDoc files in Emacs."
+       :type github
+       :pkgname "bbatsov/adoc-mode"
+       :depends (markup-faces))

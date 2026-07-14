@@ -1,0 +1,5 @@
+(flymake-perlcritic
+ :fetcher github
+ :repo "flymake/emacs-flymake-perlcritic"
+ :files ("*.el" ("bin" "bin/flymake_perlcritic")))
+

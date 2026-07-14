@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: beginGL
+# key: begingl
+# --
+pgl.beginGL();
+`%`$0
+pgl.endGL();

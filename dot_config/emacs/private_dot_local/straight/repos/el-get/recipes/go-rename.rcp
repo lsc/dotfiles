@@ -1,0 +1,8 @@
+(:name go-rename
+       :description "Integration of the Go 'rename' tool into Emacs"
+       :type github
+       :pkgname "golang/tools"
+       :load-path (()) ; The .el file comes from go-mode.
+       :depends (go-mode)
+       :build (("go" "build" "-o" "bin/gorename" "./cmd/gorename"))
+       :post-init (setq go-rename-command (concat default-directory "bin/gorename")))

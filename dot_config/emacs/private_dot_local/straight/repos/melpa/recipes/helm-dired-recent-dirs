@@ -1,0 +1,2 @@
+(helm-dired-recent-dirs :fetcher github
+                        :repo "zonkyy/helm-dired-recent-dirs")

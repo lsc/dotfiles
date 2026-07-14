@@ -1,0 +1,5 @@
+(:name fold-dwim
+       :description "Unified user interface for Emacs folding mode"
+       :website "https://github.com/emacsattic/fold-dwim"
+       :type github
+       :pkgname "emacsattic/fold-dwim")

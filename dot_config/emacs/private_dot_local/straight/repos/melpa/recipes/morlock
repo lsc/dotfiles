@@ -1,0 +1,1 @@
+(morlock :fetcher github :repo "tarsius/morlock")

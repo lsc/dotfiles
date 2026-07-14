@@ -1,0 +1,5 @@
+(:name org-bullets
+       :description "Show org-mode bullets as UTF-8 characters."
+       :type github
+       :pkgname "sabof/org-bullets"
+       :features org-bullets)

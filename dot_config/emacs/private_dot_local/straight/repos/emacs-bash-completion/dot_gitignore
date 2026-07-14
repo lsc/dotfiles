@@ -1,0 +1,5 @@
+*.elc
+README.html
+ert-profile
+bash-completion-autoloads.el
+.eldev/

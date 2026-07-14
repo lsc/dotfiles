@@ -1,0 +1,4 @@
+(:name twitter
+       :description "Simple Emacs-based client for Twitter"
+       :type github
+       :pkgname "emacsattic/twitel")

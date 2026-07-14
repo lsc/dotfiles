@@ -1,0 +1,3 @@
+(dashboard :fetcher github
+	   :repo "emacs-dashboard/dashboard"
+	   :files (:defaults "banners"))

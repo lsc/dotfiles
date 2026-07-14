@@ -1,0 +1,3 @@
+(py-autopep8
+ :fetcher codeberg
+ :repo "ideasman42/emacs-py-autopep8")

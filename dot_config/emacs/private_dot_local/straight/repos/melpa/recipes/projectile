@@ -1,0 +1,1 @@
+(projectile :fetcher github :repo "bbatsov/projectile")

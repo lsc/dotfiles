@@ -1,0 +1,1 @@
+(flycheck-projectile :fetcher github :repo "nbfalcon/flycheck-projectile")

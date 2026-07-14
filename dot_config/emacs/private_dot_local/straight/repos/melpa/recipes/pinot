@@ -1,0 +1,4 @@
+(pinot
+ :fetcher github
+ :repo "tkf/emacs-pinot-search"
+ :files ("*.el" "*.py"))

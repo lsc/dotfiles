@@ -1,0 +1,53 @@
+#+TITLE: shrink-path.el
+#+AUTHOR: Benjamin Andresen
+
+#+html: <a href="https://gitlab.com/bennya/shrink-path.el/pipelines"><img src="//gitlab.com/bennya/shrink-path.el/badges/master/build.svg" /></a>
+#+html: <a href="https://melpa.org/#/shrink-path"><img src="//melpa.org/packages/shrink-path-badge.svg" /></a>
+#+html: <a href="https://stable.melpa.org/#/shrink-path"><img src="//stable.melpa.org/packages/shrink-path-badge.svg" /></a>
+
+Small utility functions that allow for fish-style trunctated directories in
+eshell and for example modeline.
+
+* Screenshots
+[[//gitlab.com/bennya/shrink-path.el/raw/screenshots/eshell-prompt.png]]
+[[//gitlab.com/bennya/shrink-path.el/raw/screenshots/doom-modeline.png]]
+
+* Installation
+shrink-path is available via [[https://melpa.org/#/shrink-path][MELPA]] (and [[https://stable.melpa.org/#/shrink-path][MELPA Stable]]).
+
+It can be installed by using =M-x package-install RET shrink-path RET= inside Emacs or even better using [[https://github.com/jwiegley/use-package][use-package]].
+#+begin_src emacs-lisp
+(use-package shrink-path
+  :ensure t
+  :demand t)
+#+end_src
+
+* Example configuration
+** eshell
+Configuration soon to be found in [[https://github.com/hlissner/.emacs.d][DOOM Emacs]].
+
+#+begin_src emacs-lisp :tangle yes
+(setq eshell-prompt-regexp "^.* λ "
+      eshell-prompt-function #'+eshell/prompt)
+
+(defun +eshell/prompt ()
+  (let ((base/dir (shrink-path-prompt default-directory)))
+        (concat (propertize (car base/dir)
+                            'face 'font-lock-comment-face)
+                (propertize (cdr base/dir)
+                            'face 'font-lock-constant-face)
+                (propertize (+eshell--current-git-branch)
+                            'face 'font-lock-function-name-face)
+                (propertize " λ" 'face 'eshell-prompt-face)
+                ;; needed for the input text to not have prompt face
+                (propertize " " 'face 'default))))
+
+;; for completeness sake
+(defun +eshell--current-git-branch ()
+    (let ((branch (car (loop for match in (split-string (shell-command-to-string "git branch") "\n")
+                             when (string-match "^\*" match)
+                             collect match))))
+      (if (not (eq branch nil))
+          (concat " [" (substring branch 2) "]")
+        "")))
+#+end_src

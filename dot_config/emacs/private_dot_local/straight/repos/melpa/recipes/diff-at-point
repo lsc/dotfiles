@@ -1,0 +1,3 @@
+(diff-at-point
+ :fetcher codeberg
+ :repo "ideasman42/emacs-diff-at-point")

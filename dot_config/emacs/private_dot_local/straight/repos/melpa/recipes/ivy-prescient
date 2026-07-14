@@ -1,0 +1,3 @@
+(ivy-prescient :fetcher github
+               :repo "radian-software/prescient.el"
+               :files ("ivy-prescient.el"))

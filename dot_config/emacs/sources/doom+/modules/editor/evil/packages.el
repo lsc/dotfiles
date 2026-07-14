@@ -1,0 +1,41 @@
+;; -*- no-byte-compile: t; -*-
+;;; editor/evil/packages.el
+
+(package! evil :pin "3b678a221ee99cc6a95b01d7a3129ce5efc4c3da")
+(package! evil-args :pin "a8151556f63c9d45d0c44c8a7ef9e5a542f3cdc7")
+(package! evil-easymotion :pin "629c894af63336028a61cc93d6465d10837eb82b")
+(package! evil-embrace :pin "3081d37811b6a3dfaaf01d578c7ab7a746c6064d")
+(package! evil-escape
+  :recipe (:host github :repo "hlissner/evil-escape")
+  :pin "819f1ee1cf3f69a1ae920e6004f2c0baeebbe077")
+(package! evil-exchange :pin "5f0a2d41434c17c6fb02e4f744043775de1c63a2")
+(package! evil-indent-plus :pin "f392696e4813f1d3a92c7eeed333248914ba6dae")
+(package! evil-lion :pin "5a0bca151466960e090d1803c4c5ded88875f90a")
+(package! evil-nerd-commenter :pin "db5ee61a6e75db074b7d20e9dcb68e0b94b4edc7")
+(package! evil-numbers
+  ;; REVIEW: Don't byte-compile until juliapath/evil-numbers#30 is addressed.
+  :recipe (:build (:not compile))
+  :pin "616aff9e5cee012954756ed2715209fa90308cdf")
+(package! evil-snipe :pin "16317d7e54313490a0fe8642ed9a1a72498e7ad2")
+(package! evil-surround :pin "e6548372e8359ee55e67d73ca418314086011f1a")
+(package! evil-textobj-anyblock
+  :recipe (:host github
+           :repo "willghatch/evil-textobj-anyblock"
+           :branch "fix-inner-block")
+  :pin "29280cd71a05429364cdceef2ff595ae8afade4d")
+(package! evil-traces :pin "82e8a7b4213aed140f6eb5f2cc33a09bb5587166")
+(package! evil-visualstar :pin "06c053d8f7381f91c53311b1234872ca96ced752")
+(package! exato :pin "aee7af7b7a0e7551478f453d1de7d5b9cb2e06c4")
+(package! evil-quick-diff
+  :recipe (:host github :repo "rgrinberg/evil-quick-diff")
+  :pin "69c883720b30a892c63bc89f49d4f0e8b8028908")
+
+;;
+(when (modulep! +everywhere)
+  ;; `evil-collection-neotree' uses the `neotree-make-executor' macro, but this
+  ;; requires neotree be available during byte-compilation (while installing).
+  (when (modulep! :ui neotree)
+    (package! neotree)
+    (autoload 'neotree-make-executor "neotree" nil nil 'macro))
+
+  (package! evil-collection :pin "162183159dde328336bf2c92cef66b4151df26cf"))

@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Commidity directive
+# key: com
+# condition: (bolp)
+# --
+`(format-time-string "%Y-%m-%d")` commodity ${1:USD}
+  name: "${2:American dollar}"
+  asset-class: "${3:cash}"

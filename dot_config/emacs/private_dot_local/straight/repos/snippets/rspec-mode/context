@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: context 'modifier' do ... end
+# uuid: context
+# --
+context \'${1:modifier}\' do
+  `%`$0
+end

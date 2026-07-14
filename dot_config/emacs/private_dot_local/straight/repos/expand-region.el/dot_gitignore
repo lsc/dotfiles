@@ -1,0 +1,6 @@
+expand-region-autoloads.el
+expand-region-pkg.el
+*.elc
+.rvmrc
+/TAGS
+elpa

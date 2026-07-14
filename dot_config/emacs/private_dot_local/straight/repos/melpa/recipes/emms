@@ -1,0 +1,3 @@
+(emms :fetcher git
+      :url "https://git.savannah.gnu.org/git/emms.git"
+      :files (:defaults (:exclude "doc/fdl.texi" "doc/gpl.texi")))

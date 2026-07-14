@@ -1,0 +1,1 @@
+(company-emoji :repo "egirl/company-emoji" :fetcher codeberg)

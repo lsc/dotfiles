@@ -1,0 +1,6 @@
+(:name popwin
+       :description "Popup Window Manager."
+       :website "https://github.com/emacsorphanage/popwin"
+       :type github
+       :pkgname "emacsorphanage/popwin"
+       :load-path ("." "misc"))

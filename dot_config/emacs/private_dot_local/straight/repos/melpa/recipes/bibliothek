@@ -1,0 +1,4 @@
+(bibliothek
+ :fetcher codeberg
+ :repo "kutuptiyini/elisp"
+ :files ("bibliothek.el"))

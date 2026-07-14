@@ -1,0 +1,187 @@
+;;; test-ob-scheme.el --- Tests for Babel scheme     -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2017, 2019  Nicolas Goaziou
+
+;; Author: Nicolas Goaziou <mail@nicolasgoaziou.fr>
+
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+;;; Commentary:
+
+;; Unit tests for Org Babel Scheme.
+
+;;; Code:
+
+(unless (featurep 'ob-scheme)
+  (signal 'missing-test-dependency '("Support for Scheme code blocks")))
+(unless (featurep 'geiser)
+  (signal 'missing-test-dependency '("geiser")))
+(unless (version<= "27.1" emacs-version)
+  (signal 'missing-test-dependency '("Geiser required for Scheme code blocks needs Emacs >=27.1")))
+
+(ert-deftest test-ob-scheme/tables ()
+  "Test table output."
+  (should
+   (equal "#+begin_src scheme
+'(1 2 3)
+#+end_src
+
+#+RESULTS:
+| 1 | 2 | 3 |
+"
+	  (org-test-with-temp-text "#+begin_src scheme\n'(1 2 3)\n#+end_src"
+	    (org-babel-execute-maybe)
+	    (buffer-string)))))
+
+(ert-deftest test-ob-scheme/verbatim ()
+  "Test verbatim output."
+  (should
+   (equal ": (1 2 3)\n"
+	  (org-test-with-temp-text "#+begin_src scheme :results verbatim\n'(1 2 3)\n#+end_src"
+	    (org-babel-execute-src-block)
+	    (let ((case-fold-search t)) (search-forward "#+results"))
+	    (buffer-substring-no-properties (line-beginning-position 2)
+					    (point-max))))))
+
+(ert-deftest test-ob-scheme/cons-cell ()
+  "Test cons cell output."
+  (should
+   (equal ": (1 . 2)\n"
+	  (org-test-with-temp-text
+           "#+begin_src scheme\n(cons 1 2)\n#+end_src"
+	   (org-babel-execute-maybe)
+	   (let ((case-fold-search t)) (search-forward "#+results"))
+	   (buffer-substring-no-properties (line-beginning-position 2)
+					   (point-max))))))
+
+(ert-deftest test-ob-scheme/proper-list ()
+  "Test proper list output."
+  (should
+   (equal "- 1\n- 2\n- 3\n"
+	  (org-test-with-temp-text
+           "#+begin_src scheme :results list\n'(1 2 3)\n#+end_src"
+	   (org-babel-execute-maybe)
+	   (let ((case-fold-search t)) (search-forward "#+results"))
+	   (buffer-substring-no-properties (line-beginning-position 2)
+					   (point-max))))))
+
+(ert-deftest test-ob-scheme/list-conversion ()
+  "Test list conversion from Scheme to Elisp."
+  (should
+   (equal "| 1 | hline | 3 |\n"
+	  (org-test-with-temp-text "#+begin_src scheme\n'(1 null 3)\n#+end_src"
+	    (org-babel-execute-maybe)
+	    (let ((case-fold-search t)) (search-forward "#+results"))
+	    (buffer-substring-no-properties (line-beginning-position 2)
+					    (point-max)))))
+  (should
+   (equal "| 1 | nil | 3 |\n"
+          (let ((org-babel-scheme-null-to nil))
+	    (org-test-with-temp-text "#+begin_src scheme\n'(1 null 3)\n#+end_src"
+	      (org-babel-execute-maybe)
+	      (let ((case-fold-search t)) (search-forward "#+results"))
+	      (buffer-substring-no-properties (line-beginning-position 2)
+					      (point-max)))))))
+
+(ert-deftest test-ob-scheme/prologue ()
+  "Test :prologue parameter."
+  (should
+   (equal "#+begin_src scheme :prologue \"(define x 2)\"
+x
+#+end_src
+
+#+RESULTS:
+: 2
+"
+	  (org-test-with-temp-text
+	      "#+begin_src scheme :prologue \"(define x 2)\"\nx\n#+end_src"
+	    (org-babel-execute-maybe)
+	    (buffer-string))))
+  (should
+   (equal
+    "#+begin_src scheme :prologue \"(define x 2)\" :var y=1
+x
+#+end_src
+
+#+RESULTS:
+: 2
+"
+    (org-test-with-temp-text
+	"#+begin_src scheme :prologue \"(define x 2)\" :var y=1\nx\n#+end_src"
+      (org-babel-execute-maybe)
+      (buffer-string)))))
+
+(ert-deftest test-ob-scheme/variable-assignment ()
+  "Test variable assignments."
+  (should
+   (equal "string"
+          (org-test-with-temp-text
+              "#+begin_src scheme :var a=\"string\"
+a
+#+end_src"
+            (org-babel-execute-src-block))))
+  (should
+   (equal 123
+          (org-test-with-temp-text
+              "#+begin_src scheme :var a=123
+a
+#+end_src"
+            (org-babel-execute-src-block))))
+  (should
+   (equal "AB"
+          (org-test-with-temp-text
+              "#+begin_src scheme :var a=(concat \"A\" \"B\")
+a
+#+end_src"
+            (org-babel-execute-src-block))))
+  (should
+   (equal '(("A" "B" "C"))
+          (org-test-with-temp-text
+              "#+name: test
+| A | B | C |
+
+<point>#+begin_src scheme :var a=test
+a
+#+end_src"
+            (org-babel-execute-src-block))))
+  (should
+   (equal '(("A" "B" "C"))
+          (org-test-with-temp-text
+              "#+begin_src scheme :var a='((\"A\" \"B\" \"C\"))
+a
+#+end_src"
+            (org-babel-execute-src-block)))))
+
+(ert-deftest test-ob-scheme/unspecified ()
+  "Test <#unspecified> return value."
+  (should
+   (equal "#+begin_src scheme
+\(define (mysquare x)
+  (* x x))
+#+end_src
+
+#+RESULTS:
+: #<unspecified>
+"
+	  (org-test-with-temp-text
+	      "#+begin_src scheme
+(define (mysquare x)
+  (* x x))
+#+end_src"
+	    (org-babel-execute-maybe)
+	    (buffer-string)))))
+
+
+(provide 'test-ob-scheme)
+;;; test-ob-scheme.el ends here

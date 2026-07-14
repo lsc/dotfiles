@@ -1,0 +1,5 @@
+(:name gtranslate
+       :description "Use google translate api to perform translations"
+       :type github
+       :pkgname "emacsattic/gtranslate"
+       :load "gtranslate.el")

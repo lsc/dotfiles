@@ -1,0 +1,4 @@
+(edwina
+ :fetcher gitlab
+ :repo "ajgrf/edwina"
+ :old-names (edwin))

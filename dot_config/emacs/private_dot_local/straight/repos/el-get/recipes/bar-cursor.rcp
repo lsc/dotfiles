@@ -1,0 +1,4 @@
+(:name bar-cursor
+       :type github
+       :pkgname "ajsquared/bar-cursor"
+       :description "Change Emacs cursor into a bar")

@@ -1,0 +1,4 @@
+(genrnc
+ :fetcher github
+ :repo "aki2o/emacs-genrnc"
+ :files ("*.el" "*.jar" "*.xsl"))

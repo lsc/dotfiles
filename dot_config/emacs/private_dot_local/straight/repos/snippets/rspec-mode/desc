@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: describe Class do ... end
+# uuid: desc
+# --
+describe \'${1:modifier}\' do
+  `%`$0
+end

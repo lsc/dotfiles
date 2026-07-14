@@ -1,0 +1,68 @@
+;; -*- mode: lisp-data -*-
+"3.0.0"
+((name . doomemacs/core)
+ (version . "2.2.0")
+ (homepage . "https://doomemacs.org")
+
+ (commit
+  (preset doom-conventional-commits +modules)
+  (scopes "cli" "lib"
+          (docs
+           "install"
+           (lambda (scope _plist)
+             "Allow any filename in docs/* as a scope for docs commits."
+             (member
+              scope (doom-files-in (doom-path (dir!) "../docs")
+                                   :match "\\.org$"
+                                   :map #'file-name-base))))))
+
+ (make
+  ("LICENSE"
+   "The MIT License (MIT)\n"
+   (lambda (_)
+      (insert (format-time-string "Copyright (c) 2014-%Y Henrik Lissner.\n\n")))
+   "Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+\"Software\"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:\n"
+   "The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.\n"
+   "THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."))
+
+ (publish
+  (targets "docs/index.org"
+           "docs"
+           "modules/*/README.org"
+           "modules/*/*/README.org")
+  (env
+   (global-menus
+    ("± Suggest edits" . "doom-suggest-edit:")
+    ("? Help"
+     . ,(lambda! (&key title)
+          (cond ((equal title "Changelog")   "doom-help-changelog:")
+                ((string-prefix-p ":" title) "doom-help-modules:")
+                ("doom-help:")))))
+   (menus
+    (("docs/*.org" "modules/README.org")
+     (left ("← Back to index" . "doom-index:")))
+    ("docs/index.org"
+     (left ("↖ FAQ" . "doom-faq:")))
+    ("modules/*/README.org"
+     (left ("← Back to module index" . "doom-module-index:")))
+    ("modules/*/*/README.org"
+     (left ("← Back to module index" . "doom-module-index:"))
+     (right ("↖ History"
+             . ,(lambda! (&key category module)
+                  (format "doom-module-history:%s/%s" (doom-keyword-name category) module)))
+            ("! Issues"
+             . ,(lambda! (&key category module)
+                  (format "doom-module-issues::%s %s" category module)))))))))

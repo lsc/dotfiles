@@ -1,0 +1,1 @@
+(go-direx :repo "emacsorphanage/go-direx" :fetcher github)

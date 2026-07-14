@@ -1,0 +1,4 @@
+(:name oniisama
+       :description "Summon the beauteous sister on your Emacs"
+       :type github
+       :pkgname "nna774/oniisama")

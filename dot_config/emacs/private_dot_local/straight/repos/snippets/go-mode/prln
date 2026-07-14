@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: println(...)
+# type: command
+# --
+(doom-snippets-expand :uuid "println")

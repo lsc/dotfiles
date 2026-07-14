@@ -1,0 +1,3 @@
+(term-manager :fetcher github
+              :repo "colonelpanic8/term-manager"
+              :files ("term-manager*.el"))

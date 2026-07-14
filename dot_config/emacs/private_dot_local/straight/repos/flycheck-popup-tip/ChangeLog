@@ -1,0 +1,39 @@
+2017-08-13  Saša Jovanić  <sasa@simplify.ba>
+
+	* Release 0.12.2
+	* Removed `.el` suffix in `undercover-init` file
+	* Added better testing instructions
+	* Updated README to reflect using emacsclient in TTY and GUI deamon
+	* Fixed problem with not removing of tooltip when there is nothing to show (slow checkers)
+
+2017-07-30  Saša Jovanić  <sasa@simplify.ba>
+
+	* Release 0.12.1
+	* Hooks are local now
+
+2017-06-04  Saša Jovanić  <sasa@simplify.ba>
+
+	* Release 0.12.0
+	* Moved from global minor mode to normal minor mode
+	* Removed manual instalation instructions
+
+2017-05-14  Saša Jovanić  <sasa@simplify.ba>
+
+	* Release 0.11.0
+	* Added GPL3 text to all test files
+	* Added ChangeLog
+	* Updated README with contributing details
+	* Project moved to Flycheck org
+	* Added Melpa installation instructions
+
+2017-05-13  Saša Jovanić  <sasa@simplify.ba>
+
+	* Release 0.10.1
+	* Added tests
+	* Added test coverage reports
+	* Added TravisCI and Coveralls integration
+	* Updated README
+
+2017-05-08  Saša Jovanić  <sasa@simplify.ba>
+
+	* Initial release 0.10.0

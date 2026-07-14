@@ -1,0 +1,11 @@
+(:name transpose-frame
+       :description "Transpose windows arrangement in a frame."
+       :type github
+       :pkgname "emacsorphanage/transpose-frame"
+       :prepare (progn
+                  (autoload 'transpose-frame "transpose-frame" nil t)
+                  (autoload 'flip-frame "transpose-frame" nil t)
+                  (autoload 'flop-frame "transpose-frame" nil t)
+                  (autoload 'rotate-frame "transpose-frame" nil t)
+                  (autoload 'rotate-frame-clockwise "transpose-frame" nil t)
+                  (autoload 'rotate-frame-anticlockwise "transpose-frame" nil t)))

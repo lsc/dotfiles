@@ -1,0 +1,4 @@
+(sxiv
+ :fetcher codeberg
+ :repo "contrapunctus/sxiv.el"
+ :branch "dev")

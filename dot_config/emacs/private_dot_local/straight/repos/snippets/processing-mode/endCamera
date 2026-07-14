@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: endCamera
+# key: endc
+# --
+endCamera();

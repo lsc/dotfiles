@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: append
+# key: app
+# --
+append(${1:array}, ${2:element});

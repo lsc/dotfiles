@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: curveTightness
+# key: curvet
+# --
+curveTightness(${1:squishy});

@@ -1,0 +1,37 @@
+;;; os/macos/config.el -*- lexical-binding: t; -*-
+
+;;
+;;; Reasonable defaults for macOS
+
+;; Use spotlight search backend as a default for M-x locate (and helm/ivy
+;; variants thereof), since it requires no additional setup.
+(setq locate-command "mdfind")
+
+
+;;
+;;; Compatibilty fixes
+
+;; Visit files opened outside of Emacs in existing frame, not a new one
+(setq ns-pop-up-frames nil)
+
+;; Sane trackpad/mouse scroll settings. Also disables smooth scrolling because
+;; it's disturbingly clunky and slow without something like
+;; jdtsmith/ultra-scroll-mac.
+(setq mac-redisplay-dont-reset-vscroll t
+      mac-mouse-wheel-smooth-scroll nil)
+
+;; Sets `ns-transparent-titlebar' and `ns-appearance' frame parameters so window
+;; borders will match the enabled theme.
+(and (or (daemonp)
+         (display-graphic-p))
+     (require 'ns-auto-titlebar nil t)
+     (ns-auto-titlebar-mode +1))
+
+;; Integrate with Keychain
+(after! auth-source
+  (add-to-list 'auth-sources 'macos-keychain-generic t)
+  (add-to-list 'auth-sources 'macos-keychain-internet t))
+
+;; Delete files to trash on macOS, as an extra layer of precaution against
+;; accidentally deleting wanted files.
+(setq delete-by-moving-to-trash (not noninteractive))

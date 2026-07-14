@@ -1,0 +1,3 @@
+(bitlbee
+ :fetcher github
+ :repo "pjones/bitlbee-el")

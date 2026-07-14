@@ -1,0 +1,4 @@
+# -*- mode: snippet -*-
+# name: strokeWeight
+# --
+strokeWeight(${1:1});

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: public var
+# key: publicv
+# uuid: publicv
+# --
+public ${1:String} ${2:str}${4: = ${3:value}};

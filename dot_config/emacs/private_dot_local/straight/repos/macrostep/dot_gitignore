@@ -1,0 +1,6 @@
+*.elc
+*~
+
+# ELPA-generated files
+/macrostep-autoloads.el
+/macrostep-pkg.el

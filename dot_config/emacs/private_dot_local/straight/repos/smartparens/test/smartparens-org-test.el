@@ -1,0 +1,204 @@
+(require 'smartparens-org)
+
+
+;;; star pair
+(ert-deftest sp-test-org-insert-new-top-level-headline-item ()
+  (sp-test-with-temp-buffer "|"
+      (org-mode)
+    (execute-kbd-macro "* foo bar")
+    (sp-buffer-equals "* foo bar|")))
+
+(ert-deftest sp-test-org-insert-new-nested-headline-item ()
+  (sp-test-with-temp-buffer "|"
+      (org-mode)
+    (execute-kbd-macro "** foo bar")
+    (sp-buffer-equals "** foo bar|")))
+
+(ert-deftest sp-test-org-insert-star-pair ()
+  (sp-test-with-temp-buffer "|"
+      (org-mode)
+    (execute-kbd-macro "foo *bar")
+    (sp-buffer-equals "foo *bar|*")))
+
+(ert-deftest sp-test-org-do-not-insert-star-pair-after-word ()
+  (sp-test-with-temp-buffer "|"
+      (org-mode)
+    (execute-kbd-macro "foo bar* baz")
+    (sp-buffer-equals "foo bar* baz|")))
+
+(ert-deftest sp-test-org-skip-over-star-pair ()
+  (sp-test-with-temp-buffer "|"
+      (org-mode)
+    (execute-kbd-macro "foo *bar* baz")
+    (sp-buffer-equals "foo *bar* baz|")))
+
+(ert-deftest sp-test-org-wrap-star-pair ()
+  (sp-test-with-temp-buffer "foo |barM baz"
+      (org-mode)
+    (execute-kbd-macro "*")
+    (sp-buffer-equals "foo *|barM* baz")))
+
+(ert-deftest sp-test-org-skip-headline-asterisk ()
+  (sp-test-with-temp-buffer "|*** Foo"
+      (org-mode)
+    (should-not (sp-get-sexp))))
+
+(ert-deftest sp-test-org-do-not-skip-emphasis-asterisk ()
+  (sp-test-with-temp-buffer "some |*foo* text"
+      (org-mode)
+    (should (sp-get-sexp))))
+
+(ert-deftest sp-test-org-do-not-skip-emphasis-asterisk-at-bol ()
+  (sp-test-with-temp-buffer "|*foo* text"
+      (org-mode)
+    (should (sp-get-sexp))))
+
+(ert-deftest sp-test-org-do-not-skip-emphasis-asterisk-at-bol-backwards ()
+  (sp-test-with-temp-buffer "*foo*| text"
+      (org-mode)
+    (should (sp-get-sexp t))))
+
+
+;;; slash pair
+(ert-deftest sp-test-org-insert-slash-pair ()
+  (sp-test-with-temp-buffer "|"
+      (org-mode)
+    (execute-kbd-macro "foo /bar")
+    (sp-buffer-equals "foo /bar|/")))
+
+(ert-deftest sp-test-org-do-not-insert-slash-pair-after-word ()
+  (sp-test-with-temp-buffer "|"
+      (org-mode)
+    (execute-kbd-macro "foo bar/ baz")
+    (sp-buffer-equals "foo bar/ baz|")))
+
+(ert-deftest sp-test-org-skip-over-slash-pair ()
+  (sp-test-with-temp-buffer "|"
+      (org-mode)
+    (execute-kbd-macro "foo /bar/ baz")
+    (sp-buffer-equals "foo /bar/ baz|")))
+
+(ert-deftest sp-test-org-wrap-slash-pair ()
+  (sp-test-with-temp-buffer "foo |barM baz"
+      (org-mode)
+    (execute-kbd-macro "/")
+    (sp-buffer-equals "foo /|barM/ baz")))
+
+(ert-deftest sp-test-org-unpair-slash-after-space ()
+  (sp-test-with-temp-buffer "|"
+      (org-mode)
+    (execute-kbd-macro "foo / bar")
+    (sp-buffer-equals "foo / bar")))
+
+
+;;; tilde pair
+(ert-deftest sp-test-org-insert-tilde-pair ()
+  (sp-test-with-temp-buffer "|"
+      (org-mode)
+    (execute-kbd-macro "foo ~bar")
+    (sp-buffer-equals "foo ~bar|~")))
+
+(ert-deftest sp-test-org-do-not-insert-tilde-pair-after-word ()
+  (sp-test-with-temp-buffer "|"
+      (org-mode)
+    (execute-kbd-macro "foo bar~ baz")
+    (sp-buffer-equals "foo bar~ baz|")))
+
+(ert-deftest sp-test-org-skip-over-tilde-pair ()
+  (sp-test-with-temp-buffer "|"
+      (org-mode)
+    (execute-kbd-macro "foo ~bar~ baz")
+    (sp-buffer-equals "foo ~bar~ baz|")))
+
+(ert-deftest sp-test-org-wrap-tilde-pair ()
+  (sp-test-with-temp-buffer "foo |barM baz"
+      (org-mode)
+    (execute-kbd-macro "~")
+    (sp-buffer-equals "foo ~|barM~ baz")))
+
+(ert-deftest sp-test-org-unpair-tilde-after-space ()
+  (sp-test-with-temp-buffer "|"
+      (org-mode)
+    (execute-kbd-macro "foo ~ bar")
+    (sp-buffer-equals "foo ~ bar")))
+
+
+;;; equals pair
+(ert-deftest sp-test-org-insert-equals-pair ()
+  (sp-test-with-temp-buffer "|"
+      (org-mode)
+    (execute-kbd-macro "foo =bar")
+    (sp-buffer-equals "foo =bar|=")))
+
+(ert-deftest sp-test-org-do-not-insert-equals-pair-after-word ()
+  (sp-test-with-temp-buffer "|"
+      (org-mode)
+    (execute-kbd-macro "foo bar= baz")
+    (sp-buffer-equals "foo bar= baz|")))
+
+(ert-deftest sp-test-org-skip-over-equals-pair ()
+  (sp-test-with-temp-buffer "|"
+      (org-mode)
+    (execute-kbd-macro "foo =bar= baz")
+    (sp-buffer-equals "foo =bar= baz|")))
+
+(ert-deftest sp-test-org-wrap-equals-pair ()
+  (sp-test-with-temp-buffer "foo |barM baz"
+      (org-mode)
+    (execute-kbd-macro "=")
+    (sp-buffer-equals "foo =|barM= baz")))
+
+(ert-deftest sp-test-org-unpair-equals-after-space ()
+  (sp-test-with-temp-buffer "|"
+      (org-mode)
+    (execute-kbd-macro "foo = bar")
+    (sp-buffer-equals "foo = bar")))
+
+(ert-deftest sp-test-org-do-not-pair-quote-in-elisp-block ()
+  (sp-test-with-temp-buffer "#+begin_src elisp
+|
+#+end_src
+"
+      (org-mode)
+    (execute-kbd-macro "'asd")
+    (sp-buffer-equals "#+begin_src elisp
+'asd|
+#+end_src
+")))
+
+;; 1031
+(ert-deftest sp-test-org-no-text-pairs-inside-code--slash ()
+  (sp-test-with-temp-buffer "hello ~code|~"
+      (org-mode)
+    (execute-kbd-macro "/")
+    (sp-buffer-equals "hello ~code/|~")))
+
+(ert-deftest sp-test-org-no-text-pairs-inside-code--star ()
+  (sp-test-with-temp-buffer "hello ~code|~"
+      (org-mode)
+    (execute-kbd-macro "/")
+    (sp-buffer-equals "hello ~code/|~")))
+
+(ert-deftest sp-test-org-no-text-pairs-inside-code--underscore ()
+  (sp-test-with-temp-buffer "hello ~code|~"
+      (org-mode)
+    (execute-kbd-macro "/")
+    (sp-buffer-equals "hello ~code/|~")))
+
+(ert-deftest sp-test-org-no-text-pairs-inside-code-equal--slash ()
+  (sp-test-with-temp-buffer "hello =code|="
+      (org-mode)
+    (execute-kbd-macro "/")
+    (sp-buffer-equals "hello =code/|=")))
+
+(ert-deftest sp-test-org-no-text-pairs-inside-code-equal--star ()
+  (sp-test-with-temp-buffer "hello =code|="
+      (org-mode)
+    (execute-kbd-macro "/")
+    (sp-buffer-equals "hello =code/|=")))
+
+(ert-deftest sp-test-org-no-text-pairs-inside-code-equal--underscore ()
+  (sp-test-with-temp-buffer "hello =code|="
+      (org-mode)
+    (execute-kbd-macro "/")
+    (sp-buffer-equals "hello =code/|=")))

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: modelY
+# key: modely
+# --
+modelY(${1:x}, ${2:y}, ${3:z});

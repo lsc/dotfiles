@@ -1,0 +1,4 @@
+(clojure-snippets
+ :fetcher github
+ :repo "mpenet/clojure-snippets"
+ :files ("*.el" "snippets"))

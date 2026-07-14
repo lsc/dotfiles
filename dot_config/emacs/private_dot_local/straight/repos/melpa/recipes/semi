@@ -1,0 +1,2 @@
+(semi :repo "emacsmirror/semi"
+      :fetcher github)

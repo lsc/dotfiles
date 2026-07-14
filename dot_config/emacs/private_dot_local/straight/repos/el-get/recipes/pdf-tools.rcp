@@ -1,0 +1,10 @@
+(:name pdf-tools
+       :description "pdf tools"
+       :type github
+       :minimum-emacs-version "26.3"
+       :pkgname "vedang/pdf-tools"
+       :depends (let-alist tablist)
+       :build (("make" "autobuild"))
+       :build/berkeley-unix (("gmake" "autobuild"))
+       :load-path ("lisp")
+       :compile ("lisp/"))

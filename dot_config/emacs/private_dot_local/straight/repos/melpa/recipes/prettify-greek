@@ -1,0 +1,3 @@
+(prettify-greek
+ :fetcher github
+ :repo "fommil/prettify-greek.el")

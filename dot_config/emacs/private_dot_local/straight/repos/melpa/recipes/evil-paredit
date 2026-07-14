@@ -1,0 +1,1 @@
+(evil-paredit :fetcher github :repo "roman/evil-paredit")

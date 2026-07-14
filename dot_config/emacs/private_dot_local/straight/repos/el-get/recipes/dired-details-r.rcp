@@ -1,0 +1,5 @@
+(:name dired-details-r
+       :description " Show dired details on the right side of filenames."
+       :website "https://github.com/misohena/dired-details-r/"
+       :type github
+       :pkgname "misohena/dired-details-r")

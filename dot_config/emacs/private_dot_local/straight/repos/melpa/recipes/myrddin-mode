@@ -1,0 +1,1 @@
+(myrddin-mode :fetcher sourcehut :repo "jakob/myrddin-mode")

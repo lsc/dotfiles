@@ -1,0 +1,4 @@
+(org2blog
+ :fetcher github
+ :repo "org2blog/org2blog"
+ :files (:defaults "README.org" (:exclude "metaweblog.el")))

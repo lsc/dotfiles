@@ -1,0 +1,293 @@
+#+TITLE: NonGNU ELPA README
+#+DATE: 2023-01-07
+
+Copyright (C) 2020-2022 Free Software Foundation, Inc. \\
+See the end of the file for license conditions.
+
+#+BEGIN_COMMENT
+This file exists in two repositories, in the ~elpa-admin~ branch of
+the ~emacs/elpa.git~ repository and in the ~main~ branch of the
+~emacs/nongnu.git~ repository.  Please make sure you always update
+it in both locations.  This duplication will be removed eventually.
+#+END_COMMENT
+
+This repository contains the sources, deployment scripts, and auxiliary files
+for [[https://elpa.nongnu.org][NonGNU ELPA]] (=elpa.nongnu.org=).  NonGNU ELPA is a [[https://www.gnu.org/philosophy/free-sw.html][free software]] Emacs Lisp
+Package Archive (ELPA) with extensions to [[https://www.gnu.org/software/emacs/][GNU Emacs]].
+
+This file explains the repository layout, how to add and edit
+packages, and how to deploy the archive (either on =elpa.nongnu.org=,
+or a local copy for testing purposes).
+
+* Repository layout of nongnu.git
+
+The layout of the =nongnu.git= repository is as follows:
+
+- The =main= branch holds the list of specifications of the packages
+  included.  It does not hold the scripts to build them.
+
+- The copy of the code for a package =<pkg-name>= is not kept in
+  =main= but in a branch named =externals/<pkg-name>=.
+  Package branches are normally placed as git worktrees in the
+  subdirectory =packages/<pkg-name>= (see below).
+
+- The package archive deployment scripts are in the =elpa-admin=
+  branch in the external =elpa.git= repository.  This branch is
+  normally put as a git worktree in the =admin= subdirectory.
+
+* Initial setup
+
+Start with source that is cloned directly from Savannah.  See [[https://savannah.gnu.org/git/?group=elpa][the
+Savannah page]] and look for "NonGNU ELPA".  Using a clone of a clone
+does not work.
+
+The =Makefile= in =main= will automatically pull the =elpa-admin=
+branch to populate the =admin= subdirectory.  This is done by:
+
+#+begin_src sh
+    make
+#+end_src
+
+This will fetch a branch from =elpa.git= containing all the build
+scripts and makefiles and place them where needed.
+
+To checkout packages, see the instructions in the GNU ELPA README.
+
+* Building the archive
+
+Building the NonGNU ELPA package archive means creating the package tarballs,
+the =archive-contents= file, and other associated files, in an ELPA compatible
+directory.  This format is described in the Emacs Lisp Reference Manual chapter
+[[https://www.gnu.org/software/emacs/manual/html_node/elisp/Packaging-Basics.html][Packaging Basics]] (web link) or from Emacs:
+
+#+begin_src elisp
+    (info "(elisp) Packaging")
+#+end_src
+
+To build the archive(s), all it takes is:
+
+#+begin_src sh
+    cd .../nongnu
+    make build-all
+#+end_src
+
+This will build all the tarballs as well as the =archive-contents= file and
+put them into the =archive= and =archive-devel= subdirectories.
+If the archive exists already, it will only build those tarballs that are new.
+
+You can also (re)build a specific package =[PKG]= with:
+
+#+begin_src sh
+    make build/[PKG]
+#+end_src
+
+If you want to force a rebuild of a tarball that was already built, you have
+to do:
+
+#+begin_src sh
+    rm archive/[PKG]-[VERSION].tar; make build/[PKG]
+#+end_src
+
+If you have the [[https://guix.gnu.org/][GNU Guix]] package manager installed, it can take care
+of all the dependencies necessary for the ELPA build system to run.
+You can initialise a shell session by running
+
+#+begin_src sh
+  guix shell -m manifest.scm
+#+end_src
+
+* Using packages in-place
+
+The packages can be installed and used in-place.  First you need to make
+sure the package(s) you care about are placed in the =packages= subdirectory,
+e.g. with =make worktrees=, and then you can add that =.../packages= to your
+=package-directory-list=.  And once that is done, you can do:
+
+#+begin_src sh
+    make packages/[PKG]
+#+end_src
+
+to create the =[PKG]-pkg.el= and =[PKG]-autoloads.el= file as well as compile
+all the ELisp files in that package.  You can also do that for all the
+packages with:
+
+#+begin_src sh
+    make
+#+end_src
+
+* Guidance for accepting packages
+
+** We don't ask for copyright assignments to include packages in NonGNU ELPA.
+
+** The Emacs maintainers will decide what packages to put in NonGNU ELPA.
+
+** If an ELisp package follows the rules below,
+  we can add it to NonGNU ELPA if we want to.  If the code doesn't
+  follow them, we can change the code to follow them.  We may also
+  change the code in NonGNU ELPA for other reasons, technical or not.
+  After all, it is free software.
+
+** For practical reasons, we usually refrain from making local changes
+  to NonGNU ELPA packages, in order to simplify integration of future
+  changes from the upstream version.
+
+** The package's developers don't have an obligation to maintain the
+  NonGNU ELPA version, but we would like to invite them to do that, or
+  to cooperate and coordinate with us in doing that.  If you are the
+  developer of a NonGNU ELPA package, or a package that might be added
+  to NonGNU ELPA, and you're interested in maintaining it there, let's
+  discuss it.
+
+** Rules for a package to be acceptable in NonGNU ELPA
+
+*** A NonGNU ELPA package must display its copyright notices and license
+   notices clearly on each nontrivial file.  The notices do not have to
+   follow the FSF conventions about their presentation.
+
+   Software files need to carry a free license that is compatible with the
+   GNU GPL version 3-or-later.  Which licenses qualify is stated in
+   https://gnu.org/licenses/license-list.html.
+
+   Manuals need to be under a free license that is compatible
+   with the GNU FDL version 1.4-or-later.  Which licenses qualify is
+   stated in https://gnu.org/licenses/license-list.html.
+
+   All other documentation files, for users (manuals, help files, man
+   pages, and so on), and for developers (program logic, change logs,
+   and so on), can be under a license acceptable for manuals or a
+   license acceptable for software files (see above).  We can agree
+   with the package developers to include documentation published under
+   other free licenses.
+
+   Trivial files of just a few lines don't need to state a copyright or
+   a license.
+
+   Normally we don't include material other than software or
+   documentation, but we can agree with the developers to include
+   specific material.  If the material in question is an educational
+   resource, then it can have a license compatible with GNU FDL version
+   1.4 or one of the free Creative Commons licenses (CC-BY-SA, CC-BY or
+   CC-0), or another free license at our discretion.  If the material is
+   not an educational resource, it can instead be licensed under
+   CC-BY-ND.
+
+*** The package need not follow the GNU Coding Standards or the GNU
+   Maintainers Guide, except for a few specific points as stated below.
+
+*** The package must follow the rules in
+   https://www.gnu.org/prep/standards/, node References.  This means it
+   may not refer users to any nonfree software or nonfree
+   documentation, except as stated there.  Leading users to run a
+   program, and suggesting they run it, or depending on it to be
+   installed, are forms of referring users to it.
+
+*** Aside from packages obtained from GNU ELPA and NonGNU ELPA,
+   a package may not run code that it has fetched over the internet.
+
+   In particular, the package may install other packages in GNU ELPA and
+   NonGNU ELPA, but not any other software.
+
+   We will consider exceptions to that rule, but we will need to
+   consider them carefully, to make sure that the practices are
+   safe for Emacs users, not just in one package but when used in
+   many packages.  Each time we approve such an exception, we will
+   say so in comments in the package, with an explanation of our reasoning.
+
+*** The package must deliver its full functionality and convenience on a
+   completely free platform based on the GNU operating system (in
+   practice, GNU/Linux), working exclusively with other free software.
+   Otherwise, it would act as an inducement to install nonfree systems
+   or other nonfree software, and that would work against our cause.
+
+   However, as an exception it is ok for a package to provide, on some
+   non-GNU operating systems, features that the rest of Emacs (plus GNU
+   ELPA and NonGNU ELPA) already supports on GNU.
+
+   This is a moral issue.  See https://www.gnu.org/prep/standards/,
+   node System Portability.  The reason for this rule is that at no
+   time, in no way, should a NonGNU ELPA package put users who defend
+   their freedom at a disadvantage compared with those who surrender
+   their freedom.
+
+*** The package may communicate with a class of remote services, either
+   using a standard interface or using an ad-hoc interface for each
+   service, or a combination, *provided* that these services' jobs
+   consist of either communication or lookup of published data.
+
+   The package may not use remote services to do the user's own
+   computational processing.  "Your own computational processing" means
+   anything you could _in principle_ do in your own computers by
+   installing and running suitable software, without communicating with
+   any other computers.
+
+*** A general Savannah rule about advertisements
+
+   In general, you may not advertise anything commercial with material
+   in the NonGNU ELPA package or this repository.  However, as
+   exceptions, you can point people to commercial support offerings for
+   the package, and you can mention fan items that you sell directly to
+   the users.
+
+* Adding a package
+
+Once the NonGNU ELPA maintainers decides that we want to add a package =[PKG]=,
+here's what it takes:
+
+- Add a corresponding entry to the file =elpa-packages=, then
+
+  #+begin_src sh
+    make fetch/<pkgname>
+    make packages/<pkgname>
+    make build/<pkgname>
+  #+end_src
+
+- Make sure the resulting tarball looks good and works well.
+
+- You might also check that it can be compiled in place:
+
+  #+begin_src sh
+    make packages/<pkgname>
+  #+end_src
+
+- Push the package's code to the repository =nongnu.git=:
+
+  #+begin_src sh
+    make sync/<pkgname>
+  #+end_src
+
+- Commit and push the change to =elpa-packages=:
+
+  #+begin_src sh
+    git commit -m "* elpa-packages (<pkgname>): New package" -- elpa-packages
+    git push
+  #+end_src
+
+* License
+
+This file is part of NonGNU ELPA.
+
+NonGNU ELPA is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+NonGNU ELPA is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with NonGNU ELPA.  If not, see <https://www.gnu.org/licenses/>.
+
+
+#+STARTUP: showall
+#+OPTIONS: num:1
+#+AUTHOR: NonGNU ELPA Maintainers
+#+EMAIL: emacs-devel@gnu.org
+#+BEGIN_COMMENT
+Local variables:
+fill-column: 70
+paragraph-separate: "[ 	]*$"
+time-stamp-pattern: "4/#\\+DATE: %Y-%02m-%02d$"
+end:
+#+END_COMMENT

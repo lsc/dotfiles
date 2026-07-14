@@ -1,0 +1,5 @@
+*.elc
+*~
+async-autoloads.el
+/.eask
+/result

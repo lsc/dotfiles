@@ -1,0 +1,31 @@
+name: CI
+on:
+  push:
+    branches:
+      - develop
+      - main
+  pull_request: {}
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        emacs_version: [25, 26, 27, 28, 29, 30]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: GHCR login
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: CI
+        env:
+          VERSION: ${{ matrix.emacs_version }}
+        run: >-
+          make docker
+          CMD="make compile test smoke checkdoc longlines checkindent"
+          DOCKER_BASE=ghcr.io/radian-software/straight-ci
+          NO_BUILD_DOCKER=1
+          NO_SUDO_DOCKER=1

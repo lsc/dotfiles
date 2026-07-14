@@ -1,0 +1,1 @@
+(go-autocomplete :fetcher github :repo "emacsattic/go-autocomplete")

@@ -1,0 +1,4 @@
+(openfoam
+ :fetcher github
+ :repo "ralph-schleicher/emacs-openfoam"
+ :files ("openfoam.el"))

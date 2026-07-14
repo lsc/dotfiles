@@ -1,0 +1,24 @@
+language: nix
+
+os:
+  - linux
+
+env:
+  - EMACS_CI=emacs-26-3
+  - EMACS_CI=emacs-snapshot
+
+matrix:
+  allow_failures:
+    - env: EMACS_CI=emacs-snapshot
+
+install:
+  - bash <(curl https://raw.githubusercontent.com/purcell/nix-emacs-ci/master/travis-install)
+
+script:
+  - emacs --version
+  - script -eqc 'make; make update; make test' > /dev/null
+
+notifications:
+  email:
+    on_success: never
+    on_failure: always

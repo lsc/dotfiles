@@ -1,0 +1,3 @@
+(chronometrist-goal
+ :fetcher codeberg
+ :repo "contrapunctus/chronometrist-goal")

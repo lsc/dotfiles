@@ -1,0 +1,1 @@
+(helm-systemd :fetcher github :repo "Lompik/helm-systemd")

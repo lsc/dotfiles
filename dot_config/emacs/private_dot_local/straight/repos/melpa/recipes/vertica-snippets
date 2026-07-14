@@ -1,0 +1,4 @@
+(vertica-snippets
+ :fetcher github
+ :repo "baron42bba/vertica-snippets"
+ :files ("*.el" "snippets"))

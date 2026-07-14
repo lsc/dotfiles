@@ -1,0 +1,4 @@
+(:name session
+       :description "Session Management for Emacs"
+       :type github
+       :pkgname "emacsorphanage/session")

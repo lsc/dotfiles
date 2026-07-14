@@ -1,0 +1,3 @@
+(company-erlang
+ :fetcher github
+ :repo "s-kostyaev/company-erlang")

@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# contributor: Alejandro Espinoza Esparza <aespinoza@structum.com.mx>
+# name: /// <summary> ... </summary>
+# key: /summary
+# --
+/// <summary>
+/// $1
+/// </summary>

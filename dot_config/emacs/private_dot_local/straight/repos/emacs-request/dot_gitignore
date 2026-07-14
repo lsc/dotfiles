@@ -1,0 +1,7 @@
+/.cask/
+*.elc
+dist
+doc/build
+doc/source/index.rst
+tests/test-install
+melpazoid-master

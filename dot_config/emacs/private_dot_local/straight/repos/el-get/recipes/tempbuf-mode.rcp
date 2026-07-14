@@ -1,0 +1,4 @@
+(:name tempbuf-mode
+       :description "Kill unused buffers in the background"
+       :pkgname "emacsattic/tempbuf"
+       :type github)

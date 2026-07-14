@@ -1,0 +1,1 @@
+(auctex-latexmk :fetcher github :repo "emacsmirror/auctex-latexmk")

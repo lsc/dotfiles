@@ -1,0 +1,22 @@
+# Please keep sorted using "M-x sort-lines"
+*.elc
+*~
+.#*
+/config.mk
+/download_log.db
+/download_log.json.gz
+/download_log_stable.db
+/download_log_stable.json.gz
+/html*/archive.json
+/html*/build-status.json
+/html*/download_counts.json
+/html*/recipes.json
+/html*/updates.rss
+/packages*/
+/process_log.pid
+/recipes/.dirstamp
+/sandbox/
+/service/*/log
+/service/*/supervise
+/service/caddy/.caddy
+/working/

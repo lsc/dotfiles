@@ -1,0 +1,1 @@
+(doom :fetcher git :url "https://src.alexschroeder.ch/doom.git" :old-names (dom))

@@ -1,0 +1,4 @@
+(esh-autosuggest
+ :fetcher sourcehut
+ :repo "dieggsy/esh-autosuggest"
+ :old-names (company-eshell-autosuggest))

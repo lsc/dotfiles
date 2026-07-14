@@ -1,0 +1,5 @@
+(:name flycheck
+       :type github
+       :pkgname "flycheck/flycheck"
+       :minimum-emacs-version "26.1"
+       :description "On-the-fly syntax checking extension")

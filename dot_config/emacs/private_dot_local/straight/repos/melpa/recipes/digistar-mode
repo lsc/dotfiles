@@ -1,0 +1,2 @@
+(digistar-mode :fetcher github :repo "retroj/digistar-mode"
+               :files (:defaults "images"))

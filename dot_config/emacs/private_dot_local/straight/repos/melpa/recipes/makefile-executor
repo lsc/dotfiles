@@ -1,0 +1,1 @@
+(makefile-executor :repo "Olivia5k/makefile-executor.el" :fetcher github)

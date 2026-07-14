@@ -1,0 +1,6 @@
+(chronometrist-key-values
+ :fetcher codeberg
+ :repo "contrapunctus/chronometrist"
+ :branch "dev"
+ :files (:defaults
+         "elisp/chronometrist-key-values.*"))

@@ -1,0 +1,4 @@
+# -*- mode: snippet -*-
+# name: loadFont
+# --
+${1:font} = loadFont(${3:"${2:FFScala-32.vlw}"});

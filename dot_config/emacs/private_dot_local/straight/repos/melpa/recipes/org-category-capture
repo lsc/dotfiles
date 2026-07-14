@@ -1,0 +1,4 @@
+(org-category-capture
+ :fetcher github
+ :repo "colonelpanic8/org-project-capture"
+ :files ("org-category-capture*.el"))

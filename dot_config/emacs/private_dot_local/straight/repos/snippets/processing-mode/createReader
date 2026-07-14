@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: createReader
+# key: creater
+# --
+createReader(${1:filename});

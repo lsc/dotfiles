@@ -1,0 +1,5 @@
+(:name emacs-sos
+       :website "https://github.com/emacsattic/sos"
+       :description "StackOverflow Search (SOS) mode for Emacs"
+       :type github
+       :pkgname "emacsattic/sos")

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: loadStrings
+# key: loadStrings
+# --
+loadStrings(${2:"${1:filename}"});

@@ -1,0 +1,1 @@
+(git-modes :fetcher github :repo "magit/git-modes")

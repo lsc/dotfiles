@@ -1,0 +1,5 @@
+(:name darcula-theme
+       :description "Emacs theme inspired by IntelliJ's Darcula."
+       :website "https://github.com/purcell/darcula-theme-emacs"
+       :type github
+       :pkgname "purcell/darcula-theme-emacs")

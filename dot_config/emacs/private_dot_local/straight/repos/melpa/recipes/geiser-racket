@@ -1,0 +1,4 @@
+(geiser-racket
+ :fetcher codeberg
+ :repo "geiser/racket"
+ :files (:defaults ("src" "src/*" "bin" "bin/*")))

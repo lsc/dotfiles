@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: year
+# key: yr
+# uuid: yr
+# --
+year()

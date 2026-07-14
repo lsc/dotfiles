@@ -1,0 +1,4 @@
+(kaleidoscope-evil-state-flash
+ :fetcher git
+ :url "https://git.madhouse-project.org/algernon/kaleidoscope.el"
+ :files ("kaleidoscope-evil-state-flash.el"))

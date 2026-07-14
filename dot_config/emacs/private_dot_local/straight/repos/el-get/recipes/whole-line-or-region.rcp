@@ -1,0 +1,4 @@
+(:name whole-line-or-region
+       :description "Operate on current line if region undefined"
+       :type github
+       :pkgname "purcell/whole-line-or-region")

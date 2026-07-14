@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: func ...(...) ... { ... }
+# type: command
+# --
+(doom-snippets-expand :uuid "func")

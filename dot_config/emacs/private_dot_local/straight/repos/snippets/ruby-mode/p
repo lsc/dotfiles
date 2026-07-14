@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: puts ...
+# uuid: p
+# --
+puts $0

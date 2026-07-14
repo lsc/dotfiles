@@ -1,0 +1,4 @@
+(forecast
+ :fetcher codeberg
+ :repo "kutuptiyini/elisp"
+ :files ("forecast.el"))

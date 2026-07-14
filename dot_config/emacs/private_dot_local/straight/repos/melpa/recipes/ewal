@@ -1,0 +1,4 @@
+(ewal
+ :fetcher github
+ :repo "cyruseuros/ewal"
+ :files ("ewal.el" "palettes"))

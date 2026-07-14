@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: $var = value;
+# key: var
+# --
+\$${1:var} = `%`$0;

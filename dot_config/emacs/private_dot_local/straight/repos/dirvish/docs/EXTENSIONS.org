@@ -1,0 +1,297 @@
+#+AUTHOR: Alex Lu
+#+EMAIL: alexluigit@gmail.com
+#+startup: content
+
+Several small extension packages to Dirvish are maintained in the subdirectory
+/extensions/.  They are installed together with Dirvish if you pull the package
+from MELPA.  All of these extensions are inactive by default and will be loaded
+on demand (usually you don't have to require them explicitly).
+
+These extensions can augment Dirvish through different ways such as providing
+extra commands/attributes/preview methods, improving UI by the help of
+=transient.el=, integration with external tools, among other things.  With them it
+is possible to adapt Dirvish such that it matches your preference or behaves
+similar to other familiar file explorers.
+
+* Multi-stage copy/pasting of files (dirvish-yank.el)
+
+Here is a quote from [[https://github.com/Fuco1/dired-hacks][dired-ranger]] that justified the ~dired-ranger-move/paste~ commands:
+
+#+begin_quote
+A feature present in most orthodox file managers is a "two-stage" copy/paste
+process. Roughly, the user first selects some files, "copies" them into a
+clipboard and then pastes them to the target location. This workflow is missing
+in dired.
+
+In dired, user first marks the files, then issues the dired-do-copy command
+which prompts for the destination. The files are then copied there. The
+dired-dwim-target option makes this a bit friendlier---if two dired windows are
+opened, the other one is automatically the default target.
+
+With the multi-stage operations, you can gather files from multiple dired
+buffers into a single "clipboard", then copy or move all of them to the target
+location.
+#+end_quote
+
+In addition to implementing the core logic described above, this extension also
+supports several frequently used commands.  To transfer files from source to
+destination, mark the desired files, navigate to the destination, and use one of
+the =dirvish-yank=, =dirvish-move=, =dirvish-symlink=, =dirvish-relative-symlink= or
+=dirvish-hardlink= commands to complete the transfer.  All of these commands are
+executed *ASYNCHRONOUSLY* without any extra setups.
+
+See also: [[https://github.com/alexluigit/dirvish/blob/main/docs/FAQ.org#dired-ranger][comparison with dired-ranger]]
+
+* Integration with *rsync* command (dirvish-rsync.el)
+
+This extension introduces =dirvish-rsync=, which requires [[https://github.com/RsyncProject/rsync][rsync]] executable,
+mirroring the functionality of Alex Bennée's =dired-rsync=.  It also provides a
+transient menu =dirvish-rsync-switches-menu=, for temporary adjustments to
+=dirvish-rsync-args=.
+
+** Compare to =dired-rsync=
+
++ =dirvish-rsync= also handles file operations on the same remote host.
+  See: https://github.com/stsquad/dired-rsync/issues/24.
+
++ =dirvish-rsync= takes advantages of the same multi-stage action mechanism in
+  =dirvish-yank=.  Meaning that you should mark files first then goto target
+  directory and invoke =dirvish-rsync= there, instead of trying to do it in the
+  way of =dired-do-copy=.
+
++ It gathers marked files from multiple Dired buffers.
+
+** User options
+
+Configure ~dirvish-rsync-program~ and ~dirvish-rsync-args~ to specify the executable
+path and command line arguments of =rsync=.
+
+~dirvish-rsync-r2r-ssh-port~, ~dirvish-rsync-r2r-ssh-user~ and
+~dirvish-rsync-r2r-use-direct-connection~ are provided to deal with the remote to
+remote connections (thanks to @dvzubarev).
+
+Use ~dirvish-rsync-shortcut-key-for-yank-menu~ and ~dirvish-rsync-use-yank-menu~ to
+adjust the shortcut key of =dirvish-rsync= in =dirvish-yank-menu=.
+
+* Group files with custom filter stack (dirvish-emerge.el)
+
+This extension organizes your file list into groups based on your chosen
+criteria, presented similarly to ~ibuffer~.  You can collapse and expand these
+groups by pressing ~TAB~ on the group header. For a quick demonstration, see this
+video:
+
+https://user-images.githubusercontent.com/16313743/190387614-16f8d660-7e48-483b-ae54-db471324b4e0.mp4
+
+The variable ~dirvish-emerge-groups~ specifies filter criteria for groups. In the
+video, the value used appears to be:
+
+#+begin_src emacs-lisp
+;; Header string |    Type    |    Criterias
+'(("Recent files"  (predicate . recent-files-2h))
+  ("Documents"     (extensions "pdf" "tex" "bib" "epub"))
+  ("Video"         (extensions "mp4" "mkv" "webm"))
+  ("Pictures"      (extensions "jpg" "png" "svg" "gif"))
+  ("Audio"         (extensions "mp3" "flac" "wav" "ape" "aac"))
+  ("Archives"      (extensions "gz" "rar" "zip")))
+#+end_src
+
+Avoid manually editing this variable. The recommended way to modify, compose,
+apply, or save it (to *.dir-locals.el*) is with the ~dirvish-emerge-menu~ transient
+menu, which is how the value above was created.
+
+While you can set this variable globally, saving it to *.dir-locals.el* is more
+preferable because:
+
++ Different directory types may require different groups to be emerged.
++ Applying these filters in large directories can take a significant amount of time.
+
+To ensure the groups defined in ~dirvish-emerge-groups~ are emerged upon entering
+a directory, add ~dirvish-emerge-mode~ to ~dirvish-setup-hook~.
+
+#+begin_src emacs-lisp
+(add-hook 'dirvish-setup-hook 'dirvish-emerge-mode)
+#+end_src
+
+* Minibuffer file preview (dirvish-peek.el)
+
+This extension introduces =dirvish-peek-mode=, a minor mode that enables file
+previews within the minibuffer as you narrow down candidates.  By leveraging
+=dirvish.el= for its core functionality, it delivers a seamless and consistent
+preview experience.  It currently supports =vertico=, =ivy= and =icomplete=.
+
+https://user-images.githubusercontent.com/16313743/158052790-22e6cf49-e18e-435c-908e-f5d91ba316a6.mp4
+
+*Figure 1.* A demo of ~find-library~ and ~find-file~ commands after ~dirvish-peek-mode~ enabled.
+
+=dirvish-peek-mode= enables previews by default. You can disable them by adjusting
+the =dirvish-peek-key= variable (adopted from ~consult-preview-key~).  Furthermore
+it is possible to specify keybindings which trigger the preview manually. The
+default setting of =dirvish-peek-key= is =any= which means that =dirvish-peek-mode=
+triggers the preview /immediately/ on any key press when the selected candidate
+changes.  The following settings are possible:
+
+- Automatic and immediate ='any=
+- Automatic and delayed =(list :debounce 0.5 'any)=
+- Manual and immediate ="M-."=
+- Manual and delayed =(list :debounce 0.5 "M-.")=
+- Disabled =nil=
+
+* Version-control (*git*) integration (dirvish-vc.el)
+
+This extension gives Dirvish the ablity to display version-control data in
+different ways.  For now we have:
+
++ ~vc-state~: an attribute to display the VC state as a bitmap at left fringe
++ ~git-msg~: an attribute to display git commit messages after the file name
++ ~vc-[log|diff|blame]~: VC info preview dispatchers
+
+Be sure to put the ~vc-**~ preview dispatcher at the *beginning* of
+~dirvish-preview-dispatchers~ if you want to enable them by default, otherwise the
+preview content might be intercepted by other preview dispatchers.
+
+These 3 ~vc-*~ preview dispatchers are mutually exclusive, which means you should
+/not/ set ~dirvish-preview-dispatchers~ like this:
+
+#+begin_src emacs-lisp
+;; `vc-diff' will be ignored
+(vc-log vc-diff ...)
+#+end_src
+
+The ~dirvish-vc-menu~ (bound to =? v= by default) allows you to call all available
+VC commands, it also provides a way to cycle through the ~vc-*~ preview methods.
+
+[[https://user-images.githubusercontent.com/16313743/182787337-92222d67-c57c-4037-ac11-7280be92ce78.mp4][https://user-images.githubusercontent.com/16313743/182787337-92222d67-c57c-4037-ac11-7280be92ce78.mp4]]
+
+*Figure 2*. Toggle ~vc-state~ and ~git-msg~ (attribute), cycle through ~vc-[log|diff|blame]~.
+
+* Show icons at front of file name (dirvish-icons.el)
+
+This extension provides file icons integration from various backends:
+
++ ~nerd-icons~:    https://github.com/rainstormstudio/nerd-icons.el
++ ~all-the-icons~: https://github.com/domtronn/all-the-icons.el
++ ~vscode-icon~:   https://github.com/jojojames/vscode-icon-emacs
+
+To tweak the appearance of the icons, you have these options:
+
++ ~dirvish-all-the-icons-height~: Height of icons from =all-the-icons=.
++ ~dirvish-all-the-icons-offset~: Vertical offset of icons from =all-the-icons=.
++ ~dirvish-all-the-icons-palette~: Coloring style used for =all-the-icons=.
++ ~dirvish-vscode-icon-size~: Image size of icons from =vscode-icon=.
+
+* Toggle Dirvish in side window (dirvish-side.el)
+
+This extension provides the ~dirvish-side~ command, which toggles a Dirvish
+sidebar within the current frame.  The width is fixed to prevent the window from
+unexpected resizing, but you can adjust it using the ~dirvish-side-increase-width~
+and ~dirvish-side-decrease-width~ commands.
+
+When ~dirvish-side-follow-mode~ is enabled, the visible side session will select
+the current buffer's filename, similar to ~treemacs-follow-mode~ in =treemacs=. It
+will also visits the latest ~project-root~ after switching to a new project.
+
+These customization options are available:
+
++ ~dirvish-side-attributes~: like ~dirvish-attributes~, but for side window.
++ ~dirvish-side-mode-line-format~: like ~dirvish-mode-line-format~, but for side window.
++ ~dirvish-side-header-line-format~: like ~dirvish-header-line-format~, but for side window.
++ ~dirvish-side-display-alist~: Display actions for the side window.
++ ~dirvish-side-window-parameters~: Window parameters for the side window.
++ ~dirvish-side-width~: Width of the side window.
++ ~dirvish-side-open-file-action~: Action to perform before opening a file in a side window.
++ ~dirvish-side-auto-expand~: Whether to auto expand parent directories of current file.
+
+* Setup ls switches on the fly (dirvish-ls.el)
+
+This extension provides commands to changing the ls listing switches like a
+breeze. No manual editing anymore!
+
+[[https://user-images.githubusercontent.com/16313743/178141860-784e5744-a5b7-4a7b-9bdb-f0f981ca2dba.svg][https://user-images.githubusercontent.com/16313743/178141860-784e5744-a5b7-4a7b-9bdb-f0f981ca2dba.svg]]
+
+*Figure 3*. left: ~dirvish-quicksort~  right: ~dirvish-ls-switches-menu~
+
+* Turn Dirvish into a tree browser (dirvish-subtree.el)
+
+This extension enhances Dirvish with the ~dirvish-subtree-toggle~ command, a
+streamlined alternative to =dired-subtree= for toggling a directory under the
+cursor as a subtree.
+
++ To visually indicate the expansion state of directories, add ~subtree-state~ to
+  ~dirvish-attributes~.
+
++ Customize the appearance of the expansion indicator using
+  ~dirvish-subtree-state-style~ and ~dirvish-subtree-icon-scale-factor~ to adjust
+  its placement and size.  See this [[https://github.com/alexluigit/dirvish/issues/185][related issue]]
+
++ To hide the indicator when no directories are expanded, set
+  ~dirvish-subtree-always-show-state~ to nil.
+
+* History navigation (dirvish-history.el)
+
+This extension offers a collection of straightforward and useful history
+navigation commands.
+
+*Commands*:
+
++ ~dirvish-history-jump~         Go to recently visited directories
++ ~dirvish-history-go-forward~   Go forward history (session locally)
++ ~dirvish-history-go-backward~  Go backward history (session locally)
++ ~dirvish-history-last~         Go to most recent used Dirvish buffer
+
+*Options*:
+
++ =dirvish-history-sort-function=
+  Sorting criteria for ~dirvish-history-jump~ command.
+
+* Quick keys for frequently visited places (dirvish-quick-access.el)
+
+This extension gives you the ability of jumping to anywhere in the filesystem
+with minimal (2 usually) keystrokes.  Just define the entries in
+~dirvish-quick-access-entries~ and access them by calling ~dirvish-quick-access~.
+
+* Collapse unique nested paths (dirvish-collapse.el)
+
+This extension provides the ~collapse~ attribute.
+
+#+begin_quote
+Often times we find ourselves in a situation where a single file or directory is
+nested in a chain of nested directories with no other content. This is sometimes
+due to various mandatory layouts demanded by packaging tools or tools generating
+these deeply-nested "unique" paths to disambiguate architectures or versions
+(but we often use only one anyway). If the user wants to access these
+directories they have to quite needlessly drill-down through varying number of
+"uninteresting" directories to get to the content.
+
+                                                   -- from [[https://github.com/Fuco1/dired-hacks][dired-collapse]]
+#+end_quote
+
+See also: [[https://github.com/alexluigit/dirvish/blob/main/docs/FAQ.org#dired-collapse][comparison with dired-collapse]]
+
+* Live-narrowing of Dirvish buffer (dirvish-narrow.el)
+
+This extension provides live filtering of files within Dirvish buffers. Invoke
+~dirvish-narrow~, then type a filter string in the minibuffer, the buffer updates
+automatically as you type. Press =RET= to finalize the narrowed view, or =C-g= to
+cancel and restore the original buffer.  To restore the full view after
+finalizing with =RET=, use ~revert-buffer~ (typically bound to =g=).
+
+https://github.com/user-attachments/assets/539e1a74-ddf2-41fa-9dc2-3358108828fc
+
+If [[https://github.com/oantolin/orderless][orderless]] is installed, it is automatically used to generate the
+=completion-regexp-list= from your input string for file list filtering. The
+matching style is determined by your =orderless= configuration. If =orderless= is
+not available, the regexp list is generated using ~split-string~ instead.
+
+~dirvish-narrow~ also operates within buffers generated by ~dirvish-fd~.  When
+narrowing in such buffers, input starting with "#" enables two-stage filtering.
+A new =fd= process is spawned whenever the minibuffer input changes.  The portion
+of the input immediately following the initial "#" is passed as a pattern
+argument to =fd=, while the remainder of the input (after the =fd= pattern) serves
+as a secondary filter applied by Dirvish. For example, with the minibuffer input
+=#foo,bar baz=, the =fd= process runs with a pattern like =--and=foo --and=bar=, and
+its results are then filtered within Dirvish using =baz=.  If you remove the
+leading "#" character, =fd= is instructed to list all entries recursively without
+any pattern filtering, and the entire minibuffer content is used as the filter
+pattern within Dirvish.  This two-level filtering is advantageous for
+directories containing a large number of files (e.g. =/= or =$HOME=), as the initial
+=fd= filtering significantly reduces the processing time.

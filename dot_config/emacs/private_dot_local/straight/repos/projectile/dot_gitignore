@@ -1,0 +1,11 @@
+*~
+*\#*\#
+*.\#*
+*.elc
+/Eldev-local
+/.eldev
+/dist
+/TAGS
+/project
+/.projectile-cache.eld
+.claude/

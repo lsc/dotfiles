@@ -1,0 +1,3 @@
+(visual-fill-column
+ :fetcher codeberg
+ :repo "joostkremers/visual-fill-column")

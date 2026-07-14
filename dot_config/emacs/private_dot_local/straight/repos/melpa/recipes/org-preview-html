@@ -1,0 +1,1 @@
+(org-preview-html :fetcher github :repo "jakebox/org-preview-html")

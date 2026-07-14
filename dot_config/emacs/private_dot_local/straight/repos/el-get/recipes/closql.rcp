@@ -1,0 +1,7 @@
+(:name closql
+       :description "Store EIEIO objects using EmacSQL"
+       :type github
+       :pkgname "emacscollective/closql"
+       :branch "main"
+       :minimum-emacs-version "25.1"
+       :depends (esqlite))

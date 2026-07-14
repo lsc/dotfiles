@@ -1,0 +1,5 @@
+(:name processing-mode
+       :description "Emacs major-mode for Processing 2.0"
+       :type github
+       :pkgname "ptrv/processing2-emacs"
+       :features processing-mode)

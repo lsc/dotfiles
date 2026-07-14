@@ -1,0 +1,4 @@
+(ac-clang
+ :fetcher github
+ :repo "yaruopooner/ac-clang"
+ :files (:defaults "*.png" "build" "clang-server"))

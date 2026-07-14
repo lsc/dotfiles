@@ -1,0 +1,2 @@
+(org-randomnote :fetcher github
+                 :repo "tasshin/org-randomnote")

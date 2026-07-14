@@ -1,0 +1,4 @@
+(ob-lurk
+ :fetcher github
+ :repo "lurk-lab/lurk-emacs"
+ :files ("ob-lurk.el"))

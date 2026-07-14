@@ -1,0 +1,1 @@
+(selectrum :fetcher github :repo "radian-software/selectrum")

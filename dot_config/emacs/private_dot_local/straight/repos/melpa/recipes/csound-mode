@@ -1,0 +1,1 @@
+(csound-mode :fetcher github :repo "hlolli/csound-mode")

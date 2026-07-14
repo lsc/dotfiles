@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: sphereDetail
+# key: sphereDetail
+# --
+sphereDetail(${1:n});

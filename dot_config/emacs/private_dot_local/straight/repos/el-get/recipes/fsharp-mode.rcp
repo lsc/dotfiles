@@ -1,0 +1,7 @@
+(:name fsharp-mode
+       :description "Major mode for editing fsharp code."
+       :type github
+       :pkgname "fsharp/emacs-fsharp-mode"
+       :load-path (".")
+       :depends (eglot jsonrpc)
+       :website "https://github.com/fsharp/emacs-fsharp-mode")

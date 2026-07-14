@@ -1,0 +1,119 @@
+#+title: marginalia.el - Changelog
+#+author: Omar Antolín Camarena, Daniel Mendler
+#+language: en
+
+* Version 2.11 (2026-05-19)
+
+- Require Compat 31.
+
+* Version 2.10 (2026-03-09)
+
+- Avoid slowdown due to Tramp in ~abbreviate-file-name~.
+
+* Version 2.9 (2026-01-25)
+
+- Add ~marginalia-annotate-frame~ for ~select-by-frame-name~ and ~select-frame-by-id~.
+- Fix ~marginalia-annotate-embark-keybinding~.
+
+* Version 2.8 (2026-01-17)
+
+- Use =when-let*= instead of =when-let=.
+
+* Version 2.7 (2025-12-31)
+
+- Run annotation functions in original window and original buffer.
+
+* Version 2.6 (2025-12-19)
+
+- Stop providing an =annotation-function=. The =affixation-function= has been
+  supported since Emacs 28.1 and Marginalia requires Emacs 29.1.
+
+* Version 2.5 (2025-11-15)
+
+- Annotate definition prefix symbols which appear in =describe-function=,
+  =describe-variable= etc if =help-enable-completion-autoload= is enabled.
+
+* Version 2.4 (2025-10-13)
+
+- Require Emacs 29.
+- Drop loaded indicator from theme annotator.
+- Drop obsolete variable alias =marginalia-annotator-registry=.
+
+* Version 2.3 (2025-09-08)
+
+- Support new ~project-buffer~ category.
+- Improve remote file detection to avoid calling Tramp.
+
+* Version 2.2 (2025-07-28)
+
+- Support ~uniquify-get-unique-names~ used by ~project-switch-to-buffer~ in
+  Emacs 31.
+
+* Version 2.1 (2025-06-04)
+
+- Rename =marginalia-annotator-registry= to =marginalia-annotators= for consistency
+  with =marginalia-classifiers=.
+- Add context menu in minibuffer. Enable =context-menu-mode= to try.
+
+* Version 2.0 (2025-03-17)
+
+- =marginalia--variable-value=: Add tool tip for integers with hexadecimal, octal
+  and character representation.
+
+* Version 1.8 (2024-12-22)
+
+- Require Emacs 28.1.
+- Add G symbol class for customization groups.
+
+* Version 1.7 (2024-07-26)
+
+- Bump Compat dependency to Compat 30.
+- Advise both ~completion-metadata-get~ and ~(compat-function
+  completion-metadata-get)~ in order to provide completion categories and
+  annotation functions.
+
+* Version 1.6 (2024-04-04)
+
+- ~marginalia-annotate-buffer~: Handle dead buffers, which can occur when
+  annotating the candidates of ~consult-buffer~, which maintains the actual buffer
+  objects during completion.
+
+* Version 1.5 (2023-12-27)
+
+- ~marginalia-annotate-bookmark~: Show location and more context.
+- ~marginalia-annotate-tab~: Show tab index starting from one.
+
+* Version 1.4 (2023-12-01)
+
+- =marginalia-annotate-theme=: New annotator based on =marginalia-annotate-library=.
+- =marginalia-remote-file-regexps=: New customization variable set to a list of
+  regexps matching remote paths, which should be excluded from file annotations.
+
+* Version 1.3 (2023-07-02)
+
+- =marginalia-classify-by-prompt=: Use case-insensitive matching.
+- =marginalia-annotate-symbol=: Additional symbol classes. Use =M= for module
+  functions, =P= for primitives and =S= for special forms.
+- =marginalia-annotate-symbol=: Add =symbol-file= column.
+- =marginalia-cycle=: Add =completion-predicate= to display command only in
+  recursive minibuffers.
+
+* Version 1.2 (2023-04-17)
+
+- =marginalia-classify-by-command-name=: Resolve function aliases and use the name
+  of the original command to determine the completion category.
+
+* Version 1.1 (2023-02-17)
+
+- Require the =compat= library.
+- Fix =marginalia-classify-by-prompt= such that it handles multiple brackets in
+  the prompt gracefully.
+- Add =help-echo= properties to truncated annotations. The full string is shown on
+  mouse hover.
+- Add =help-echo= to the symbol classes of =marginalia-annotate-symbol=.
+- Add =help-echo= to file sizes showing the exact size in bytes.
+- Add =help-echo= to file dates showing the exact date.
+
+* Version 1.0 (2022-12-22)
+
+- Start of changelog.

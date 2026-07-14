@@ -1,0 +1,2 @@
+(loopy :fetcher codeberg
+       :repo "okamsn/loopy")

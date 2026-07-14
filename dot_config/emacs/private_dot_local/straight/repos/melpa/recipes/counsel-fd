@@ -1,0 +1,1 @@
+(counsel-fd :fetcher github :repo "ChetanKoneru/counsel-fd")

@@ -1,0 +1,3 @@
+(apparmor-mode
+ :fetcher gitlab
+ :repo "apparmor/apparmor-mode")

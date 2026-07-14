@@ -1,0 +1,1 @@
+(circe :repo "emacs-circe/circe" :fetcher github)

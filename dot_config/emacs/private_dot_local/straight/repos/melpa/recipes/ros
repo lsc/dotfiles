@@ -1,0 +1,3 @@
+(ros
+  :repo "mbeutelspacher/ros.el"
+  :fetcher github)

@@ -1,0 +1,1 @@
+(static-unless noninteractive (with-doom-context '(module init) (doom-load "/home/lsc/.config/doom/init.el" t)))

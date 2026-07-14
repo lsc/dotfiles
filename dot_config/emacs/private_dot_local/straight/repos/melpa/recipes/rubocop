@@ -1,0 +1,2 @@
+(rubocop :repo "rubocop/rubocop-emacs"
+         :fetcher github)

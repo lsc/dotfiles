@@ -1,0 +1,4 @@
+(sclang-snippets
+ :fetcher github
+ :repo "ptrv/sclang-snippets"
+ :files ("*.el" "snippets"))

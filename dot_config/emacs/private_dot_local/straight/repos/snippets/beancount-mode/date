@@ -1,0 +1,4 @@
+# -*- mode: snippet -*-
+# name: Insert date
+# --
+`(format-time-string "%Y-%m-%d")`

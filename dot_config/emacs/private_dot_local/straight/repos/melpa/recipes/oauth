@@ -1,0 +1,3 @@
+(oauth
+ :fetcher gitlab
+ :repo "fvdbeek/emacs-oauth")

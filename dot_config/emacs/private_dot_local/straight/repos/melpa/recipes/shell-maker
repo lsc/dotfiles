@@ -1,0 +1,3 @@
+(shell-maker
+ :fetcher github
+ :repo "xenodium/shell-maker")

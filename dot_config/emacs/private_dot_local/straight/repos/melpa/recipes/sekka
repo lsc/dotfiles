@@ -1,0 +1,1 @@
+(sekka :fetcher github :repo "kiyoka/sekka" :files ("emacs/sekka*.el" (:exclude "emacs/sekka-tests.el")))

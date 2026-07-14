@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: void keytyped() {...}
+# key: keyt
+# --
+void keyTyped(){
+  `%`$0
+}

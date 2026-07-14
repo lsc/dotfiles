@@ -1,0 +1,5 @@
+(:name dired-details-s
+       :description "Make file details hide-able in dired."
+       :website "https://github.com/misohena/dired-details-s"
+       :type github
+       :pkgname "misohena/dired-details-s")

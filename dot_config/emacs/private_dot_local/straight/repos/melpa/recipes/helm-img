@@ -1,0 +1,3 @@
+(helm-img
+ :repo "mtmtcode/helm-img"
+ :fetcher github)

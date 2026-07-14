@@ -1,0 +1,138 @@
+#+AUTHOR: Alex Lu
+#+EMAIL: alexluigit@gmail.com
+#+startup: content
+
+Generally speaking, Dirvish should be able to handle most of the file
+exploring/managing tasks, after all it is backed by the superb Dired.  Besides,
+choose Dirvish over packages listed below gives you:
+1. An unified user interface in all your file managing scenarios.
+2. File preview at your disposal.
+3. Less package configs to maintain or worry about.
+
+* neotree
+
+=neotree= works pretty well as a simple project explorer. But sadly, compare to
+=dirvish[-side]=, this package is not built on top of Dired, which means you have
+to learn or configure a different set of commands, meanwhile, it is way less
+powerful as Dired/Dirvish in terms of file managing.
+
+* treemacs
+
+Same as =neotree=, but =treemacs= is a much more mature yet complex package. It can
+even be used as a general rendering backend of any tree-like structures, you may
+find this package useful when you have related needs. It might be an overkill
+for simple project exploring tasks due to its complexity and huge codebase.
+
+* dired-sidebar
+
+=dired-sidebar=, which is also a file explorer at side window that leveraging the
+power of Dired, is a promising alternative to =dirvish-side=.  The problem with
+=dired-sidebar= is that all the niceities this package provided are only applied
+to the side Dired instance, one needs to do some extra works to make the regular
+Dired and =dired-sidebar= look consistent.
+
+* ranger.el
+
+See this [[https://github.com/alexluigit/dirvish/issues/10][discussion]].
+
+* all-the-icons-dired
+
+I'd advise *against* using this package ([[https://github.com/jtbm37/all-the-icons-dired][all-the-icons-dired]]) along with
+Dirvish. The reason is that it tries to retrieve icons for all the files in a
+directory /eagerly/, which hangs up Emacs on large directories. Dirvish, on the
+contrary, renders UI elements (including icons of course) *lazily* whenever
+applicable.
+
+* treemacs-icons-dired
+
+Apart from similar concerns mentioned in the above =all-the-icons-dired.el=
+section, this package ([[https://melpa.org/#/treemacs-icons-dired][treemacs-icons-dired]]) also introduces duplicate icon
+columns in Dirvish on =spacemacs=. A workaround can be found [[https://github.com/alexluigit/dirvish/issues/16][here]].
+
+* dired-hacks
+** dired-ranger
+
+The ~dirvish-yank/move~ command can do similar things as ~dired-ranger-move/paste~,
+meanwhile, it has several benefits over ~dired-do-copy~ or ~dired-ranger~:
+
+- It paste/move files using external processes, hence heavy I/O tasks won't
+  block the main process of Emacs.
+- It's much simpler than ~dired-ranger~ because you mark files using inbuilt Dired
+  commands such as ~dired-mark~, ~dired-mark-extension~, to name a few.
+
+** dired-subtree
+
+Comparing with =dired-subtree=, =dirvish-subtree= has several advantages:
+
+- Small code base: only 300+ lines
+- Way Faster: expands a directory with 50000+ entries almost instantly
+- Provides the ~subtree-state~ attribute
+- Consistency: respects ~dired-actual-switches~
+
+** dired-filter
+
+~dired-filter~ extends the filtering system of Dired on two aspects:
+
+1. Introduces the "filter-stack" concept after =ibuffer=
+
+   Dirvish has no plan on implementing the =ibuffer= like "filter-stack" because
+   IMO the Dired marking system plus different ~dired-listing-switches~ covers
+   almost all the possible file filtering needs.  In terms of filtering files
+   matching multiple criteria, you can always mark files using various
+   ~dired-mark-*~ commands and kill the rest lines.  This also makes
+   ~dirvish-emerge.el~ a relatively small codebase.
+
+2. Allows users to group files via various criteria
+
+   Dirvish implements the second feature as ~dirvish-emerge-mode~. It works in a
+   similar way as ~dired-filter-group-mode~ along with several improvements:
+
+   - File line indexing and reordering happened in one pass (~ 3x faster)
+   - Manage groups using transient menu (~dirvish-emerge-menu~)
+   - Respect configurations in =dir-locals.el=
+
+** dired-narrow
+
+- ~dirvish-narrow~ has (optional) =orderless= integration
+- ~dirvish-narrow~ does not show results from subtrees because it can be confusion
+  sometimes
+
+Other than these, ~dired-narrow~ and ~dirvish-narrow~ works pretty much the same.
+
+** dired-collapse
+
+In short, the =collapse= attribute in Dirvish does it much faster and less invasive.
+
+Let's say you have a file =~/foo/bar/baz=.  After you enter the =~/= directory and
+enable ~dired-collapse-mode~, the line previously displaying the directory =foo= not
+only reads as =foo/bar/baz=, but also points to the file =~/foo/bar/baz=, because
+=dired-collapse= replace the old file names with the collapsed ones by modifying
+the buffer content.  This behavior is quite invasive because it deprives user's
+ability to access the original file =foo=.  Namely, when you call ~dired-do-delete~
+on that line, the file being deleted is =~/foo/bar/baz= instead of =~/foo=.  This
+file name replace approach also leads to this [[https://github.com/Fuco1/dired-hacks/issues/126][weird behavior]].
+
+The ~collapse~ attribute in Dirvish never touch the buffer content, it only act as
+a visual indicator for files that has unique nested paths.
+
+* find-dired | fd-dired
+
+Compared to =find/fd-dired=, =dirvish-fd= offers several advantages:
+
++ File previews are supported.
++ The =dirvish-fd-switches-menu= allows interactive modification of =fd= flags.
++ =dirvish-quicksort= and =dirvish-ls-switches-menu= are fully functional within the
+  =dirvish-fd= result buffer.
++ The =dirvish-fd= result buffer is integrated into Dirvish's local history,
+  enabling seamless navigation with commands like =dirvish-history-go-forward= and
+  =dirvish-history-go-backward=.
+
+* dired-git-info | diff-hl | dired-k
+
+The ~vc-state~ and ~git-msg~ attributes in Dirvish can achieve the same
+functionality without sacrificing performance. Meanwhile, these packages doesn't
+mesh well with =dirvish-subtree= nor =dired-subtree=.
+
+* dired-rsync
+
+See: [[file:EXTENSIONS.org][dirvish-rsync section in Extensions.org]]

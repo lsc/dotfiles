@@ -1,0 +1,4 @@
+(package-build
+ :fetcher github
+ :repo "melpa/package-build"
+ :files (:defaults "package-build.mk"))
