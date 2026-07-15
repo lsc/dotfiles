@@ -1,3 +1,11 @@
+local obsidianPath = function()
+  if vim.fn.has("mac") then
+    return "~/Obsidian/Notes"
+  elseif vim.fn.has("linux") then
+    return "~/Documents/Notes"
+  end
+end
+
 return {
   {
     "NeogitOrg/neogit",
@@ -32,7 +40,7 @@ return {
       workspaces = {
         {
           name = "Personal",
-          path = "~/Documents/Notes/",
+          path = obsidianPath(),
         },
       },
     },
