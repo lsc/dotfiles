@@ -12,6 +12,8 @@ bind \cg __zoxide_zi
 set --export EDITOR nvim
 set --export USE_GKE_GCLOUD_AUTH_PLUGIN True
 set --export TELEPORT_ADD_KEYS_TO_AGENT no
+test -d ~/.cache/go-mod/ || mkdir ~/.cache/go-mod/
+set --export GOMODCACHE ~/.cache/go-mod/
 set --unexport fish_greeting
 
 set teleport_host_list ~/.teleport_hosts
