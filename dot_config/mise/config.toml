@@ -29,5 +29,8 @@ uv = "0.11.30"
 xh = "0.26.1"
 zoxide = "0.10.0"
 
+[settings]
+disable_backends = ["vfox"]
+
 [settings.ruby]
 compile = false
