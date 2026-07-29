@@ -1,8 +1,8 @@
 local obsidianPath = function()
-  if vim.fn.has("mac") then
-    return "~/Obsidian/Notes"
-  elseif vim.fn.has("linux") then
+  if vim.uv.os_uname().sysname == "Linux" then
     return "~/Documents/Notes"
+  else
+    return "~/Obsidian/Notes"
   end
 end
 
