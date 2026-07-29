@@ -13,18 +13,14 @@ return {
     keys = { { "<leader>gn", "<cmd>Neogit<cr>", desc = "Neogit" } },
     opts = { disable_commit_confirmation = true },
   },
-  {
-    "NicolasGB/jj.nvim",
-  },
-  {
-    "evanphx/jjsigns.nvim",
-  },
+  { "justinmk/guh.nvim" },
+  { "f-person/git-blame.nvim" },
+  { "NicolasGB/jj.nvim" },
+  { "evanphx/jjsigns.nvim" },
+  { "mistweaverco/jujutsu.nvim" },
   {
     "sindrets/diffview.nvim",
     dependencies = "nvim-lua/plenary.nvim",
-  },
-  {
-    "f-person/git-blame.nvim",
   },
   {
     "benomahony/uv.nvim",
