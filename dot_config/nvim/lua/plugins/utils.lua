@@ -17,7 +17,18 @@ return {
   { "f-person/git-blame.nvim" },
   { "NicolasGB/jj.nvim" },
   { "evanphx/jjsigns.nvim" },
-  { "mistweaverco/jujutsu.nvim" },
+  {
+    "mistweaverco/jujutsu.nvim",
+    keys = {
+      {
+        "<leader>jj",
+        function()
+          require("jujutsu").open()
+        end,
+        desc = "Jujutsu",
+      },
+    },
+  },
   {
     "sindrets/diffview.nvim",
     dependencies = "nvim-lua/plenary.nvim",
