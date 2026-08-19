@@ -57,11 +57,21 @@ end
 if test -f ~/.github-token
     set --export GITHUB_TOKEN (cat ~/.github-token)
 end
+
 switch $os
     case Darwin
         set --export SSH_AUTH_SOCK /Users/$username/.bitwarden-ssh-agent.sock
     case Linux
         set --export SSH_AUTH_SOCK /home/$username/.bitwarden-ssh-agent.sock
+end
+
+functions -c fish_prompt _original_fish_prompt 2>/dev/null
+
+function fish_prompt
+    if set -q ZMX_SESSION
+        echo -n "[$ZMX_SESSION]"
+    end
+    _original_fish_prompt
 end
 
 alias av aws-vault
@@ -82,7 +92,7 @@ alias tf terraform
 alias tg terragrunt
 alias tm terramate
 alias v nvim
-alias zj zellij
+alias z zmx
 
 # BEGIN opam configuration
 # This is useful if you're using opam as it adds:
