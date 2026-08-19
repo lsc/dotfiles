@@ -1,3 +1,4 @@
+
 [Default Applications]
 image/png=imv.desktop
 image/jpeg=imv.desktop
@@ -31,5 +32,3 @@ inode/directory=org.gnome.Nautilus.desktop
 x-scheme-handler/sgnl=signal.desktop
 x-scheme-handler/signalcaptcha=signal.desktop
 x-scheme-handler/slack=slack.desktop
-x-scheme-handler/jetbrains=jetbrainsd.desktop
-x-scheme-handler/bitwarden=bitwarden.desktop

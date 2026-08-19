@@ -2,71 +2,11 @@
   "version": 3,
   "workspaces": [
     {
-      "id": "wB",
+      "id": "w9",
       "custom_name": null,
-      "identity_cwd": "/home/lsc/Downloads",
+      "identity_cwd": "/Users/lowe.schmidt",
       "public_pane_numbers": {
-        "10": 1
-      },
-      "next_public_pane_number": 3,
-      "public_tab_numbers": [
-        1
-      ],
-      "next_public_tab_number": 3,
-      "tabs": [
-        {
-          "custom_name": null,
-          "layout": {
-            "Pane": 10
-          },
-          "panes": {
-            "10": {
-              "cwd": "/home/lsc/Downloads"
-            }
-          },
-          "zoomed": false,
-          "focused": 10,
-          "root_pane": 10
-        }
-      ],
-      "active_tab": 0
-    },
-    {
-      "id": "w1",
-      "custom_name": null,
-      "identity_cwd": "/home/lsc/Projects/ziglings",
-      "public_pane_numbers": {
-        "1": 1
-      },
-      "next_public_pane_number": 3,
-      "public_tab_numbers": [
-        1
-      ],
-      "next_public_tab_number": 3,
-      "tabs": [
-        {
-          "custom_name": null,
-          "layout": {
-            "Pane": 1
-          },
-          "panes": {
-            "1": {
-              "cwd": "/home/lsc/Projects/ziglings"
-            }
-          },
-          "zoomed": false,
-          "focused": 1,
-          "root_pane": 1
-        }
-      ],
-      "active_tab": 0
-    },
-    {
-      "id": "w2",
-      "custom_name": null,
-      "identity_cwd": "/home/lsc/Projects/infrastructure",
-      "public_pane_numbers": {
-        "2": 1
+        "22": 1
       },
       "next_public_pane_number": 2,
       "public_tab_numbers": [
@@ -77,260 +17,16 @@
         {
           "custom_name": null,
           "layout": {
-            "Pane": 2
+            "Pane": 22
           },
           "panes": {
-            "2": {
-              "cwd": "/home/lsc/Projects/infrastructure"
+            "22": {
+              "cwd": "/Users/lowe.schmidt"
             }
           },
           "zoomed": false,
-          "focused": 2,
-          "root_pane": 2
-        }
-      ],
-      "active_tab": 0
-    },
-    {
-      "id": "w3",
-      "custom_name": null,
-      "identity_cwd": "/home/lsc/Projects/gonarr",
-      "public_pane_numbers": {
-        "4": 2,
-        "5": 3,
-        "3": 1
-      },
-      "next_public_pane_number": 4,
-      "public_tab_numbers": [
-        1,
-        2,
-        3
-      ],
-      "next_public_tab_number": 4,
-      "tabs": [
-        {
-          "custom_name": "Editor",
-          "layout": {
-            "Pane": 3
-          },
-          "panes": {
-            "3": {
-              "cwd": "/home/lsc/Projects/gonarr"
-            }
-          },
-          "zoomed": false,
-          "focused": 3,
-          "root_pane": 3
-        },
-        {
-          "custom_name": "Dev Server",
-          "layout": {
-            "Pane": 4
-          },
-          "panes": {
-            "4": {
-              "cwd": "/home/lsc/Projects/gonarr"
-            }
-          },
-          "zoomed": false,
-          "focused": 4,
-          "root_pane": 4
-        },
-        {
-          "custom_name": null,
-          "layout": {
-            "Pane": 5
-          },
-          "panes": {
-            "5": {
-              "cwd": "/home/lsc/Projects/gonarr"
-            }
-          },
-          "zoomed": false,
-          "focused": 5,
-          "root_pane": 5
-        }
-      ],
-      "active_tab": 2
-    },
-    {
-      "id": "w4",
-      "custom_name": "TF Provider Pingdom",
-      "identity_cwd": "/home/lsc/Projects/terraform-provider-pingdom",
-      "public_pane_numbers": {
-        "6": 1
-      },
-      "next_public_pane_number": 2,
-      "public_tab_numbers": [
-        1
-      ],
-      "next_public_tab_number": 2,
-      "tabs": [
-        {
-          "custom_name": null,
-          "layout": {
-            "Pane": 6
-          },
-          "panes": {
-            "6": {
-              "cwd": "/home/lsc/Projects/terraform-provider-pingdom"
-            }
-          },
-          "zoomed": false,
-          "focused": 6,
-          "root_pane": 6
-        }
-      ],
-      "active_tab": 0
-    },
-    {
-      "id": "w5",
-      "custom_name": null,
-      "identity_cwd": "/home/lsc/Projects/tonearm",
-      "public_pane_numbers": {
-        "7": 1
-      },
-      "next_public_pane_number": 2,
-      "public_tab_numbers": [
-        1
-      ],
-      "next_public_tab_number": 2,
-      "tabs": [
-        {
-          "custom_name": null,
-          "layout": {
-            "Pane": 7
-          },
-          "panes": {
-            "7": {
-              "cwd": "/home/lsc/Projects/tonearm"
-            }
-          },
-          "zoomed": false,
-          "focused": 7,
-          "root_pane": 7
-        }
-      ],
-      "active_tab": 0
-    },
-    {
-      "id": "wA",
-      "custom_name": "obsidian",
-      "identity_cwd": "/home/lsc/Documents/Notes",
-      "public_pane_numbers": {
-        "9": 2,
-        "8": 1
-      },
-      "next_public_pane_number": 3,
-      "public_tab_numbers": [
-        1,
-        2
-      ],
-      "next_public_tab_number": 3,
-      "tabs": [
-        {
-          "custom_name": null,
-          "layout": {
-            "Pane": 8
-          },
-          "panes": {
-            "8": {
-              "cwd": "/home/lsc/Documents/Notes"
-            }
-          },
-          "zoomed": false,
-          "focused": 8,
-          "root_pane": 8
-        },
-        {
-          "custom_name": null,
-          "layout": {
-            "Pane": 9
-          },
-          "panes": {
-            "9": {
-              "cwd": "/home/lsc"
-            }
-          },
-          "zoomed": false,
-          "focused": 9,
-          "root_pane": 9
-        }
-      ],
-      "active_tab": 0
-    },
-    {
-      "id": "wC",
-      "custom_name": null,
-      "identity_cwd": "/home/lsc/Projects/ladybird",
-      "public_pane_numbers": {
-        "11": 1,
-        "12": 2
-      },
-      "next_public_pane_number": 3,
-      "public_tab_numbers": [
-        1,
-        2
-      ],
-      "next_public_tab_number": 3,
-      "tabs": [
-        {
-          "custom_name": "Editor",
-          "layout": {
-            "Pane": 11
-          },
-          "panes": {
-            "11": {
-              "cwd": "/home/lsc/Projects/ladybird"
-            }
-          },
-          "zoomed": false,
-          "focused": 11,
-          "root_pane": 11
-        },
-        {
-          "custom_name": "Build",
-          "layout": {
-            "Pane": 12
-          },
-          "panes": {
-            "12": {
-              "cwd": "/home/lsc/Projects/ladybird"
-            }
-          },
-          "zoomed": false,
-          "focused": 12,
-          "root_pane": 12
-        }
-      ],
-      "active_tab": 1
-    },
-    {
-      "id": "wD",
-      "custom_name": null,
-      "identity_cwd": "/home/lsc/Projects/ghostty",
-      "public_pane_numbers": {
-        "14": 1
-      },
-      "next_public_pane_number": 2,
-      "public_tab_numbers": [
-        1
-      ],
-      "next_public_tab_number": 2,
-      "tabs": [
-        {
-          "custom_name": null,
-          "layout": {
-            "Pane": 14
-          },
-          "panes": {
-            "14": {
-              "cwd": "/home/lsc/Projects/ghostty"
-            }
-          },
-          "zoomed": false,
-          "focused": 14,
-          "root_pane": 14
+          "focused": 22,
+          "root_pane": 22
         }
       ],
       "active_tab": 0
@@ -338,7 +34,7 @@
   ],
   "active": 0,
   "selected": 0,
-  "sidebar_width": 33,
+  "sidebar_width": 36,
   "sidebar_section_split": 0.5,
   "collapsed_space_keys": []
 }
