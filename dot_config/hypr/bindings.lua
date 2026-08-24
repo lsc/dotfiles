@@ -20,6 +20,8 @@
 -- hl.unbind("SUPER + SPACE")
 -- o.bind("SUPER + SPACE", "Omarchy menu", "omarchy-menu toggle root")
 
+hl.unbind("SUPER + ENTER")
+-- o.bind("SUPER + ENTER", "Terminal", "monstar")
 -- Disable a default binding without replacing it.
 -- hl.unbind("SUPER + SHIFT + B")
 
