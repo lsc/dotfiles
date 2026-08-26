@@ -92,7 +92,6 @@ alias tf terraform
 alias tg terragrunt
 alias tm terramate
 alias v nvim
-alias z zmx
 
 # BEGIN opam configuration
 # This is useful if you're using opam as it adds:
