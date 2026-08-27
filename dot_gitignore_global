@@ -19,3 +19,5 @@ ehthumbs.db
 Thumbs.db
 tags
 *.undodir
+
+**/.claude/settings.local.json
