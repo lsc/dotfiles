@@ -14,13 +14,13 @@ set --export USE_GKE_GCLOUD_AUTH_PLUGIN True
 set --export TELEPORT_ADD_KEYS_TO_AGENT no
 test -d ~/.cache/go-mod/ || mkdir ~/.cache/go-mod/
 set --export GOMODCACHE ~/.cache/go-mod/
+set --export SSH_AUTH_SOCK $HOME/.bitwarden-ssh-agent.sock
 set --unexport fish_greeting
 
 set teleport_host_list ~/.teleport_hosts
 
 set os (uname)
 set shell (basename $SHELL)
-set username (whoami)
 
 if status is-interactive && command -v mise &>/dev/null
     mise activate fish | source
@@ -58,13 +58,6 @@ if test -f ~/.github-token
     set --export GITHUB_TOKEN (cat ~/.github-token)
 end
 
-switch $os
-    case Darwin
-        set --export SSH_AUTH_SOCK /Users/$username/.bitwarden-ssh-agent.sock
-    case Linux
-        set --export SSH_AUTH_SOCK /home/$username/.bitwarden-ssh-agent.sock
-end
-
 functions -c fish_prompt _original_fish_prompt 2>/dev/null
 
 function fish_prompt
@@ -78,9 +71,7 @@ alias av aws-vault
 alias b brew
 alias c chezmoi
 alias cat bat
-alias e encore
 alias g git
-alias j just
 alias k kubectl
 alias ks kubens
 alias kx kubectx
@@ -92,11 +83,3 @@ alias tf terraform
 alias tg terragrunt
 alias tm terramate
 alias v nvim
-
-# BEGIN opam configuration
-# This is useful if you're using opam as it adds:
-#   - the correct directories to the PATH
-#   - auto-completion for the opam binary
-# This section can be safely removed at any time if needed.
-test -r ~/.opam/opam-init/init.fish && source ~/.opam/opam-init/init.fish >/dev/null 2>/dev/null; or true
-# END opam configuration
