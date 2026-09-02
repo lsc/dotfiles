@@ -1,14 +1,13 @@
 [user]
   name  = Lowe Schmidt
+  email = git@loweschmidt.se
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIItoJUUQ7U0KJg+hqtV+KNYCHqvv1261/VnipE7PIOaa
 [gpg]
 	format = ssh
 [commit]
 	gpgsign = true
 
-[include]
-  path = ~/.gitconfig.personal
-
-[includeIf "gitditr:~/Projects/Work/**.git"]
+[includeIf "gitdir:~/Projects/Work/"]
   path = ~/.gitconfig.work
 
 [branch]

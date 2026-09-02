@@ -1,4 +1,5 @@
 [user]
 email = "lowe.schmidt@imperva.com"
+name = "Lowe Schmidt"
 signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINL7C8JM+zrHF9n5c0wu5yHTn+/X+epQ1Xw4QoS3fttG
 
